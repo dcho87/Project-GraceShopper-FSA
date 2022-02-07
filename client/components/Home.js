@@ -1,15 +1,20 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import { Link } from "react-router-dom";
 
 /**
  * COMPONENT
  */
-export const Home = props => {
-  const {username} = props
-
+export const Home = ({user}) => {
   return (
     <div>
-      <h3>Welcome, {username}</h3>
+      <div>the user is logged in</div>
+      <div>Welcome, {user.first_name}</div>
+      <div>first name: {user.first_name}</div>
+      <div>email: {user.email}</div>
+      <Link to="/login" onClick={logout}>
+        Logout
+      </Link>
     </div>
   )
 }
@@ -19,7 +24,7 @@ export const Home = props => {
  */
 const mapState = state => {
   return {
-    username: state.auth.username
+    username: state.auth.email
   }
 }
 

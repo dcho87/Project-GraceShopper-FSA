@@ -1,6 +1,6 @@
 'use strict'
 
-const {db, models: {User, Product} } = require('../server/db')
+const {db, models: {User, Product, Category} } = require('../server/db')
 
 /**
  * seed - this function clears the database, updates tables to
@@ -10,16 +10,34 @@ async function seed() {
   await db.sync({ force: true }) // clears db and matches models to tables
   console.log('db synced!')
 
+
+
+
   // Creating Users
   const users = await Promise.all([
-    User.create({ username: 'cody', password: '123' }),
-    User.create({ username: 'murphy', password: '123' }),
+    User.create({first_name: "Joe", last_name: "Collins", email: "joe@gmail.com", password: "joe_pw", isAdmin: false, isEngineer: true}),
+    User.create({first_name: "Daniel", last_name: "Cho", email: "daniel@gmail.com", password: "daniel_pw", isAdmin: true, isEngineer: true}),
+    User.create({first_name: "Ben", last_name: "Greenspan", email: "ben@gmail.com", password: "ben_pw", isAdmin: false, isEngineer: false }),
+    User.create({ first_name: "Saad", last_name: "Razzak", email: "saad@gmail.com", password: "saad_pw", isAdmin: true, isEngineer: false}),
+  ])
+
+////catgeories
+const categories = await Promise.all([
+  Category.create({name: 'landscape'}),
+  Category.create({name: 'doodle'}),
+  Category.create({name: 'car'}),
+  Category.create({name: 'kangaroo'}),
+  Category.create({name: 'person'})
   ])
 
 
-
-
-const products = await Promise.all([
+const [
+  landscape1, landscape2, landscape3, landscape4, landscape5, 
+  doodle1, doodle2, doodle3, doodle4, doodle5, 
+  car1, car2, car3, car4, car5, 
+  kangaroo1, kangaroo2, kangaroo3, kangaroo4, kangaroo5, 
+  person1, person2, person3, person4, person5] = await Promise.all([
+    
 Product.create({
   name: 1101, 
   description: 'A beautiful seascape',
@@ -227,17 +245,40 @@ Product.create({
 })
 ])
 
+const productCategory = [
+  {productId: landscape1.id, categoryId:Landscape },
+  {productId: landscape2.id, categoryId:Landscape },
+  {productId: landscape3.id, categoryId:Landscape },
+  {productId: landscape4.id, categoryId:Landscape },
+  {productId: landscape5.id, categoryId:Landscape },
+  {productId: doodle1.id, categoryId:Doodle },
+  {productId: doodle2.id, categoryId:Doodle },
+  {productId: doodle3.id, categoryId:Doodle },
+  {productId: doodle4.id, categoryId:Doodle },
+  {productId: doodle5.id, categoryId:Doodle },
+  {productId: car1.id, categoryId:Car },
+  {productId: car2.id, categoryId:Car },
+  {productId: car3.id, categoryId:Car },
+  {productId: car4.id, categoryId:Car },
+  {productId: car5.id, categoryId:Car },
+  {productId: kangaroo1.id, categoryId:Kangaroo },
+  {productId: kangaroo2.id, categoryId:Kangaroo },
+  {productId: kangaroo3.id, categoryId:Kangaroo },
+  {productId: kangaroo4.id, categoryId:Kangaroo },
+  {productId: kangaroo5.id, categoryId:Kangaroo },
+  {productId: person1.id, categoryId:Person },
+  {productId: person2.id, categoryId:Person },
+  {productId: person3.id, categoryId:Person },
+  {productId: person4.id, categoryId:Person },
+  {productId: person5.id, categoryId:Person },
+]
 
+await db.models.productCategory.bulkcreate(productCategory)
 
 
 console.log(`seeded ${users.length} users`)
 console.log(`seeded successfully`)
-return {
-  users: {
-    cody: users[0],
-    murphy: users[1]
-  }
-}
+
 }
 // console.log(`seeded ${products.length} products successfully`)
 

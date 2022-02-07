@@ -3,19 +3,27 @@ import history from '../history'
 
 const TOKEN = 'token'
 
-/**
- * ACTION TYPES
- */
+import configureMockStore from 'redux-mock-store'
+import {thunkMiddleware, thunk} from 'redux-thunk'
+import { createStore, combineReducers, applyMiddleware } from "redux";
+const middlewares = [thunkMiddleware]
+const mockStore = configureMockStore(middlewares)
+
+
+
+
+//////////////////////////////////// ACTION TYPES below:
+
+const LOAD_USERS = "LOAD_USERS";
 const SET_AUTH = 'SET_AUTH'
 
-/**
- * ACTION CREATORS
- */
-const setAuth = auth => ({type: SET_AUTH, auth})
+//////////////////////////////////// ACTION CREATORS below:
 
-/**
- * THUNK CREATORS
- */
+export const _loadUsers = (users) => {
+  return { type: LOAD_USERS, users };
+};
+export const setAuth = auth => ({type: SET_AUTH, auth})
+
 export const me = () => async dispatch => {
   const token = window.localStorage.getItem(TOKEN)
   if (token) {
@@ -28,9 +36,9 @@ export const me = () => async dispatch => {
   }
 }
 
-export const authenticate = (username, password, method) => async dispatch => {
+export const authenticate = (email, password, method) => async dispatch => {
   try {
-    const res = await axios.post(`/auth/${method}`, {username, password})
+    const res = await axios.post(`/auth/${method}`, {email, password})
     window.localStorage.setItem(TOKEN, res.data.token)
     dispatch(me())
   } catch (authError) {
@@ -47,9 +55,33 @@ export const logout = () => {
   }
 }
 
-/**
- * REDUCER
- */
+//////////////////////////////////// THUNKS below:
+
+const loadUsers = () => {
+  return async (dispatch) => {
+    const users = (await axios.get("/api/users")).data;
+    dispatch(_loadUsers(users));
+  };
+};
+
+export const init = () => {
+  return async (dispatch) => {
+    dispatch(loadUsers());
+  };
+};
+
+//////////////////////////////////// REDUCERS below:
+const users = (state = [], action) => {
+  switch (action.type) {
+    case LOAD_USERS:
+      return action.users;
+
+    default:
+      return state;
+  }
+};
+
+
 export default function(state = {}, action) {
   switch (action.type) {
     case SET_AUTH:
@@ -58,3 +90,14 @@ export default function(state = {}, action) {
       return state
   }
 }
+
+
+const reducer = combineReducers({
+  users,
+});
+
+const store = createStore(reducer);
+
+
+
+

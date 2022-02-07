@@ -6,16 +6,45 @@ const axios = require('axios');
 
 const SALT_ROUNDS = 5;
 
-const User = db.define('user', {
-  username: {
-    type: Sequelize.STRING,
+const { STRING, UUID, UUIDV4, INTEGER, TEXT, BOOLEAN } = Sequelize;
+const id = {
+  type: UUID,
+  defaultValue: UUIDV4,
+  primaryKey: true,
+};
+
+
+const User = db.define("user", {
+  id,
+  first_name: {
+    type: STRING,
+    allowNull: false,
+  },
+  last_name: {
+    type: STRING,
+    allowNull: false,
+  },
+  email: {
+    type: STRING,
+    allowNull: false,
     unique: true,
-    allowNull: false
+    validate: {
+      isEmail: true,
+    },
   },
   password: {
-    type: Sequelize.STRING,
-  }
-})
+    type: STRING,
+    allowNull: false,
+  },
+  isAdmin: {
+    type: BOOLEAN,
+    defaultValue: false,
+  },
+  isEngineer: {
+    type: BOOLEAN,
+    defaultValue: false,
+  },
+});
 
 module.exports = User
 
@@ -34,39 +63,57 @@ User.prototype.generateToken = function() {
 /**
  * classMethods
  */
-User.authenticate = async function({ username, password }){
-    const user = await this.findOne({where: { username }})
-    if (!user || !(await user.correctPassword(password))) {
-      const error = Error('Incorrect username/password');
-      error.status = 401;
-      throw error;
+ User.authenticate = async ({ email, password }) => {
+  try {
+    const user = await User.findOne({
+      where: {
+        email,
+      },
+    });
+
+    if (user && (await bcrypt.compare(password, user.password))) {
+      const token = jwt.sign({ id: user.id }, process.env.JWT, {
+        expiresIn: 30 * 60,
+      });
+      return token;
     }
-    return user.generateToken();
+    const error = Error("bad credentials - in authenticate - try");
+    error.status = 401;
+    throw error;
+  } catch (err) {
+    console.log("REEED", err);
+    const error = Error("bad credentials - in authenticate - catch");
+    error.status = 401;
+    throw error;
+  }
 };
 
-User.findByToken = async function(token) {
+User.byToken = async (token) => {
   try {
-    const {id} = await jwt.verify(token, process.env.JWT)
-    const user = User.findByPk(id)
-    if (!user) {
-      throw 'nooo'
+    const { id } = jwt.verify(token, process.env.JWT);
+    const user = await User.findByPk(id);
+    if (user) {
+      return user;
     }
-    return user
-  } catch (ex) {
-    const error = Error('bad token')
-    error.status = 401
-    throw error
+    const error = Error("bad credentials - in byToken - on try");
+    error.status = 401;
+    throw error;
+  } catch (err) {
+    console.log("REEEEED", err);
+    const error = Error("bad credentials - in byToken on catch");
+    error.status = 401;
+    throw error;
   }
-}
-
+};
 /**
  * hooks
  */
-const hashPassword = async(user) => {
-  //in case the password has been changed, we want to encrypt it with bcrypt
-  if (user.changed('password')) {
-    user.password = await bcrypt.hash(user.password, SALT_ROUNDS);
-  }
+ const hashPassword = user => {
+  User.addHook("beforeSave", async function (user) {
+    if (user._changed.has("password")) {
+      user.password = await bcrypt.hash(user.password, 10);
+    }
+  });
 }
 
 User.beforeCreate(hashPassword)
