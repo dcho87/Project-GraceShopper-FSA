@@ -1,7 +1,7 @@
 import React from "react";
 import Navbar from "./components/navbar/Navbar";
 import Routes from "./Routes";
-import "./App.css";
+// import "./App.css";
 
 const App = () => {
   return (

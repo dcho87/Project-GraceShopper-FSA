@@ -1,8 +1,9 @@
 const router = require("express").Router();
-const { Product } = require("../db/models");
+const { models: { Product }} = require('../db')
+module.exports = router
 
 //route to all products
-router.get("/", async (req, res, next) => {
+router.get('/', async (req, res, next) => {
   try {
     res.send(await Product.findAll());
   } catch (ex) {
