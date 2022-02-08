@@ -6,37 +6,41 @@ import {authenticate} from '../store'
  * COMPONENT
  */
 const AuthForm = props => {
-  const {name, displayName, handleSubmit, error} = props
+  const {name, handleSubmit, error} = props
 
   return (
     <div>
+      &#128274; Create Secure Account 
       <form onSubmit={handleSubmit} name={name}>
-        <div>
-          <label htmlFor="username">
-            <small>Email</small>
-          </label>
-          <input name="email" type="text" />
-        </div>
-        <div>
-          <label htmlFor="password">
-            <small>Password</small>
-          </label>
-          <input name="password" type="password" />
-        </div>
-        <div>
+      <div>
           <label htmlFor="first_name">
-            <small>First Name</small>
           </label>
-          <input name="first_name" type="first_name" />
+          <input name="first_name" type="first_name" placeholder="First Name"/>
         </div>
         <div>
           <label htmlFor="last_name">
-            <small>Last Name</small>
           </label>
-          <input name="last_name" type="last_name" />
+          <input name="last_name" type="last_name" placeholder="Last Name" />
         </div>
         <div>
-          <button type="submit">{displayName}</button>
+          <label htmlFor="email">
+          </label>
+          <input name="email" type="text" placeholder="Email" />
+        </div>
+        <div>
+          <label htmlFor="password">
+          </label>
+          <input name="password" type="password" placeholder="Password"/>
+        </div>
+        <div>
+          <label htmlFor="password">
+          </label>
+          <input name="password" type="password"  placeholder="Confirm Password"/>
+        </div>
+     
+        
+        <div>
+          <button type="submit"  > Create Account</button>
         </div>
         {error && error.response && <div> {error.response.data} </div>}
       </form>

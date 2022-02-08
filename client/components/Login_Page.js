@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { connect } from "react-redux";
 
 const Login_Page = ({ signIn }) => {
   const [email, setEmail] = useState("");
@@ -21,8 +22,11 @@ const Login_Page = ({ signIn }) => {
 
   return (
     <main id="login_page">
+     
       <form onSubmit={onSubmit}>
+   
         <div id="form-cont-login">
+        <div>NFT SHOP</div>
           <div className="login-cont">
             <div id="email-cont">
               <input
@@ -36,15 +40,17 @@ const Login_Page = ({ signIn }) => {
             <div id="pw-cont">
               <input
                 id="pw-info"
-                placeholder="password"
+                placeholder="Password (Case Sensitive)"
                 value={password}
                 onChange={onChange}
                 name="password"
+                type="password"
               />
             </div>
           </div>
           <div id="submit-cont">
-            <button id="submit-info">Login</button>
+            <button id="submit-info" disabled={!email || !password}>Login</button>
+            
           </div>
         </div>
       </form>
@@ -52,4 +58,28 @@ const Login_Page = ({ signIn }) => {
   );
 };
 
-export default Login_Page;
+const mapLogin = state => {
+  return {
+    name: 'login',
+    displayName: 'Login',
+    error: state.auth.error
+  }
+}
+
+
+const mapDispatch = dispatch => {
+  return {
+    handleSubmit(evt) {
+      evt.preventDefault()
+      const formName = evt.target.name
+      const username = evt.target.email.value
+      const password = evt.target.password.value
+      dispatch(authenticate(username, password, formName))
+    }
+  }
+}
+
+
+
+
+export default connect (mapLogin, mapDispatch)(Login_Page)
