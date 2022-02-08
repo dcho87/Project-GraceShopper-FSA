@@ -10,8 +10,6 @@ const middlewares = [thunkMiddleware]
 const mockStore = configureMockStore(middlewares)
 
 
-
-
 //////////////////////////////////// ACTION TYPES below:
 
 const LOAD_USERS = "LOAD_USERS";
