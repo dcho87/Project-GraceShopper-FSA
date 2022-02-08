@@ -32,3 +32,28 @@ export const fetchProducts = () => {
     });
   };
 };
+
+export const createUser = (product) => {
+  return async (dispatch) => {
+    const product_ = await axios.post(`/api/products`, {
+      product,
+    });
+    dispatch({ type: "CREATE_PRODUCT", product_ });
+  };
+};
+
+export const destroyUser = (productId) => {
+  return async (dispatch) => {
+    const product_ = await axios.delete(`/api/products/${productId}`);
+    dispatch({ type: "DELETE_PRODUCT", product_ });
+  };
+};
+
+export const editUser = (productId, product) => {
+  return async (dispatch) => {
+    const product_ = await axios.put(`/api/students/${productId}`, {
+      product,
+    });
+    dispatch({ type: "UPDATE_PRODUCT", product_ });
+  };
+};

@@ -1,34 +1,57 @@
 import axios from "axios";
 
-export const products = (state = [], action) => {
-  if (action.type === "LOAD_PRODUCTS") {
-    return action.products;
+export const users = (state = [], action) => {
+  if (action.type === "LOAD_USERS") {
+    return action.users;
   }
 
-  if (action.type === "UPDATE_PRODUCT") {
-    return state.map(
-      (product) => (product.id = action.product.id ? action.product : product)
-    );
+  if (action.type === "UPDATE_USER") {
+    return state.map((user) => (user.id = action.user.id ? action.user : user));
   }
 
-  if (action.type === "DELETE_PRODUCT") {
+  if (action.type === "DELETE_USER") {
     console.log(state);
-    return state.filter((product) => product.id !== action.product.id);
+    return state.filter((user) => user.id !== action.user.id);
   }
 
-  if (action.type === "CREATE_PRODUCT") {
-    return [...state, action.products];
+  if (action.type === "CREATE_USER") {
+    return [...state, action.user];
   }
 
   return state;
 };
 
-export const fetchProducts = () => {
+export const fetchUsers = () => {
   return async (dispatch) => {
-    const products = (await axios.get("/api/products")).data;
+    const users = (await axios.get("/api/users")).data;
     dispatch({
-      type: "LOAD_PRODUCTS",
-      products,
+      type: "LOAD_USERS",
+      users,
     });
+  };
+};
+
+export const createUser = (user) => {
+  return async (dispatch) => {
+    const user_ = await axios.post(`/api/users`, {
+      user,
+    });
+    dispatch({ type: "CREATE_USER", user_ });
+  };
+};
+
+export const destroyUser = (userId) => {
+  return async (dispatch) => {
+    const user_ = await axios.delete(`/api/users/${userId}`);
+    dispatch({ type: "DELETE_USER", user_ });
+  };
+};
+
+export const editUser = (userId, user) => {
+  return async (dispatch) => {
+    const user_ = await axios.put(`/api/users/${userId}`, {
+      user,
+    });
+    dispatch({ type: "UPDATE_USER", user_ });
   };
 };
