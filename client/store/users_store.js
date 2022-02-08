@@ -1,34 +1,34 @@
 import axios from "axios";
 
-export const products = (state = [], action) => {
-  if (action.type === "LOAD_PRODUCTS") {
-    return action.products;
+export const users = (state = [], action) => {
+  if (action.type === "LOAD_USERS") {
+    return action.users;
   }
 
-  if (action.type === "UPDATE_PRODUCT") {
-    return state.map(
-      (product) => (product.id = action.product.id ? action.product : product)
-    );
-  }
+  // if (action.type === "UPDATE_USER") {
+  //   return state.map(
+  //     (user) => (user.id = action.user.id ? action.user : user)
+  //   );
+  // }
 
-  if (action.type === "DELETE_PRODUCT") {
-    console.log(state);
-    return state.filter((product) => product.id !== action.product.id);
-  }
+  // if (action.type === "DELETE_USER") {
+  //   console.log(state);
+  //   return state.filter((product) => product.id !== action.product.id);
+  // }
 
-  if (action.type === "CREATE_PRODUCT") {
-    return [...state, action.products];
-  }
+  // if (action.type === "CREATE_PRODUCT") {
+  //   return [...state, action.products];
+  // }
 
   return state;
 };
 
-export const fetchProducts = () => {
+export const fetchUsers = () => {
   return async (dispatch) => {
-    const products = (await axios.get("/api/products")).data;
+    const users = (await axios.get("/api/users")).data;
     dispatch({
-      type: "LOAD_PRODUCTS",
-      products,
+      type: "LOAD_USERS",
+      users,
     });
   };
 };
