@@ -62,8 +62,7 @@ const Navbar = ({ handleClick, isLoggedIn }) => {
                   />
                 </a>
               </li>
-              <li className="nav-item">
-                logout
+              {/* <li className="nav-item">
                 <a href="#" onClick={handleClick}>
                   <img
                     src="https://i.ibb.co/2gfMsdL/logout.png"
@@ -71,6 +70,16 @@ const Navbar = ({ handleClick, isLoggedIn }) => {
                     id="logout-icon"
                   />
                 </a>
+              </li> */}
+              <li className="nav-item">
+                logout button
+                <Link to="/login" onClick={handleClick}>
+                  <img
+                    src="https://i.ibb.co/2gfMsdL/logout.png"
+                    alt="logout"
+                    id="logout-icon"
+                  />
+                </Link>
               </li>
             </ul>
           </div>
