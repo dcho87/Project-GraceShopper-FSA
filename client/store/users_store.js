@@ -16,8 +16,8 @@ export const users = (state = [], action) => {
   //   return state.filter((product) => product.id !== action.product.id);
   // }
 
-  // if (action.type === "CREATE_PRODUCT") {
-  //   return [...state, action.products];
+  // if (action.type === "ADD_USER") {
+  //   return [...state, action.user];
   // }
 
   return state;
