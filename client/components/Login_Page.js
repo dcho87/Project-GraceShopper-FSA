@@ -28,7 +28,7 @@ const Login_Page = () => {
             <div id="email-cont">
               <input
                 id="email-info"
-                placeholder="email"
+                placeholder="Email"
                 value={email}
                 onChange={onChange}
                 name="email"
@@ -37,7 +37,7 @@ const Login_Page = () => {
             <div id="pw-cont">
               <input
                 id="pw-info"
-                placeholder="password"
+                placeholder="Password"
                 value={password}
                 onChange={onChange}
                 name="password"

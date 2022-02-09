@@ -1,33 +1,18 @@
-import React, { Component } from "react";
+import React from "react";
 import { HashRouter as Router } from "react-router-dom";
 import Navbar from "./components/navbar/Navbar";
 import Routes from "./Routes";
-import store from "./store/index";
+import "./App.css";
 
-class App extends Component {
-  constructor() {
-    super();
-    this.state = store.getState();
-  }
-
-  async componentDidMount() {
-    store.dispatch(init());
-
-    store.subscribe(() => {
-      this.setState(store.getState());
-    });
-  }
-
-  render() {
-    return (
-      <Router>
-        <div className="main">
-          <Navbar />
-          <Routes />
-        </div>
-      </Router>
-    );
-  }
-}
+const App = async () => {
+  return (
+    <Router>
+      <div className="main">
+        <Navbar />
+        <Routes />
+      </div>
+    </Router>
+  );
+};
 
 export default App;
