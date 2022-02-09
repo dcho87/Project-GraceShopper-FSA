@@ -29,9 +29,11 @@ router.get('/:id', async (req, res, next) => {
 // route to ADD a Product to an Order
 router.put('/:id', async (req, res, next) => {
     try {
-        //find or create a new order
-        const order = await Order.findByPk(req.params.id)
+        //find an order and product
+        const order = await Order.findByPk(req.params.id) || {}
+        const product = await Product.findByPk(req.body.id) || {}
 
+        //find or create an associate between order and product
         const [orderProduct] = await OrderProduct.findOrCreate({
             where: {
                 orderId: req.params.id,
@@ -39,12 +41,12 @@ router.put('/:id', async (req, res, next) => {
             }
         })
 
-        const product = await Product.findByPk(req.body.id)
-
         await order.update({
             totalItems: 1,
             totalPrice: product.price
         })
+
+        orderProduct.update()
 
         res.send(order)
     }
@@ -52,3 +54,6 @@ router.put('/:id', async (req, res, next) => {
         next(ex)
     }
 })
+
+//TO DO
+// Update Order
