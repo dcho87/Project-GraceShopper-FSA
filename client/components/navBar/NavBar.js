@@ -2,7 +2,6 @@ import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { logout } from "../../store";
-// import picture from "../../../public/icons/logout.png";
 
 import "./Navbar.css";
 
@@ -63,13 +62,13 @@ const Navbar = ({ handleClick, isLoggedIn }) => {
                 </a>
               </li>
               <li className="nav-item">
-                <a href="#" onClick={handleClick}>
+                <Link to="/login" onClick={handleClick}>
                   <img
                     src="https://i.ibb.co/2gfMsdL/logout.png"
                     alt="logout"
                     id="logout-icon"
                   />
-                </a>
+                </Link>
               </li>
             </ul>
           </div>

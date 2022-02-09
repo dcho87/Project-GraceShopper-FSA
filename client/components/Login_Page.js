@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { connect } from "react-redux";
+import { useDispatch } from "react-redux";
+import { authenticate } from "../store/auth";
 
-const Login_Page = ({ signIn }) => {
+const Login_Page = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -11,22 +12,18 @@ const Login_Page = ({ signIn }) => {
       : setPassword(ev.target.value);
   };
 
+  const dispatch = useDispatch();
+
   const onSubmit = (ev) => {
     ev.preventDefault();
-    signIn({
-      email,
-      password,
-    });
+    dispatch(authenticate(email, password));
     location.hash = "#/home"; //where the user is sent after they succesfully login
   };
 
   return (
     <main id="login_page">
-     
       <form onSubmit={onSubmit}>
-   
         <div id="form-cont-login">
-        <div>NFT SHOP</div>
           <div className="login-cont">
             <div id="email-cont">
               <input
@@ -40,17 +37,15 @@ const Login_Page = ({ signIn }) => {
             <div id="pw-cont">
               <input
                 id="pw-info"
-                placeholder="Password (Case Sensitive)"
+                placeholder="password"
                 value={password}
                 onChange={onChange}
                 name="password"
-                type="password"
               />
             </div>
           </div>
           <div id="submit-cont">
-            <button id="submit-info" disabled={!email || !password}>Login</button>
-            
+            <button id="submit-info">Login</button>
           </div>
         </div>
       </form>
@@ -58,28 +53,4 @@ const Login_Page = ({ signIn }) => {
   );
 };
 
-const mapLogin = state => {
-  return {
-    name: 'login',
-    displayName: 'Login',
-    error: state.auth.error
-  }
-}
-
-
-const mapDispatch = dispatch => {
-  return {
-    handleSubmit(evt) {
-      evt.preventDefault()
-      const formName = evt.target.name
-      const username = evt.target.email.value
-      const password = evt.target.password.value
-      dispatch(authenticate(username, password, formName))
-    }
-  }
-}
-
-
-
-
-export default connect (mapLogin, mapDispatch)(Login_Page)
+export default Login_Page;

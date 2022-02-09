@@ -1,14 +1,18 @@
 import React from "react";
+import { HashRouter as Router } from "react-router-dom";
 import Navbar from "./components/navbar/Navbar";
-import Routes from "./Routes";
+import Routes from "./Routes"; //dont need?
+
 import "./App.css";
 
 const App = () => {
   return (
-    <div className="main">
-      <Navbar />
-      <Routes />
-    </div>
+    <Router>
+      <div className="main">
+        <Navbar />
+        <Routes />
+      </div>
+    </Router>
   );
 };
 
