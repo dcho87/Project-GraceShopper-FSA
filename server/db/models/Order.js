@@ -9,11 +9,11 @@ const id = {
   };
 const Order = db.define('order', {
     id,
-    purchase: {
+    purchased: {
         type: BOOLEAN,
         defaultValue: false
     },
-    totalProducts: {
+    totalItems: {
         type: INTEGER,
         defaultValue: 0
     },

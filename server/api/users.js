@@ -1,7 +1,9 @@
 const router = require('express').Router()
-const { models: { User }} = require('../db')
+const { models: { User, Product, Order }} = require('../db')
+
 module.exports = router
 
+//route to GET all Users
 router.get('/', async (req, res, next) => {
   try {
     const users = await User.findAll({
@@ -13,14 +15,14 @@ router.get('/', async (req, res, next) => {
   }
 })
 
-
-router.get(':/id', async(req, res, next) => {
+//route to Search User by ID
+router.get('/:id', async(req, res, next) => {
   try{
     res.send(await User.findOne({
       where: {
         id: req.params.id
       },
-      attributes: ['id','first_name','last_name', 'email', 'password', 'isAdmin', 'isEngineer' ]
+      attributes: ['id','first_name','last_name', 'email']
     }))
   }
   catch(ex){
@@ -28,27 +30,63 @@ router.get(':/id', async(req, res, next) => {
   }
 })
 
-
-//route to get cart for user
-router.get('/carts/:id', async(req, res, next) => {
+//route to GET an Order
+router.get('/order/:id', async(req, res, next) => {
   try{
-
+    const order = await Order.findOne({
+      where: {
+        userId: req.params.id,
+        purchased: false,
+      },
+      include: {
+        model: Product
+      }
+    })
+    res.send(order)
   }
   catch(ex){
     next(ex)
   }
 })
 
-//route to update cart for user
-router.put('/carts/:id', async(req, res, next) => {
+//route to GET an Order History
+router.get('/order/history/:id', async(req, res, next) => {
   try{
-
+    const orderHistory = await Order.findAll({
+      where: {
+        userId: req.params.id,
+        purchased: true,
+      },
+      include: {
+        model: Product
+      }
+    })
+    res.send(orderHistory)
   }
   catch(ex){
     next(ex)
   }
 })
 
-/*
-  No POST, DELETE
-*/
+//route to UPDATE a User
+router.put('/:id', async (req, res, next) => {
+  try {
+    const user = await User.findByPk(req.params.id)
+    res.send(await user.update(req.body))
+  }
+  catch(ex){
+    next(ex)
+  }
+})
+
+//route to DELETE a User
+router.delete('/:id', async (req, res, next) => {
+  try {
+    const user = await User.findByPk(req.params.id)
+    await user.destroy()
+    res.sendStatus(204)
+  }
+  catch(ex){
+    next(ex)
+  }
+})
