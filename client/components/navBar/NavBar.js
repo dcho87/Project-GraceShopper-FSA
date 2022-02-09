@@ -2,9 +2,9 @@ import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { logout } from "../../store";
-import picture from "../../../public/icons/logout.png";
+// import picture from "../../../public/icons/logout.png";
 
-import "./Navbar.css";
+// import "./Navbar.css";
 
 const Navbar = ({ handleClick, isLoggedIn }) => {
   return (
