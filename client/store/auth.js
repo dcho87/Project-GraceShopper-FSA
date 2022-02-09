@@ -57,6 +57,13 @@ export const logout = () => {
   };
 };
 
+export const addUser = (user) => {
+  return async (dispatch) => {
+    user = (await axios.post("/api/add/auth", user)).data;
+    dispatch(_addUser(user));
+  };
+};
+
 //////////////////////////////////// THUNKS below:
 
 const loadUsers = () => {
@@ -77,7 +84,8 @@ const users = (state = [], action) => {
   switch (action.type) {
     case LOAD_USERS:
       return action.users;
-
+    case ADD_USER:
+      return [...state, action.user];
     default:
       return state;
   }

@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { authenticate } from "../store/auth";
+import { addUser } from "../store/auth.js";
 
 const SignUp_Page = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
+  const [first_name, setFirstName] = useState("");
+  const [last_name, setLastName] = useState("");
 
   const onChange = (ev) => {
     switch (ev.target.name) {
@@ -31,10 +32,16 @@ const SignUp_Page = () => {
 
   const onSubmit = (ev) => {
     ev.preventDefault();
-    console.log([email, password, firstName, lastName]);
 
-    // dispatch(authenticate(email, password));
-    // location.hash = "#/home"; //where the user is sent after they succesfully login
+    const user = {
+      email,
+      password,
+      first_name,
+      last_name,
+    };
+
+    dispatch(addUser(user));
+    location.hash = "#/login"; //where the user is sent after they succesfully login
   };
 
   return (
@@ -47,7 +54,7 @@ const SignUp_Page = () => {
               <input
                 id="first-name"
                 placeholder="First Name"
-                value={firstName}
+                value={first_name}
                 onChange={onChange}
                 name="first_name"
               />
@@ -56,7 +63,7 @@ const SignUp_Page = () => {
               <input
                 id="last-name"
                 placeholder="Last Name"
-                value={lastName}
+                value={last_name}
                 onChange={onChange}
                 name="last_name"
               />

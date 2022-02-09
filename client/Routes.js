@@ -6,7 +6,6 @@ import Login_Page from "./components/Login_Page";
 import SignUp_Page from "./components/SignUp_Page";
 import Home from "./components/Home";
 import { me } from "./store";
-import { fetchProducts } from "./store/product_store";
 
 class Routes extends Component {
   componentDidMount() {

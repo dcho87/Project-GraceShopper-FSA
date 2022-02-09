@@ -41,6 +41,7 @@ const Login_Page = () => {
                 value={password}
                 onChange={onChange}
                 name="password"
+                type="password"
               />
             </div>
           </div>
