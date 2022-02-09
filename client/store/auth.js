@@ -4,7 +4,7 @@ import history from '../history'
 const TOKEN = 'token'
 
 import configureMockStore from 'redux-mock-store'
-import {thunkMiddleware, thunk} from 'redux-thunk'
+import thunkMiddleware from 'redux-thunk'
 import { createStore, combineReducers, applyMiddleware } from "redux";
 const middlewares = [thunkMiddleware]
 const mockStore = configureMockStore(middlewares)

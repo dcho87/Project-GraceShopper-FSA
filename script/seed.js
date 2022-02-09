@@ -1,13 +1,13 @@
 'use strict'
 
-const {db, models: {User, Product, Order, CompletedOrder} } = require('../server/db')
+const {db, models: {User, Product, Order, OrderProduct} } = require('../server/db')
 
 Order.belongsTo(User)
 User.hasMany(Order)
-CompletedOrder.belongsTo(Product)
-CompletedOrder.belongsTo(Order)
-Product.belongsToMany(Order, {through: CompletedOrder})
-Order.belongsToMany(Product, {through: CompletedOrder})
+OrderProduct.belongsTo(Product)
+OrderProduct.belongsTo(Order)
+Product.belongsToMany(Order, {through: OrderProduct})
+Order.belongsToMany(Product, {through: OrderProduct})
 
 /**
  * seed - this function clears the database, updates tables to
