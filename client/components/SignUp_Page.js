@@ -40,30 +40,13 @@ const SignUp_Page = () => {
   return (
     <main id="login_page">
       <form onSubmit={onSubmit}>
+      &#128274; Create Secure Account
         <div id="form-cont-login">
           <div className="login-cont">
-            <div id="email-cont">
-              <input
-                id="email-info"
-                placeholder="email"
-                value={email}
-                onChange={onChange}
-                name="email"
-              />
-            </div>
-            <div id="pw-cont">
-              <input
-                id="pw-info"
-                placeholder="password"
-                value={password}
-                onChange={onChange}
-                name="password"
-              />
-            </div>
-            <div id="first-name-cont">
+          <div id="first-name-cont">
               <input
                 id="first-name"
-                placeholder="first name"
+                placeholder="First Name"
                 value={firstName}
                 onChange={onChange}
                 name="first_name"
@@ -72,15 +55,35 @@ const SignUp_Page = () => {
             <div id="last-name-cont">
               <input
                 id="last-name"
-                placeholder="last name"
+                placeholder="Last Name"
                 value={lastName}
                 onChange={onChange}
                 name="last_name"
               />
             </div>
+            <div id="email-cont">
+              <input
+                id="email-info"
+                placeholder="Email"
+                value={email}
+                onChange={onChange}
+                name="email"
+              />
+            </div>
+            <div id="pw-cont">
+              <input
+                id="pw-info"
+                placeholder="Password"
+                value={password}
+                onChange={onChange}
+                name="password"
+                type="password"
+              />
+            </div>
+           
           </div>
           <div id="submit-cont">
-            <button id="submit-info">Sign Up</button>
+            <button id="submit-info">Create Account</button>
           </div>
         </div>
       </form>
