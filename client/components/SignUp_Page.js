@@ -88,8 +88,4 @@ const SignUp_Page = () => {
   );
 };
 
-<<<<<<< HEAD
 export default SignUp_Page;
-=======
-export default SignUp_Page;
->>>>>>> de245dd7cf35b90377dac1861ab3a0f6f2698632

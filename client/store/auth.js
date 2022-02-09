@@ -1,18 +1,8 @@
-<<<<<<< HEAD
 import axios from "axios";
 import history from "../history";
 const TOKEN = "token";
 import configureMockStore from "redux-mock-store";
 import { thunkMiddleware, thunk } from "redux-thunk";
-=======
-import axios from 'axios'
-import history from '../history'
-
-const TOKEN = 'token'
-
-import configureMockStore from 'redux-mock-store'
-import thunkMiddleware from 'redux-thunk'
->>>>>>> de245dd7cf35b90377dac1861ab3a0f6f2698632
 import { createStore, combineReducers, applyMiddleware } from "redux";
 const middlewares = [thunkMiddleware];
 const mockStore = configureMockStore(middlewares);
