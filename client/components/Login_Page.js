@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { connect, useDispatch } from "react-redux";
-import { me, authenticate } from "../store/auth";
+import { useDispatch } from "react-redux";
+import { authenticate } from "../store/auth";
 
 const Login_Page = () => {
   const [email, setEmail] = useState("");
@@ -37,7 +37,7 @@ const Login_Page = () => {
             <div id="email-cont">
               <input
                 id="email-info"
-                placeholder="email"
+                placeholder="Email"
                 value={email}
                 onChange={onChange}
                 name="email"
@@ -46,7 +46,7 @@ const Login_Page = () => {
             <div id="pw-cont">
               <input
                 id="pw-info"
-                placeholder="password"
+                placeholder="Password"
                 value={password}
                 onChange={onChange}
                 name="password"
@@ -62,26 +62,4 @@ const Login_Page = () => {
   );
 };
 
-// const mapLogin = state => {
-//   return {
-//     name: 'login',
-//     displayName: 'Login',
-//     error: state.auth.error
-//   }
-// }
-
-// const mapDispatch = dispatch => {
-//   return {
-//     handleSubmit(evt) {
-//       evt.preventDefault()
-//       const formName = evt.target.name
-//       const username = evt.target.email.value
-//       const password = evt.target.password.value
-//       dispatch(authenticate(username, password, formName))
-//     }
-//   }
-// }
-
 export default Login_Page;
-
-// export default connect (mapLogin, mapDispatch)(Login_Page)

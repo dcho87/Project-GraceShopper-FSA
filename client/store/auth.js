@@ -1,8 +1,6 @@
 import axios from "axios";
 import history from "../history";
-
 const TOKEN = "token";
-
 import configureMockStore from "redux-mock-store";
 import { thunkMiddleware, thunk } from "redux-thunk";
 import { createStore, combineReducers, applyMiddleware } from "redux";
@@ -13,30 +11,25 @@ const mockStore = configureMockStore(middlewares);
 
 const LOAD_USERS = "LOAD_USERS";
 const SET_AUTH = "SET_AUTH";
+const ADD_USER = "ADD_USER";
 
 //////////////////////////////////// ACTION CREATORS below:
 
 export const _loadUsers = (users) => {
   return { type: LOAD_USERS, users };
 };
-export const setAuth = (auth) => ({ type: SET_AUTH, auth });
 
-// export const me = () => async dispatch => {
-//   const token = window.localStorage.getItem(TOKEN)
-//   if (token) {
-//     const res = await axios.get('/auth/me', {
-//       headers: {
-//         authorization: token
-//       }
-//     })
-//     return dispatch(setAuth(res.data))
-//   }
-// }
+const _addUser = (user) => {
+  return { type: ADD_USER, user };
+};
+
+export const setAuth = (auth) => ({ type: SET_AUTH, auth });
 
 export const me = () => async (dispatch) => {
   const token = window.localStorage.getItem(TOKEN);
+
   if (token) {
-    const response = await axios.get("/api/auth", {
+    const response = await axios.get("/api/me", {
       headers: {
         authorization: token,
       },
@@ -45,19 +38,8 @@ export const me = () => async (dispatch) => {
   }
 };
 
-// export const authenticate = (email, password, method) => async dispatch => {
-//   try {
-//     const res = await axios.post(`/auth/${method}`, {email, password})
-//     window.localStorage.setItem(TOKEN, res.data.token)
-//     dispatch(me())
-//   } catch (authError) {
-//     return dispatch(setAuth({error: authError}))
-//   }
-// }
-
 export const authenticate = (email, password) => async (dispatch) => {
   try {
-    console.log("authenticate is running");
     const response = await axios.post("api/auth", { email, password });
     const { token } = response.data;
     window.localStorage.setItem(TOKEN, token);
@@ -69,7 +51,6 @@ export const authenticate = (email, password) => async (dispatch) => {
 
 export const logout = () => {
   window.localStorage.removeItem(TOKEN);
-  history.push("/login");
   return {
     type: SET_AUTH,
     auth: {},

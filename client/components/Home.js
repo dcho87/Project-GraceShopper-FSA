@@ -1,31 +1,17 @@
-import React from 'react'
-import {connect} from 'react-redux'
-import { Link } from "react-router-dom";
+import React from "react";
+import { useSelector } from "react-redux";
 
-/**
- * COMPONENT
- */
-export const Home = ({user}) => {
+export const Home = () => {
+  const user = useSelector((state) => state.auth);
   return (
     <div>
+      <h1>home page component has loaded, user is logged in</h1>
       <div>the user is logged in</div>
       <div>Welcome, {user.first_name}</div>
       <div>first name: {user.first_name}</div>
       <div>email: {user.email}</div>
-      <Link to="/login" onClick={logout}>
-        Logout
-      </Link>
     </div>
-  )
-}
+  );
+};
 
-/**
- * CONTAINER
- */
-const mapState = state => {
-  return {
-    username: state.auth.email
-  }
-}
-
-export default connect(mapState)(Home)
+export default Home;

@@ -2,8 +2,15 @@
 
 const {
   db,
-  models: { User, Product, Category },
+  models: { User, Product, Order, OrderProduct },
 } = require("../server/db");
+
+Order.belongsTo(User);
+User.hasMany(Order);
+OrderProduct.belongsTo(Product);
+OrderProduct.belongsTo(Order);
+Product.belongsToMany(Order, { through: OrderProduct });
+Order.belongsToMany(Product, { through: OrderProduct });
 
 /**
  * seed - this function clears the database, updates tables to
@@ -276,36 +283,6 @@ async function seed() {
       price: 200,
     }),
   ]);
-
-  // const productCategory = [
-  //   {productId: landscape1.id, categoryId:Landscape },
-  //   {productId: landscape2.id, categoryId:Landscape },
-  //   {productId: landscape3.id, categoryId:Landscape },
-  //   {productId: landscape4.id, categoryId:Landscape },
-  //   {productId: landscape5.id, categoryId:Landscape },
-  //   {productId: doodle1.id, categoryId:Doodle },
-  //   {productId: doodle2.id, categoryId:Doodle },
-  //   {productId: doodle3.id, categoryId:Doodle },
-  //   {productId: doodle4.id, categoryId:Doodle },
-  //   {productId: doodle5.id, categoryId:Doodle },
-  //   {productId: car1.id, categoryId:Car },
-  //   {productId: car2.id, categoryId:Car },
-  //   {productId: car3.id, categoryId:Car },
-  //   {productId: car4.id, categoryId:Car },
-  //   {productId: car5.id, categoryId:Car },
-  //   {productId: kangaroo1.id, categoryId:Kangaroo },
-  //   {productId: kangaroo2.id, categoryId:Kangaroo },
-  //   {productId: kangaroo3.id, categoryId:Kangaroo },
-  //   {productId: kangaroo4.id, categoryId:Kangaroo },
-  //   {productId: kangaroo5.id, categoryId:Kangaroo },
-  //   {productId: person1.id, categoryId:Person },
-  //   {productId: person2.id, categoryId:Person },
-  //   {productId: person3.id, categoryId:Person },
-  //   {productId: person4.id, categoryId:Person },
-  //   {productId: person5.id, categoryId:Person },
-  // ]
-
-  // await db.models.productCategory.bulkcreate(productCategory)
 
   console.log(`seeded ${users.length} users`);
 
