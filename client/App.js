@@ -4,7 +4,7 @@ import Navbar from "./components/navbar/Navbar";
 import Routes from "./Routes";
 import "./App.css";
 
-const App = async () => {
+const App = () => {
   return (
     <Router>
       <div className="main">

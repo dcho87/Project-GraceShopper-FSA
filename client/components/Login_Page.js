@@ -20,15 +20,6 @@ const Login_Page = () => {
     location.hash = "#/home"; //where the user is sent after they succesfully login
   };
 
-  // const onSubmit = (ev) => {
-  //   ev.preventDefault();
-  //   signIn({
-  //     email,
-  //     password,
-  //   });
-  //   location.hash = "#/home"; //where the user is sent after they succesfully login
-  // };
-
   return (
     <main id="login_page">
       <form onSubmit={onSubmit}>
@@ -50,6 +41,7 @@ const Login_Page = () => {
                 value={password}
                 onChange={onChange}
                 name="password"
+                type="password"
               />
             </div>
           </div>
