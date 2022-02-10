@@ -41,12 +41,15 @@ router.put('/:id', async (req, res, next) => {
             }
         })
 
+        //
+        orderProduct.update({
+            itemCount: 1
+        })
+
         await order.update({
             totalItems: 1,
             totalPrice: product.price
         })
-
-        orderProduct.update()
 
         res.send(order)
     }
