@@ -11,7 +11,7 @@ const { users } = require("./users_store");
 // const middleware = composeWithDevTools(
 //   applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
 // );
-const reducer = combineReducers({ auth }, products, users);
+const reducer = combineReducers({ auth, products, users });
 const middleware = applyMiddleware(thunk);
 const store = createStore(reducer, middleware);
 
