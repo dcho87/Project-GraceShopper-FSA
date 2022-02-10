@@ -7,6 +7,10 @@ export const Home = () => {
   // const dispatch = useDispatch();
   // dispatch(fetchProducts());
   const user = useSelector((state) => state.auth);
+  const products = useSelector((state) => state.products);
+
+  console.log("products");
+  console.log(products);
   return (
     <div>
       <h1>home page component has loaded, user is logged in</h1>
