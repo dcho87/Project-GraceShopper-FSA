@@ -282,6 +282,56 @@ async function seed() {
       category: "Person",
       price: 200,
     }),
+    /// Apes
+    Product.create({
+      name: 1601,
+      description: "pizza",
+      imageURL:
+        "https://nft-media.b-cdn.net/boredapeyachtclub/9606.png?width=512&height=512",
+      category: "Ape",
+      price: 500,
+    }),
+    Product.create({
+      name: 1602,
+      description: "trippy",
+      imageURL:
+        "https://nft-media.b-cdn.net/boredapeyachtclub/2087.png?width=512&height=512",
+      category: "Ape",
+      price: 500,
+    }),
+    Product.create({
+      name: 1603,
+      description: "Cowboy",
+      imageURL:
+        "https://lh3.googleusercontent.com/natQzxcx7wCSsfYL5VgwFx1occeJOQdGm4hQGwWOoIh5vP0YaxcptD5dVZBOB1UmMr0CBAgkapdWNznwmwpO4O1KwL6EjLcTqo7_=w600",
+      category: "Ape",
+      price: 500,
+    }),
+
+    ///Punks
+    Product.create({
+      name: 1701,
+      description: "Cig",
+      imageURL: "https://www.larvalabs.com/cryptopunks/cryptopunk8348.png",
+      category: "Punk",
+      price: 700,
+    }),
+    Product.create({
+      name: 1702,
+      description: "headband",
+      imageURL:
+        "https://lh3.googleusercontent.com/PWDq8erM2dMscd99OntjFRJFfvtvki7uxeYiBUT8e59Kdbn8s34dM59kCkVZ66b687B6i8KXMDspRfnU-JbLcB9Kc23EoSydJNkmgA=w600",
+      category: "Punk",
+      price: 700,
+    }),
+    Product.create({
+      name: 1703,
+      description: "Bandit",
+      imageURL:
+        "https://lh3.googleusercontent.com/VZgeKWUmrLjkbbCfjMn3ytDvOK3nLJjImk1-CW0jxIwE1XYIDnUDbcwbEOkrLXaS9aLhQJLQNCsSVuMwSg3RGtB1eIqPDQ2FU4OF=s0",
+      category: "Punk",
+      price: 700,
+    }),
   ]);
 
   console.log(`seeded ${users.length} users`);
