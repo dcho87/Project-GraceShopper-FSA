@@ -2,8 +2,9 @@ import axios from "axios";
 import history from "../history";
 const TOKEN = "token";
 import configureMockStore from "redux-mock-store";
-import { thunkMiddleware, thunk } from "redux-thunk";
+import thunkMiddleware from "redux-thunk";
 import { createStore, combineReducers, applyMiddleware } from "redux";
+import { fetchProducts } from "./product_store";
 const middlewares = [thunkMiddleware];
 const mockStore = configureMockStore(middlewares);
 
@@ -73,7 +74,7 @@ export const init = () => {
 };
 
 //////////////////////////////////// REDUCERS below:
-const users = (state = [], action) => {
+export const users = (state = [], action) => {
   switch (action.type) {
     case LOAD_USERS:
       return action.users;
@@ -92,8 +93,8 @@ export default function (state = {}, action) {
   }
 }
 
-const reducer = combineReducers({
-  users,
-});
+// const reducer = combineReducers({
+//   users,
+// });
 
-const store = createStore(reducer);
+// const store = createStore(reducer);

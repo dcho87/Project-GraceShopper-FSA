@@ -2,6 +2,7 @@ import axios from "axios";
 
 export const products = (state = [], action) => {
   if (action.type === "LOAD_PRODUCTS") {
+    console.log(state);
     return action.products;
   }
 
@@ -12,7 +13,6 @@ export const products = (state = [], action) => {
   }
 
   if (action.type === "DELETE_PRODUCT") {
-    console.log(state);
     return state.filter((product) => product.id !== action.product.id);
   }
 
