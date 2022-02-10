@@ -1,8 +1,13 @@
 import axios from "axios";
 
+const LOAD_PRODUCTS = "LOAD_PRODUCTS";
+
+const _loadProducts = (products) => {
+  return { type: LOAD_PRODUCTS, products };
+};
+
 export const products = (state = [], action) => {
-  if (action.type === "LOAD_PRODUCTS") {
-    console.log(state);
+  if (action.type === LOAD_PRODUCTS) {
     return action.products;
   }
 
@@ -26,10 +31,7 @@ export const products = (state = [], action) => {
 export const fetchProducts = () => {
   return async (dispatch) => {
     const products = (await axios.get("/api/products")).data;
-    dispatch({
-      type: "LOAD_PRODUCTS",
-      products,
-    });
+    dispatch(_loadProducts(products));
   };
 };
 

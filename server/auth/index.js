@@ -25,7 +25,8 @@ router.put("/api/users/:id", async (req, res, next) => {
 
 router.post("/api/add/auth", async (req, res, next) => {
   try {
-    res.send({ token: await User.authenticate(req.body) });
+    const auth = await { ...req.body };
+    res.status(201).send(await User.create(auth));
   } catch (err) {
     next(err);
   }

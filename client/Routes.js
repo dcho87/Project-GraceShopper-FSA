@@ -7,7 +7,6 @@ import SignUp_Page from "./components/SignUp_Page";
 import Home from "./components/Home";
 import { me } from "./store";
 import SingleProduct from "./components/products/SingleProduct";
-import { fetchProducts } from "./store/product_store";
 
 const Routes = () => {
   const dispatch = useDispatch();
