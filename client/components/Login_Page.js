@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { authenticate } from "../store/auth";
 
-const Login_Page = ({ signIn }) => {
+const Login_Page = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -10,12 +12,11 @@ const Login_Page = ({ signIn }) => {
       : setPassword(ev.target.value);
   };
 
+  const dispatch = useDispatch();
+
   const onSubmit = (ev) => {
     ev.preventDefault();
-    signIn({
-      email,
-      password,
-    });
+    dispatch(authenticate(email, password));
     location.hash = "#/home"; //where the user is sent after they succesfully login
   };
 
@@ -27,7 +28,7 @@ const Login_Page = ({ signIn }) => {
             <div id="email-cont">
               <input
                 id="email-info"
-                placeholder="email"
+                placeholder="Email"
                 value={email}
                 onChange={onChange}
                 name="email"
@@ -36,10 +37,11 @@ const Login_Page = ({ signIn }) => {
             <div id="pw-cont">
               <input
                 id="pw-info"
-                placeholder="password"
+                placeholder="Password"
                 value={password}
                 onChange={onChange}
                 name="password"
+                type="password"
               />
             </div>
           </div>

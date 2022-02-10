@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { authenticate } from "../store/auth";
+import { addUser } from "../store/auth.js";
 
 const SignUp_Page = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
+  const [first_name, setFirstName] = useState("");
+  const [last_name, setLastName] = useState("");
 
   const onChange = (ev) => {
     switch (ev.target.name) {
@@ -31,21 +32,46 @@ const SignUp_Page = () => {
 
   const onSubmit = (ev) => {
     ev.preventDefault();
-    console.log([email, password, firstName, lastName]);
 
-    // dispatch(authenticate(email, password));
-    // location.hash = "#/home"; //where the user is sent after they succesfully login
+    const user = {
+      email,
+      password,
+      first_name,
+      last_name,
+    };
+
+    dispatch(addUser(user));
+    location.hash = "#/login"; //where the user is sent after they succesfully login
   };
 
   return (
     <main id="login_page">
       <form onSubmit={onSubmit}>
+        &#128274; Create Secure Account
         <div id="form-cont-login">
           <div className="login-cont">
+            <div id="first-name-cont">
+              <input
+                id="first-name"
+                placeholder="First Name"
+                value={first_name}
+                onChange={onChange}
+                name="first_name"
+              />
+            </div>
+            <div id="last-name-cont">
+              <input
+                id="last-name"
+                placeholder="Last Name"
+                value={last_name}
+                onChange={onChange}
+                name="last_name"
+              />
+            </div>
             <div id="email-cont">
               <input
                 id="email-info"
-                placeholder="email"
+                placeholder="Email"
                 value={email}
                 onChange={onChange}
                 name="email"
@@ -54,33 +80,16 @@ const SignUp_Page = () => {
             <div id="pw-cont">
               <input
                 id="pw-info"
-                placeholder="password"
+                placeholder="Password"
                 value={password}
                 onChange={onChange}
                 name="password"
-              />
-            </div>
-            <div id="first-name-cont">
-              <input
-                id="first-name"
-                placeholder="first name"
-                value={firstName}
-                onChange={onChange}
-                name="first_name"
-              />
-            </div>
-            <div id="last-name-cont">
-              <input
-                id="last-name"
-                placeholder="last name"
-                value={lastName}
-                onChange={onChange}
-                name="last_name"
+                type="password"
               />
             </div>
           </div>
           <div id="submit-cont">
-            <button id="submit-info">Sign Up</button>
+            <button id="submit-info">Create Account</button>
           </div>
         </div>
       </form>
