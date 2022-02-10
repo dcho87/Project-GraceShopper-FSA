@@ -15,7 +15,7 @@ const Product = db.define("product", {
     type: STRING,
     allowNull: false
   },
-  pictureURL: {
+  imageURL: {
     type: TEXT,
     validate: {
       isUrl: true
