@@ -1,13 +1,11 @@
-const Sequelize = require("sequelize");
-const db = require("../db");
-const jwt = require("jsonwebtoken");
-const bcrypt = require("bcrypt");
-const axios = require("axios");
-require("dotenv").config();
+const Sequelize = require('sequelize')
+const db = require('../db')
+const jwt = require('jsonwebtoken')
+const bcrypt = require('bcrypt');
 
 const SALT_ROUNDS = 5;
 
-const { STRING, UUID, UUIDV4, INTEGER, TEXT, BOOLEAN } = Sequelize;
+const { STRING, UUID, UUIDV4, BOOLEAN } = Sequelize;
 const id = {
   type: UUID,
   defaultValue: UUIDV4,
