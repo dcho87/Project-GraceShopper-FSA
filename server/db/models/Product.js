@@ -2,7 +2,7 @@ const Sequelize = require('sequelize')
 const db = require('../db')
 
 
-const { STRING, UUID, UUIDV4, INTEGER, TEXT, BOOLEAN } = Sequelize;
+const { STRING, UUID, UUIDV4, INTEGER, TEXT } = Sequelize;
 const id = {
   type: UUID,
   defaultValue: UUIDV4,
