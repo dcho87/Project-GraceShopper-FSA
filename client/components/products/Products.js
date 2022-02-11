@@ -24,7 +24,7 @@ const Products = () => {
             </p>
             <p>
               {" "}
-              <b>left in stock:</b> {product.inventory}
+              <b>Left in stock:</b> {product.inventory}
             </p>
             <p>
               <b>Category: </b>
