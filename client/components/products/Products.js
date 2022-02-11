@@ -21,7 +21,7 @@ const Products = () => {
         
         
         <div className="product" key={product.name}>
-          
+                  {/* <h1>{product.name}</h1> */}
           <Link to={`/products/${product.id}`} > 
        <img className="product-img" src={product.imageURL} />
        </Link >
@@ -36,7 +36,10 @@ const Products = () => {
             </p>
             <p>
               <b>Category: </b>
+              <Link to={`/products/${product.category}`} > 
               {product.category}
+       </Link >
+          
             </p>
             <button>Add to cart</button>
             <input

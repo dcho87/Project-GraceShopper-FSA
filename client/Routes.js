@@ -30,13 +30,13 @@ const Routes = () => {
       {isLoggedIn ? (
         <Switch>
           <Route path="/home" component={Products} />
-          <Route path="/products/animals" component={Animals} />
+          <Route path="/products/kangaroos" component={Animals} />
           <Route path="/products/apes" component={Apes} />
           <Route path="/products/cars" component={Cars} />
           <Route path="/products/doodles" component={Doodles} />
           <Route path="/products/landscapes" component={Landscapes} />
           <Route path="/products/punks" component={Punks} />
-          <Route path="/products/stick_figures" component={Stick_Figures} />
+          <Route path="/products/people" component={Stick_Figures} />
           <Route path="/products/:id" component={Product} exact/>
           <Route path="/cart" component={Cart} />
           <Route path="/bio" component={Bio} />

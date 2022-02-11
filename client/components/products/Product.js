@@ -20,10 +20,10 @@ console.log(product.name)
   }, []);
 
   return (
-
-  
+    <>
     <div className="product" key={product.name}>
-        <h1>{product.name}</h1>
+
+    <h1>{product.name}</h1>
        <img className="product-img" src={product.imageURL} />
        <div className="product-details">
        <small>{product.description}</small>&nbsp;
@@ -37,6 +37,7 @@ console.log(product.name)
             </p>
             <p>
               <b>Category: </b>
+      
               {product.category}
             </p>
             <button>Add to cart</button>
@@ -50,7 +51,9 @@ console.log(product.name)
           </div>
     
     </div>
+ </>
   );
+
 };
 
 
