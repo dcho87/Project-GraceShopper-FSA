@@ -1,6 +1,6 @@
-import React, { useEffect, useReducer, useState } from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchProducts, products } from "../../store/product_store";
+import { fetchProducts } from "../../store/product_store";
 
 import "./Products.css";
 
@@ -20,17 +20,24 @@ const Products = () => {
           <img className="product-img" src={product.imageURL} />
           <div className="product-details">
             <p>
-              <b> Top Bid:</b> {product.price}$
+              <b> Top Bid:</b> ${product.price}
             </p>
             <p>
               {" "}
-              <b>Total Count:</b> {product.inventory}
+              <b>left in stock:</b> {product.inventory}
             </p>
             <p>
               <b>Category: </b>
               {product.category}
             </p>
             <button>Add to cart</button>
+            <input
+              type="number"
+              step="1"
+              placeholder="0"
+              min="0"
+              max={product.inventory}
+            ></input>
           </div>
         </div>
       ))}
