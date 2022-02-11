@@ -37,8 +37,10 @@ console.log(product.name)
             </p>
             <p>
               <b>Category: </b>
-      
+              <Link to={`/products/${product.category}`} > 
               {product.category}
+       </Link >
+          
             </p>
             <button>Add to cart</button>
             <input
