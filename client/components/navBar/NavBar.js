@@ -1,9 +1,10 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { logout } from "../../store";
 import "./Navbar.css";
 import { useSelector } from "react-redux";
+
 
 const Navbar = ({ handleClick, isLoggedIn }) => {
   const user = useSelector((state) => state.auth);
@@ -13,7 +14,8 @@ const Navbar = ({ handleClick, isLoggedIn }) => {
       <Link to="/home">
         <h1 id="logo">NFT</h1>
       </Link>
-      {isLoggedIn && <h1>{user.first_name} is logged in</h1>}
+      {isLoggedIn && <Link to="/bio"> <div> {user.first_name} logged in   </div>
+      </Link>}
       <nav>
         {isLoggedIn ? (
           <div className="nav-links">
