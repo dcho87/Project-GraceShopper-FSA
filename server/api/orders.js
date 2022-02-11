@@ -58,5 +58,4 @@ router.put('/:id', async (req, res, next) => {
     }
 })
 
-//TO DO
 // Checkout process API
