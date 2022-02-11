@@ -302,7 +302,7 @@ async function seed() {
     Product.create({
       name: 1505,
       description: "wave",
-      imageURL: "https://i.dlpng.com/static/png/6700536_preview.png",
+      imageURL: "https://i0.wp.com/clipartworks.com/wp-content/uploads/2021/06/Stick-Man-Wave.jpg?resize=300%2C300&ssl=1",
       category: "Person",
       price: 200,
       inventory: 8
@@ -311,8 +311,7 @@ async function seed() {
     Product.create({
       name: 1601,
       description: "pizza",
-      imageURL:
-        "https://nft-media.b-cdn.net/boredapeyachtclub/9606.png?width=512&height=512",
+      imageURL: 'https://lh3.googleusercontent.com/I1-Fa_i7gG3cJ-kiwEHki-5P5RE47lyeY31qKsX04z3X56jzA4sE5VIDYoAVCgOmssS39tfQDEkGeiOv_Chj1RXOOUdc3Lfb__AA3Q=w600',
       category: "Ape",
       price: 500,
       inventory: 3
@@ -320,8 +319,7 @@ async function seed() {
     Product.create({
       name: 1602,
       description: "trippy",
-      imageURL:
-        "https://nft-media.b-cdn.net/boredapeyachtclub/2087.png?width=512&height=512",
+      imageURL: "https://lh3.googleusercontent.com/oZ4wtxWRkKuDTlOnZV25ZSehUnmLgh8wF5SA_vaudILPQ23fY2SA8kEVoG3-JfTsMAY9sdycqWDvF24tFcwzTuqptILDGb9_nQLpuJ4",
       category: "Ape",
       price: 500,
       inventory: 2
