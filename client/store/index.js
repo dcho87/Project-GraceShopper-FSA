@@ -6,7 +6,7 @@ const { products } = require("./product_store");
 const { users } = require("./users_store");
 
 const reducer = combineReducers({ auth, products, users });
-const middleware = applyMiddleware(thunk, logger);
+const middleware = applyMiddleware(thunk);
 const store = createStore(reducer, middleware);
 
 export default store;
