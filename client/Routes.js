@@ -5,6 +5,7 @@ import { me } from "./store";
 import Login_Page from "./components/Login_Page";
 import SignUp_Page from "./components/SignUp_Page";
 import Products from "./components/products/Products";
+import Product from "./components/products/Product";
 import Animals from "./components/categories/Animals";
 import Apes from "./components/categories/Apes";
 import Cars from "./components/categories/Cars";
@@ -36,6 +37,7 @@ const Routes = () => {
           <Route path="/products/landscapes" component={Landscapes} />
           <Route path="/products/punks" component={Punks} />
           <Route path="/products/stick_figures" component={Stick_Figures} />
+          <Route path="/products/:id" component={Product} exact/>
           <Route path="/cart" component={Cart} />
           <Route path="/bio" component={Bio} />
         </Switch>
