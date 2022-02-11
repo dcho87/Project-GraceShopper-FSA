@@ -23,6 +23,10 @@ const Products = () => {
           <img src={product.imageURL} max-width='100%' height='150' />
           <p>${product.price}</p>
           <p>{product.inventory} left in stock</p>
+          <button>Add to cart</button>
+          <input type='number'  step='1' placeholder="0" min='0' max={product.inventory} ></input>
+     
+ 
         </div>
       ))}
     </div>
