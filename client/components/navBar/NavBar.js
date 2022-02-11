@@ -14,7 +14,8 @@ const Navbar = ({ handleClick, isLoggedIn }) => {
       <Link to="/home">
         <h1 id="logo">NFT</h1>
       </Link>
-      {isLoggedIn && <h1>{user.first_name} is logged in</h1>}
+      {isLoggedIn && <Link to="/bio"> <div> {user.first_name} logged in   </div>
+      </Link>}
       <nav>
         {isLoggedIn ? (
           <div className="nav-links">
