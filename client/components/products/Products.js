@@ -2,10 +2,10 @@ import React, { useEffect, useReducer, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchProducts, products } from "../../store/product_store";
 
+import "./Products.css";
+
 const Products = () => {
   const dispatch = useDispatch();
-
-  //   const [state_, setstate] = useState(0);
 
   useEffect(() => {
     dispatch(fetchProducts());
@@ -13,17 +13,25 @@ const Products = () => {
 
   const state = useSelector((state) => state);
 
-  console.log(state.pictureURL);
-
   return (
-    <div>
+    <div className="products-container">
       {state.products.map((product) => (
-        <div>
-          <h1>{product.name}</h1>
-          <img src={product.imageURL} />
-          <p>{product.price}</p>
-          <p>{product.inventory}</p>
-          <p>{product.category}</p>
+        <div className="product" key={product.name}>
+          <img className="product-img" src={product.imageURL} />
+          <div className="product-details">
+            <p>
+              <b> Top Bid:</b> {product.price}$
+            </p>
+            <p>
+              {" "}
+              <b>Total Count:</b> {product.inventory}
+            </p>
+            <p>
+              <b>Category: </b>
+              {product.category}
+            </p>
+            <button>Add to cart</button>
+          </div>
         </div>
       ))}
     </div>
