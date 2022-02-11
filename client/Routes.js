@@ -5,7 +5,14 @@ import { me } from "./store";
 import Login_Page from "./components/Login_Page";
 import SignUp_Page from "./components/SignUp_Page";
 import Products from "./components/products/Products";
-import SingleCategory_Page from "./components/categories/SingleCategory_Page";
+import Product from "./components/products/Product";
+import Animals from "./components/categories/Animals";
+import Apes from "./components/categories/Apes";
+import Cars from "./components/categories/Cars";
+import Doodles from "./components/categories/Doodles";
+import Landscapes from "./components/categories/Landscapes";
+import Punks from "./components/categories/Punks";
+import Stick_Figures from "./components/categories/Stick_Figures";
 import Cart from "./components/cart/Cart";
 import Bio from "./components/bio/Bio";
 
@@ -23,16 +30,14 @@ const Routes = () => {
       {isLoggedIn ? (
         <Switch>
           <Route path="/home" component={Products} />
-          <Route path="/products/animals" component={SingleCategory_Page} />
-          <Route path="/products/apes" component={SingleCategory_Page} />
-          <Route path="/products/cars" component={SingleCategory_Page} />
-          <Route path="/products/doodles" component={SingleCategory_Page} />
-          <Route path="/products/landscapes" component={SingleCategory_Page} />
-          <Route path="/products/punks" component={SingleCategory_Page} />
-          <Route
-            path="/products/stick_figures"
-            component={SingleCategory_Page}
-          />
+          <Route path="/products/kangaroos" component={Animals} />
+          <Route path="/products/apes" component={Apes} />
+          <Route path="/products/cars" component={Cars} />
+          <Route path="/products/doodles" component={Doodles} />
+          <Route path="/products/landscapes" component={Landscapes} />
+          <Route path="/products/punks" component={Punks} />
+          <Route path="/products/people" component={Stick_Figures} />
+          <Route path="/products/:id" component={Product} exact />
           <Route path="/cart" component={Cart} />
           <Route path="/bio" component={Bio} />
         </Switch>

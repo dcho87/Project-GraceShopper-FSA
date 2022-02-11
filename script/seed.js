@@ -58,162 +58,244 @@ async function seed() {
 
   const products = await Promise.all([
     Product.create({
-      name: 1101,
+      name: 'Seascape',
       description: "A beautiful seascape",
       imageURL:
         "https://images.unsplash.com/photo-1518837695005-2083093ee35b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
+<<<<<<< HEAD
       category: "Landscape",
       price: 50,
       inventory: 12,
+=======
+      category: "Landscapes",
+      price: 39,
+      inventory: 12
+>>>>>>> 0a05fbd394bb8623f6c515b07ae674fc22ed0872
     }),
 
     Product.create({
-      name: 1102,
+      name: 'Desert',
       description: "A spanning desert",
       imageURL:
         "https://media.istockphoto.com/photos/sand-dunes-in-the-sahara-desert-morocco-picture-id983422208?k=20&m=983422208&s=612x612&w=0&h=gjtn_hlkqzKfGQJQg62QTUbpFlQ0O5E5LnxQ5arh4ao=",
+<<<<<<< HEAD
       category: "Landscape",
       price: 50,
       inventory: 18,
+=======
+      category: "Landscapes",
+      price: 22,
+      inventory: 18
+>>>>>>> 0a05fbd394bb8623f6c515b07ae674fc22ed0872
     }),
 
     Product.create({
-      name: 1103,
-      description: "A stunning mountain",
+      name: "Mountain",
+      description: "A stunning snowy mountain",
       imageURL:
         "https://media.istockphoto.com/videos/the-perfect-mountain-aerial-shot-video-id181013019?s=640x640",
+<<<<<<< HEAD
       category: "Landscape",
       price: 50,
       inventory: 19,
+=======
+      category: "Landscapes",
+      price: 25,
+      inventory: 19
+>>>>>>> 0a05fbd394bb8623f6c515b07ae674fc22ed0872
     }),
 
     Product.create({
-      name: 1104,
-      description: "A captivating forest",
+      name: 'Forest',
+      description: "A captivating silent forest",
       imageURL:
         "https://www.treehugger.com/thmb/QolJfOYFmxwIH6Sxv5SBqY8Kq-M=/1885x1414/smart/filters:no_upscale()/GettyImages-1273584292-cbcd5f85f4c646d58f7a7fa158dcaaeb.jpg",
+<<<<<<< HEAD
       category: "Landscape",
       price: 50,
       inventory: 15,
+=======
+      category: "Landscapes",
+      price: 39,
+      inventory: 15
+>>>>>>> 0a05fbd394bb8623f6c515b07ae674fc22ed0872
     }),
 
     Product.create({
-      name: 1105,
+      name: 'City',
       description: "A grandious city",
       imageURL:
         "https://static01.nyt.com/images/2021/04/09/realestate/09SUBURBTOCITY-slide-ROM2/09SUBURBTOCITY-slide-ROM2-mobileMasterAt3x.jpg",
-      category: "Landscape",
+      category: "Landscapes",
       price: 50,
       inventory: 9,
     }),
 
     //doodle
     Product.create({
-      name: 1201,
-      description: "Squiggle 2",
+      name: 'Squiggly',
+      description: "Unique Squiggle with two peaks",
       imageURL:
         "https://lh3.googleusercontent.com/36pq45ZwWmyX1haBqD29ysVcw8F9Cmx1ZgAFC6ptJfnDAJneA9Vqk6pRSScZDU0c8Hh1MPF6uvEcNEI-cT_DEbyWNBGhvinwA5DE=w1400-k",
+<<<<<<< HEAD
       category: "Doodle",
       price: 70,
       inventory: 7,
+=======
+      category: "Doodles",
+      price: 170,
+      inventory: 7
+>>>>>>> 0a05fbd394bb8623f6c515b07ae674fc22ed0872
     }),
 
     Product.create({
-      name: 1202,
-      description: "Squiggle 4",
+      name: 'Big Squiggle',
+      description: "Chromatic and intense action",
       imageURL:
         "https://lh3.googleusercontent.com/_gy7-sZJ5u5H0dBkANZTtGaBtbBgU_Ui424RHvx9k1AhffIajWs-ttf7Dn4sUcW2fdmhEN0Hcjn6KamobkrAs5hVtBMf29xzNSSDOw=w1400-k",
+<<<<<<< HEAD
       category: "Doodle",
       price: 70,
       inventory: 5,
+=======
+      category: "Doodles",
+      price: 120,
+      inventory: 5
+>>>>>>> 0a05fbd394bb8623f6c515b07ae674fc22ed0872
     }),
 
     Product.create({
-      name: 1203,
-      description: "Squiggle 6",
+      name: 'Blue Squiggle',
+      description: "Scintillating vertical lines",
       imageURL:
         "https://lh3.googleusercontent.com/V8vm4TZJuQDB-frpp2RROJJBcQg2A8KC-nTf7ZMM04RDlhlCPDDs0cR0gtyWV2llJ0yR9L9W6zD0Ra7jnepWExECoNs5ZIfL7bfsAA=w1400-k",
+<<<<<<< HEAD
       category: "Doodle",
       price: 70,
       inventory: 8,
+=======
+      category: "Doodles",
+      price: 290,
+      inventory: 8
+>>>>>>> 0a05fbd394bb8623f6c515b07ae674fc22ed0872
     }),
 
     Product.create({
-      name: 1204,
-      description: "Rainbow",
+      name: 'Squiggle Rainbow',
+      description: "Vibrate experience",
       imageURL:
         "https://static.nftgo.io/asset/metadata/c9fba9f0b9225caa73710b35b8ad0eb8.png",
+<<<<<<< HEAD
       category: "Doodle",
       price: 70,
       inventory: 123,
+=======
+      category: "Doodles",
+      price: 350,
+      inventory: 123
+>>>>>>> 0a05fbd394bb8623f6c515b07ae674fc22ed0872
     }),
 
     Product.create({
-      name: 1205,
-      description: "Squiggle 3",
+      name: 'Light Squiggle',
+      description: "Lighter hue for a more mellow affair",
       imageURL:
         "https://external-preview.redd.it/cZn2m1ikRJMIvOWLjl6p-hT6vmOMEjVIc-uPUQxgO2A.jpg?auto=webp&s=0821e1f4ae5004e14320138c67d50306f7c5d961",
+<<<<<<< HEAD
       category: "Doodle",
       price: 70,
       inventory: 4,
+=======
+      category: "Doodles",
+      price: 99,
+      inventory: 4
+>>>>>>> 0a05fbd394bb8623f6c515b07ae674fc22ed0872
     }),
 
     //cars
 
     Product.create({
-      name: 1301,
-      description: "Electric",
+      name: 'Golf',
+      description: "It goes fast enough",
       imageURL:
         "https://oceanatlanticrentals.com/wp-content/uploads/2016-Club-Car-Precedent-4-Seater-Macon-GA-1295_2.aiimg-w700ar1cr0.jpg",
+<<<<<<< HEAD
       category: "Car",
+=======
+      category: "Cars",
+>>>>>>> 0a05fbd394bb8623f6c515b07ae674fc22ed0872
       price: 100,
       inventory: 21,
     }),
 
     Product.create({
-      name: 1302,
-      description: "SUV",
+      name: 'SUV',
+      description: "Luxury and Utility",
       imageURL:
         "https://di-uploads-pod4.dealerinspire.com/sunrisechevyredesign/uploads/2019/02/tahoe-exterior.jpg",
+<<<<<<< HEAD
       category: "Car",
       price: 100,
       inventory: 12,
+=======
+      category: "Cars",
+      price: 120,
+      inventory: 12
+>>>>>>> 0a05fbd394bb8623f6c515b07ae674fc22ed0872
     }),
 
     Product.create({
-      name: 1303,
-      description: "Tank",
+      name: 'Tank',
+      description: "Truck will fit your golf clubs",
       imageURL:
         "https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Challenger2-Bergen-Hohne-Training-Area-2.jpg/600px-Challenger2-Bergen-Hohne-Training-Area-2.jpg",
+<<<<<<< HEAD
       category: "Car",
       price: 100,
       inventory: 9,
+=======
+      category: "Cars",
+      price: 450,
+      inventory: 9
+>>>>>>> 0a05fbd394bb8623f6c515b07ae674fc22ed0872
     }),
 
     Product.create({
-      name: 1304,
-      description: "Sports Car",
+      name: 'Sport',
+      description: 'Suitable for a Bond villan',
       imageURL:
         "https://www.denverpost.com/wp-content/uploads/2021/07/7.14D-Lucid-scaled-1.jpg?w=1020",
+<<<<<<< HEAD
       category: "Car",
       price: 100,
       inventory: 5,
+=======
+      category: "Cars",
+      price: 720,
+      inventory: 5
+>>>>>>> 0a05fbd394bb8623f6c515b07ae674fc22ed0872
     }),
 
     Product.create({
-      name: 1305,
-      description: "Convertible",
+      name: 'Convertible',
+      description: "Holding this token gives you fractional ownership of the product",
       imageURL:
         "https://www.autocar.co.uk/sites/autocar.co.uk/files/styles/gallery_slide/public/images/car-reviews/first-drives/legacy/mercedes-amg-c63-cabriolet.jpg?itok=mY23jB1D",
+<<<<<<< HEAD
       category: "Car",
       price: 100,
       inventory: 3,
+=======
+      category: "Cars",
+      price: 399,
+      inventory: 3
+>>>>>>> 0a05fbd394bb8623f6c515b07ae674fc22ed0872
     }),
 
     // kangaroo
     Product.create({
-      name: 1401,
-      description: "Sleepy",
+      name: 'Sleepy',
+      description: 'Narcoleptic in nature',
       imageURL:
         "https://i.pinimg.com/474x/81/ab/90/81ab90af8c33e17078eae6b13a7cada1--kangaroo-jack-sleeping-animals.jpg",
       category: "Animal",
@@ -222,7 +304,7 @@ async function seed() {
     }),
 
     Product.create({
-      name: 1402,
+      name: 'Hello',
       description: "Seductive",
       imageURL:
         "https://i.pinimg.com/originals/93/57/52/935752e7d704377fadbdfa35b8e3e15c.jpg",
@@ -232,8 +314,8 @@ async function seed() {
     }),
 
     Product.create({
-      name: 1403,
-      description: "Funny Face",
+      name: 'Goofy',
+      description: 'Ready to hop around',
       imageURL:
         "https://www.askideas.com/media/40/Funny-Kangaroo-Showing-Tomgue-Face-Picture.jpg",
       category: "Animal",
@@ -242,8 +324,8 @@ async function seed() {
     }),
 
     Product.create({
-      name: 1404,
-      description: "Snapchat lense",
+      name: 'Goofier',
+      description: "Historians believe this work was augmented by a Snapchat lens ",
       imageURL:
         "https://lensesforsnap.com/wp-content/uploads/2021/02/funny-kangaroo-2.png",
       category: "Animal",
@@ -252,8 +334,8 @@ async function seed() {
     }),
 
     Product.create({
-      name: 1405,
-      description: "Buff",
+      name: 'Buff',
+      description: "How tough are you?",
       imageURL: "https://i.redd.it/fgb64gg7w0271.jpg",
       category: "Animal",
       price: 150,
@@ -261,8 +343,8 @@ async function seed() {
     }),
 
     Product.create({
-      name: 1501,
-      description: "smile",
+      name: 'Smile',
+      description: "Reminiscent of the halcyon days",
       imageURL: "http://www.clipartbest.com/cliparts/dT8/oEk/dT8oEkXKc.jpg",
       category: "Stick Figure",
       price: 200,
@@ -270,8 +352,8 @@ async function seed() {
     }),
 
     Product.create({
-      name: 1502,
-      description: "point",
+      name: 'Point',
+      description: "When you point one finger, there are three fingers pointing back at your... maybe",
       imageURL:
         "http://www.freepngclipart.com/download/stick_figure/20206-girl-stick-figure-images-hd-photo.jpeg",
       category: "Stick Figure",
@@ -280,8 +362,8 @@ async function seed() {
     }),
 
     Product.create({
-      name: 1503,
-      description: "shrug",
+      name: 'Shrug',
+      description: "An apocryphal demeanor",
       imageURL:
         "https://clipartix.com/wp-content/uploads/2016/05/Girl-clipart-stick-figure-free-clipart-images.jpeg",
       category: "Stick Figure",
@@ -290,8 +372,8 @@ async function seed() {
     }),
 
     Product.create({
-      name: 1504,
-      description: "girl",
+      name: 'Girl',
+      description: "Youthful and Convival",
       imageURL:
         "https://clipartix.com/wp-content/uploads/2016/05/Stick-figures-on-clip-art-sticks-and-vector-graphics.jpg",
       category: "Stick Figure",
@@ -328,8 +410,8 @@ async function seed() {
       inventory: 2,
     }),
     Product.create({
-      name: 1603,
-      description: "Cowboy",
+      name: 'Cowboy',
+      description: "All Hat, No Cattle",
       imageURL:
         "https://lh3.googleusercontent.com/natQzxcx7wCSsfYL5VgwFx1occeJOQdGm4hQGwWOoIh5vP0YaxcptD5dVZBOB1UmMr0CBAgkapdWNznwmwpO4O1KwL6EjLcTqo7_=w600",
       category: "Ape",
@@ -339,16 +421,16 @@ async function seed() {
 
     ///Punks
     Product.create({
-      name: 1701,
-      description: "Cig",
+      name: 'Cigarette',
+      description: "Someone introduce this man to a Juul",
       imageURL: "https://www.larvalabs.com/cryptopunks/cryptopunk8348.png",
-      category: "Punk",
+      category: "Punks",
       price: 700,
       inventory: 2,
     }),
     Product.create({
-      name: 1702,
-      description: "headband",
+      name: 'Headband',
+      description: 'Ready to help Michael and Buggs defeat the Monstars',
       imageURL:
         "https://lh3.googleusercontent.com/PWDq8erM2dMscd99OntjFRJFfvtvki7uxeYiBUT8e59Kdbn8s34dM59kCkVZ66b687B6i8KXMDspRfnU-JbLcB9Kc23EoSydJNkmgA=w600",
       category: "Punk",
@@ -356,8 +438,8 @@ async function seed() {
       inventory: 1,
     }),
     Product.create({
-      name: 1703,
-      description: "Bandit",
+      name: 'Bandit',
+      description: "Display your rebellious and slightly unshaven nature",
       imageURL:
         "https://lh3.googleusercontent.com/VZgeKWUmrLjkbbCfjMn3ytDvOK3nLJjImk1-CW0jxIwE1XYIDnUDbcwbEOkrLXaS9aLhQJLQNCsSVuMwSg3RGtB1eIqPDQ2FU4OF=s0",
       category: "Punk",

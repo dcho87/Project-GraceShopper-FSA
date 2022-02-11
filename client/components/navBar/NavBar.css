@@ -1,13 +1,15 @@
+nav {
+  background-color: #ffffff;
+}
 .header {
-  background-color: transparent;
   display: flex;
   justify-content: space-between;
   align-items: center;
   box-shadow: 0px 1px 5px #a9a9a9;
   position: sticky;
   top: 0px;
+  background-color: #ffffff;
 }
-
 
 #logo {
   margin-left: 20px;
@@ -61,8 +63,8 @@ a:hover {
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
   right: 141px;
-  z-index: 999;
   animation: fade 0.5s;
+  background-color: #ffffff;
 }
 
 #last-item {
