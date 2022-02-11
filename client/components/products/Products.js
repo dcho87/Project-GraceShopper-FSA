@@ -20,9 +20,9 @@ const Products = () => {
       {state.products.map((product) => (
         <div>
           <h1>{product.name}</h1>
-          <img src={product.imageURL} />
-          <p>{product.price}</p>
-          <p>{product.inventory}</p>
+          <img src={product.imageURL} max-width='100%' height='150' />
+          <p>${product.price}</p>
+          <p>{product.inventory} left in stock</p>
         </div>
       ))}
     </div>
