@@ -16,10 +16,6 @@ const Product = db.define("product", {
   },
   imageURL: {
     type: TEXT,
-<<<<<<< HEAD
-=======
-
->>>>>>> 0a05fbd394bb8623f6c515b07ae674fc22ed0872
     validate: {
       isUrl: true,
     },

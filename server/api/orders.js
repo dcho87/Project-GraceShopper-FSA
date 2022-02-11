@@ -32,6 +32,7 @@ router.put('/:id', async (req, res, next) => {
         //find an order and product
         const order = await Order.findByPk(req.params.id) || {}
         const product = await Product.findByPk(req.body.id) || {}
+        let count = req.body.itemCount || 1
 
         //find or create an associate between order and product
         const [orderProduct] = await OrderProduct.findOrCreate({
@@ -41,14 +42,13 @@ router.put('/:id', async (req, res, next) => {
             }
         })
 
-        //
         orderProduct.update({
-            itemCount: 1
+            itemCount: orderProduct.itemCount + count
         })
 
         await order.update({
-            totalItems: 1,
-            totalPrice: product.price
+            totalItems: order.totalItems + count,
+            totalPrice: order.totalPrice + product.price * count
         })
 
         res.send(order)
@@ -59,4 +59,4 @@ router.put('/:id', async (req, res, next) => {
 })
 
 //TO DO
-// Update Order
+// Checkout process API

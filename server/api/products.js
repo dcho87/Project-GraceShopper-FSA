@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const { models: { Product }, } = require("../db");
+const { isAdmin } = require('./isAdmin')
 module.exports = router;
 
 //route to All Products
@@ -21,7 +22,7 @@ router.get("/:id", async (req, res, next) => {
 });
 
 //route to ADD a Product
-router.post("/", async (req, res, next) => {
+router.post("/", isAdmin, async (req, res, next) => {
   try {
     const newProduct = {
       name: req.body.name,
@@ -37,7 +38,7 @@ router.post("/", async (req, res, next) => {
 });
 
 //route to UPDATE a Product
-router.put("/:id", async (req, res, next) => {
+router.put("/:id", isAdmin, async (req, res, next) => {
   try {
     const product = await Product.findByPk(req.params.id);
     res.send(await product.update(req.body));
@@ -47,7 +48,7 @@ router.put("/:id", async (req, res, next) => {
 });
 
 //route to REMOVE a Product
-router.delete("/:id", async (req, res, next) => {
+router.delete("/:id", isAdmin, async (req, res, next) => {
   try {
     const product = await Product.findByPk(req.params.id);
     await product.destroy();
