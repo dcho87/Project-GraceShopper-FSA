@@ -1,3 +1,6 @@
+nav {
+  background-color: #ffffff;
+}
 .header {
   display: flex;
   justify-content: space-between;
@@ -5,6 +8,7 @@
   box-shadow: 0px 1px 5px #a9a9a9;
   position: sticky;
   top: 0px;
+  background-color: #ffffff;
 }
 
 #logo {
@@ -60,6 +64,7 @@ a:hover {
   border-bottom-right-radius: 10px;
   right: 141px;
   animation: fade 0.5s;
+  background-color: #ffffff;
 }
 
 #last-item {
