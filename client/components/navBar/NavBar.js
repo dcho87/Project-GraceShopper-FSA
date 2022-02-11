@@ -1,9 +1,10 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { logout } from "../../store";
 import "./Navbar.css";
 import { useSelector } from "react-redux";
+
 
 const Navbar = ({ handleClick, isLoggedIn }) => {
   const user = useSelector((state) => state.auth);
