@@ -23,6 +23,7 @@ const Products = () => {
           <img src={product.imageURL} />
           <p>{product.price}</p>
           <p>{product.inventory}</p>
+          <p>{product.category}</p>
         </div>
       ))}
     </div>
