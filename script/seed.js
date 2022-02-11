@@ -165,7 +165,7 @@ async function seed() {
       description: "It goes fast enough",
       imageURL:
         "https://oceanatlanticrentals.com/wp-content/uploads/2016-Club-Car-Precedent-4-Seater-Macon-GA-1295_2.aiimg-w700ar1cr0.jpg",
-      category: "car",
+      category: "Car",
       price: 100,
       inventory: 21
     }),
@@ -175,7 +175,7 @@ async function seed() {
       description: "Luxury and Utility",
       imageURL:
         "https://di-uploads-pod4.dealerinspire.com/sunrisechevyredesign/uploads/2019/02/tahoe-exterior.jpg",
-      category: "car",
+      category: "Car",
       price: 120,
       inventory: 12
     }),
@@ -185,7 +185,7 @@ async function seed() {
       description: "Truck will fit your golf clubs",
       imageURL:
         "https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Challenger2-Bergen-Hohne-Training-Area-2.jpg/600px-Challenger2-Bergen-Hohne-Training-Area-2.jpg",
-      category: "car",
+      category: "Car",
       price: 450,
       inventory: 9
     }),
@@ -195,7 +195,7 @@ async function seed() {
       description: 'Suitable for a Bond villan',
       imageURL:
         "https://www.denverpost.com/wp-content/uploads/2021/07/7.14D-Lucid-scaled-1.jpg?w=1020",
-      category: "car",
+      category: "Car",
       price: 720,
       inventory: 5
     }),
@@ -205,7 +205,7 @@ async function seed() {
       description: "Holding this token gives you fractional ownership of the product",
       imageURL:
         "https://www.autocar.co.uk/sites/autocar.co.uk/files/styles/gallery_slide/public/images/car-reviews/first-drives/legacy/mercedes-amg-c63-cabriolet.jpg?itok=mY23jB1D",
-      category: "car",
+      category: "Car",
       price: 399,
       inventory: 3
     }),
