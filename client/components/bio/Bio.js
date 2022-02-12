@@ -29,7 +29,11 @@ const Bio = () => {
         <pre> </pre>
         <small>Much later, have last payment method</small>
       </ul>
-      <button>Change Password Here</button>
+
+      <button>
+        <Link to="/password">Change Password Here</Link>
+      </button>
+
       <button>
         <Link to="/login" onClick={() => dispatch(logout())}>
           Logout
