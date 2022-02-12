@@ -26,35 +26,36 @@ router.get("/:id", async (req, res, next) => {
 });
 
 // route to ADD a Product to an Order
-router.put("/:id", async (req, res, next) => {
-  try {
-    //find an order and product
-    const order = (await Order.findByPk(req.params.id)) || {};
-    const product = (await Product.findByPk(req.body.id)) || {};
+router.put('/:id', async (req, res, next) => {
+    try {
+        //find an order and product
+        const order = await Order.findByPk(req.params.id) || {}
+        const product = await Product.findByPk(req.body.id) || {}
+        let count = req.body.itemCount || 1
 
-    //find or create an associate between order and product
-    const [orderProduct] = await OrderProduct.findOrCreate({
-      where: {
-        orderId: req.params.id,
-        productId: req.body.id,
-      },
-    });
+        //find or create an associate between order and product
+        const [orderProduct] = await OrderProduct.findOrCreate({
+            where: {
+                orderId: req.params.id,
+                productId: req.body.id
+            }
+        })
 
-    //
-    orderProduct.update({
-      itemCount: 1,
-    });
+        orderProduct.update({
+            itemCount: orderProduct.itemCount + count
+        })
 
-    await order.update({
-      totalItems: 1,
-      totalPrice: product.price,
-    });
+        await order.update({
+            totalItems: order.totalItems + count,
+            totalPrice: order.totalPrice + product.price * count
+        })
 
-    res.send(order);
-  } catch (ex) {
-    next(ex);
-  }
-});
+        res.send(order)
+    }
+    catch(ex){
+        next(ex)
+    }
+})
 
 //TO DO
-// Update Order
+// Checkout process API
