@@ -27,9 +27,9 @@ router.put("/api/users/:id", async (req, res, next) => {
 router.post("/api/add/auth", async (req, res, next) => {
   try {
     const auth = await { ...req.body };
-    const user = await User.create(auth)
+    const user = await User.create(auth);
     const newOrder = await Order.create();
-    await user.addOrder(newOrder)
+    await user.addOrder(newOrder);
     res.status(201).send(user);
   } catch (err) {
     next(err);
