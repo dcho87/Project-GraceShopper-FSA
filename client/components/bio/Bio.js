@@ -1,21 +1,23 @@
 import React from "react";
-import { useSelector, connect } from "react-redux";
+import { useSelector, useDispatch, connect } from "react-redux";
 import { logout } from "../../store";
 import { Link } from "react-router-dom";
+import BioUpdate from "./BioUpdate";
 
-const Bio = ({ handleClick }) => {
+const Bio = () => {
   const user = useSelector((state) => state.auth);
-  console.log(user.email);
+
+  const dispatch = useDispatch();
+  console.log(user);
+
   return (
     <div>
-      <h4>
-        {user.first_name} {user.last_name} is logged in
-      </h4>
-      <h2>Welcome {user.first_name}</h2>
+      <h3>Welcome {user.first_name}</h3>
+      <h2>Update User Details Below</h2>
 
-      <small> Email: {user.email} </small>
+      <BioUpdate history={history} user={user} />
+
       <ul>
-        this will include info about:
         <pre> </pre>
         <li>Number of past orders</li>
         <li>Previous shipping address</li>
@@ -27,8 +29,9 @@ const Bio = ({ handleClick }) => {
         <pre> </pre>
         <small>Much later, have last payment method</small>
       </ul>
+      <button>Change Password Here</button>
       <button>
-        <Link to="/login" onClick={handleClick}>
+        <Link to="/login" onClick={() => dispatch(logout())}>
           Logout
         </Link>
       </button>
@@ -36,12 +39,4 @@ const Bio = ({ handleClick }) => {
   );
 };
 
-const mapDispatch = (dispatch) => {
-  return {
-    handleClick() {
-      dispatch(logout());
-    },
-  };
-};
-
-export default connect(null, mapDispatch)(Bio);
+export default Bio;
