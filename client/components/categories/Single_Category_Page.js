@@ -9,19 +9,45 @@ const SingleCategory_Page = () => {
 
   let category;
 
-  const categories = {
-    cars: "Car",
-    animals: "Animal",
-    doodles: "Doodle",
-    landscapes: "Landscape",
-    stick_figures: "Stick Figure",
-    apes: "Ape",
-    punks: "Punk",
-  };
+  // const categories = {
+  //   cars: "Car",
+  //   animals: "Animal",
+  //   doodles: "Doodle",
+  //   landscapes: "Landscape",
+  //   stick_figures: "Stick Figure",
+  //   apes: "Ape",
+  //   punks: "Punk",
+  // };
 
-  Object.keys(categories).map((cat) => {
-    if (pathname === `/products/${cat}`) category = categories[cat];
-  });
+  // Object.keys(categories).map((cat) => {
+  //   if (pathname === `/products/${cat}`) category = categories[cat];
+  // });
+
+  switch (pathname) {
+    case "/products/Cars":
+      category = "Cars";
+      break;
+    case "/products/Kangaroos":
+      category = "Kangaroos";
+      break;
+    case "/products/Doodles":
+      category = "Doodles";
+      break;
+    case "/products/Landscapes":
+      category = "Landscapes";
+      break;
+    case "/products/People":
+      category = "People";
+      break;
+    case "/products/Apes":
+      category = "Apes";
+      break;
+    case "/products/Punks":
+      category = "Punks";
+      break;
+    default:
+      break;
+  }
 
   const dispatch = useDispatch();
   useEffect(() => {
