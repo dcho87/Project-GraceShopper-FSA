@@ -40,7 +40,7 @@ const Single_Product_Page = ({ products, match }) => {
           <input
             type="number"
             step="1"
-            placeholder="0"
+            placeholder="1"
             min="0"
             max={product.inventory}
           ></input>

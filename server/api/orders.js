@@ -70,20 +70,19 @@ router.put("/update", async (req, res, next) => {
     });
 
     const orderDB = await Order.findOne({
-        where: {
-            orderId: order.id
-        }
-    })
+      where: {
+        orderId: order.id,
+      },
+    });
 
     await lineProduct.update({
       itemCount: itemCount,
     });
     await orderDB.update({
-        totalPrice: itemCount * product.price,
-    })
+      totalPrice: itemCount * product.price,
+    });
 
-    res.send(await Order.findByPk(order.id, {include: Product}))
-
+    res.send(await Order.findByPk(order.id, { include: Product }));
   } catch (ex) {
     next(ex);
   }
