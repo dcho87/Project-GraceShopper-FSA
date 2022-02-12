@@ -34,25 +34,25 @@ const Navbar = ({ handleClick, isLoggedIn }) => {
                 <a className="categories-btn">Categories</a>
                 <ul className="dropdown">
                   <li className="dropdown-item">
-                    <Link to="/products/cars">Cars</Link>
+                    <Link to="/products/Cars">Cars</Link>
                   </li>
                   <li className="dropdown-item">
-                    <Link to="/products/animals">Animals</Link>
+                    <Link to="/products/Kangaroos">Kangaroos</Link>
                   </li>
                   <li className="dropdown-item">
-                    <Link to="/products/doodles">Doodles</Link>
+                    <Link to="/products/Doodles">Doodles</Link>
                   </li>
                   <li className="dropdown-item">
-                    <Link to="/products/landscapes">Landscapes</Link>
+                    <Link to="/products/Landscapes">Landscapes</Link>
                   </li>
                   <li className="dropdown-item">
-                    <Link to="/products/stick_figures">Stick Figures</Link>
+                    <Link to="/products/People">People</Link>
                   </li>
                   <li className="dropdown-item">
-                    <Link to="/products/apes">Apes</Link>
+                    <Link to="/products/Apes">Apes</Link>
                   </li>
                   <li id="last-item" className="dropdown-item">
-                    <Link to="/products/punks">Punks</Link>
+                    <Link to="/products/Punks">Punks</Link>
                   </li>
                 </ul>
               </li>

@@ -8,6 +8,7 @@ import Products from "./components/products/Products";
 import Single_Category_Page from "./components/categories/Single_Category_Page";
 import Cart from "./components/cart/Cart";
 import Bio from "./components/bio/Bio";
+import Single_Product_Page from "./components/products/Single_Product_Page";
 
 const Routes = () => {
   const dispatch = useDispatch();
@@ -23,18 +24,16 @@ const Routes = () => {
       {isLoggedIn ? (
         <Switch>
           <Route path="/home" component={Products} />
-          <Route path="/products/animals" component={Single_Category_Page} />
-          <Route path="/products/apes" component={Single_Category_Page} />
-          <Route path="/products/cars" component={Single_Category_Page} />
-          <Route path="/products/doodles" component={Single_Category_Page} />
-          <Route path="/products/landscapes" component={Single_Category_Page} />
-          <Route path="/products/punks" component={Single_Category_Page} />
-          <Route
-            path="/products/stick_figures"
-            component={Single_Category_Page}
-          />
+          <Route path="/products/Kangaroos" component={Single_Category_Page} />
+          <Route path="/products/Apes" component={Single_Category_Page} />
+          <Route path="/products/Cars" component={Single_Category_Page} />
+          <Route path="/products/Doodles" component={Single_Category_Page} />
+          <Route path="/products/Landscapes" component={Single_Category_Page} />
+          <Route path="/products/Punks" component={Single_Category_Page} />
+          <Route path="/products/People" component={Single_Category_Page} />
           <Route path="/cart" component={Cart} />
           <Route path="/bio" component={Bio} />
+          <Route path="/products/:id" component={Single_Product_Page} />
         </Switch>
       ) : (
         <Switch>
