@@ -1,26 +1,11 @@
-import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { fetchProducts } from "../../store/product_store";
+import React from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 import "./Products.css";
 
 const Products = () => {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(fetchProducts());
-  }, []);
-
   const state = useSelector((state) => state);
-  const userId = useSelector((state) => state.auth).id;
-
-  // const addToCart = (product) => {
-  //   const productToAdd = {
-  //     userId,
-  //     totalItems: 1,
-  //     totalPrice: product.price,
-  //   };
 
   return (
     <div className="products-container">

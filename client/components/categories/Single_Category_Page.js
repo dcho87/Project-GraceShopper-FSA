@@ -9,20 +9,6 @@ const SingleCategory_Page = () => {
 
   let category;
 
-  // const categories = {
-  //   cars: "Car",
-  //   animals: "Animal",
-  //   doodles: "Doodle",
-  //   landscapes: "Landscape",
-  //   stick_figures: "Stick Figure",
-  //   apes: "Ape",
-  //   punks: "Punk",
-  // };
-
-  // Object.keys(categories).map((cat) => {
-  //   if (pathname === `/products/${cat}`) category = categories[cat];
-  // });
-
   switch (pathname) {
     case "/products/Cars":
       category = "Cars";
@@ -59,7 +45,7 @@ const SingleCategory_Page = () => {
   );
 
   return (
-    <div>
+    <div className="products-container">
       {products.map((product) => (
         <div className="product" key={product.name}>
           {/* <h1>{product.name}</h1> */}
