@@ -365,6 +365,12 @@ async function seed() {
     }),
   ]);
 
+  await Promise.all(
+    users.map(async (user) => {
+      await user.addOrder(await Order.create());
+    })
+  );
+
   console.log(`seeded ${users.length} users`);
 
   console.log(`seeded ${products.length} products`);

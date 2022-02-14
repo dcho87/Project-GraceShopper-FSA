@@ -1,21 +1,23 @@
 import axios from "axios";
 
+const UPDATE = "UPDATE";
+
 export const users = (state = [], action) => {
   if (action.type === "LOAD_USERS") {
     return action.users;
   }
-
-  if (action.type === "UPDATE_USER") {
-    return state.map((user) => (user.id = action.user.id ? action.user : user));
+  if (action.type === "CREATE_USER") {
+    return [...state, action.user];
   }
-
   if (action.type === "DELETE_USER") {
     console.log(state);
     return state.filter((user) => user.id !== action.user.id);
   }
 
-  if (action.type === "CREATE_USER") {
-    return [...state, action.user];
+  if (action.type === UPDATE) {
+    state = state.map((user) =>
+      user.id !== action.user.id ? user : action.user
+    );
   }
 
   return state;
@@ -53,5 +55,14 @@ export const editUser = (userId, user) => {
       user,
     });
     dispatch({ type: "UPDATE_USER", user_ });
+  };
+};
+
+const _updateUser = (user) => ({ type: UPDATE, user });
+
+export const updateUser = (user) => {
+  return async (dispatch) => {
+    const updatedUser = (await axios.put(`/api/users/${user.id}`, user)).data;
+    dispatch(_updateUser(updatedUser));
   };
 };

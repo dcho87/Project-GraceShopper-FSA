@@ -1,7 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { fetchOrders } from "../../store/index.js";
+import { useDispatch, useSelector } from "react-redux";
 
 const Cart = () => {
+  const user = useSelector((state) => state.auth);
+
+  const userOrder = useSelector((state) => state.orders).find(
+    (order) => order.userId === user.id
+  );
+
+  console.log("userOrder:", userOrder);
+
   return (
     <div>
       Your Current Cart contains:

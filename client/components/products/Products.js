@@ -1,11 +1,29 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { addToOrder, editProduct } from "../../store/index.js";
 import { Link } from "react-router-dom";
-
 import "./Products.css";
 
 const Products = () => {
+  const dispatch = useDispatch();
+
   const state = useSelector((state) => state);
+  const user = state.auth;
+
+  const [totalItems, setTotalItems] = useState(0);
+  const [totalPrice, setTotalPrice] = useState(0);
+  const [productId, setProductId] = useState("");
+
+  const userOrderId = state.orders
+    .filter((order) => order.userId === user.id)
+    .map((order) => order.id)[0];
+
+  const orderToAdd = {
+    id: userOrderId,
+    totalItems,
+    totalPrice,
+    productId,
+  };
 
   return (
     <div className="products-container">
@@ -29,13 +47,27 @@ const Products = () => {
                 {product.category}
               </Link>
             </p>
-            <button>Add to cart</button>
+            <button
+              disabled={product.id !== productId || totalItems === 0}
+              onClick={(ev) => {
+                dispatch(addToOrder(orderToAdd));
+                dispatch(editProduct(orderToAdd, product));
+                setProductId("");
+              }}
+            >
+              Add to cart
+            </button>
             <input
               type="number"
-              step="1"
-              placeholder="1"
-              min="0"
+              step={1}
+              placeholder={0}
+              min={0}
               max={product.inventory}
+              onChange={(ev) => {
+                setTotalItems(ev.target.value * 1);
+                setTotalPrice(ev.target.value * product.price);
+                setProductId(product.id);
+              }}
             ></input>
           </div>
         </div>
