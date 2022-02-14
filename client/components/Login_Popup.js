@@ -4,7 +4,7 @@ import { authenticate } from "../store/auth";
 
 import "./Login_Popup.css";
 
-const Login_Popup = (props) => {
+const Login_Popup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [state, setstate] = useState("none");
