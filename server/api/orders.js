@@ -91,7 +91,7 @@ router.put("/update", async (req, res, next) => {
   try {
     const { order, product, itemCount } = req.body;
 
-    //find the OrderProduct for active order
+    //find the Products for Active Order
     const lineProduct = await OrderProduct.findOne({
       where: {
         orderId: order.id,
@@ -99,17 +99,28 @@ router.put("/update", async (req, res, next) => {
       },
     });
 
+    //delete Product if itemCount is 0
+    if (itemCount === 0) {
+      await lineProduct.delete();
+    } else {
+      await lineProduct.update({
+        itemCount: itemCount,
+      });
+    }
+
+    //find the Active Order
     const orderDB = await Order.findOne({
       where: {
         orderId: order.id,
       },
     });
 
-    await lineProduct.update({
-      itemCount: itemCount,
-    });
+    const newTotalPrice = orderDB.totalPrice + product.price * itemCount;
+    const newTotalItems = orderDB.totalItems + (itemCount - orderDB.totalItems);
+
     await orderDB.update({
-      totalPrice: itemCount * product.price,
+      totalPrice: newTotalPrice,
+      totalItems: newTotalItems,
     });
 
     res.send(await Order.findByPk(order.id, { include: Product }));

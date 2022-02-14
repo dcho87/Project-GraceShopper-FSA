@@ -58,7 +58,7 @@ const SingleCategory_Page = () => {
   );
 
   return (
-    <div>
+    <div className="products-container">
       {products.map((product) => (
         <div className="product" key={product.name}>
           <h1>{product.name}</h1>

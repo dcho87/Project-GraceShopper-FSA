@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addToOrder, editProduct } from "../../store/index.js";
 import { connect } from "react-redux";
 import "./Products.css";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 const Single_Product_Page = ({ match }) => {
   const state = useSelector((state) => state);
