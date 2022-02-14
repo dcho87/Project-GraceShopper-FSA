@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { updateUserThunk } from "../../store";
+import { updateUser } from "../../store";
 
 class BioUpdate extends Component {
   constructor(props) {
@@ -40,9 +40,8 @@ class BioUpdate extends Component {
   async onSave(ev) {
     ev.preventDefault();
     try {
-      // console.log(this);
+      // await this.props.update(user.id);
       await this.props.updateUser({ ...this.state });
-      console.log(this);
     } catch (er) {
       console.log(er);
       // this.setState({ error: er.response.data.error.errors[0].message });
@@ -95,9 +94,12 @@ class BioUpdate extends Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  updateUser: (id, first_name, last_name, email) =>
-    dispatch(updateUserThunk(id, first_name, last_name, email)),
-});
+const mapDispatchToProps = (dispatch) => {
+  return {
+    updateUser: (user) => {
+      dispatch(updateUser(user));
+    },
+  };
+};
 
 export default connect((state) => state, mapDispatchToProps)(BioUpdate);
