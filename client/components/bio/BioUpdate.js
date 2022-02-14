@@ -1,15 +1,17 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { editUser } from "../../store";
+import { updateUserThunk } from "../../store";
 
 class BioUpdate extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      id: "",
       first_name: "",
       last_name: "",
       email: "",
       password: "",
+      address: "",
     };
     this.onChange = this.onChange.bind(this);
     this.onSave = this.onSave.bind(this);
@@ -24,6 +26,7 @@ class BioUpdate extends Component {
         last_name: user.last_name,
         email: user.email,
         password: user.password,
+        address: user.address || "",
       });
     }
   }
@@ -37,18 +40,20 @@ class BioUpdate extends Component {
   async onSave(ev) {
     ev.preventDefault();
     try {
-      await this.props.editUser({ ...this.state });
-      window.location.reload();
+      // console.log(this);
+      await this.props.updateUser({ ...this.state });
+      console.log(this);
     } catch (er) {
       console.log(er);
-      //   this.setState({ error: er.response.data.error.errors[0].message });
+      // this.setState({ error: er.response.data.error.errors[0].message });
     }
   }
 
   render() {
-    const { first_name, last_name, email } = this.state;
+    const { first_name, last_name, email, address } = this.state;
+    // console.log(this.props);
     const { onChange, onSave } = this;
-    console.log(this);
+    // console.log(this);
     return (
       <div>
         <form onSubmit={onSave}>
@@ -74,6 +79,13 @@ class BioUpdate extends Component {
             placeholder="Email"
           />{" "}
           <br />
+          <input
+            name="address"
+            value={address}
+            onChange={onChange}
+            placeholder="Address"
+          />{" "}
+          <br />
           <button disabled={!first_name || !last_name || !email}>
             Update Details!{" "}
           </button>
@@ -83,12 +95,9 @@ class BioUpdate extends Component {
   }
 }
 
-const mapDispatchToProps = (dispatch, { history }) => {
-  return {
-    editUser: (user) => {
-      dispatch(editUser(user, history));
-    },
-  };
-};
+const mapDispatchToProps = (dispatch) => ({
+  updateUser: (id, first_name, last_name, email) =>
+    dispatch(updateUserThunk(id, first_name, last_name, email)),
+});
 
 export default connect((state) => state, mapDispatchToProps)(BioUpdate);

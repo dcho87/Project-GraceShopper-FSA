@@ -5,7 +5,7 @@ const bcrypt = require("bcrypt");
 
 const SALT_ROUNDS = 5;
 
-const { STRING, UUID, UUIDV4, BOOLEAN } = Sequelize;
+const { STRING, UUID, UUIDV4, BOOLEAN, TEXT } = Sequelize;
 const id = {
   type: UUID,
   defaultValue: UUIDV4,
@@ -34,13 +34,14 @@ const User = db.define("user", {
     type: STRING,
     allowNull: false,
   },
+
   isAdmin: {
     type: BOOLEAN,
     defaultValue: false,
   },
   isEngineer: {
-    type: BOOLEAN,
-    defaultValue: false,
+    type: TEXT,
+    allowNull: true,
   },
 });
 
