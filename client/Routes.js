@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import { me } from "./store";
@@ -10,6 +10,7 @@ import Cart from "./components/cart/Cart";
 import Bio from "./components/bio/Bio";
 import Password from "./components/bio/Password";
 import Single_Product_Page from "./components/products/Single_Product_Page";
+import Login_Popup from "./components/Login_Popup";
 
 const Routes = () => {
   const dispatch = useDispatch();
@@ -39,9 +40,19 @@ const Routes = () => {
         </Switch>
       ) : (
         <Switch>
-          <Route path="/" exact component={Login_Page} />
+          <Route
+            path="/"
+            exact
+            render={() => (
+              <div>
+                <Login_Popup />
+                <Products />
+              </div>
+            )}
+          />
           <Route path="/login" exact component={Login_Page} />
           <Route path="/signup" exact component={SignUp_Page} />
+          <Route path="/home" component={Products} />
         </Switch>
       )}
     </div>
