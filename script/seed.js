@@ -52,6 +52,12 @@ async function seed() {
     }),
   ]);
 
+  await Promise.all(
+    users.map(async (user) => {
+      await user.addOrder(await Order.create());
+    })
+  );
+
   const products = await Promise.all([
     Product.create({
       name: "Seascape",
