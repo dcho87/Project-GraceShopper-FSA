@@ -55,3 +55,19 @@ export const editUser = (userId, user) => {
     dispatch({ type: "UPDATE_USER", user_ });
   };
 };
+
+export const updateUser =
+  (id, first_name, last_name, email, password) => async (dispatch) => {
+    try {
+      console.log(id);
+      const user = await axios.post(`/api/users/${id}`, {
+        first_name,
+        last_name,
+        email,
+        password,
+      });
+      dispatch(_updateUser(user.data));
+    } catch (err) {
+      console.log(err);
+    }
+  };
