@@ -2,15 +2,23 @@ import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { logout } from "../../store";
-
 import "./Navbar.css";
+import { useSelector } from "react-redux";
 
 const Navbar = ({ handleClick, isLoggedIn }) => {
+  const user = useSelector((state) => state.auth);
+
   return (
     <div className="header">
-      <h1 id="logo">
-        <a href="/home">NFT </a>
-      </h1>
+      <Link to="/home">
+        <h1 id="logo">NFT</h1>
+      </Link>
+      {isLoggedIn && (
+        <Link to="/bio">
+          {" "}
+          <div> {user.first_name} logged in </div>
+        </Link>
+      )}
       <nav>
         {isLoggedIn ? (
           <div className="nav-links">
@@ -18,48 +26,53 @@ const Navbar = ({ handleClick, isLoggedIn }) => {
             <ul className="nav-list">
               <li className="nav-item">
                 {" "}
-                <a href="/home" className="home-btn">
-                  Home
-                </a>
+                <Link to="/home">
+                  <h5 id="home-btn">Home</h5>
+                </Link>
               </li>
               <li className="nav-item">
                 <a className="categories-btn">Categories</a>
                 <ul className="dropdown">
                   <li className="dropdown-item">
-                    <Link to="">Cars</Link>
+                    <Link to="/products/Cars">Cars</Link>
                   </li>
                   <li className="dropdown-item">
-                    <Link to="">Animals</Link>
+                    <Link to="/products/Kangaroos">Kangaroos</Link>
                   </li>
                   <li className="dropdown-item">
-                    <Link to="">Doodles</Link>
+                    <Link to="/products/Doodles">Doodles</Link>
                   </li>
                   <li className="dropdown-item">
-                    <Link to="">Landscapes</Link>
+                    <Link to="/products/Landscapes">Landscapes</Link>
+                  </li>
+                  <li className="dropdown-item">
+                    <Link to="/products/People">People</Link>
+                  </li>
+                  <li className="dropdown-item">
+                    <Link to="/products/Apes">Apes</Link>
                   </li>
                   <li id="last-item" className="dropdown-item">
-                    {" "}
-                    <Link to="">Stick Figures</Link>
+                    <Link to="/products/Punks">Punks</Link>
                   </li>
                 </ul>
               </li>
               <li className="nav-item">
-                <a>
+                <Link to="/cart">
                   <img
                     src="https://i.ibb.co/LRNwbDz/outline-shopping-cart-checkout-black-24dp.png"
                     alt="shopping-cart-checkout"
                   />
-                </a>
+                </Link>
               </li>
 
               <li className="nav-item">
-                <a>
+                <Link to="/bio">
                   <img
                     src="https://i.ibb.co/4Zcr662/account-Logo.png"
                     alt="account-Logo"
                     id="account-logo"
                   />
-                </a>
+                </Link>
               </li>
               <li className="nav-item">
                 <Link to="/login" onClick={handleClick}>

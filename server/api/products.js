@@ -1,6 +1,8 @@
 const router = require("express").Router();
-const { models: { Product }, } = require("../db");
-const { isAdmin } = require('./isAdmin')
+const {
+  models: { Product },
+} = require("../db");
+const { isAdmin } = require("./isAdmin");
 module.exports = router;
 
 //route to All Products

@@ -1,17 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { HashRouter as Router } from "react-router-dom";
 import Navbar from "./components/navbar/Navbar";
 import Routes from "./Routes";
 import "./App.css";
-import SingleProduct from "./components/products/SingleProduct";
+import { useDispatch } from "react-redux";
+import { fetchProducts } from "./store/product_store";
 
 const App = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchProducts());
+  }, []);
+
   return (
     <Router>
-      <div className="main">
-        <Navbar />
+      <Navbar />
+      <div className="routes">
         <Routes />
-        {/* <SingleProduct /> */}
       </div>
     </Router>
   );

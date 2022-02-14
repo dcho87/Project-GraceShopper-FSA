@@ -1,8 +1,7 @@
-const Sequelize = require('sequelize')
-const db = require('../db')
+const Sequelize = require("sequelize");
+const db = require("../db");
 
-
-const { STRING, UUID, UUIDV4, INTEGER, TEXT } = Sequelize;
+const { STRING, UUID, UUIDV4, INTEGER, TEXT, BOOLEAN } = Sequelize;
 const id = {
   type: UUID,
   defaultValue: UUIDV4,
@@ -13,25 +12,25 @@ const Product = db.define("product", {
   id,
   name: {
     type: STRING,
-    allowNull: false
+    allowNull: false,
   },
   imageURL: {
     type: TEXT,
     validate: {
-      isUrl: true
-    }
+      isUrl: true,
+    },
   },
   price: {
     type: INTEGER,
-    allowNull: false
+    allowNull: false,
   },
   inventory: {
     type: INTEGER,
     defaultValue: 1,
-    allowNull: true
+    allowNull: true,
   },
   description: {
-    type: STRING
+    type: STRING,
   },
   category: {
     type: STRING,
@@ -39,4 +38,4 @@ const Product = db.define("product", {
   },
 });
 
-module.exports = Product
+module.exports = Product;

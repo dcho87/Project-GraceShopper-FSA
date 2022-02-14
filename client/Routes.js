@@ -1,12 +1,15 @@
-import React, { Component, Fragment, useEffect } from "react";
-import { connect, useDispatch, useSelector } from "react-redux";
-import { withRouter, Route, Switch, Redirect } from "react-router-dom";
-// import { Login, Signup } from "./components/AuthForm";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Route, Switch } from "react-router-dom";
+import { me } from "./store";
 import Login_Page from "./components/Login_Page";
 import SignUp_Page from "./components/SignUp_Page";
-import Home from "./components/Home";
-import { me } from "./store";
-import SingleProduct from "./components/products/SingleProduct";
+import Products from "./components/products/Products";
+import Single_Category_Page from "./components/categories/Single_Category_Page";
+import Cart from "./components/cart/Cart";
+import Bio from "./components/bio/Bio";
+import Password from "./components/bio/Password";
+import Single_Product_Page from "./components/products/Single_Product_Page";
 
 const Routes = () => {
   const dispatch = useDispatch();
@@ -21,9 +24,18 @@ const Routes = () => {
     <div>
       {isLoggedIn ? (
         <Switch>
-          <Route path="/home" component={Home} />
-          <Route path="/singleProduct" component={SingleProduct} />
-          {/* <Redirect to="/login" /> */}
+          <Route path="/home" component={Products} />
+          <Route path="/products/Kangaroos" component={Single_Category_Page} />
+          <Route path="/products/Apes" component={Single_Category_Page} />
+          <Route path="/products/Cars" component={Single_Category_Page} />
+          <Route path="/products/Doodles" component={Single_Category_Page} />
+          <Route path="/products/Landscapes" component={Single_Category_Page} />
+          <Route path="/products/Punks" component={Single_Category_Page} />
+          <Route path="/products/People" component={Single_Category_Page} />
+          <Route path="/cart" component={Cart} />
+          <Route path="/bio" component={Bio} />
+          <Route path="/password" component={Password} />
+          <Route path="/products/:id" component={Single_Product_Page} />
         </Switch>
       ) : (
         <Switch>
@@ -35,47 +47,5 @@ const Routes = () => {
     </div>
   );
 };
-
-// class Routes extends Component {
-//   componentDidMount() {
-//     this.props.loadInitialData();
-//   }
-
-//   render() {
-//     const { isLoggedIn } = this.props;
-
-//     return (
-//       <div>
-//         {isLoggedIn ? (
-//           <Switch>
-//             <Route path="/home" component={Home} />
-//             <Route path="/home" component={SingleProduct} />
-//             {/* <Redirect to="/login" /> */}
-//           </Switch>
-//         ) : (
-//           <Switch>
-//             <Route path="/" exact component={Login_Page} />
-//             <Route path="/login" exact component={Login_Page} />
-//             <Route path="/signup" exact component={SignUp_Page} />
-//           </Switch>
-//         )}
-//       </div>
-//     );
-//   }
-// }
-
-// const mapState = (state) => {
-//   return {
-//     isLoggedIn: !!state.auth.id,
-//   };
-// };
-
-// const mapDispatch = (dispatch) => {
-//   return {
-//     loadInitialData() {
-//       dispatch(me());
-//     },
-//   };
-// };
 
 export default Routes;
