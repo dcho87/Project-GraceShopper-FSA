@@ -28,7 +28,6 @@ async function seed() {
       email: "daniel@gmail.com",
       password: "daniel_pw",
       isAdmin: true,
-      isEngineer: true,
     }),
     User.create({
       first_name: "Ben",
@@ -36,7 +35,6 @@ async function seed() {
       email: "ben@gmail.com",
       password: "ben_pw",
       isAdmin: false,
-      isEngineer: false,
     }),
     User.create({
       first_name: "Joe",
@@ -44,7 +42,6 @@ async function seed() {
       email: "joe@gmail.com",
       password: "joe_pw",
       isAdmin: false,
-      isEngineer: true,
     }),
     User.create({
       first_name: "Saad",
@@ -52,7 +49,6 @@ async function seed() {
       email: "saad@gmail.com",
       password: "saad_pw",
       isAdmin: true,
-      isEngineer: false,
     }),
   ]);
 
@@ -303,8 +299,8 @@ async function seed() {
     }),
 
     Product.create({
-      name: 1505,
-      description: "wave",
+      name: "Wave",
+      description: "His best statue of liberty impression",
       imageURL:
         "https://i0.wp.com/clipartworks.com/wp-content/uploads/2021/06/Stick-Man-Wave.jpg?resize=300%2C300&ssl=1",
       category: "People",
@@ -313,8 +309,8 @@ async function seed() {
     }),
     /// Apes
     Product.create({
-      name: 1601,
-      description: "pizza",
+      name: "Pizza",
+      description: "I am not sure he is going to share",
       imageURL:
         "https://lh3.googleusercontent.com/I1-Fa_i7gG3cJ-kiwEHki-5P5RE47lyeY31qKsX04z3X56jzA4sE5VIDYoAVCgOmssS39tfQDEkGeiOv_Chj1RXOOUdc3Lfb__AA3Q=w600",
       category: "Apes",
@@ -322,8 +318,8 @@ async function seed() {
       inventory: 3,
     }),
     Product.create({
-      name: 1602,
-      description: "trippy",
+      name: "Colorful",
+      description: "Radical in nature",
       imageURL:
         "https://lh3.googleusercontent.com/oZ4wtxWRkKuDTlOnZV25ZSehUnmLgh8wF5SA_vaudILPQ23fY2SA8kEVoG3-JfTsMAY9sdycqWDvF24tFcwzTuqptILDGb9_nQLpuJ4",
       category: "Apes",
@@ -368,6 +364,12 @@ async function seed() {
       inventory: 3,
     }),
   ]);
+
+  await Promise.all(
+    users.map(async (user) => {
+      await user.addOrder(await Order.create());
+    })
+  );
 
   console.log(`seeded ${users.length} users`);
 

@@ -1,6 +1,8 @@
 const router = require("express").Router();
-const { models: { Product }, } = require("../db");
-const { isAdmin } = require('./isAdmin')
+const {
+  models: { Product },
+} = require("../db");
+const { isAdmin } = require("./isAdmin");
 module.exports = router;
 
 //route to All Products
@@ -38,7 +40,16 @@ router.post("/", isAdmin, async (req, res, next) => {
 });
 
 //route to UPDATE a Product
-router.put("/:id", isAdmin, async (req, res, next) => {
+// router.put("/:id", isAdmin, async (req, res, next) => {
+//   try {
+//     const product = await Product.findByPk(req.params.id);
+//     res.send(await product.update(req.body));
+//   } catch (ex) {
+//     next(ex);
+//   }
+// });
+
+router.put("/:id", async (req, res, next) => {
   try {
     const product = await Product.findByPk(req.params.id);
     res.send(await product.update(req.body));

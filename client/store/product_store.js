@@ -1,31 +1,14 @@
 import axios from "axios";
 
 const LOAD_PRODUCTS = "LOAD_PRODUCTS";
+const EDIT_PRODUCT = "EDIT_PRODUCT";
 
 const _loadProducts = (products) => {
   return { type: LOAD_PRODUCTS, products };
 };
 
-export const products = (state = [], action) => {
-  if (action.type === LOAD_PRODUCTS) {
-    return action.products;
-  }
-
-  if (action.type === "UPDATE_PRODUCT") {
-    return state.map(
-      (product) => (product.id = action.product.id ? action.product : product)
-    );
-  }
-
-  if (action.type === "DELETE_PRODUCT") {
-    return state.filter((product) => product.id !== action.product.id);
-  }
-
-  if (action.type === "CREATE_PRODUCT") {
-    return [...state, action.products];
-  }
-
-  return state;
+const _editProduct = (order, product) => {
+  return { type: EDIT_PRODUCT, order, product };
 };
 
 export const fetchProducts = () => {
@@ -51,11 +34,22 @@ export const destroyProduct = (productId) => {
   };
 };
 
-export const editProduct = (productId, product) => {
+export const editProduct = (order, product) => {
   return async (dispatch) => {
-    const product_ = await axios.put(`/api/products/${productId}`, {
-      product,
-    });
-    dispatch({ type: "UPDATE_PRODUCT", product_ });
+    product.inventory -= order.totalItems;
+    product = (await axios.put(`/api/products/${product.id}`, product)).data;
+    dispatch(_editProduct(order, product));
   };
+};
+
+export const products = (state = [], action) => {
+  switch (action.type) {
+    case LOAD_PRODUCTS:
+      return action.products;
+    case EDIT_PRODUCT:
+      return state;
+
+    default:
+      return state;
+  }
 };

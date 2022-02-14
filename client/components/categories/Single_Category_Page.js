@@ -1,27 +1,31 @@
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchProducts } from "../../store/product_store";
+import { useSelector, useDispatch } from "react-redux";
+import { addToOrder, editProduct } from "../../store/index.js";
 import { Link } from "react-router-dom";
 
 const SingleCategory_Page = () => {
+  const state = useSelector((state) => state);
   const { pathname } = useLocation();
+  const dispatch = useDispatch();
+  const user = state.auth;
+
+  const [totalItems, setTotalItems] = useState(0);
+  const [totalPrice, setTotalPrice] = useState(0);
+  const [productId, setProductId] = useState("");
+
+  const userOrderId = state.orders
+    .filter((order) => order.userId === user.id)
+    .map((order) => order.id)[0];
+
+  const orderToAdd = {
+    id: userOrderId,
+    totalItems,
+    totalPrice,
+    productId,
+  };
 
   let category;
-
-  // const categories = {
-  //   cars: "Car",
-  //   animals: "Animal",
-  //   doodles: "Doodle",
-  //   landscapes: "Landscape",
-  //   stick_figures: "Stick Figure",
-  //   apes: "Ape",
-  //   punks: "Punk",
-  // };
-
-  // Object.keys(categories).map((cat) => {
-  //   if (pathname === `/products/${cat}`) category = categories[cat];
-  // });
 
   switch (pathname) {
     case "/products/Cars":
@@ -49,11 +53,6 @@ const SingleCategory_Page = () => {
       break;
   }
 
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(fetchProducts());
-  }, []);
-
   const products = useSelector((state) => state.products).filter(
     (product) => product.category === category
   );
@@ -62,7 +61,7 @@ const SingleCategory_Page = () => {
     <div>
       {products.map((product) => (
         <div className="product" key={product.name}>
-          {/* <h1>{product.name}</h1> */}
+          <h1>{product.name}</h1>
           <Link to={`/products/${product.id}`}>
             <img className="product-img" src={product.imageURL} />
           </Link>
@@ -81,13 +80,27 @@ const SingleCategory_Page = () => {
                 {product.category}
               </Link>
             </p>
-            <button>Add to cart</button>
+            <button
+              disabled={product.id !== productId || totalItems === 0}
+              onClick={(ev) => {
+                dispatch(addToOrder(orderToAdd));
+                dispatch(editProduct(orderToAdd, product));
+                setProductId("");
+              }}
+            >
+              Add to cart
+            </button>
             <input
               type="number"
-              step="1"
-              placeholder="0"
-              min="0"
+              step={1}
+              placeholder={0}
+              min={0}
               max={product.inventory}
+              onChange={(ev) => {
+                setTotalItems(ev.target.value * 1);
+                setTotalPrice(ev.target.value * product.price);
+                setProductId(product.id);
+              }}
             ></input>
           </div>
         </div>
