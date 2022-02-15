@@ -1,33 +1,72 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { fetchOrders } from "../../store/index.js";
 import { useDispatch, useSelector } from "react-redux";
+import { fetchOrderDetails } from "../../store/index.js";
+import "./Cart.css";
 
 const Cart = () => {
   const user = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
 
-  const userOrder = useSelector((state) => state.orders).find(
+  useEffect(() => {
+    dispatch(fetchOrderDetails(user));
+  }, []);
+
+  const orderDetails = useSelector((state) => state.orders).find(
     (order) => order.userId === user.id
   );
 
-  console.log("userOrder:", userOrder);
+  if (!orderDetails) {
+    return null;
+  }
+
+  if (!orderDetails.products) {
+    return null;
+  }
+
+  console.log("orderDetails", orderDetails);
 
   return (
-    <div>
-      Your Current Cart contains:
-      <h4> I think we just map over each item, </h4>
-      <h4> each map contains </h4>{" "}
-      <ul>
-        <li> Name (links to product) </li>
-        <li> Picture (also links to product?) </li>
-        <li> Price </li>
-        <li> Quantity in cart (can increment)</li>
-        <li> Delete button </li>
+    <div className="cart-cont">
+      <div className="header">
+        <h1>Shopping Cart</h1>
+        <Link to="/previous_orders">View Previous Orders</Link>
+      </div>
 
-        <button>
-          <Link to="/home">Continue Shopping</Link>
-        </button>
-      </ul>
+      {orderDetails.products.map((product) => (
+        <div key={product.id} className="single-product-cont">
+          <img className="cart-image" src={product.imageURL}></img>
+          <div className="order-info-cont">
+            <Link to={`/products/${product.id}`}>
+              NFT Description: {product.description}
+            </Link>
+            {product.inventory} NFTs left in stock.
+            <div className="quantity-cont">
+              <div>Order Quantity:</div>
+              <input
+                type="number"
+                step={1}
+                placeholder={product.orderproduct.itemCount}
+                min={0}
+                max={product.inventory}
+              ></input>
+              <button>Update Order Quantity</button>
+              <button>Delete NFT from Order</button>
+            </div>
+          </div>
+        </div>
+      ))}
+
+      <div className="checkout-cont">
+        <div className="total-cont">
+          Subtotal ({orderDetails.totalItems} items): ${orderDetails.totalPrice}
+        </div>
+        <Link to="/orders/checkout" className="link-to-checkout-cont">
+          Proceed to Checkout
+        </Link>
+      </div>
+
+      <Link to="/home">Continue Shopping</Link>
     </div>
   );
 };
