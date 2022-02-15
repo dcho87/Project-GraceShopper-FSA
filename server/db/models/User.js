@@ -39,10 +39,6 @@ const User = db.define("user", {
     type: BOOLEAN,
     defaultValue: false,
   },
-  isEngineer: {
-    type: TEXT,
-    allowNull: true,
-  },
 });
 
 /**

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { updateUser } from "../../store";
+import { updateUserThunk } from "../../store";
 
 class BioUpdate extends Component {
   constructor(props) {
@@ -49,7 +49,7 @@ class BioUpdate extends Component {
   }
 
   render() {
-    const { first_name, last_name, email, address } = this.state;
+    const { first_name, last_name, email, address, password } = this.state;
     // console.log(this.props);
     const { onChange, onSave } = this;
     // console.log(this);
@@ -85,6 +85,12 @@ class BioUpdate extends Component {
             placeholder="Address"
           />{" "}
           <br />
+          <input
+            name="password"
+            value={password}
+            onChange={onChange}
+            placeholder="Password"
+          />{" "}
           <button disabled={!first_name || !last_name || !email}>
             Update Details!{" "}
           </button>
@@ -97,7 +103,7 @@ class BioUpdate extends Component {
 const mapDispatchToProps = (dispatch) => {
   return {
     updateUser: (user) => {
-      dispatch(updateUser(user));
+      dispatch(updateUserThunk(user));
     },
   };
 };
