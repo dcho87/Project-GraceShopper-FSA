@@ -8,7 +8,7 @@ const Bio = () => {
   const user = useSelector((state) => state.auth);
 
   const dispatch = useDispatch();
-  console.log(user);
+  // console.log(user);
 
   return (
     <div>
