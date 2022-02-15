@@ -34,7 +34,10 @@ const User = db.define("user", {
     type: STRING,
     allowNull: false,
   },
-
+  address: {
+    type: STRING,
+    allowNull: true,
+  },
   isAdmin: {
     type: BOOLEAN,
     defaultValue: false,
