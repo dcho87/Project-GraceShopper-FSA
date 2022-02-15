@@ -85,12 +85,12 @@ class BioUpdate extends Component {
             placeholder="Address"
           />{" "}
           <br />
-          <input
+          {/* <input
             name="password"
             value={password}
             onChange={onChange}
             placeholder="Password"
-          />{" "}
+          />{" "} */}
           <button disabled={!first_name || !last_name || !email}>
             Update Details!{" "}
           </button>
@@ -100,10 +100,10 @@ class BioUpdate extends Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch, { history }) => {
   return {
     updateUser: (user) => {
-      dispatch(updateUserThunk(user));
+      dispatch(updateUserThunk(user, history));
     },
   };
 };

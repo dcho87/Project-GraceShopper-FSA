@@ -60,9 +60,10 @@ export const editUser = (userId, user) => {
 
 const _updateUser = (user) => ({ type: UPDATE, user });
 
-export const updateUserThunk = (user) => {
+export const updateUserThunk = (user, history) => {
   return async (dispatch) => {
     const updatedUser = (await axios.put(`/api/users/${user.id}`, user)).data;
     dispatch(_updateUser(updatedUser));
+    history.push(`/`);
   };
 };
