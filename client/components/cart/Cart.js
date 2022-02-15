@@ -32,15 +32,17 @@ const Cart = () => {
         <h1>Shopping Cart</h1>
         <Link to="/orders/previous_orders">View Previous Orders</Link>
       </div>
-
       {orderDetails.products.map((product) => (
         <div key={product.id} className="single-product-cont">
-          <img className="cart-image" src={product.imageURL}></img>
+          <Link to={`/products/${product.id}`}>
+            <img className="cart-image" src={product.imageURL}></img>
+          </Link>
           <div className="order-info-cont">
             <Link to={`/products/${product.id}`}>
-              NFT Description: {product.description}
+              <h3> Name: {product.name}</h3>
+              <h4>Description: {product.description}</h4>
             </Link>
-            {product.inventory} NFTs left in stock.
+            {product.inventory} left in stock.
             <div className="quantity-cont">
               <div>Order Quantity:</div>
               <input
@@ -50,8 +52,8 @@ const Cart = () => {
                 min={0}
                 max={product.inventory}
               ></input>
-              <button>Update Order Quantity</button>
-              <button>Delete NFT from Order</button>
+              <button>Update Quantity</button>
+              <button>Remove from Order</button>
             </div>
           </div>
         </div>
