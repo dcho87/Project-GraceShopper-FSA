@@ -31,10 +31,6 @@ const Bio = () => {
       </ul>
 
       <button>
-        <Link to="/password">Change Password Here</Link>
-      </button>
-
-      <button>
         <Link to="/login" onClick={() => dispatch(logout())}>
           Logout
         </Link>

@@ -8,7 +8,7 @@ import Products from "./components/products/Products";
 import Single_Category_Page from "./components/categories/Single_Category_Page";
 import Cart from "./components/cart/Cart";
 import Bio from "./components/bio/Bio";
-import Password from "./components/bio/Password";
+// import Password from "./components/bio/Password";
 import Single_Product_Page from "./components/products/Single_Product_Page";
 import Login_Popup from "./components/Login_Popup";
 import Checkout_Page from "./components/checkout/Checkout_Page";
@@ -37,7 +37,7 @@ const Routes = () => {
           <Route path="/products/People" component={Single_Category_Page} />
           <Route path="/cart" component={Cart} />
           <Route path="/bio" component={Bio} />
-          <Route path="/password" component={Password} />
+          {/* <Route path="/password" component={Password} /> */}
           <Route path="/products/:id" component={Single_Product_Page} />
           <Route path="/orders/checkout" component={Checkout_Page} />
           <Route
