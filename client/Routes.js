@@ -10,6 +10,8 @@ import Cart from "./components/cart/Cart";
 import Bio from "./components/bio/Bio";
 import Password from "./components/bio/Password";
 import Single_Product_Page from "./components/products/Single_Product_Page";
+import Previous_Orders_Page from "./components/previous_orders/Previous_Orders_Page";
+import Checkout_Page from "./components/checkout/Checkout_Page";
 
 const Routes = () => {
   const dispatch = useDispatch();
@@ -36,6 +38,8 @@ const Routes = () => {
           <Route path="/bio" component={Bio} />
           <Route path="/password" component={Password} />
           <Route path="/products/:id" component={Single_Product_Page} />
+          <Route path="/previous_orders" component={Previous_Orders_Page} />
+          <Route path="/orders/checkout" component={Checkout_Page} />
         </Switch>
       ) : (
         <Switch>

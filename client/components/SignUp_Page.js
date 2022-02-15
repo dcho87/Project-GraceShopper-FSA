@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { authenticate } from "../store/auth";
 import { addUser } from "../store/auth.js";
 
 const SignUp_Page = () => {

@@ -14,3 +14,4 @@ export default store;
 export * from "./auth";
 export * from "./order_store";
 export * from "./product_store";
+export * from "./users_store";
