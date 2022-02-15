@@ -11,7 +11,7 @@ const Login_Popup = () => {
   useEffect(() => {
     setTimeout(() => {
       setstate("block");
-    }, 1000);
+    }, 2000);
   }, []);
 
   const onChange = (ev) => {
