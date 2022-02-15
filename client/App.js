@@ -3,7 +3,7 @@ import { HashRouter as Router } from "react-router-dom";
 import Navbar from "./components/navbar/Navbar";
 import Routes from "./Routes";
 import "./App.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts, fetchOrders } from "./store/index.js";
 
 const App = () => {

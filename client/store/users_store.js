@@ -18,7 +18,7 @@ export const users = (state = [], action) => {
 
   if (action.type === UPDATE) {
     state = state.map((user) =>
-      user.id !== action.user.id ? user : action.user
+      user.id !== action.orderDetails.userId ? user : action.user
     );
   }
 
