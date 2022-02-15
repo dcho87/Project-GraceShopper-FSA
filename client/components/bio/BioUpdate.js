@@ -85,15 +85,27 @@ class BioUpdate extends Component {
             placeholder="Address"
           />{" "}
           <br />
-          {/* <input
-            name="password"
-            value={password}
-            onChange={onChange}
-            placeholder="Password"
-          />{" "} */}
           <button disabled={!first_name || !last_name || !email}>
             Update Details!{" "}
           </button>
+          <h4> Change Password Here</h4>
+          <input
+            name="password"
+            // value={password}
+            onChange={onChange}
+            placeholder="Password"
+            type="password"
+          />{" "}
+          <br />
+          <input
+            name="password1"
+            // value={password}
+            onChange={onChange}
+            placeholder="Confirm Password"
+            type="password"
+          />{" "}
+          <br />
+          <button disabled={!password}>Update Password! </button>
         </form>
       </div>
     );
