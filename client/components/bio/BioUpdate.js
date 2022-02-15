@@ -40,8 +40,8 @@ class BioUpdate extends Component {
   async onSave(ev) {
     ev.preventDefault();
     try {
-      // await this.props.update(user.id);
       await this.props.updateUser({ ...this.state });
+      window.location.reload();
     } catch (er) {
       console.log(er);
       // this.setState({ error: er.response.data.error.errors[0].message });

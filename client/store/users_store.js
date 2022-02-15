@@ -1,3 +1,5 @@
+import { createStore, combineReducers, applyMiddleware } from "redux";
+import thunk from "redux-thunk";
 import axios from "axios";
 
 const UPDATE = "UPDATE";
