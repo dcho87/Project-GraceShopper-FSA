@@ -13,6 +13,7 @@ const Navbar = ({ handleClick, isLoggedIn }) => {
       <Link to="/home">
         <h1 id="logo">NFT</h1>
       </Link>
+
       {isLoggedIn && (
         <Link to="/bio">
           {" "}
@@ -24,14 +25,21 @@ const Navbar = ({ handleClick, isLoggedIn }) => {
           <div className="nav-links">
             {/* The navbar will show these links after you log in */}
             <ul className="nav-list">
+              {user.isAdmin === true ? (
+                <li className="nav-item">
+                  <p className="nav-btn">Add Product</p>
+                </li>
+              ) : (
+                ""
+              )}
               <li className="nav-item">
                 {" "}
                 <Link to="/home">
-                  <h5 id="home-btn">Home</h5>
+                  <p id="nav-btn">Home</p>
                 </Link>
               </li>
               <li className="nav-item">
-                <a className="categories-btn">Categories</a>
+                <a className="nav-btn">Explore</a>
                 <ul className="dropdown">
                   <li className="dropdown-item">
                     <Link to="/products/Cars">Cars</Link>

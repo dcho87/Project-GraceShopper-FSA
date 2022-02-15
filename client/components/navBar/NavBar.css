@@ -53,6 +53,11 @@ a:hover {
   height: 69px;
 }
 
+.nav-btn {
+  color: #525252;
+  height: 69px;
+}
+
 .dropdown {
   display: none;
   list-style: none;

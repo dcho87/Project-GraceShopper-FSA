@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { addToOrder, editProduct } from "../../store/index.js";
 import { Link } from "react-router-dom";
 import "./Products.css";
+import Product_Create_Edit from "./Product_Create_Edit.js";
 
 const Products = () => {
   const dispatch = useDispatch();
@@ -27,11 +28,12 @@ const Products = () => {
 
   return (
     <div className="products-container">
+      <Product_Create_Edit />
       {state.products.map((product) => (
         <div className="product" key={product.name}>
-          <Link to={`/products/${product.id}`}>
-            <img className="product-img" src={product.imageURL} />
-          </Link>
+          {/* <Link to={`/products/${product.id}`}> */}
+          <img className="product-img" src={product.imageURL} />
+          {/* </Link> */}
 
           <div className="product-details">
             <p>
@@ -69,6 +71,8 @@ const Products = () => {
                 setProductId(product.id);
               }}
             ></input>
+
+            <Link to={`/products/edit/${product.id}`}>Edit Product</Link>
           </div>
         </div>
       ))}
