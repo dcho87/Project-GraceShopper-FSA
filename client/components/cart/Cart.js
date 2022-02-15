@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchOrderDetails } from "../../store/index.js";
+import { fetchOrderDetails, deleteOrder } from "../../store/index.js";
 import "./Cart.css";
 
 const Cart = () => {
@@ -35,12 +35,17 @@ const Cart = () => {
 
       {orderDetails.products.map((product) => (
         <div key={product.id} className="single-product-cont">
-          <img className="cart-image" src={product.imageURL}></img>
+          <Link to={`/products/${product.id}`}>
+            <img className="cart-image" src={product.imageURL}></img>
+          </Link>
+
           <div className="order-info-cont">
             <Link to={`/products/${product.id}`}>
               NFT Description: {product.description}
             </Link>
-            {product.inventory} NFTs left in stock.
+            <div> ${product.price} per NFT</div>
+            <div>{product.inventory} NFTs left in stock.</div>
+
             <div className="quantity-cont">
               <div>Order Quantity:</div>
               <input
@@ -51,7 +56,11 @@ const Cart = () => {
                 max={product.inventory}
               ></input>
               <button>Update Order Quantity</button>
-              <button>Delete NFT from Order</button>
+              <button
+                onClick={() => dispatch(deleteOrder(orderDetails, product))}
+              >
+                Delete NFT from Order
+              </button>
             </div>
           </div>
         </div>

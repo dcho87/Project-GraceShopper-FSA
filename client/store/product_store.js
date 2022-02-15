@@ -2,6 +2,7 @@ import axios from "axios";
 
 const LOAD_PRODUCTS = "LOAD_PRODUCTS";
 const EDIT_PRODUCT = "EDIT_PRODUCT";
+const DELETE_ORDER = "DELETE_ORDER";
 
 const _loadProducts = (products) => {
   return { type: LOAD_PRODUCTS, products };
@@ -48,6 +49,17 @@ export const products = (state = [], action) => {
       return action.products;
     case EDIT_PRODUCT:
       return state;
+    case DELETE_ORDER:
+      return [...state].map((product) => {
+        if (product.id === action.order.productIdToRemove) {
+          const amountToAddToInv = action.order.products.find(
+            (product) => product.id
+          ).orderproduct.itemCount;
+          product.inventory += amountToAddToInv;
+          return product;
+        }
+        return product;
+      });
 
     default:
       return state;
