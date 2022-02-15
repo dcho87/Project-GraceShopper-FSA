@@ -1,9 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-<<<<<<< HEAD
 import { Link } from "react-router-dom";
-=======
->>>>>>> main
 import { addUser } from "../store/auth.js";
 import "./Signup_Page.css";
 

@@ -30,7 +30,7 @@ const Cart = () => {
     <div className="cart-cont">
       <div className="header">
         <h1>Shopping Cart</h1>
-        <Link to="/previous_orders">View Previous Orders</Link>
+        <Link to="/orders/previous_orders">View Previous Orders</Link>
       </div>
 
       {orderDetails.products.map((product) => (
