@@ -128,3 +128,15 @@ router.put("/update", async (req, res, next) => {
     next(ex);
   }
 });
+
+//Stripe
+
+// app.post("/create-checkout-session", async (req, res) => {
+//   const session = await stripe.checkout.sessions.create({
+//     success_url: 'http://localhost:8000/success'
+//     cancel_url
+//     payment_method_types
+//     mode
+//   });
+//   res.json({})
+// });
