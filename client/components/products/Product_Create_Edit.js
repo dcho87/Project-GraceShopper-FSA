@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { editProduct } from "../../store";
 
 export default function Product_Create_Edit() {
@@ -8,6 +8,7 @@ export default function Product_Create_Edit() {
   const products = useSelector((state) => state.products);
   const product = products.filter((product) => product.id === productId);
   const [state, setstate] = useState({
+    id: productId,
     ...product,
   });
 
@@ -62,8 +63,8 @@ export default function Product_Create_Edit() {
             />
           </div>
           <div>
-            <button onClick={() => dispatch(editProduct(productId, state))}>
-              Submit Changes
+            <button onClick={() => dispatch(editProduct({}, state))}>
+              <Link to={`/home`}>Submit Changes</Link>
             </button>
           </div>
         </div>

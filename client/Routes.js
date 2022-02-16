@@ -8,10 +8,12 @@ import Products from "./components/products/Products";
 import Single_Category_Page from "./components/categories/Single_Category_Page";
 import Cart from "./components/cart/Cart";
 import Bio from "./components/bio/Bio";
-import Password from "./components/bio/Password";
+// import Password from "./components/bio/Password";
 import Single_Product_Page from "./components/products/Single_Product_Page";
 import Login_Popup from "./components/Login_Popup";
 import Product_Create_Edit from "./components/products/Product_Create_Edit";
+import Checkout_Page from "./components/checkout/Checkout_Page";
+import Previous_Orders_Page from "./components/previous_orders/Previous_Orders_Page";
 
 const Routes = () => {
   const dispatch = useDispatch();
@@ -56,7 +58,7 @@ const Routes = () => {
           />
           <Route exact path="/cart" component={Cart} />
           <Route exact path="/bio" component={Bio} />
-          <Route exact path="/password" component={Password} />
+          {/* <Route exact path="/password" component={Password} /> */}
           <Route exact path="/products/:id" component={Single_Product_Page} />
           <Route
             exact
@@ -68,6 +70,11 @@ const Routes = () => {
           ) : (
             ""
           )} */}
+          <Route path="/orders/checkout" component={Checkout_Page} />
+          <Route
+            path="/orders/previous_orders"
+            component={Previous_Orders_Page}
+          />
         </Switch>
       ) : (
         <Switch>

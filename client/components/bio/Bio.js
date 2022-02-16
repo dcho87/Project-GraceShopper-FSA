@@ -8,7 +8,7 @@ const Bio = () => {
   const user = useSelector((state) => state.auth);
 
   const dispatch = useDispatch();
-  console.log(user);
+  // console.log(user);
 
   return (
     <div>
@@ -29,10 +29,6 @@ const Bio = () => {
         <pre> </pre>
         <small>Much later, have last payment method</small>
       </ul>
-
-      <button>
-        <Link to="/password">Change Password Here</Link>
-      </button>
 
       <button>
         <Link to="/login" onClick={() => dispatch(logout())}>

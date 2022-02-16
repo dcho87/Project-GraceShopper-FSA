@@ -31,9 +31,9 @@ const Products = () => {
       <Product_Create_Edit />
       {state.products.map((product) => (
         <div className="product" key={product.name}>
-          {/* <Link to={`/products/${product.id}`}> */}
-          <img className="product-img" src={product.imageURL} />
-          {/* </Link> */}
+          <Link to={`/products/${product.id}`}>
+            <img className="product-img" src={product.imageURL} />
+          </Link>
 
           <div className="product-details">
             <p>

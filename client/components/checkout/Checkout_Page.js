@@ -2,9 +2,9 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchOrderDetails } from "../../store/index.js";
-import "./Cart.css";
+import "./Checkout.css";
 
-const Cart = () => {
+const Checkout = () => {
   const user = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
@@ -23,9 +23,9 @@ const Cart = () => {
   if (!orderDetails.products) {
     return null;
   }
-  // console.log(user);
-  // console.log("orderDetails", orderDetails);
-  // console.log(orderDetails.totalItems);
+  console.log(user);
+  console.log("orderDetails", orderDetails);
+  console.log(orderDetails.totalItems);
   return (
     <div>
       {/* <nav> */}
@@ -41,7 +41,7 @@ const Cart = () => {
       {!!orderDetails.totalItems ? (
         <div className="cart-cont">
           <div className="header">
-            <h1>Shopping Cart</h1>
+            <h1>Checkout</h1>
             <Link to="/orders/previous_orders">View Previous Orders</Link>
           </div>
           {orderDetails.products.map((product) => (
@@ -51,22 +51,12 @@ const Cart = () => {
               </Link>
               <div className="order-info-cont">
                 <Link to={`/products/${product.id}`}>
-                  <h3> Name: {product.name}</h3>
-                  <h4>Description: {product.description}</h4>
+                  <h3>{product.name}</h3>
+                  <h4>
+                    {product.orderproduct.itemCount} x {product.price}{" "}
+                  </h4>
+                  <h3>${product.price * product.orderproduct.itemCount}</h3>
                 </Link>
-                {product.inventory} left in stock.
-                <div className="quantity-cont">
-                  <div>Order Quantity:</div>
-                  <input
-                    type="number"
-                    step={1}
-                    placeholder={product.orderproduct.itemCount}
-                    min={0}
-                    max={product.inventory}
-                  ></input>
-                  <button>Update Quantity</button>
-                  <button>Remove from Order</button>
-                </div>
               </div>
             </div>
           ))}
@@ -74,13 +64,18 @@ const Cart = () => {
           <div className="checkout-cont">
             <div className="total-cont">
               Subtotal ({orderDetails.totalItems} items): $
-              {orderDetails.totalPrice}
+              {orderDetails.totalPrice} <br />
+              Shipping : Free <br />
+              Estimated Tax: $
+              {Math.round(orderDetails.totalPrice * 0.07).toFixed(2)}
             </div>
-            <Link to="/orders/checkout" className="link-to-checkout-cont">
-              Proceed to Checkout
-            </Link>
+            <h3 className="total-cont">
+              Order Total: $
+              {Math.round(orderDetails.totalPrice * 1.07).toFixed(2)}
+            </h3>
+            <button>Place Order</button>
           </div>
-          <Link to="/home">Continue Shopping</Link>
+          <Link to="/cart">Back To Cart</Link>
         </div>
       ) : (
         <div>
@@ -102,4 +97,4 @@ const Cart = () => {
   );
 };
 
-export default Cart;
+export default Checkout;

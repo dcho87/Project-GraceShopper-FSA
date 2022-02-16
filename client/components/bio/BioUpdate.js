@@ -40,8 +40,8 @@ class BioUpdate extends Component {
   async onSave(ev) {
     ev.preventDefault();
     try {
-      // await this.props.update(user.id);
       await this.props.updateUser({ ...this.state });
+      window.location.reload();
     } catch (er) {
       console.log(er);
       // this.setState({ error: er.response.data.error.errors[0].message });
@@ -94,16 +94,34 @@ class BioUpdate extends Component {
           <button disabled={!first_name || !last_name || !email}>
             Update Details!{" "}
           </button>
+          <h4> Change Password Here</h4>
+          <input
+            name="password"
+            // value={password}
+            onChange={onChange}
+            placeholder="Password"
+            type="password"
+          />{" "}
+          <br />
+          <input
+            name="password1"
+            // value={password}
+            onChange={onChange}
+            placeholder="Confirm Password"
+            type="password"
+          />{" "}
+          <br />
+          <button disabled={!password}>Update Password! </button>
         </form>
       </div>
     );
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch, { history }) => {
   return {
     updateUser: (user) => {
-      dispatch(updateUserThunk(user));
+      dispatch(updateUserThunk(user, history));
     },
   };
 };

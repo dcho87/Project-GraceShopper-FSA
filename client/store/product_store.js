@@ -36,7 +36,7 @@ export const destroyProduct = (productId) => {
 
 export const editProduct = (order, product) => {
   return async (dispatch) => {
-    product.inventory -= order.totalItems;
+    // product.inventory -= order.totalItems;
     product = (await axios.put(`/api/products/${product.id}`, product)).data;
     dispatch(_editProduct(order, product));
   };

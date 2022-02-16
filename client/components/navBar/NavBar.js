@@ -7,11 +7,10 @@ import { useSelector } from "react-redux";
 
 const Navbar = ({ handleClick, isLoggedIn }) => {
   const user = useSelector((state) => state.auth);
-
   return (
     <div className="header">
       <Link to="/home">
-        <h1 id="logo">NFT</h1>
+        <h1 id="logo">NFT </h1>
       </Link>
 
       {isLoggedIn && (

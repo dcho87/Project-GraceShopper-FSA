@@ -34,6 +34,7 @@ async function seed() {
       last_name: "Greenspan",
       email: "ben@gmail.com",
       password: "ben_pw",
+      address: "1600 Pennsylvania Avenue",
       isAdmin: false,
     }),
     User.create({
@@ -41,6 +42,7 @@ async function seed() {
       last_name: "Collins",
       email: "joe@gmail.com",
       password: "joe_pw",
+      address: "1060 W Addison St",
       isAdmin: false,
     }),
     User.create({

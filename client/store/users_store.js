@@ -1,3 +1,5 @@
+import { createStore, combineReducers, applyMiddleware } from "redux";
+import thunk from "redux-thunk";
 import axios from "axios";
 
 const UPDATE = "UPDATE";
@@ -16,7 +18,7 @@ export const users = (state = [], action) => {
 
   if (action.type === UPDATE) {
     state = state.map((user) =>
-      user.id !== action.user.id ? user : action.user
+      user.id !== action.orderDetails.userId ? user : action.user
     );
   }
 
@@ -60,9 +62,10 @@ export const editUser = (userId, user) => {
 
 const _updateUser = (user) => ({ type: UPDATE, user });
 
-export const updateUserThunk = (user) => {
+export const updateUserThunk = (user, history) => {
   return async (dispatch) => {
     const updatedUser = (await axios.put(`/api/users/${user.id}`, user)).data;
     dispatch(_updateUser(updatedUser));
+    // history.push(`/`);
   };
 };
