@@ -37,7 +37,6 @@ const Routes = () => {
           <Route path="/products/People" component={Single_Category_Page} />
           <Route path="/cart" component={Cart} />
           <Route path="/bio" component={Bio} />
-          {/* <Route path="/password" component={Password} /> */}
           <Route path="/products/:id" component={Single_Product_Page} />
           <Route path="/orders/checkout" component={Checkout_Page} />
           <Route
