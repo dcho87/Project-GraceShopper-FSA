@@ -1,27 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useParams } from "react-router-dom";
 import { editProduct } from "../../store";
 
-export default function Product_Create_Edit() {
-  const productId = useParams().id;
-  const products = useSelector((state) => state.products);
-  const product = products.filter((product) => product.id === productId);
-  const [state, setstate] = useState({
-    id: productId,
-    ...product,
-  });
+export default function Product_Create() {
+  const [state, setstate] = useState({});
 
   const dispatch = useDispatch();
   return (
-    <form>
-      {product.map((product) => (
+    <div>
+      <form>
         <div>
           {" "}
           <div>
             <label>Top Bid: </label>
             <input
-              defaultValue={product.price}
               onChange={(e) => setstate({ ...state, price: e.target.value })}
               type="number"
             />
@@ -29,7 +21,6 @@ export default function Product_Create_Edit() {
           <div>
             <label>Inventory: </label>
             <input
-              defaultValue={product.inventory}
               onChange={(e) =>
                 setstate({ ...state, inventory: e.target.value })
               }
@@ -39,7 +30,6 @@ export default function Product_Create_Edit() {
           <div>
             <label>Name: </label>
             <input
-              defaultValue={product.name}
               onChange={(e) => setstate({ ...state, name: e.target.value })}
               type="text"
             />
@@ -47,7 +37,6 @@ export default function Product_Create_Edit() {
           <div>
             <label>Description: </label>
             <input
-              defaultValue={product.description}
               onChange={(e) =>
                 setstate({ ...state, description: e.target.value })
               }
@@ -57,18 +46,21 @@ export default function Product_Create_Edit() {
           <div>
             <label>Category: </label>
             <input
-              defaultValue={product.category}
               onChange={(e) => setstate({ ...state, category: e.target.value })}
               type="text"
             />
           </div>
           <div>
-            <button onClick={() => dispatch(editProduct({}, state))}>
-              <Link to={`/home`}>Submit Changes</Link>
+            <button
+              onClick={() => {
+                dispatch(editProduct({}, state));
+              }}
+            >
+              Submit Changes
             </button>
           </div>
         </div>
-      ))}
-    </form>
+      </form>
+    </div>
   );
 }

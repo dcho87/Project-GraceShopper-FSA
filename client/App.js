@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { HashRouter as Router } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { HashRouter as Router, Route, useLocation } from "react-router-dom";
 import Navbar from "./components/navbar/Navbar";
 import Routes from "./Routes";
 import "./App.css";
@@ -8,7 +8,7 @@ import { fetchProducts, fetchOrders } from "./store/index.js";
 
 const App = () => {
   const dispatch = useDispatch();
-
+  const hash = useLocation().hash;
   useEffect(() => {
     dispatch(fetchProducts());
     dispatch(fetchOrders());
@@ -16,7 +16,7 @@ const App = () => {
 
   return (
     <Router>
-      <Navbar />
+      {hash === "#/signup" || hash === "#/login" ? "" : <Navbar />}
       <div className="routes">
         <Routes />
       </div>

@@ -11,9 +11,10 @@ import Bio from "./components/bio/Bio";
 // import Password from "./components/bio/Password";
 import Single_Product_Page from "./components/products/Single_Product_Page";
 import Login_Popup from "./components/Login_Popup";
-import Product_Create_Edit from "./components/products/Product_Create_Edit";
+import Product_Edit from "./components/products/Product_Edit";
 import Checkout_Page from "./components/checkout/Checkout_Page";
 import Previous_Orders_Page from "./components/previous_orders/Previous_Orders_Page";
+import Product_Create from "./components/products/Product_Create";
 
 const Routes = () => {
   const dispatch = useDispatch();
@@ -60,18 +61,19 @@ const Routes = () => {
           <Route exact path="/bio" component={Bio} />
           {/* <Route exact path="/password" component={Password} /> */}
           <Route exact path="/products/:id" component={Single_Product_Page} />
-          <Route
-            exact
-            path="/products/edit/:id"
-            component={Product_Create_Edit}
-          />
-          {/* 
-          {isAdmin === true ? (
+          <Route exact path="/products/edit/:id" component={Product_Edit} />
+          <Route exact path="/products/create" component={Product_Create} />
+
+          {/* {isAdmin === true ? (
+            <div>
+         
+            </div>
           ) : (
             ""
           )} */}
-          <Route path="/orders/checkout" component={Checkout_Page} />
+          <Route exact path="/orders/checkout" component={Checkout_Page} />
           <Route
+            exact
             path="/orders/previous_orders"
             component={Previous_Orders_Page}
           />

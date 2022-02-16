@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { addToOrder, editProduct } from "../../store/index.js";
+import { addToOrder, destroyProduct, editProduct } from "../../store/index.js";
 import { Link } from "react-router-dom";
 import "./Products.css";
-import Product_Create_Edit from "./Product_Create_Edit.js";
+import Product_Edit from "./Product_Edit.js";
 
 const Products = () => {
   const dispatch = useDispatch();
@@ -28,12 +28,13 @@ const Products = () => {
 
   return (
     <div className="products-container">
-      <Product_Create_Edit />
       {state.products.map((product) => (
         <div className="product" key={product.name}>
-          <Link to={`/products/${product.id}`}>
-            <img className="product-img" src={product.imageURL} />
-          </Link>
+          <div className="img-div">
+            <Link to={`/products/${product.id}`}>
+              <img className="product-img" src={product.imageURL} />
+            </Link>
+          </div>
 
           <div className="product-details">
             <p>
@@ -72,7 +73,29 @@ const Products = () => {
               }}
             ></input>
 
-            <Link to={`/products/edit/${product.id}`}>Edit Product</Link>
+            {user.isAdmin === true ? (
+              <div>
+                {" "}
+                <Link to={`/products/edit/${product.id}`}>
+                  <button
+                    onClick={() => {
+                      setProductId(product.id);
+                    }}
+                  >
+                    Edit
+                  </button>
+                </Link>
+                <button
+                  onClick={() => {
+                    dispatch(destroyProduct(product.id));
+                  }}
+                >
+                  Delete
+                </button>
+              </div>
+            ) : (
+              ""
+            )}
           </div>
         </div>
       ))}

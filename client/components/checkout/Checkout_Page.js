@@ -1,100 +1,110 @@
-import React, { useEffect } from "react";
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { updateUserThunk } from "../../store";
+import Checkout_Products from "./Checkout_Products";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchOrderDetails } from "../../store/index.js";
-import "./Checkout.css";
 
-const Checkout = () => {
-  const user = useSelector((state) => state.auth);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(fetchOrderDetails(user));
-  }, []);
-
-  const orderDetails = useSelector((state) => state.orders).find(
-    (order) => order.userId === user.id
-  );
-
-  if (!orderDetails) {
-    return null;
+class Checkout extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      id: "",
+      first_name: "",
+      last_name: "",
+      email: "",
+      address: "",
+    };
+    this.onChange = this.onChange.bind(this);
+    this.onSave = this.onSave.bind(this);
   }
 
-  if (!orderDetails.products) {
-    return null;
+  async componentDidMount() {
+    // const { user } = this.props.auth;
+    console.log(this.props.auth.first_name);
+    if (this.props.auth.id) {
+      this.setState({
+        id: this.props.auth.id,
+        first_name: this.props.auth.first_name,
+        last_name: this.props.auth.last_name,
+        email: this.props.auth.email,
+        address: this.props.auth.address || "",
+      });
+    }
   }
-  console.log(user);
-  console.log("orderDetails", orderDetails);
-  console.log(orderDetails.totalItems);
-  return (
-    <div>
-      {/* <nav> */}
-      {/* {isLoggedIn ? ( */}
-      {/* <div className="nav-links"> */}
-      {/* The navbar will show these links after you log in */}
-      {/* </div> */}
-      {/* ) : ( */}
-      {/* <div> */}
-      {/* The navbar will show these links before you log in */}
-      {/* )} */}
-      {/* </nav> */}
-      {!!orderDetails.totalItems ? (
-        <div className="cart-cont">
-          <div className="header">
-            <h1>Checkout</h1>
-            <Link to="/orders/previous_orders">View Previous Orders</Link>
-          </div>
-          {orderDetails.products.map((product) => (
-            <div key={product.id} className="single-product-cont">
-              <Link to={`/products/${product.id}`}>
-                <img className="cart-image" src={product.imageURL}></img>
-              </Link>
-              <div className="order-info-cont">
-                <Link to={`/products/${product.id}`}>
-                  <h3>{product.name}</h3>
-                  <h4>
-                    {product.orderproduct.itemCount} x {product.price}{" "}
-                  </h4>
-                  <h3>${product.price * product.orderproduct.itemCount}</h3>
-                </Link>
-              </div>
-            </div>
-          ))}
 
-          <div className="checkout-cont">
-            <div className="total-cont">
-              Subtotal ({orderDetails.totalItems} items): $
-              {orderDetails.totalPrice} <br />
-              Shipping : Free <br />
-              Estimated Tax: $
-              {Math.round(orderDetails.totalPrice * 0.07).toFixed(2)}
-            </div>
-            <h3 className="total-cont">
-              Order Total: $
-              {Math.round(orderDetails.totalPrice * 1.07).toFixed(2)}
-            </h3>
-            <button>Place Order</button>
-          </div>
-          <Link to="/cart">Back To Cart</Link>
-        </div>
-      ) : (
-        <div>
-          <div className="cart-cont">
-            <div className="header">
-              <h1>Shopping Cart</h1>
-              <Link to="/orders/previous_orders">View Previous Orders</Link>
-            </div>
-          </div>
+  onChange(ev) {
+    const change = {};
+    change[ev.target.name] = ev.target.value;
+    this.setState(change);
+  }
 
-          <h2>
-            {user.first_name}, you have nothing in your cart. Click
-            <Link to="/home"> here to</Link> add products
-          </h2>
-          <Link to="/home">Continue Shopping</Link>
+  async onSave(ev) {
+    ev.preventDefault();
+    try {
+      await this.props.updateUser({ ...this.state });
+      window.location.reload();
+    } catch (er) {
+      console.log(er);
+      // this.setState({ error: er.response.data.error.errors[0].message });
+    }
+  }
+
+  render() {
+    const { first_name, last_name, email, address } = this.state;
+    const { onChange, onSave } = this;
+    return (
+      <div>
+        <div className="header">
+          <h1>Checkout</h1>
+          <Link to="/orders/previous_orders">View Previous Orders</Link>
         </div>
-      )}
-    </div>
-  );
+        <form onSubmit={onSave}>
+          {/* <pre>{!!error && JSON.stringify(error, null, 2)}</pre> */}
+          <input
+            name="first_name"
+            value={first_name}
+            onChange={onChange}
+            placeholder="First Name"
+          />{" "}
+          <br />
+          <input
+            name="last_name"
+            value={last_name}
+            onChange={onChange}
+            placeholder="Last Name"
+          />{" "}
+          <br />
+          <input
+            name="email"
+            value={email}
+            onChange={onChange}
+            placeholder="Email"
+          />{" "}
+          <br />
+          <input
+            name="address"
+            value={address}
+            onChange={onChange}
+            placeholder="Address"
+          />{" "}
+          <br />
+          <button disabled={!first_name || !last_name || !email}>
+            Confirm Details{" "}
+          </button>
+          <br />
+        </form>
+        <Checkout_Products />
+      </div>
+    );
+  }
+}
+
+const mapDispatchToProps = (dispatch, { history }) => {
+  return {
+    updateUser: (user) => {
+      dispatch(updateUserThunk(user, history));
+    },
+  };
 };
 
-export default Checkout;
+export default connect((state) => state, mapDispatchToProps)(Checkout);

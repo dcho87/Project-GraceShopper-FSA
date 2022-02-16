@@ -48,15 +48,15 @@ const SignUp_Page = () => {
   return (
     <div className="signup-page">
       <form onSubmit={onSubmit} className="signup-containter">
-        {/* <div className="signup-containter"> */}
-        {/* &#128274; Create Secure Account */}
-        {/* <div className="signup-form-item"> */}
         <Link className="signup-form-item" id="signup-form-link" to="/">
           &#60; Marketplace
         </Link>
         <h1 className="sign-up-header">Sign Up</h1>
         <p>
-          Already have an account? <Link id="signup-form-link">Sign in</Link>
+          Already have an account?{" "}
+          <Link to="/login" id="signup-form-link">
+            Sign in
+          </Link>
         </p>
         <input
           className="signup-form-item"
@@ -65,8 +65,7 @@ const SignUp_Page = () => {
           onChange={onChange}
           name="first_name"
         />
-        {/* </div> */}
-        {/* <div className="signup-form-item"> */}
+
         <input
           className="signup-form-item"
           placeholder="Last Name"
@@ -74,8 +73,7 @@ const SignUp_Page = () => {
           onChange={onChange}
           name="last_name"
         />
-        {/* </div> */}
-        {/* <div className="signup-form-item"> */}
+
         <input
           className="signup-form-item"
           placeholder="Email"
@@ -83,8 +81,7 @@ const SignUp_Page = () => {
           onChange={onChange}
           name="email"
         />
-        {/* </div> */}
-        {/* <div className="signup-form-item"> */}
+
         <input
           className="signup-form-item"
           placeholder="Password"
@@ -93,8 +90,7 @@ const SignUp_Page = () => {
           name="password"
           type="password"
         />
-        {/* </div> */}
-        {/* <div id="submit-cont"> */}
+
         <div className="signup-form-item terms_cond">
           <input type="checkbox" />
           <p>
@@ -106,8 +102,6 @@ const SignUp_Page = () => {
         <button className="signup-form-item" id="submit-info">
           Create Account
         </button>
-        {/* </div> */}
-        {/* </div> */}
       </form>
       <div className="signup-poster">
         <div className="blur">

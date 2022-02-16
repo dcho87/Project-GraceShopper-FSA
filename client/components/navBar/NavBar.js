@@ -26,7 +26,9 @@ const Navbar = ({ handleClick, isLoggedIn }) => {
             <ul className="nav-list">
               {user.isAdmin === true ? (
                 <li className="nav-item">
-                  <p className="nav-btn">Add Product</p>
+                  <Link to="/products/create" className="nav-btn">
+                    Add Product
+                  </Link>
                 </li>
               ) : (
                 ""
@@ -82,7 +84,7 @@ const Navbar = ({ handleClick, isLoggedIn }) => {
                 </Link>
               </li>
               <li className="nav-item">
-                <Link to="/" onClick={handleClick}>
+                <Link to="/login" onClick={handleClick}>
                   <img
                     src="https://i.ibb.co/2gfMsdL/logout.png"
                     alt="logout"
