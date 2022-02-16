@@ -2,6 +2,7 @@ const path = require("path");
 const express = require("express");
 const morgan = require("morgan");
 const app = express();
+
 module.exports = app;
 
 // logging middleware
@@ -9,6 +10,9 @@ app.use(morgan("dev"));
 
 // body parsing middleware
 app.use(express.json());
+
+//view
+app.set("view engine", "ejs");
 
 // auth and api routes
 app.use("/", require("./auth"));
