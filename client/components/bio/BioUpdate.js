@@ -12,9 +12,12 @@ class BioUpdate extends Component {
       email: "",
       password: "",
       address: "",
+      newPassword: "",
+      confirmNewPassword: "",
     };
     this.onChange = this.onChange.bind(this);
     this.onSave = this.onSave.bind(this);
+    this.onSaveA = this.onSaveA.bind(this);
   }
 
   async componentDidMount() {
@@ -26,6 +29,7 @@ class BioUpdate extends Component {
         last_name: user.last_name,
         email: user.email,
         password: user.password,
+        confirmPassword: "",
         address: user.address || "",
       });
     }
@@ -48,10 +52,27 @@ class BioUpdate extends Component {
     }
   }
 
+  async onSaveA(ev) {
+    ev.preventDefault();
+    if (this.state.newPassword !== this.state.confirmNewPassword) {
+      alert("your passwords do not match");
+      return;
+    }
+    try {
+      this.state.password = this.state.newPassword;
+      await this.props.updateUser({ ...this.state });
+      // window.location.reload();
+      console.log("working");
+    } catch (er) {
+      console.log(er);
+      // this.setState({ error: er.response.data.error.errors[0].message });
+    }
+  }
+
   render() {
     const { first_name, last_name, email, address, password } = this.state;
     // console.log(this.props);
-    const { onChange, onSave } = this;
+    const { onChange, onSave, onSaveA } = this;
     // console.log(this);
     return (
       <div>
@@ -94,24 +115,24 @@ class BioUpdate extends Component {
           <button disabled={!first_name || !last_name || !email}>
             Update Details!{" "}
           </button>
+        </form>
+        <form onSubmit={onSaveA}>
           <h4> Change Password Here</h4>
           <input
-            name="password"
-            // value={password}
+            name="newPassword"
             onChange={onChange}
             placeholder="Password"
-            type="password"
+            // type="password"
           />{" "}
           <br />
           <input
-            name="password1"
-            // value={password}
+            name="confirmNewPassword"
             onChange={onChange}
             placeholder="Confirm Password"
-            type="password"
+            // type="password"
           />{" "}
           <br />
-          <button disabled={!password}>Update Password! </button>
+          <button>Update Password! </button>
         </form>
       </div>
     );

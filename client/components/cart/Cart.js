@@ -1,11 +1,32 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchOrderDetails } from "../../store/index.js";
+import {
+  fetchOrderDetails,
+  deleteOrder,
+  updateOrder,
+} from "../../store/index.js";
 import "./Cart.css";
 
 const Cart = () => {
-  const user = useSelector((state) => state.auth);
+  const state = useSelector((state) => state);
+  const user = state.auth;
+
+  const [totalItems, setTotalItems] = useState(0);
+  const [totalPrice, setTotalPrice] = useState(0);
+  const [productId, setProductId] = useState("joe");
+
+  const userOrderId = state.orders
+    .filter((order) => order.userId === user.id)
+    .map((order) => order.id)[0];
+
+  const orderToAdd = {
+    id: userOrderId,
+    totalItems,
+    totalPrice,
+    productId,
+  };
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -23,81 +44,83 @@ const Cart = () => {
   if (!orderDetails.products) {
     return null;
   }
-  // console.log(user);
-  // console.log("orderDetails", orderDetails);
-  // console.log(orderDetails.totalItems);
-  return (
-    <div>
-      {/* <nav> */}
-      {/* {isLoggedIn ? ( */}
-      {/* <div className="nav-links"> */}
-      {/* The navbar will show these links after you log in */}
-      {/* </div> */}
-      {/* ) : ( */}
-      {/* <div> */}
-      {/* The navbar will show these links before you log in */}
-      {/* )} */}
-      {/* </nav> */}
-      {!!orderDetails.totalItems ? (
-        <div className="cart-cont">
-          <div className="header">
-            <h1>Shopping Cart</h1>
-            <Link to="/orders/previous_orders">View Previous Orders</Link>
-          </div>
-          {orderDetails.products.map((product) => (
-            <div key={product.id} className="single-product-cont">
-              <Link to={`/products/${product.id}`}>
-                <img className="cart-image" src={product.imageURL}></img>
-              </Link>
-              <div className="order-info-cont">
-                <Link to={`/products/${product.id}`}>
-                  <h3> Name: {product.name}</h3>
-                  <h4>Description: {product.description}</h4>
-                  <h4>${product.price}</h4>
-                </Link>
-                <div className="quantity-cont">
-                  <div>Order Quantity:</div>
-                  <input
-                    type="number"
-                    step={1}
-                    placeholder={product.orderproduct.itemCount}
-                    min={0}
-                    max={product.inventory}
-                  ></input>
-                  <button>Update Quantity</button>
-                  <button>Remove from Order</button>
-                </div>
-              </div>
-            </div>
-          ))}
 
-          <div className="checkout-cont">
+  return (
+    <div className="cart-cont">
+      <div className="header">
+        <h1>Shopping Cart</h1>
+        <Link to="/orders/previous_orders">View Previous Orders</Link>
+      </div>
+
+      {orderDetails.products.map((product) => (
+        <div key={product.id} className="single-product-cont">
+          <Link to={`/products/${product.id}`}>
+            <img className="cart-image" src={product.imageURL}></img>
+          </Link>
+
+          <div className="order-info-cont">
+            <Link to={`/products/${product.id}`}>
+              NFT Description: {product.description}
+            </Link>
+            <div> ${product.price} per NFT</div>
+            <div>{product.inventory} NFTs left in stock.</div>
+
+            <div className="quantity-cont">
+              <div>Order Quantity:</div>
+              <input
+                type="number"
+                step={1}
+                defaultValue={product.orderproduct.itemCount}
+                min={0}
+                max={product.inventory}
+                onChange={(ev) => {
+                  setTotalItems(ev.target.value * 1);
+                  setTotalPrice(ev.target.value * product.price);
+                  setProductId(product.id);
+                }}
+              ></input>
+              <button
+                disabled={
+                  productId === "joe" ||
+                  product.id !== productId ||
+                  totalItems === 0
+                }
+                onClick={() =>
+                  dispatch(updateOrder(orderDetails, orderToAdd, product))
+                }
+              >
+                Update Order Quantity
+              </button>
+              <button
+                onClick={() => dispatch(deleteOrder(orderDetails, product))}
+              >
+                Delete NFT from Order
+              </button>
+            </div>
+          </div>
+        </div>
+      ))}
+
+      <div className="checkout-cont">
+        {orderDetails.totalItems ? (
+          <div>
             <div className="total-cont">
-              Subtotal ({orderDetails.totalItems} items): $
+              Subtotal ({orderDetails.totalItems}{" "}
+              {orderDetails.totalItems === 1 ? "item" : "items"}): $
               {orderDetails.totalPrice}
             </div>
             <Link to="/orders/checkout" className="link-to-checkout-cont">
               Proceed to Checkout
             </Link>
+            <Link to="/home">Continue Shopping</Link>
           </div>
-          <Link to="/home">Continue Shopping</Link>
-        </div>
-      ) : (
-        <div>
-          <div className="cart-cont">
-            <div className="header">
-              <h1>Shopping Cart</h1>
-              <Link to="/orders/previous_orders">View Previous Orders</Link>
-            </div>
+        ) : (
+          <div>
+            <h2>{user.first_name}, you have nothing in your cart.</h2>
+            <Link to="/home">Shop now!</Link>
           </div>
-
-          <h2>
-            {user.first_name}, you have nothing in your cart. Click
-            <Link to="/home"> here to</Link> add products
-          </h2>
-          <Link to="/home">Continue Shopping</Link>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 };
