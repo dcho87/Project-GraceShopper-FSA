@@ -1,8 +1,10 @@
 import axios from "axios";
+import { Provider } from "react-redux";
 
 const LOAD_ORDERS = "LOAD_ORDERS";
 const ADD_TO_ORDER = "ADD_TO_ORDER";
 const LOAD_ORDER_DETAILS = "LOAD_ORDER_DETAILS";
+const UPDATE_ORDER = "UPDATE_ORDER";
 const DELETE_ORDER = "DELETE_ORDER";
 
 const _loadOrders = (orders) => {
@@ -15,6 +17,10 @@ const _addToOrder = (order) => {
 
 const _deleteOrder = (order) => {
   return { type: DELETE_ORDER, order };
+};
+
+const _updateOrder = (order) => {
+  return { type: UPDATE_ORDER, order };
 };
 
 const _loadOrderDetails = (orderDetails) => {
@@ -30,20 +36,31 @@ export const fetchOrders = () => {
 
 export const addToOrder = (order) => {
   return async (dispatch) => {
+    order.type = "add";
     order = (await axios.put(`/api/orders/${order.id}`, order)).data;
     dispatch(_addToOrder(order));
   };
 };
 
+export const updateOrder = (order, orderUpdates, product) => {
+  return async (dispatch) => {
+    order.type = "update";
+    order.productId = product.id;
+    order.orderToUpdateId = orderUpdates.id;
+    order.orderUpdateTotalItems = orderUpdates.totalItems;
+    order.orderUpdateTotalPrice = orderUpdates.totalPrice;
+    console.log("thunk, order before axios call", order);
+    order = (await axios.put(`/api/orders/${order.id}`, order)).data;
+    console.log("thunk, order after axios call", order);
+    dispatch(_updateOrder(order));
+  };
+};
+
 export const deleteOrder = (order, product) => {
   return async (dispatch) => {
-    console.log("order before axios call", order);
-    order.productIdToRemove = product.id;
-    // order.products.filter((prod) => prod.id !== product.id);
-    console.log("order before axios call, but after filter", order);
-    order = (await axios.put(`/api/orders/deleteOrder/${order.id}`, order))
-      .data;
-    console.log("order after axios call", order);
+    order.type = "delete";
+    order.productId = product.id;
+    order = (await axios.put(`/api/orders/${order.id}`, order)).data;
     dispatch(_deleteOrder(order));
   };
 };
@@ -68,12 +85,11 @@ export const orders = (state = [], action) => {
     case DELETE_ORDER:
       return [...state].map((order) => {
         if (order.id === action.order.id) {
-          console.log("action.order", action.order);
           order.totalItems = action.order.totalItems;
           order.totalPrice = action.order.totalPrice;
-          order.productIdToRemove = null;
+          order.productId = null;
           order.products = order.products.filter(
-            (product) => product.id !== action.order.productIdToRemove
+            (product) => product.id !== action.order.productId
           );
           return order;
         }
@@ -81,9 +97,18 @@ export const orders = (state = [], action) => {
       });
     case ADD_TO_ORDER:
       return [...state].map((order) => {
-        if (order.userId === action.userId) {
-          order.totalItems += action.totalItems;
-          order.totalPrice += action.totalPrice;
+        if (order.userId === action.order.userId) {
+          order.totalItems += action.order.totalItems;
+          order.totalPrice += action.order.totalPrice;
+          return order;
+        }
+        return order;
+      });
+    case UPDATE_ORDER:
+      return [...state].map((order) => {
+        if (order.userId === action.order.userId) {
+          order.totalItems = action.order.totalItems;
+          order.totalPrice = action.order.totalPrice;
           return order;
         }
         return order;

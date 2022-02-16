@@ -3,6 +3,7 @@ import axios from "axios";
 const LOAD_PRODUCTS = "LOAD_PRODUCTS";
 const EDIT_PRODUCT = "EDIT_PRODUCT";
 const DELETE_ORDER = "DELETE_ORDER";
+const UPDATE_ORDER = "UPDATE_ORDER";
 
 const _loadProducts = (products) => {
   return { type: LOAD_PRODUCTS, products };
@@ -51,11 +52,29 @@ export const products = (state = [], action) => {
       return state;
     case DELETE_ORDER:
       return [...state].map((product) => {
-        if (product.id === action.order.productIdToRemove) {
+        if (product.id === action.order.productId) {
           const amountToAddToInv = action.order.products.find(
             (product) => product.id
           ).orderproduct.itemCount;
           product.inventory += amountToAddToInv;
+          return product;
+        }
+        return product;
+      });
+    case UPDATE_ORDER:
+      return [...state].map((product) => {
+        console.log("action order", action.order);
+        if (product.id === action.order.productId) {
+          const inventoryIncrease =
+            action.order.inventoryCountOG < action.order.orderUpdateTotalItems
+              ? true
+              : false;
+
+          const difference =
+            action.order.orderUpdateTotalItems - action.order.inventoryCountOG;
+
+          // product.inventory -= difference;
+
           return product;
         }
         return product;
