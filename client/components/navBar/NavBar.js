@@ -1,16 +1,32 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { logout } from "../../store";
 import "./Navbar.css";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchOrderDetails } from "../../store/index.js";
 
 const Navbar = ({ handleClick, isLoggedIn }) => {
   const user = useSelector((state) => state.auth);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchOrderDetails(user));
+  }, []);
+
+  const orderDetails = useSelector((state) => state.orders).find(
+    (order) => order.userId === user.id
+  );
+
+  console.log(orderDetails);
+
   return (
     <div className="header">
       <Link to="/home">
-        <h1 id="logo">NFT </h1>
+        <h1 id="logo">
+          <img className="nft-logo" src="/NFT-Logo.jpg" />
+        </h1>
       </Link>
 
       {isLoggedIn && (
@@ -66,11 +82,31 @@ const Navbar = ({ handleClick, isLoggedIn }) => {
                 </ul>
               </li>
               <li className="nav-item">
-                <Link to="/cart">
+                {/* <Link to="/cart">
                   <img
                     src="https://i.ibb.co/LRNwbDz/outline-shopping-cart-checkout-black-24dp.png"
                     alt="shopping-cart-checkout"
                   />
+
+                  <span className="cart-count">5</span>
+                </Link> */}
+                <Link to="/cart">
+                  <img
+                    src="https://i.ibb.co/LRNwbDz/outline-shopping-cart-checkout-black-24dp.png"
+                    alt="shopping-cart-checkout"
+                    className="menu-item cart-contents"
+                  />
+                  <span
+                    className={
+                      orderDetails.totalItems === 0
+                        ? "cart-contents-count-0"
+                        : "cart-contents-count"
+                    }
+                  >
+                    {orderDetails.totalItems === 0
+                      ? 0
+                      : orderDetails.products.length}
+                  </span>
                 </Link>
               </li>
 

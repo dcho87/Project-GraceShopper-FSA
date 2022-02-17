@@ -34,11 +34,12 @@ export const fetchOrders = () => {
   };
 };
 
-export const addToOrder = (order) => {
+export const addToOrder = (order, user) => {
   return async (dispatch) => {
     order.type = "add";
     order = (await axios.put(`/api/orders/${order.id}`, order)).data;
     dispatch(_addToOrder(order));
+    dispatch(fetchOrderDetails(user));
   };
 };
 

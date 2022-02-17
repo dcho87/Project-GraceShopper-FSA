@@ -35,7 +35,7 @@ export const fetchUsers = () => {
   };
 };
 
-export const createUser = (user) => {
+const createUser = (user) => {
   return async (dispatch) => {
     const user_ = await axios.post(`/api/users`, {
       user,
