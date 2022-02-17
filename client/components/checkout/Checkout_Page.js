@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { updateUserThunk } from "../../store";
 import Checkout_Products from "./Checkout_Products";
 import { Link } from "react-router-dom";
+import StripeContainer from "./StripeContainer";
 
 class Checkout extends Component {
   constructor(props) {
@@ -19,8 +20,6 @@ class Checkout extends Component {
   }
 
   async componentDidMount() {
-    // const { user } = this.props.auth;
-    console.log(this.props.auth.first_name);
     if (this.props.auth.id) {
       this.setState({
         id: this.props.auth.id,
@@ -94,6 +93,7 @@ class Checkout extends Component {
           <br />
         </form>
         <Checkout_Products />
+        <StripeContainer />
       </div>
     );
   }
