@@ -25,11 +25,18 @@ const Routes = () => {
   const isAdmin = useSelector((state) => state.auth.isAdmin);
   const isLoggedIn = useSelector((state) => !!state.auth.id);
 
+  const products = useSelector((state) => state.products);
+
   return (
     <div>
       {isLoggedIn ? (
         <Switch>
-          <Route exact path="/home" component={Products} />
+          <Route
+            exact
+            path="/home"
+            render={(props) => <Products products={products} {...props} />}
+          />
+          {/* <Route exact path="/home" component={} /> */}
           <Route
             exact
             path="/products/Kangaroos"

@@ -1,12 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { addToOrder, destroyProduct, editProduct } from "../../store/index.js";
+import {
+  addToOrder,
+  destroyProduct,
+  editProduct,
+  fetchProducts,
+  // products,
+} from "../../store/index.js";
 import { Link } from "react-router-dom";
 import "./Products.css";
 import Product_Edit from "./Product_Edit.js";
 
-const Products = () => {
+const Products = (props) => {
   const dispatch = useDispatch();
+
+  // console.log(props.products);
 
   const state = useSelector((state) => state);
   const user = state.auth;
@@ -14,6 +22,7 @@ const Products = () => {
   const [totalItems, setTotalItems] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
   const [productId, setProductId] = useState("");
+  const [show, setShow] = useState("");
 
   const userOrderId = state.orders
     .filter((order) => order.userId === user.id)
@@ -26,8 +35,17 @@ const Products = () => {
     productId,
   };
 
+  const EditForm = ({ id }) => {
+    return <Product_Edit id={id} />;
+  };
+
+  // useEffect(() => {
+  //   dispatch(fetchProducts());
+  // }, [props.products]);
+
   return (
     <div className="products-container">
+      <div>{show === "show" && <EditForm id={productId} />}</div>
       {state.products.map((product) => (
         <div className="product" key={product.name}>
           <div className="img-div">
@@ -76,20 +94,18 @@ const Products = () => {
             {user.isAdmin === true ? (
               <div>
                 {" "}
-                <Link to={`/products/edit/${product.id}`}>
-                  <button
-                    onClick={() => {
-                      setProductId(product.id);
-                    }}
-                  >
-                    Edit
-                  </button>
-                </Link>
+                {/* <Link to={`/products/edit/${product.id}`}> */}
                 <button
                   onClick={() => {
-                    dispatch(destroyProduct(product.id));
+                    setProductId(product.id);
+                    setShow("show");
+                    document.body.style.overflow = "hidden";
                   }}
                 >
+                  Edit
+                </button>
+                {/* </Link> */}
+                <button onClick={() => dispatch(destroyProduct(product.id))}>
                   Delete
                 </button>
               </div>

@@ -1,0 +1,16 @@
+.edit-container {
+  width: 100vw;
+  height: 100vh;
+}
+
+.edit-form-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.edit-form {
+  background-color: #575757;
+  width: 500px;
+  /* margin: 0 20px; */
+  position: fixed;
+}
