@@ -304,3 +304,39 @@ router.put("/:id", async (req, res, next) => {
 //     next(ex);
 //   }
 // });
+
+// Stripe
+
+// app.post("/create-checkout-session", async (req, res) => {
+//   const session = await stripe.checkout.sessions.create({
+//     success_url: 'http://localhost:8000/success'
+//     cancel_url
+//     payment_method_types
+//     mode
+//   });
+//   res.json({})
+// });
+// app.post("/payment", cors(), async (req, res) => {
+// let { amount, id } = req.body;
+
+//   try {
+//     const payment = await stripe.paymentIntents.create({
+//       amount,
+//       currency: "USD",
+//       description: "NFT",
+//       payment_method: id,
+//       confirm: true,
+//     });
+//     console.log(payment);
+//     res.json({
+//       message: "Payment successful",
+//       success: true,
+//     });
+//   } catch (error) {
+//     console.log(error),
+//       res.json({
+//         message: "failed",
+//         success: false,
+//       });
+//   }
+// });

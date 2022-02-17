@@ -34,13 +34,39 @@ export const fetchOrders = () => {
   };
 };
 
-export const addToOrder = (order, user) => {
-  return async (dispatch) => {
-    order.type = "add";
-    order = (await axios.put(`/api/orders/${order.id}`, order)).data;
-    dispatch(_addToOrder(order));
-    dispatch(fetchOrderDetails(user));
-  };
+export const addToOrder = (order) => {
+  if (order.id) {
+    return async (dispatch) => {
+      order.type = "add";
+      order = (await axios.put(`/api/orders/${order.id}`, order)).data;
+      dispatch(_addToOrder(order));
+    };
+  } else {
+    //for guest users
+    let cart = JSON.parse(localStorage.getItem("cart"));
+    if (cart) {
+      let productIdx = cart.products.findIndex(
+        (p) => p.productId === order.productId
+      );
+      console.log("loop");
+      let productToAdd = cart.products[productIdx];
+      if (productIdx === -1) {
+        order.OrderProducts = { itemCount: order.totalItems };
+        cart.products.push(order);
+      } else {
+        productToAdd.OrderProducts.itemCount += order.totalItems;
+      }
+      cart.totalPrice += order.totalPrice;
+      cart.totalItems += order.totalItems;
+    } else {
+      cart = { products: [], totalPrice: 0, totalItems: 0 };
+      order.OrderProducts = { itemCount: order.totalItems };
+      cart.products.push(order);
+      cart.totalPrice = order.totalPrice;
+      cart.totalItems = order.totalItems;
+    }
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }
 };
 
 export const updateOrder = (order, orderUpdates, product) => {

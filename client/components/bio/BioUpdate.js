@@ -61,7 +61,7 @@ class BioUpdate extends Component {
     try {
       this.state.password = this.state.newPassword;
       await this.props.updateUser({ ...this.state });
-      // window.location.reload();
+      window.location.reload();
       console.log("working");
     } catch (er) {
       console.log(er);
@@ -106,12 +106,6 @@ class BioUpdate extends Component {
             placeholder="Address"
           />{" "}
           <br />
-          <input
-            name="password"
-            value={password}
-            onChange={onChange}
-            placeholder="Password"
-          />{" "}
           <button disabled={!first_name || !last_name || !email}>
             Update Details!{" "}
           </button>
@@ -122,14 +116,14 @@ class BioUpdate extends Component {
             name="newPassword"
             onChange={onChange}
             placeholder="Password"
-            // type="password"
+            type="password"
           />{" "}
           <br />
           <input
             name="confirmNewPassword"
             onChange={onChange}
             placeholder="Confirm Password"
-            // type="password"
+            type="password"
           />{" "}
           <br />
           <button>Update Password! </button>
