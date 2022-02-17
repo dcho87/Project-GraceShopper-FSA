@@ -316,27 +316,27 @@ router.put("/:id", async (req, res, next) => {
 //   });
 //   res.json({})
 // });
-app.post("/payment", cors(), async (req, res) => {
-  let { amount, id } = req.body;
+// app.post("/payment", cors(), async (req, res) => {
+// let { amount, id } = req.body;
 
-  try {
-    const payment = await stripe.paymentIntents.create({
-      amount,
-      currency: "USD",
-      description: "NFT",
-      payment_method: id,
-      confirm: true,
-    });
-    console.log(payment);
-    res.json({
-      message: "Payment successful",
-      success: true,
-    });
-  } catch (error) {
-    console.log(error),
-      res.json({
-        message: "failed",
-        success: false,
-      });
-  }
-});
+//   try {
+//     const payment = await stripe.paymentIntents.create({
+//       amount,
+//       currency: "USD",
+//       description: "NFT",
+//       payment_method: id,
+//       confirm: true,
+//     });
+//     console.log(payment);
+//     res.json({
+//       message: "Payment successful",
+//       success: true,
+//     });
+//   } catch (error) {
+//     console.log(error),
+//       res.json({
+//         message: "failed",
+//         success: false,
+//       });
+//   }
+// });
