@@ -67,3 +67,32 @@
   margin: 5px 0px;
   border: 1px solid;
 }
+
+.check-cont {
+  /* display: flex; */
+  border: 1px solid black;
+}
+
+.total-cont {
+  border: 1px solid black;
+  display: flex;
+}
+
+.total-cont > div {
+  border: 1px solid black;
+  display: flex;
+}
+
+.order-info-cont {
+  /* border: 1px solid black; */
+  max-width: 10rem;
+}
+
+.single-product-check-cont {
+  border: 1px solid blue;
+  display: flex;
+}
+
+.cart-image {
+  width: auto;
+}

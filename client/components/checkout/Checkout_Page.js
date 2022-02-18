@@ -4,6 +4,7 @@ import { updateUserThunk } from "../../store";
 import Checkout_Products from "./Checkout_Products";
 import { Link } from "react-router-dom";
 import Stripe from "./payments/Stripe";
+import "./Checkout.css";
 
 class Checkout extends Component {
   constructor(props) {
