@@ -54,7 +54,7 @@ class Checkout extends Component {
     const { onChange, onSave } = this;
     return (
       <div>
-        <div className="header">
+        <div className="checkout-header">
           <h1>Checkout</h1>
           <Link to="/orders/previous_orders">View Previous Orders</Link>
         </div>

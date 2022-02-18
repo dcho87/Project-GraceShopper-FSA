@@ -51,7 +51,7 @@ const Single_Product_Page = ({ match }) => {
           <button
             disabled={product.id !== productId || totalItems === 0}
             onClick={(ev) => {
-              dispatch(addToOrder(orderToAdd));
+              dispatch(addToOrder(orderToAdd, user));
               dispatch(editProduct(orderToAdd, product));
               setProductId("");
             }}

@@ -43,3 +43,16 @@
   display: flex;
   justify-content: end;
 }
+
+.cart-header {
+  display: flex;
+}
+
+.cart-header > h1 {
+  display: flex;
+  flex: 1;
+}
+
+.error-cont {
+  color: red;
+}

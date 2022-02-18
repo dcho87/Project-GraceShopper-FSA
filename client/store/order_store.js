@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Provider } from "react-redux";
+import { fetchProducts } from "./index.js";
 
 const LOAD_ORDERS = "LOAD_ORDERS";
 const ADD_TO_ORDER = "ADD_TO_ORDER";
@@ -34,13 +34,50 @@ export const fetchOrders = () => {
   };
 };
 
+// export const addToOrder = (order, user) => {
+//   return async (dispatch) => {
+//     order.type = "add";
+//     order = (await axios.put(`/api/orders/${order.id}`, order)).data;
+//     dispatch(_addToOrder(order));
+//     dispatch(fetchOrderDetails(user));
+//   };
+// };
+
 export const addToOrder = (order, user) => {
-  return async (dispatch) => {
-    order.type = "add";
-    order = (await axios.put(`/api/orders/${order.id}`, order)).data;
-    dispatch(_addToOrder(order));
-    dispatch(fetchOrderDetails(user));
-  };
+  if (order.id) {
+    return async (dispatch) => {
+      order.type = "add";
+      order = (await axios.put(`/api/orders/${order.id}`, order)).data;
+      dispatch(_addToOrder(order));
+      dispatch(fetchOrderDetails(user));
+      // dispatch(fetchProducts());
+    };
+  } else {
+    //for guest users
+    let cart = JSON.parse(localStorage.getItem("cart"));
+    if (cart) {
+      let productIdx = cart.products.findIndex(
+        (p) => p.productId === order.productId
+      );
+      console.log("loop");
+      let productToAdd = cart.products[productIdx];
+      if (productIdx === -1) {
+        order.OrderProducts = { itemCount: order.totalItems };
+        cart.products.push(order);
+      } else {
+        productToAdd.OrderProducts.itemCount += order.totalItems;
+      }
+      cart.totalPrice += order.totalPrice;
+      cart.totalItems += order.totalItems;
+    } else {
+      cart = { products: [], totalPrice: 0, totalItems: 0 };
+      order.OrderProducts = { itemCount: order.totalItems };
+      cart.products.push(order);
+      cart.totalPrice = order.totalPrice;
+      cart.totalItems = order.totalItems;
+    }
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }
 };
 
 export const updateOrder = (order, orderUpdates, product) => {
@@ -49,11 +86,12 @@ export const updateOrder = (order, orderUpdates, product) => {
     order.productId = product.id;
     order.orderToUpdateId = orderUpdates.id;
     order.orderUpdateTotalItems = orderUpdates.totalItems;
-    order.orderUpdateTotalPrice = orderUpdates.totalPrice;
-    console.log("thunk, order before axios call", order);
     order = (await axios.put(`/api/orders/${order.id}`, order)).data;
-    console.log("thunk, order after axios call", order);
+    const orderDetails = (await axios.get(`/api/users/order/${order.userId}`))
+      .data;
     dispatch(_updateOrder(order));
+    dispatch(fetchOrderDetails(orderDetails));
+    dispatch(fetchProducts());
   };
 };
 
@@ -63,6 +101,7 @@ export const deleteOrder = (order, product) => {
     order.productId = product.id;
     order = (await axios.put(`/api/orders/${order.id}`, order)).data;
     dispatch(_deleteOrder(order));
+    dispatch(fetchProducts());
   };
 };
 

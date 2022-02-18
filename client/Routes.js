@@ -22,6 +22,7 @@ const Routes = () => {
   useEffect(() => {
     dispatch(me());
   }, []);
+
   const isAdmin = useSelector((state) => state.auth.isAdmin);
   const isLoggedIn = useSelector((state) => !!state.auth.id);
 

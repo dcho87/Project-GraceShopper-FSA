@@ -1,15 +1,27 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { addToOrder, destroyProduct, editProduct } from "../../store/index.js";
+import {
+  addToOrder,
+  destroyProduct,
+  editProduct,
+  fetchOrderDetails,
+} from "../../store/index.js";
 import { Link } from "react-router-dom";
 import "./Products.css";
 import Product_Edit from "./Product_Edit.js";
 
 const Products = () => {
   const dispatch = useDispatch();
-
   const state = useSelector((state) => state);
   const user = state.auth;
+
+  useEffect(() => {
+    dispatch(fetchOrderDetails(user));
+  }, []);
+
+  const orderDetails = useSelector((state) => state.orders).find(
+    (order) => order.userId === user.id
+  );
 
   const [totalItems, setTotalItems] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
