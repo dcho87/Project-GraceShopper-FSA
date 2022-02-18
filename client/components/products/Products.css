@@ -5,15 +5,26 @@
   flex-wrap: wrap;
 }
 
-.product-img {
-  width: fit-content;
-  max-width: 600px;
+.img-div {
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
 }
 
 .product {
   margin: 20px;
-  border: 1px solid #000000;
+  border: 1px solid #6a6a6a;
   border-radius: 20px;
+}
+
+.product-details {
+  height: 235px;
+  background-color: #0b1426;
+  color: #ffffff;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
+.product-details > p,
+button {
+  margin: 10px;
 }

@@ -36,38 +36,48 @@ const Products = (props) => {
   };
 
   const EditForm = ({ id }) => {
-    return <Product_Edit id={id} />;
+    return <Product_Edit id={id} disableEditForm={(res) => setShow(res)} />;
   };
 
   // useEffect(() => {
   //   dispatch(fetchProducts());
   // }, [props.products]);
 
+  console.log(show);
+
   return (
     <div className="products-container">
       <div>{show === "show" && <EditForm id={productId} />}</div>
       {state.products.map((product) => (
         <div className="product" key={product.name}>
-          <div className="img-div">
-            <Link to={`/products/${product.id}`}>
-              <img className="product-img" src={product.imageURL} />
-            </Link>
+          <div
+            className="img-div"
+            style={{
+              backgroundImage: `url(${product.imageURL} `,
+              width: "360px",
+              height: "370px",
+              backgroundRepeat: "no-repeat",
+              backgroundSize: "cover",
+            }}
+          >
+            {/* <Link to={`/products/${product.id}`}> */}
+            {/* <img className="product-img" src={product.imageURL} /> */}
+            {/* </Link> */}
           </div>
 
           <div className="product-details">
             <p>
-              <b> Top Bid:</b> ${product.price}
-            </p>
-            <p>
-              {" "}
-              <b>Left in stock:</b> {product.inventory}
-            </p>
-            <p>
-              <b>Category: </b>
               <Link to={`/products/${product.category}`}>
                 {product.category}
               </Link>
             </p>
+            <p style={{ fontSize: "1.2rem" }}>{product.name}</p>
+
+            <p>
+              <b>Left in stock:</b>
+              <p>{product.inventory}</p>
+            </p>
+
             <button
               disabled={product.id !== productId || totalItems === 0}
               onClick={(ev) => {

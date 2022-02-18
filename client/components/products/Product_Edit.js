@@ -4,7 +4,7 @@ import { Link, useParams } from "react-router-dom";
 import { editProduct } from "../../store";
 import "./ProductEdit.css";
 
-export default function Product_Edit({ id }) {
+export default function Product_Edit({ id, disableEditForm }) {
   // const productId = useParams().id;
   let productId = id;
 
@@ -70,7 +70,9 @@ export default function Product_Edit({ id }) {
           <div className="edit-form-item">
             <button
               onClick={() => {
+                disableEditForm("");
                 dispatch(editProduct({}, state));
+                document.body.style.overflow = "visible";
               }}
             >
               Submit Changes
