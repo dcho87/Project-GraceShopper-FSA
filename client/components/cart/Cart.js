@@ -46,26 +46,25 @@ const Cart = () => {
   }
 
   return (
-    <div className="cart-cont">
-      <div className="header">
+    <div className="cart-cont-cart">
+      <div className="header-cart">
         <h1>Shopping Cart</h1>
-        <Link to="/orders/previous_orders">View Previous Orders</Link>
       </div>
 
       {orderDetails.products.map((product) => (
-        <div key={product.id} className="single-product-check-cont">
+        <div key={product.id} className="single-product-cont-cart">
           <Link to={`/products/${product.id}`}>
-            <img className="cart-image" src={product.imageURL}></img>
+            <img className="cart-image-cart" src={product.imageURL}></img>
           </Link>
 
-          <div className="order-info-cont">
+          <div className="order-info-cont-cart">
             <Link to={`/products/${product.id}`}>
               NFT Description: {product.description}
             </Link>
             <div> ${product.price} per NFT</div>
             <div>{product.inventory} NFTs left in stock.</div>
 
-            <div className="quantity-cont">
+            <div className="quantity-cont-cart">
               <div>Order Quantity:</div>
               <input
                 type="number"
@@ -101,15 +100,15 @@ const Cart = () => {
         </div>
       ))}
 
-      <div className="checkout-cont">
+      <div className="checkout-cont-cart">
         {orderDetails.totalItems ? (
           <div>
-            <div className="total-cont">
+            <div className="total-cont-cart">
               Subtotal ({orderDetails.totalItems}{" "}
               {orderDetails.totalItems === 1 ? "item" : "items"}): $
               {orderDetails.totalPrice}
             </div>
-            <Link to="/orders/checkout" className="link-to-checkout-cont">
+            <Link to="/orders/checkout" className="link-to-checkout-cont-cart">
               Proceed to Checkout
             </Link>
             <Link to="/home">Continue Shopping</Link>
