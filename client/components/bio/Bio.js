@@ -3,6 +3,7 @@ import { useSelector, useDispatch, connect } from "react-redux";
 import { logout } from "../../store";
 import { Link } from "react-router-dom";
 import BioUpdate from "./BioUpdate";
+import "./Bio.css";
 
 const Bio = () => {
   const user = useSelector((state) => state.auth);
@@ -12,9 +13,10 @@ const Bio = () => {
 
   return (
     <div>
-      <h3>Welcome {user.first_name}</h3>
-      <h2>Update User Details Below</h2>
-
+      <div className="header-bio">
+        <h2>Welcome {user.first_name}</h2>
+        <h4>Update User Details Below</h4>
+      </div>
       <BioUpdate history={history} user={user} />
 
       <ul>
@@ -30,7 +32,7 @@ const Bio = () => {
         <small>Much later, have last payment method</small>
       </ul>
 
-      <button>
+      <button className="button2">
         <Link to="/login" onClick={() => dispatch(logout())}>
           Logout
         </Link>
