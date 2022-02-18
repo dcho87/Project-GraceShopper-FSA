@@ -7,6 +7,7 @@ import {
   updateOrder,
 } from "../../store/index.js";
 import "./Cart.css";
+import Alert from "@mui/material/Alert";
 
 const Cart = () => {
   const state = useSelector((state) => state);
@@ -15,6 +16,9 @@ const Cart = () => {
   const [totalItems, setTotalItems] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
   const [productId, setProductId] = useState("joe");
+  const [error, setError] = useState("");
+  const [currentVal, setCurrentVal] = useState(0);
+  const [invLimit, setInvLimit] = useState(0);
 
   const userOrderId = state.orders
     .filter((order) => order.userId === user.id)
@@ -47,60 +51,81 @@ const Cart = () => {
 
   return (
     <div className="cart-cont">
-      <div className="header">
+      <div className="cart-header">
         <h1>Shopping Cart</h1>
         <Link to="/orders/previous_orders">View Previous Orders</Link>
       </div>
 
-      {orderDetails.products.map((product) => (
-        <div key={product.id} className="single-product-cont">
-          <Link to={`/products/${product.id}`}>
-            <img className="cart-image" src={product.imageURL}></img>
-          </Link>
-
-          <div className="order-info-cont">
+      {orderDetails.products.map((product, idx) => {
+        return (
+          <div key={product.id} className="single-product-cont">
             <Link to={`/products/${product.id}`}>
-              NFT Description: {product.description}
+              <img className="cart-image" src={product.imageURL}></img>
             </Link>
-            <div> ${product.price} per NFT</div>
-            <div>{product.inventory} NFTs left in stock.</div>
 
-            <div className="quantity-cont">
-              <div>Order Quantity:</div>
-              <input
-                type="number"
-                step={1}
-                defaultValue={product.orderproduct.itemCount}
-                min={0}
-                max={product.inventory}
-                onChange={(ev) => {
-                  setTotalItems(ev.target.value * 1);
-                  setTotalPrice(ev.target.value * product.price);
-                  setProductId(product.id);
-                }}
-              ></input>
-              <button
-                disabled={
-                  productId === "joe" ||
-                  product.id !== productId ||
-                  totalItems === 0
-                }
-                onClick={() =>
-                  dispatch(updateOrder(orderDetails, orderToAdd, product))
-                }
-              >
-                Update Order Quantity
-              </button>
-              <button
-                onClick={() => dispatch(deleteOrder(orderDetails, product))}
-              >
-                Delete NFT from Order
-              </button>
+            <div className="order-info-cont">
+              <Link to={`/products/${product.id}`}>
+                NFT Description: {product.description}
+              </Link>
+              <div> ${product.price} per NFT</div>
+              <div className="error-cont">
+                {!!error && productId === product.id ? (
+                  <Alert severity="error" className="error-text">
+                    {error}
+                  </Alert>
+                ) : (
+                  ""
+                )}
+              </div>
+              <div className="quantity-cont">
+                <div>Order Quantity:</div>
+                <input
+                  type="number"
+                  step={1}
+                  defaultValue={product.orderproduct.itemCount}
+                  min={0}
+                  max={product.orderproduct.itemCount + product.inventory}
+                  onChange={(ev) => {
+                    setTotalItems(ev.target.value * 1);
+                    setTotalPrice(ev.target.value * product.price);
+                    setProductId(product.id);
+                    productId !== product.id && setError("");
+                  }}
+                  onClick={(ev) => {
+                    productId !== product.id && setError("");
+                    setProductId(product.id);
+                    setInvLimit(
+                      product.orderproduct.itemCount + product.inventory
+                    );
+                    ev.target.value * 1 === invLimit &&
+                    ev.target.value * 1 === currentVal
+                      ? setError("Inventory Limit Has Been Reached")
+                      : setError("");
+                    setCurrentVal(ev.target.value * 1);
+                  }}
+                ></input>
+                <button
+                  disabled={
+                    productId === "joe" ||
+                    product.id !== productId ||
+                    totalItems === 0
+                  }
+                  onClick={() =>
+                    dispatch(updateOrder(orderDetails, orderToAdd, product))
+                  }
+                >
+                  Update Order Quantity
+                </button>
+                <button
+                  onClick={() => dispatch(deleteOrder(orderDetails, product))}
+                >
+                  Delete NFT from Order
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-      ))}
-
+        );
+      })}
       <div className="checkout-cont">
         {orderDetails.totalItems ? (
           <div>

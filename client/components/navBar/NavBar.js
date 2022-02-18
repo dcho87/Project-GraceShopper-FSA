@@ -6,20 +6,20 @@ import "./Navbar.css";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchOrderDetails } from "../../store/index.js";
 
-const Navbar = ({ handleClick, isLoggedIn }) => {
-  const user = useSelector((state) => state.auth);
-
+const Navbar = ({ handleClick, user }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchOrderDetails(user));
   }, []);
 
+  const isLoggedIn = user !== "n/a" ? true : false;
+
   const orderDetails = useSelector((state) => state.orders).find(
     (order) => order.userId === user.id
   );
 
-  console.log(orderDetails);
+  // orderDetails && console.log("order details", orderDetails);
 
   return (
     <div className="header">
@@ -82,14 +82,6 @@ const Navbar = ({ handleClick, isLoggedIn }) => {
                 </ul>
               </li>
               <li className="nav-item">
-                {/* <Link to="/cart">
-                  <img
-                    src="https://i.ibb.co/LRNwbDz/outline-shopping-cart-checkout-black-24dp.png"
-                    alt="shopping-cart-checkout"
-                  />
-
-                  <span className="cart-count">5</span>
-                </Link> */}
                 <Link to="/cart">
                   <img
                     src="https://i.ibb.co/LRNwbDz/outline-shopping-cart-checkout-black-24dp.png"
@@ -98,18 +90,21 @@ const Navbar = ({ handleClick, isLoggedIn }) => {
                   />
                   <span
                     className={
+                      !orderDetails ||
+                      (orderDetails.totalItems > 0 && !orderDetails.products) ||
                       orderDetails.totalItems === 0
                         ? "cart-contents-count-0"
                         : "cart-contents-count"
                     }
                   >
-                    {orderDetails.totalItems === 0
+                    {!orderDetails ||
+                    (orderDetails.totalItems > 0 && !orderDetails.products) ||
+                    orderDetails.totalItems === 0
                       ? 0
                       : orderDetails.products.length}
                   </span>
                 </Link>
               </li>
-
               <li className="nav-item">
                 <Link to="/bio">
                   <img
@@ -145,11 +140,11 @@ const Navbar = ({ handleClick, isLoggedIn }) => {
 /**
  * CONTAINER
  */
-const mapState = (state) => {
-  return {
-    isLoggedIn: !!state.auth.id,
-  };
-};
+// const mapState = (state) => {
+//   return {
+//     isLoggedIn: !!state.auth.id,
+//   };
+// };
 
 const mapDispatch = (dispatch) => {
   return {
@@ -159,4 +154,4 @@ const mapDispatch = (dispatch) => {
   };
 };
 
-export default connect(mapState, mapDispatch)(Navbar);
+export default connect(null, mapDispatch)(Navbar);
