@@ -54,8 +54,10 @@ class Checkout extends Component {
     const { onChange, onSave } = this;
     return (
       <div>
-        <div className="header"></div>
-        <Link to="/orders/previous_orders">View Previous Orders</Link>
+        <div className="header">
+          <Link to="/cart">Back To Cart</Link>
+          <Link to="/orders/previous_orders">View Previous Orders</Link>
+        </div>
         <div className="firstTwo">
           <Checkout_Products />
           <form className="Form" onSubmit={onSave}>
@@ -108,7 +110,6 @@ class Checkout extends Component {
           </form>
         </div>
         <Stripe />
-        <Link to="/cart">Back To Cart</Link>
       </div>
     );
   }
