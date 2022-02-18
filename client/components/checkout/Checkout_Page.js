@@ -56,32 +56,41 @@ class Checkout extends Component {
       <div>
         <div className="header"></div>
         <Link to="/orders/previous_orders">View Previous Orders</Link>
+        <Checkout_Products />
         <form className="Form" onSubmit={onSave}>
           <fieldset className="FormGroup">
             <h2>Confirm User Details</h2>
             {/* <pre>{!!error && JSON.stringify(error, null, 2)}</pre> */}
+            <small>First Name</small>
             <input
+              className="field"
               name="first_name"
               value={first_name}
               onChange={onChange}
               placeholder="First Name"
             />{" "}
             <br />
+            <small>Last Name</small>
             <input
+              className="field"
               name="last_name"
               value={last_name}
               onChange={onChange}
               placeholder="Last Name"
             />{" "}
             <br />
+            <small>Email</small>
             <input
+              className="field"
               name="email"
               value={email}
               onChange={onChange}
               placeholder="Email"
             />{" "}
             <br />
+            <small>Billing Address</small>
             <input
+              className="field"
               name="address"
               value={address}
               onChange={onChange}
@@ -94,7 +103,7 @@ class Checkout extends Component {
             <br />
           </fieldset>
         </form>
-        <Checkout_Products />
+
         <Stripe />
         <Link to="/cart">Back To Cart</Link>
       </div>

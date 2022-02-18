@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { addUser } from "../store/auth.js";
+// import { addUser } from "../auth";
 import "./Signup_Page.css";
 
 const SignUp_Page = () => {
