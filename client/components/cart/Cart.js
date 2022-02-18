@@ -50,10 +50,9 @@ const Cart = () => {
   }
 
   return (
-    <div className="cart-cont">
-      <div className="cart-header">
+    <div className="cart-cont-cart">
+      <div className="header-cart">
         <h1>Shopping Cart</h1>
-        <Link to="/orders/previous_orders">View Previous Orders</Link>
       </div>
 
       {orderDetails.products.map((product, idx) => {
@@ -129,12 +128,12 @@ const Cart = () => {
       <div className="checkout-cont">
         {orderDetails.totalItems ? (
           <div>
-            <div className="total-cont">
+            <div className="total-cont-cart">
               Subtotal ({orderDetails.totalItems}{" "}
               {orderDetails.totalItems === 1 ? "item" : "items"}): $
               {orderDetails.totalPrice}
             </div>
-            <Link to="/orders/checkout" className="link-to-checkout-cont">
+            <Link to="/orders/checkout" className="link-to-checkout-cont-cart">
               Proceed to Checkout
             </Link>
             <Link to="/home">Continue Shopping</Link>

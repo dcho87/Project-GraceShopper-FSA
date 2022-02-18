@@ -4,7 +4,6 @@ import { updateUserThunk } from "../../store";
 import Checkout_Products from "./Checkout_Products";
 import { Link } from "react-router-dom";
 import Stripe from "./payments/Stripe";
-import "./Checkout.css";
 
 class Checkout extends Component {
   constructor(props) {
@@ -54,62 +53,48 @@ class Checkout extends Component {
     const { onChange, onSave } = this;
     return (
       <div>
-        <div className="checkout-header">
+        <div className="header">
           <h1>Checkout</h1>
           <Link to="/orders/previous_orders">View Previous Orders</Link>
         </div>
-        <div className="firstTwo">
-          <Checkout_Products />
-          <form className="Form" onSubmit={onSave}>
-            <fieldset className="FormGroup">
-              <h2>Confirm User Details</h2>
-              {/* <pre>{!!error && JSON.stringify(error, null, 2)}</pre> */}
-              <small>First Name</small>
-              <input
-                className="field"
-                name="first_name"
-                value={first_name}
-                onChange={onChange}
-                placeholder="First Name"
-              />{" "}
-              <br />
-              <small>Last Name</small>
-              <input
-                className="field"
-                name="last_name"
-                value={last_name}
-                onChange={onChange}
-                placeholder="Last Name"
-              />{" "}
-              <br />
-              <small>Email</small>
-              <input
-                className="field"
-                name="email"
-                value={email}
-                onChange={onChange}
-                placeholder="Email"
-              />{" "}
-              <br />
-              <small>Billing Address</small>
-              <input
-                className="field"
-                name="address"
-                value={address}
-                onChange={onChange}
-                placeholder="Address"
-              />{" "}
-              <br />
-              <button
-                disabled={!first_name || !last_name || !email || !address}
-              >
-                Submit{" "}
-              </button>
-              <br />
-            </fieldset>
-          </form>
-        </div>
+        <form onSubmit={onSave}>
+          {/* <pre>{!!error && JSON.stringify(error, null, 2)}</pre> */}
+          <input
+            name="first_name"
+            value={first_name}
+            onChange={onChange}
+            placeholder="First Name"
+          />{" "}
+          <br />
+          <input
+            name="last_name"
+            value={last_name}
+            onChange={onChange}
+            placeholder="Last Name"
+          />{" "}
+          <br />
+          <input
+            name="email"
+            value={email}
+            onChange={onChange}
+            placeholder="Email"
+          />{" "}
+          <br />
+          <input
+            name="address"
+            value={address}
+            onChange={onChange}
+            placeholder="Address"
+          />{" "}
+          <br />
+          <button disabled={!first_name || !last_name || !email}>
+            Confirm Details{" "}
+          </button>
+          <br />
+        </form>
+        <Checkout_Products />
         <Stripe />
+        <Link to="/cart">Back To Cart</Link>
       </div>
     );
   }
