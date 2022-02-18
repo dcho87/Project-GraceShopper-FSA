@@ -43,3 +43,27 @@
   display: flex;
   justify-content: end;
 }
+
+.Form {
+  animation: fade 200ms ease-out;
+}
+
+.FormGroup {
+  margin: 0 15px 20px;
+  padding: 0;
+  border-style: none;
+  background-color: #61c5fa;
+  will-change: opacity, transform;
+  box-shadow: 0 6px 9px rgba(50, 50, 93, 0.06), 0 2px 5px rgba(0, 0, 0, 0.08),
+    inset 0 1px 0 #0b1426;
+  border-radius: 10px;
+  border: 1px solid;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+}
+
+.FormGroup1 > input {
+  margin: 5px 0px;
+  border: 1px solid;
+}

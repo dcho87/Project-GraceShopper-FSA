@@ -72,6 +72,7 @@ body {
   align-items: center;
   margin-left: 15px;
   border-top: 1px solid #0b1426;
+  width: 500px;
 }
 
 .FormRow:first-child {

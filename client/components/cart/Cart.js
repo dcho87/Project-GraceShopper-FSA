@@ -53,7 +53,7 @@ const Cart = () => {
       </div>
 
       {orderDetails.products.map((product) => (
-        <div key={product.id} className="single-product-cont">
+        <div key={product.id} className="single-product-check-cont">
           <Link to={`/products/${product.id}`}>
             <img className="cart-image" src={product.imageURL}></img>
           </Link>

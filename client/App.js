@@ -16,7 +16,7 @@ const App = () => {
 
   return (
     <Router>
-      {hash === "#/signup" || hash === "#/login" ? "" : <Navbar />}
+      {/* {hash === "#/signup" || hash === "#/login" ? "" : <Navbar />} */}
       <div className="routes">
         <Routes />
       </div>

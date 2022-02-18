@@ -53,44 +53,45 @@ class Checkout extends Component {
     const { onChange, onSave } = this;
     return (
       <div>
-        <div className="header">
-          <h1>Checkout</h1>
-          <Link to="/orders/previous_orders">View Previous Orders</Link>
-        </div>
-        <form onSubmit={onSave}>
-          {/* <pre>{!!error && JSON.stringify(error, null, 2)}</pre> */}
-          <input
-            name="first_name"
-            value={first_name}
-            onChange={onChange}
-            placeholder="First Name"
-          />{" "}
-          <br />
-          <input
-            name="last_name"
-            value={last_name}
-            onChange={onChange}
-            placeholder="Last Name"
-          />{" "}
-          <br />
-          <input
-            name="email"
-            value={email}
-            onChange={onChange}
-            placeholder="Email"
-          />{" "}
-          <br />
-          <input
-            name="address"
-            value={address}
-            onChange={onChange}
-            placeholder="Address"
-          />{" "}
-          <br />
-          <button disabled={!first_name || !last_name || !email}>
-            Confirm Details{" "}
-          </button>
-          <br />
+        <div className="header"></div>
+        <Link to="/orders/previous_orders">View Previous Orders</Link>
+        <form className="Form" onSubmit={onSave}>
+          <fieldset className="FormGroup">
+            <h2>Confirm User Details</h2>
+            {/* <pre>{!!error && JSON.stringify(error, null, 2)}</pre> */}
+            <input
+              name="first_name"
+              value={first_name}
+              onChange={onChange}
+              placeholder="First Name"
+            />{" "}
+            <br />
+            <input
+              name="last_name"
+              value={last_name}
+              onChange={onChange}
+              placeholder="Last Name"
+            />{" "}
+            <br />
+            <input
+              name="email"
+              value={email}
+              onChange={onChange}
+              placeholder="Email"
+            />{" "}
+            <br />
+            <input
+              name="address"
+              value={address}
+              onChange={onChange}
+              placeholder="Address"
+            />{" "}
+            <br />
+            <button disabled={!first_name || !last_name || !email || !address}>
+              Submit{" "}
+            </button>
+            <br />
+          </fieldset>
         </form>
         <Checkout_Products />
         <Stripe />
