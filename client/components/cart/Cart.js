@@ -57,12 +57,12 @@ const Cart = () => {
 
       {orderDetails.products.map((product, idx) => {
         return (
-          <div key={product.id} className="single-product-cont">
+          <div key={product.id} className="single-product-cont-cart">
             <Link to={`/products/${product.id}`}>
-              <img className="cart-image" src={product.imageURL}></img>
+              <img className="cart-image-cart" src={product.imageURL}></img>
             </Link>
 
-            <div className="order-info-cont">
+            <div className="order-info-cont-cart">
               <Link to={`/products/${product.id}`}>
                 NFT Description: {product.description}
               </Link>
@@ -76,7 +76,7 @@ const Cart = () => {
                   ""
                 )}
               </div>
-              <div className="quantity-cont">
+              <div className="quantity-cont-cart">
                 <div>Order Quantity:</div>
                 <input
                   type="number"
@@ -125,7 +125,7 @@ const Cart = () => {
           </div>
         );
       })}
-      <div className="checkout-cont">
+      <div className="checkout-cont-cart">
         {orderDetails.totalItems ? (
           <div>
             <div className="total-cont-cart">

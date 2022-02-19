@@ -118,24 +118,37 @@ export const updateOrder = (order, orderUpdates, product) => {
 };
 
 export const deleteOrder = (order, product) => {
-  return async (dispatch) => {
-    order.type = "delete";
-    order.productId = product.id;
-    order = (await axios.put(`/api/orders/${order.id}`, order)).data;
-    dispatch(_deleteOrder(order));
+  if (order.id) {
+    return async (dispatch) => {
+      order.type = "delete";
+      order.productId = product.id;
+      order = (await axios.put(`/api/orders/${order.id}`, order)).data;
+      dispatch(_deleteOrder(order));
+      dispatch(fetchProducts());
+    };
+  } else {
+    //for guest user's cart update
+    let cart = JSON.parse(localStorage.getItem("cart"));
+    //find the product to update
+    const productIdx = cart.products.findIndex(
+      (p) => p.productId === product.id
+    );
+    if (order.totalItems === 0) {
+      cart.products.splice(productIdx, 1);
+    }
     dispatch(fetchProducts());
-  };
+  }
 };
 
 export const fetchOrderDetails = (user) => {
   return async (dispatch) => {
+    const cart = JSON.parse(localStorage.getItem("cart"));
     if (user.id) {
       const orderDetails = (await axios.get(`/api/users/order/${user.id}`))
         .data;
       dispatch(_loadOrderDetails(orderDetails));
     } else {
       //for guest user
-      let cart = JSON.parse(localStorage.getItem("cart"));
       dispatch(_loadOrderDetails(cart));
     }
   };
