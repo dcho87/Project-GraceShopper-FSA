@@ -45,8 +45,10 @@
 
 .total-cont-cart {
   display: flex;
-  justify-content: end;
+  justify-content: left;
   border-radius: 4px;
+  width: 50rem;
+  /* align-content: justify; */
 }
 
 .link-to-checkout-cont-cart {
@@ -62,17 +64,4 @@
   border: 1px solid;
   flex-direction: column;
   border-radius: 4px;
-}
-
-.cart-header {
-  display: flex;
-}
-
-.cart-header > h1 {
-  display: flex;
-  flex: 1;
-}
-
-.error-cont {
-  color: red;
 }

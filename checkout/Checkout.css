@@ -3,6 +3,13 @@
   padding: 1rem;
 }
 
+.checkout-cont {
+  display: flex;
+  justify-content: end;
+  flex-direction: column;
+  width: 500rem;
+}
+
 .cart-image {
   height: 7rem;
   width: 10rem;
@@ -26,12 +33,6 @@
 .quantity-cont {
   display: flex;
   justify-content: space-around;
-}
-
-.checkout-cont {
-  display: flex;
-  justify-content: end;
-  flex-direction: column;
 }
 
 .total-cont {
