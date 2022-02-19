@@ -142,13 +142,13 @@ export const deleteOrder = (order, product) => {
 
 export const fetchOrderDetails = (user) => {
   return async (dispatch) => {
+    const cart = JSON.parse(localStorage.getItem("cart"));
     if (user.id) {
       const orderDetails = (await axios.get(`/api/users/order/${user.id}`))
         .data;
       dispatch(_loadOrderDetails(orderDetails));
     } else {
       //for guest user
-      let cart = JSON.parse(localStorage.getItem("cart"));
       dispatch(_loadOrderDetails(cart));
     }
   };
