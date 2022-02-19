@@ -365,6 +365,34 @@ async function seed() {
       price: 700,
       inventory: 3,
     }),
+    /// order
+
+    Order.create({
+      purchased: true,
+      totalItems: 2,
+      totalPrice: 450,
+    }),
+    Order.create({
+      purchased: true,
+      totalItems: 1,
+      totalPrice: 1000,
+    }),
+    Order.create({
+      purchased: true,
+      totalItems: 1,
+      totalPrice: 199,
+    }),
+    Order.create({
+      purchased: false,
+      totalItems: 4,
+      totalPrice: 1000,
+    }),
+    Order.create({
+      purchased: false,
+      totalItems: 5,
+      totalPrice: 600,
+      // userId: butt,
+    }),
   ]);
 
   await Promise.all(

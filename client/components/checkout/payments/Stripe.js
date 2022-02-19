@@ -107,19 +107,18 @@ const ResetButton = ({ onClick }) => (
   </button>
 );
 
-const DEFAULT_STATE = {
-  error: null,
-  cardComplete: false,
-  processing: false,
-  paymentMethod: null,
-  email: "",
-  name: "",
-};
-
 class CheckoutForm extends React.Component {
   constructor(props) {
     super(props);
-    this.state = DEFAULT_STATE;
+    // console.log(props);
+    this.state = {
+      error: null,
+      cardComplete: false,
+      processing: false,
+      paymentMethod: null,
+      email: "",
+      name: "",
+    };
   }
 
   handleSubmit = async (event) => {
@@ -173,9 +172,18 @@ class CheckoutForm extends React.Component {
   };
 
   render() {
-    const { error, processing, paymentMethod, name, email } = this.state;
+    const {
+      error,
+      processing,
+      paymentMethod,
+      first_name,
+      last_name,
+      email,
+      address,
+    } = this.state;
+    console.log(this.state);
     const { stripe } = this.props;
-    console.log(this);
+    // console.log(name);
     return paymentMethod ? (
       <div className="Result">
         <div className="ResultTitle" role="alert">
@@ -190,16 +198,28 @@ class CheckoutForm extends React.Component {
     ) : (
       <form className="Form" onSubmit={this.handleSubmit}>
         <fieldset className="FormGroup">
-          {/* <Field
-            label="Name"
-            id="name"
-            type="text"
-            placeholder="Jane Doe"
+          <Field
+            label="First"
+            id="first_name"
+            type="first_name"
+            placeholder="FakeFirst"
             required
-            autoComplete="name"
-            value={name}
+            autoComplete="first_name"
+            value={first_name}
             onChange={(event) => {
-              this.setState({ name: event.target.value });
+              this.setState({ first_name: event.target.value });
+            }}
+          />
+          <Field
+            label="Last"
+            id="last_name"
+            type="last_name"
+            placeholder="FakeLast"
+            required
+            autoComplete="last_name"
+            value={last_name}
+            onChange={(event) => {
+              this.setState({ last_name: event.target.value });
             }}
           />
           <Field
@@ -213,7 +233,19 @@ class CheckoutForm extends React.Component {
             onChange={(event) => {
               this.setState({ email: event.target.value });
             }}
-          /> */}
+          />
+          <Field
+            label="Address"
+            id="Address"
+            type="Address"
+            placeholder="Address"
+            required
+            autoComplete="Address"
+            value={address}
+            onChange={(event) => {
+              this.setState({ address: event.target.value });
+            }}
+          />
           {/* <Field
             label="Phone"
             id="phone"
@@ -238,7 +270,11 @@ class CheckoutForm extends React.Component {
           />
         </fieldset>
         {error && <ErrorMessage>{error.message}</ErrorMessage>}
-        <SubmitButton processing={processing} error={error} disabled={!stripe}>
+        <SubmitButton
+          processing={processing}
+          error={error}
+          disabled={!stripe || !first_name}
+        >
           Pay
         </SubmitButton>
       </form>
@@ -254,13 +290,13 @@ const InjectedCheckoutForm = () => (
   </ElementsConsumer>
 );
 
-// const ELEMENTS_OPTIONS = {
-//   fonts: [
-//     {
-//       cssSrc: "https://fonts.googleapis.com/css?family=Roboto",
-//     },
-//   ],
-// };
+const ELEMENTS_OPTIONS = {
+  fonts: [
+    {
+      cssSrc: "https://fonts.googleapis.com/css?family=Roboto",
+    },
+  ],
+};
 
 // Make sure to call `loadStripe` outside of a component’s render to avoid
 // recreating the `Stripe` object on every render.

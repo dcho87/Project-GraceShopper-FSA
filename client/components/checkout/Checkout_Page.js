@@ -50,6 +50,8 @@ class Checkout extends Component {
   }
 
   render() {
+    const user = this.state;
+    // console.log(user);
     const { first_name, last_name, email, address } = this.state;
     const { onChange, onSave } = this;
     return (
@@ -109,6 +111,7 @@ class Checkout extends Component {
             </fieldset>
           </form>
         </div>
+        {/* {console.log(this.state)} */}
         <Stripe />
       </div>
     );
