@@ -7,7 +7,7 @@ import "./Checkout.css";
 const CheckoutProducts = () => {
   const user = useSelector((state) => state.auth);
   const dispatch = useDispatch();
-
+  // console.log(user);
   useEffect(() => {
     dispatch(fetchOrderDetails(user));
   }, []);
@@ -23,22 +23,22 @@ const CheckoutProducts = () => {
   if (!orderDetails.products) {
     return null;
   }
-  console.log(user);
-  console.log("orderDetails", orderDetails);
-  console.log(orderDetails.totalItems);
+  // console.log(user);
+  // console.log("orderDetails", orderDetails);
+  // console.log(orderDetails.totalItems);
   return (
     <>
       <div>
-        {/* <nav> */}
-        {/* {isLoggedIn ? ( */}
-        {/* <div className="nav-links"> */}
-        {/* The navbar will show these links after you log in */}
-        {/* </div> */}
-        {/* ) : ( */}
-        {/* <div> */}
-        {/* The navbar will show these links before you log in */}
-        {/* )} */}
-        {/* </nav> */}
+        {/* <nav>
+        {isLoggedIn ? (
+        <div className="nav-links">
+      The navbar will show these links after you log in 
+      </div> 
+        ) : ( 
+         <div> 
+         The navbar will show these links before you log in 
+        )} 
+        </nav>  */}
         {!!orderDetails.totalItems ? (
           <div className="check-cont">
             {orderDetails.products.map((product) => (
