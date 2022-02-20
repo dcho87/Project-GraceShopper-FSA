@@ -91,6 +91,8 @@ const Routes = () => {
               </div>
             )}
           />
+          <Route exact path="/cart" component={Cart} />
+          <Route exact path="/products/:id" component={Single_Product_Page} />
           <Route path="/login" exact component={Login_Page} />
           <Route path="/signup" exact component={SignUp_Page} />
           <Route path="/home" component={Products} />

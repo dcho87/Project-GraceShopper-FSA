@@ -128,6 +128,13 @@ const Navbar = ({ handleClick, user }) => {
         ) : (
           <div>
             {/* The navbar will show these links before you log in */}
+            <Link to="/cart">
+              <img
+                src="https://i.ibb.co/LRNwbDz/outline-shopping-cart-checkout-black-24dp.png"
+                alt="shopping-cart-checkout"
+                className="menu-item cart-contents"
+              />
+            </Link>
             <Link to="/login">Login</Link>
             <Link to="/signup">Sign Up</Link>
           </div>

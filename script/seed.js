@@ -1,5 +1,6 @@
 "use strict";
 
+const { default: axios } = require("axios");
 const {
   db,
   models: { User, Product, Order, OrderProduct },
@@ -53,6 +54,34 @@ async function seed() {
       isAdmin: true,
     }),
   ]);
+
+  const testOrders = [
+    {
+      purchased: true,
+      totalItems: 2,
+      totalPrice: 450,
+    },
+    {
+      purchased: true,
+      totalItems: 2,
+      totalPrice: 450,
+    },
+    {
+      purchased: true,
+      totalItems: 1,
+      totalPrice: 199,
+    },
+    {
+      purchased: true,
+      totalItems: 4,
+      totalPrice: 1000,
+    },
+    {
+      purchased: true,
+      totalItems: 5,
+      totalPrice: 600,
+    },
+  ];
 
   const products = await Promise.all([
     Product.create({
@@ -365,42 +394,22 @@ async function seed() {
       price: 700,
       inventory: 3,
     }),
-    /// order
-
-    Order.create({
-      purchased: true,
-      totalItems: 2,
-      totalPrice: 450,
-    }),
-    Order.create({
-      purchased: true,
-      totalItems: 1,
-      totalPrice: 1000,
-    }),
-    Order.create({
-      purchased: true,
-      totalItems: 1,
-      totalPrice: 199,
-    }),
-    Order.create({
-      purchased: false,
-      totalItems: 4,
-      totalPrice: 1000,
-    }),
-    Order.create({
-      purchased: false,
-      totalItems: 5,
-      totalPrice: 600,
-      // userId: butt,
-    }),
   ]);
 
   await Promise.all(
     users.map(async (user) => {
+      await user.addOrder(
+        await Order.create(testOrders[Math.floor(Math.random() * 5)])
+      );
+      await user.addOrder(
+        await Order.create(testOrders[Math.floor(Math.random() * 5)])
+      );
+      await user.addOrder(
+        await Order.create(testOrders[Math.floor(Math.random() * 5)])
+      );
       await user.addOrder(await Order.create());
     })
   );
-
   console.log(`seeded ${users.length} users`);
 
   console.log(`seeded ${products.length} products`);
