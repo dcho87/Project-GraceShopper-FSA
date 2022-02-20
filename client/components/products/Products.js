@@ -42,7 +42,7 @@ const Products = (props) => {
                 width: "360px",
                 height: "360px",
                 backgroundRepeat: "no-repeat",
-                backgroundSize: "contain",
+                backgroundSize: "cover",
                 borderTopLeftRadius: "20px",
                 borderTopRightRadius: "20px",
               }}
@@ -114,8 +114,18 @@ const Products = (props) => {
             </div>
 
             <div className="price-div right">
-              <p style={{ fontSize: "1.2rem" }}>Top Bid</p>
-              <p style={{ fontSize: "1rem" }}>${product.price}</p>
+              <p style={{ fontSize: "0.8rem", margin: "0" }}>Buy Now</p>
+              <p
+                style={{
+                  fontSize: "1.3rem",
+                  fontWeight: "900",
+                  display: "flex",
+                  alignItems: "center",
+                }}
+              >
+                <span style={{ fontSize: "1rem", marginRight: "2px" }}>$</span>
+                {product.price}
+              </p>
             </div>
           </div>
         </div>

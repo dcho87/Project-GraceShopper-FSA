@@ -9,16 +9,17 @@ const Navbar = ({ handleClick, isLoggedIn }) => {
   const user = useSelector((state) => state.auth);
   return (
     <div className="header">
-      <Link className="nav-link" to="/home">
+      <Link className="nav-link" to="/">
         <h1 id="logo">NFT </h1>
       </Link>
 
-      {isLoggedIn && (
-        <Link to="/bio">
-          {" "}
-          <div> {user.first_name} logged in </div>
-        </Link>
-      )}
+      {/* {isLoggedIn &&  */}
+      {/* // ( //{" "}
+      <Link to="/bio">
+        // // <div> {user.first_name} logged in </div>
+        //{" "}
+      </Link>
+      // )} */}
       <nav>
         {isLoggedIn ? (
           <div className="nav-links">
@@ -43,36 +44,40 @@ const Navbar = ({ handleClick, isLoggedIn }) => {
                 <a className="nav-btn nav-link">Explore</a>
                 <ul className="dropdown">
                   <li className="dropdown-item">
-                    <Link className="dropdown-link" to="/products/Cars">
-                      Cars
+                    <Link className="dropdown-link" to="/products/azuki">
+                      Azuki
                     </Link>
                   </li>
                   <li className="dropdown-item">
-                    <Link className="dropdown-link" to="/products/Kangaroos">
-                      Kangaroos
+                    <Link className="dropdown-link" to="/products/crypto_punks">
+                      Crypto Punks
                     </Link>
                   </li>
                   <li className="dropdown-item">
-                    <Link className="dropdown-link" to="/products/Doodles">
-                      Doodles
+                    <Link
+                      className="dropdown-link"
+                      to="/products/RTFKTCLONEXTM"
+                    >
+                      RTFKTCLONEXTM
                     </Link>
                   </li>
                   <li className="dropdown-item">
-                    <Link to="/products/Landscapes">Landscapes</Link>
-                  </li>
-                  <li className="dropdown-item">
-                    <Link className="dropdown-link" to="/products/People">
-                      People
+                    <Link className="dropdown-link" to="/products/Tasty_Bones">
+                      Tasty Bones
                     </Link>
                   </li>
                   <li className="dropdown-item">
-                    <Link className="dropdown-link" to="/products/Apes">
-                      Apes
+                    <Link
+                      className="dropdown-link"
+                      to="/products/The_Metascapes"
+                    >
+                      The Metascapes
                     </Link>
                   </li>
-                  <li id="last-item" className="dropdown-item">
-                    <Link className="dropdown-link" to="/products/Punks">
-                      Punks
+
+                  <li className="dropdown-item">
+                    <Link className="dropdown-link" to="/products/The_Ladies">
+                      The Ladies
                     </Link>
                   </li>
                 </ul>
@@ -80,7 +85,8 @@ const Navbar = ({ handleClick, isLoggedIn }) => {
               <li className="nav-item">
                 <Link className="nav-link" to="/cart">
                   <img
-                    src="https://i.ibb.co/LRNwbDz/outline-shopping-cart-checkout-black-24dp.png"
+                    src="https://i.ibb.co/tQgMFFz/outline-add-shopping-cart-white-24dp.png"
+                    // src="https://i.ibb.co/LRNwbDz/outline-shopping-cart-checkout-black-24dp.png"
                     alt="shopping-cart-checkout"
                   />
                 </Link>
@@ -89,16 +95,19 @@ const Navbar = ({ handleClick, isLoggedIn }) => {
               <li className="nav-item">
                 <Link className="nav-link" to="/bio">
                   <img
-                    src="https://i.ibb.co/4Zcr662/account-Logo.png"
+                    src="https://i.ibb.co/YD9P9Zw/outline-account-circle-white-24dp.png"
+                    // src="https://i.ibb.co/4Zcr662/account-Logo.png"
                     alt="account-Logo"
                     id="account-logo"
                   />
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/login" onClick={handleClick}>
+                <Link className="nav-link" to="/" onClick={handleClick}>
                   <img
-                    src="https://i.ibb.co/2gfMsdL/logout.png"
+                    src="https://i.ibb.co/XbkS6LJ/outline-logout-white-24dp.png"
+                    alt="outline-add-shopping-cart-white-24dp"
+                    // src="https://i.ibb.co/2gfMsdL/logout.png"
                     alt="logout"
                     id="logout-icon"
                   />
@@ -110,7 +119,7 @@ const Navbar = ({ handleClick, isLoggedIn }) => {
           <div>
             {/* The navbar will show these links before you log in */}
             <Link className="nav-link" to="/login">
-              Login
+              Sign in
             </Link>
             <Link className="nav-link" to="/signup">
               Sign Up

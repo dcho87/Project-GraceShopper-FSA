@@ -28,26 +28,23 @@ const SingleCategory_Page = () => {
   let category;
 
   switch (pathname) {
-    case "/products/Cars":
-      category = "Cars";
+    case "/products/crypto_punks":
+      category = "Crypto Punks";
       break;
-    case "/products/Kangaroos":
-      category = "Kangaroos";
+    case "/products/azuki":
+      category = "Azuki";
       break;
-    case "/products/Doodles":
-      category = "Doodles";
+    case "/products/RTFKTCLONEXTM":
+      category = "Clone X";
       break;
-    case "/products/Landscapes":
-      category = "Landscapes";
+    case "/products/Tasty_Bones":
+      category = "Tasty Bones";
       break;
-    case "/products/People":
-      category = "People";
+    case "/products/The_Metascapes":
+      category = "The Metascapes";
       break;
-    case "/products/Apes":
-      category = "Apes";
-      break;
-    case "/products/Punks":
-      category = "Punks";
+    case "/products/The_Ladies":
+      category = "The Ladies";
       break;
     default:
       break;

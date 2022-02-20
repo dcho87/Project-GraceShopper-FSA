@@ -14,6 +14,7 @@ import Previous_Orders_Page from "./components/previous_orders/Previous_Orders_P
 import Product_Create from "./components/products/Product_Create";
 import Product from "./components/products/Product";
 import Single_Category_Page from "./components/categories/Single_Category_Page";
+// import Home from "./components/Home/Home";
 
 const Routes = () => {
   const dispatch = useDispatch();
@@ -28,33 +29,45 @@ const Routes = () => {
     <div>
       {isLoggedIn ? (
         <Switch>
-          <Route exact path="/home" component={Products} />
-          {/* <Route exact path="/home" component={} /> */}
           <Route
             exact
-            path="/products/Kangaroos"
-            component={Single_Category_Page}
+            path="/home"
+            render={() => (
+              <div>
+                {/* <Home /> */}
+                <Products />
+              </div>
+            )}
           />
-          <Route exact path="/products/Apes" component={Single_Category_Page} />
-          <Route exact path="/products/Cars" component={Single_Category_Page} />
+          <Route exact path="/" component={Products} />
           <Route
             exact
-            path="/products/Doodles"
-            component={Single_Category_Page}
-          />
-          <Route
-            exact
-            path="/products/Landscapes"
+            path="/products/crypto_punks"
             component={Single_Category_Page}
           />
           <Route
             exact
-            path="/products/Punks"
+            path="/products/Tasty_Bones"
             component={Single_Category_Page}
           />
           <Route
             exact
-            path="/products/People"
+            path="/products/RTFKTCLONEXTM"
+            component={Single_Category_Page}
+          />
+          <Route
+            exact
+            path="/products/azuki"
+            component={Single_Category_Page}
+          />
+          <Route
+            exact
+            path="/products/The_Metascapes"
+            component={Single_Category_Page}
+          />
+          <Route
+            exact
+            path="/products/The_Ladies"
             component={Single_Category_Page}
           />
           <Route exact path="/cart" component={Cart} />
