@@ -38,7 +38,6 @@ export const me = () => async (dispatch) => {
     });
     const cart = JSON.parse(localStorage.getItem("cart"));
     if (cart) {
-      console.log(cart);
       const currOrder = (
         await axios.get(`/api/users/order/${response.data.id}`)
       ).data;
@@ -46,7 +45,6 @@ export const me = () => async (dispatch) => {
         const product = cart.products[i];
         product.type = "add";
         await axios.put(`/api/orders/${currOrder.id}`, product);
-        console.log("addedDB");
       }
       localStorage.removeItem("cart");
     }

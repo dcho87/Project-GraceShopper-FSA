@@ -34,7 +34,7 @@ export const fetchOrders = () => {
   };
 };
 
-export const addToOrder = (order, user) => {
+export const addToOrder = (order, user, product) => {
   return async (dispatch) => {
     if (order.id) {
       order.type = "add";
@@ -45,23 +45,33 @@ export const addToOrder = (order, user) => {
       //for guest users
       let cart = JSON.parse(localStorage.getItem("cart"));
       if (cart) {
-        //check if product is already exist
+        //check if the product already exists
         const productIdx = cart.products.findIndex(
           (p) => p.productId === order.productId
         );
         const productToAdd = cart.products[productIdx];
         //create association if new, otherwise add to quantity
         if (productIdx === -1) {
-          order.OrderProducts = { itemCount: order.totalItems };
+          order.orderproduct = { itemCount: order.totalItems };
+          order.id = product.id;
+          order.price = product.price;
+          order.inventory = product.inventory;
+          order.description = product.description;
+          order.imageURL = product.imageURL;
           cart.products.push(order);
         } else {
-          productToAdd.OrderProducts.itemCount += order.totalItems;
+          productToAdd.orderproduct.itemCount += order.totalItems;
         }
         cart.totalPrice += order.totalPrice;
         cart.totalItems += order.totalItems;
       } else {
         cart = { products: [], totalPrice: 0, totalItems: 0 };
-        order.OrderProducts = { itemCount: order.totalItems };
+        order.orderproduct = { itemCount: order.totalItems };
+        order.id = product.id;
+        order.price = product.price;
+        order.inventory = product.inventory;
+        order.description = product.description;
+        order.imageURL = product.imageURL;
         cart.products.push(order);
         cart.totalPrice = order.totalPrice;
         cart.totalItems = order.totalItems;
@@ -104,10 +114,13 @@ export const updateOrder = (order, orderUpdates, product) => {
       const productToUpdate = cart.products[productIdx];
 
       //find the difference between previous itemCount and the new itemCount
-      const prevCount = Number(productToUpdate.OrderProducts.itemCount);
+      const prevCount = Number(productToUpdate.orderproduct.itemCount);
+
       const diff = orderUpdates.totalItems - prevCount;
 
-      productToUpdate.OrderProducts.itemCount = orderUpdates.totalItems;
+      productToUpdate.orderproduct.itemCount = orderUpdates.totalItems;
+      productToUpdate.totalPrice += diff * product.price;
+      productToUpdate.totalItems += diff;
       cart.totalPrice += diff * product.price;
       cart.totalItems += diff;
 
@@ -118,37 +131,43 @@ export const updateOrder = (order, orderUpdates, product) => {
 };
 
 export const deleteOrder = (order, product) => {
-  if (order.id) {
-    return async (dispatch) => {
+  return async (dispatch) => {
+    if (order.id) {
       order.type = "delete";
       order.productId = product.id;
       order = (await axios.put(`/api/orders/${order.id}`, order)).data;
       dispatch(_deleteOrder(order));
       dispatch(fetchProducts());
-    };
-  } else {
-    //for guest user's cart update
-    let cart = JSON.parse(localStorage.getItem("cart"));
-    //find the product to update
-    const productIdx = cart.products.findIndex(
-      (p) => p.productId === product.id
-    );
-    if (order.totalItems === 0) {
-      cart.products.splice(productIdx, 1);
+    } else {
+      //for guest user's cart update
+      let cart = JSON.parse(localStorage.getItem("cart"));
+      //find the product to update
+      const productIdx = cart.products.findIndex(
+        (p) => p.productId === product.id
+      );
+      const productToUpdate = cart.products[productIdx];
+      //find the difference between previous itemCount and the new itemCount
+      const prevCount = Number(productToUpdate.orderproduct.itemCount);
+      if (order.totalItems === prevCount) {
+        cart.products.splice(productIdx, 1);
+      }
+      cart.totalPrice -= prevCount * product.price;
+      cart.totalItems -= prevCount;
+      localStorage.setItem("cart", JSON.stringify(cart));
+      dispatch(fetchProducts());
     }
-    dispatch(fetchProducts());
-  }
+  };
 };
 
 export const fetchOrderDetails = (user) => {
   return async (dispatch) => {
-    const cart = JSON.parse(localStorage.getItem("cart"));
     if (user.id) {
       const orderDetails = (await axios.get(`/api/users/order/${user.id}`))
         .data;
       dispatch(_loadOrderDetails(orderDetails));
     } else {
       //for guest user
+      const cart = JSON.parse(localStorage.getItem("cart"));
       dispatch(_loadOrderDetails(cart));
     }
   };
