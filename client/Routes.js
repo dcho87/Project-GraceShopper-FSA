@@ -23,12 +23,57 @@ const Routes = () => {
     dispatch(me());
   }, []);
 
-  const isAdmin = useSelector((state) => state.auth.isAdmin);
-  const isLoggedIn = useSelector((state) => !!state.auth.id);
+  // const isAdmin = useSelector((state) => state.auth.isAdmin);
+  // const isLoggedIn = useSelector((state) => !!state.auth.id);
 
   return (
     <div>
-      {isLoggedIn ? (
+      <Switch>
+        <Route exact path="/home" component={Products} />
+        <Route
+          exact
+          path="/products/Kangaroos"
+          component={Single_Category_Page}
+        />
+        <Route exact path="/products/Apes" component={Single_Category_Page} />
+        <Route exact path="/products/Cars" component={Single_Category_Page} />
+        <Route
+          exact
+          path="/products/Doodles"
+          component={Single_Category_Page}
+        />
+        <Route
+          exact
+          path="/products/Landscapes"
+          component={Single_Category_Page}
+        />
+        <Route exact path="/products/Punks" component={Single_Category_Page} />
+        <Route exact path="/products/People" component={Single_Category_Page} />
+        <Route exact path="/cart" component={Cart} />
+        <Route exact path="/bio" component={Bio} />
+        {/* <Route exact path="/password" component={Password} /> */}
+        <Route exact path="/products/:id" component={Single_Product_Page} />
+        <Route exact path="/products/edit/:id" component={Product_Edit} />
+        <Route exact path="/products/create" component={Product_Create} />
+        <Route path="/login" exact component={Login_Page} />
+        <Route path="/signup" exact component={SignUp_Page} />
+
+        {/* {isAdmin === true ? (
+            <div>
+         
+            </div>
+          ) : (
+            ""
+          )} */}
+        <Route exact path="/orders/checkout" component={Checkout_Page} />
+        <Route
+          exact
+          path="/orders/previous_orders"
+          component={Previous_Orders_Page}
+        />
+      </Switch>
+
+      {/* {isLoggedIn ? (
         <Switch>
           <Route exact path="/home" component={Products} />
           <Route
@@ -61,24 +106,24 @@ const Routes = () => {
           <Route exact path="/cart" component={Cart} />
           <Route exact path="/bio" component={Bio} />
           {/* <Route exact path="/password" component={Password} /> */}
-          <Route exact path="/products/:id" component={Single_Product_Page} />
+      {/* <Route exact path="/products/:id" component={Single_Product_Page} />
           <Route exact path="/products/edit/:id" component={Product_Edit} />
-          <Route exact path="/products/create" component={Product_Create} />
+          <Route exact path="/products/create" component={Product_Create} /> */}
 
-          {/* {isAdmin === true ? (
+      {/* {isAdmin === true ? (
             <div>
          
             </div>
           ) : (
             ""
           )} */}
-          <Route exact path="/orders/checkout" component={Checkout_Page} />
+      {/* <Route exact path="/orders/checkout" component={Checkout_Page} />
           <Route
             exact
             path="/orders/previous_orders"
             component={Previous_Orders_Page}
-          />
-        </Switch>
+          /> */}
+      {/* </Switch>
       ) : (
         <Switch>
           <Route
@@ -96,8 +141,8 @@ const Routes = () => {
           <Route path="/login" exact component={Login_Page} />
           <Route path="/signup" exact component={SignUp_Page} />
           <Route path="/home" component={Products} />
-        </Switch>
-      )}
+        </Switch> */}
+      {/* )} } */}
     </div>
   );
 };

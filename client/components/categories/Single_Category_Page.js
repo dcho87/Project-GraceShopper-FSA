@@ -14,9 +14,11 @@ const SingleCategory_Page = () => {
   const [totalPrice, setTotalPrice] = useState(0);
   const [productId, setProductId] = useState("");
 
-  const userOrderId = state.orders
-    .filter((order) => order.userId === user.id)
-    .map((order) => order.id)[0];
+  const userOrderId =
+    user.id &&
+    state.orders
+      .filter((order) => order.userId === user.id)
+      .map((order) => order.id)[0];
 
   const orderToAdd = {
     id: userOrderId,

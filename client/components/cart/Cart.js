@@ -40,7 +40,9 @@ const Cart = () => {
   let orderDetails = useSelector((state) => state.orders).find(
     (order) => order.userId === user.id
   );
+
   let cart = JSON.parse(localStorage.getItem("cart"));
+
   if (cart) {
     orderDetails = cart;
   }
