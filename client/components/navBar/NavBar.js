@@ -9,7 +9,7 @@ const Navbar = ({ handleClick, isLoggedIn }) => {
   const user = useSelector((state) => state.auth);
   return (
     <div className="header">
-      <Link to="/home">
+      <Link className="nav-link" to="/home">
         <h1 id="logo">NFT </h1>
       </Link>
 
@@ -26,7 +26,7 @@ const Navbar = ({ handleClick, isLoggedIn }) => {
             <ul className="nav-list">
               {user.isAdmin === true ? (
                 <li className="nav-item">
-                  <Link to="/products/create" className="nav-btn">
+                  <Link to="/product/create" className="nav-btn nav-link">
                     Add Product
                   </Link>
                 </li>
@@ -35,38 +35,50 @@ const Navbar = ({ handleClick, isLoggedIn }) => {
               )}
               <li className="nav-item">
                 {" "}
-                <Link to="/home">
+                <Link className="nav-link" to="/home">
                   <p id="nav-btn">Home</p>
                 </Link>
               </li>
               <li className="nav-item">
-                <a className="nav-btn">Explore</a>
+                <a className="nav-btn nav-link">Explore</a>
                 <ul className="dropdown">
                   <li className="dropdown-item">
-                    <Link to="/products/Cars">Cars</Link>
+                    <Link className="dropdown-link" to="/products/Cars">
+                      Cars
+                    </Link>
                   </li>
                   <li className="dropdown-item">
-                    <Link to="/products/Kangaroos">Kangaroos</Link>
+                    <Link className="dropdown-link" to="/products/Kangaroos">
+                      Kangaroos
+                    </Link>
                   </li>
                   <li className="dropdown-item">
-                    <Link to="/products/Doodles">Doodles</Link>
+                    <Link className="dropdown-link" to="/products/Doodles">
+                      Doodles
+                    </Link>
                   </li>
                   <li className="dropdown-item">
                     <Link to="/products/Landscapes">Landscapes</Link>
                   </li>
                   <li className="dropdown-item">
-                    <Link to="/products/People">People</Link>
+                    <Link className="dropdown-link" to="/products/People">
+                      People
+                    </Link>
                   </li>
                   <li className="dropdown-item">
-                    <Link to="/products/Apes">Apes</Link>
+                    <Link className="dropdown-link" to="/products/Apes">
+                      Apes
+                    </Link>
                   </li>
                   <li id="last-item" className="dropdown-item">
-                    <Link to="/products/Punks">Punks</Link>
+                    <Link className="dropdown-link" to="/products/Punks">
+                      Punks
+                    </Link>
                   </li>
                 </ul>
               </li>
               <li className="nav-item">
-                <Link to="/cart">
+                <Link className="nav-link" to="/cart">
                   <img
                     src="https://i.ibb.co/LRNwbDz/outline-shopping-cart-checkout-black-24dp.png"
                     alt="shopping-cart-checkout"
@@ -75,7 +87,7 @@ const Navbar = ({ handleClick, isLoggedIn }) => {
               </li>
 
               <li className="nav-item">
-                <Link to="/bio">
+                <Link className="nav-link" to="/bio">
                   <img
                     src="https://i.ibb.co/4Zcr662/account-Logo.png"
                     alt="account-Logo"
@@ -84,7 +96,7 @@ const Navbar = ({ handleClick, isLoggedIn }) => {
                 </Link>
               </li>
               <li className="nav-item">
-                <Link to="/login" onClick={handleClick}>
+                <Link className="nav-link" to="/login" onClick={handleClick}>
                   <img
                     src="https://i.ibb.co/2gfMsdL/logout.png"
                     alt="logout"
@@ -97,8 +109,12 @@ const Navbar = ({ handleClick, isLoggedIn }) => {
         ) : (
           <div>
             {/* The navbar will show these links before you log in */}
-            <Link to="/login">Login</Link>
-            <Link to="/signup">Sign Up</Link>
+            <Link className="nav-link" to="/login">
+              Login
+            </Link>
+            <Link className="nav-link" to="/signup">
+              Sign Up
+            </Link>
           </div>
         )}
       </nav>

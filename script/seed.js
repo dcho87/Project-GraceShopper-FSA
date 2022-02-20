@@ -5,6 +5,8 @@ const {
   models: { User, Product, Order, OrderProduct },
 } = require("../server/db");
 
+const data = require("./data");
+
 Order.belongsTo(User);
 User.hasMany(Order);
 OrderProduct.belongsTo(Product);
@@ -55,16 +57,36 @@ async function seed() {
   ]);
 
   const products = await Promise.all([
-    Product.create({
-      name: "Seascape",
-      description: "A beautiful seascape",
-      imageURL:
-        "https://images.unsplash.com/photo-1518837695005-2083093ee35b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
-      category: "Landscapes",
-      price: 39,
-      inventory: 12,
-    }),
-
+    // data.cloneX.map((product) =>
+    //   Product.create({
+    //     name: product.name,
+    //     description: product.description,
+    //     imageURL: product.file_url,
+    //     category: "Clone X",
+    //     price: Math.floor(Math.random() * (10000 - 500) + 500),
+    //     inventory: Math.floor(Math.random() * (100 - 20) + 20),
+    //   })
+    // ),
+    // data.TheStrawHatBackpacker.map((product) =>
+    //   Product.create({
+    //     name: product.name,
+    //     description: product.description,
+    //     imageURL: product.file_url,
+    //     category: "Clone X",
+    //     price: Math.floor(Math.random() * (10000 - 500) + 500),
+    //     inventory: Math.floor(Math.random() * (100 - 20) + 20),
+    //   })
+    // ),
+  ]);
+  Product.create({
+    name: "Seascape",
+    description: "A beautiful seascape",
+    imageURL:
+      "https://images.unsplash.com/photo-1518837695005-2083093ee35b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
+    category: "Landscapes",
+    price: 39,
+    inventory: 12,
+  }),
     Product.create({
       name: "Desert",
       description: "A spanning desert",
@@ -74,7 +96,6 @@ async function seed() {
       price: 22,
       inventory: 18,
     }),
-
     Product.create({
       name: "Mountain",
       description: "A stunning snowy mountain",
@@ -84,7 +105,6 @@ async function seed() {
       price: 25,
       inventory: 19,
     }),
-
     Product.create({
       name: "Forest",
       description: "A captivating silent forest",
@@ -94,7 +114,6 @@ async function seed() {
       price: 39,
       inventory: 15,
     }),
-
     Product.create({
       name: "City",
       description: "A grandious city",
@@ -104,7 +123,6 @@ async function seed() {
       price: 50,
       inventory: 9,
     }),
-
     //doodle
     Product.create({
       name: "Squiggly",
@@ -115,7 +133,6 @@ async function seed() {
       price: 170,
       inventory: 7,
     }),
-
     Product.create({
       name: "Big Squiggle",
       description: "Chromatic and intense action",
@@ -125,7 +142,6 @@ async function seed() {
       price: 120,
       inventory: 5,
     }),
-
     Product.create({
       name: "Blue Squiggle",
       description: "Scintillating vertical lines",
@@ -135,7 +151,6 @@ async function seed() {
       price: 290,
       inventory: 8,
     }),
-
     Product.create({
       name: "Squiggle Rainbow",
       description: "Vibrate experience",
@@ -145,7 +160,6 @@ async function seed() {
       price: 350,
       inventory: 123,
     }),
-
     Product.create({
       name: "Light Squiggle",
       description: "Lighter hue for a more mellow affair",
@@ -155,7 +169,6 @@ async function seed() {
       price: 99,
       inventory: 4,
     }),
-
     //cars
 
     Product.create({
@@ -167,7 +180,6 @@ async function seed() {
       price: 100,
       inventory: 21,
     }),
-
     Product.create({
       name: "SUV",
       description: "Luxury and Utility",
@@ -177,7 +189,6 @@ async function seed() {
       price: 120,
       inventory: 12,
     }),
-
     Product.create({
       name: "Tank",
       description: "Truck will fit your golf clubs",
@@ -187,7 +198,6 @@ async function seed() {
       price: 450,
       inventory: 9,
     }),
-
     Product.create({
       name: "Sport",
       description: "Suitable for a Bond villan",
@@ -197,7 +207,6 @@ async function seed() {
       price: 720,
       inventory: 5,
     }),
-
     Product.create({
       name: "Convertible",
       description:
@@ -208,7 +217,6 @@ async function seed() {
       price: 399,
       inventory: 3,
     }),
-
     // kangaroo
     Product.create({
       name: "Sleepy",
@@ -219,7 +227,6 @@ async function seed() {
       price: 150,
       inventory: 9,
     }),
-
     Product.create({
       name: "Hello",
       description: "Seductive",
@@ -229,7 +236,6 @@ async function seed() {
       price: 150,
       inventory: 7,
     }),
-
     Product.create({
       name: "Goofy",
       description: "Ready to hop around",
@@ -239,7 +245,6 @@ async function seed() {
       price: 150,
       inventory: 8,
     }),
-
     Product.create({
       name: "Goofier",
       description:
@@ -250,7 +255,6 @@ async function seed() {
       price: 150,
       inventory: 14,
     }),
-
     Product.create({
       name: "Buff",
       description: "How tough are you?",
@@ -259,7 +263,6 @@ async function seed() {
       price: 150,
       inventory: 6,
     }),
-
     Product.create({
       name: "Smile",
       description: "Reminiscent of the halcyon days",
@@ -268,7 +271,6 @@ async function seed() {
       price: 200,
       inventory: 19,
     }),
-
     Product.create({
       name: "Point",
       description:
@@ -279,7 +281,6 @@ async function seed() {
       price: 200,
       inventory: 3,
     }),
-
     Product.create({
       name: "Shrug",
       description: "An apocryphal demeanor",
@@ -289,7 +290,6 @@ async function seed() {
       price: 200,
       inventory: 17,
     }),
-
     Product.create({
       name: "Girl",
       description: "Youthful and Convival",
@@ -299,7 +299,6 @@ async function seed() {
       price: 200,
       inventory: 9,
     }),
-
     Product.create({
       name: "Wave",
       description: "His best statue of liberty impression",
@@ -337,7 +336,6 @@ async function seed() {
       price: 500,
       inventory: 4,
     }),
-
     ///Punks
     Product.create({
       name: "Cigarette",
@@ -365,13 +363,11 @@ async function seed() {
       price: 700,
       inventory: 3,
     }),
-  ]);
-
-  await Promise.all(
-    users.map(async (user) => {
-      await user.addOrder(await Order.create());
-    })
-  );
+    await Promise.all(
+      users.map(async (user) => {
+        await user.addOrder(await Order.create());
+      })
+    );
 
   console.log(`seeded ${users.length} users`);
 

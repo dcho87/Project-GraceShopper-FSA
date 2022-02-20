@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { authenticate } from "../store/auth";
+import { authenticate } from "../../store/auth";
 
 import "./Login_Popup.css";
 
@@ -11,7 +11,7 @@ const Login_Popup = () => {
   useEffect(() => {
     setTimeout(() => {
       setstate("block");
-    }, 0);
+    }, 2000);
   }, []);
 
   const onChange = (ev) => {
@@ -29,24 +29,24 @@ const Login_Popup = () => {
   };
 
   return (
-    <div id="login_popup_page" style={{ display: state }}>
+    <main id="login_popup_page" style={{ display: state }}>
       <button onClick={() => setstate("none")}>X</button>
       <form onSubmit={onSubmit}>
-        <h1>Sign in to have the best experience</h1>
-        <div className="form-cont-login">
+        <h1>Login to have the best experience</h1>
+        <div id="form-cont-login">
           <div className="login-cont">
-            <div className="email-cont">
+            <div id="email-cont">
               <input
-                className="email-info"
+                id="email-info"
                 placeholder="Email"
                 value={email}
                 onChange={onChange}
                 name="email"
               />
             </div>
-            <div className="pw-cont">
+            <div id="pw-cont">
               <input
-                className="pw-info"
+                id="pw-info"
                 placeholder="Password"
                 value={password}
                 onChange={onChange}
@@ -55,12 +55,12 @@ const Login_Popup = () => {
               />
             </div>
           </div>
-          <div className="submit-cont">
-            <button className="submit-info">Sign in</button>
+          <div id="submit-cont">
+            <button id="submit-info">Login</button>
           </div>
         </div>
       </form>
-    </div>
+    </main>
   );
 };
 
