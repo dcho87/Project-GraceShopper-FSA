@@ -24,10 +24,10 @@ const Navbar_User = ({ handleClick, user }) => {
           <img className="nft-logo" src="/NFT-Logo.jpg" />
         </h1>
       </Link>
-      <Link to="/bio">
+      {/* <Link to="/bio">
         {" "}
         <div> {user.first_name} logged in </div>
-      </Link>
+      </Link> */}
       <nav>
         <div className="nav-links">
           {/* The navbar will show these links after you log in */}

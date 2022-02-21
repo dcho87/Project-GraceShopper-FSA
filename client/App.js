@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { HashRouter as Router, Route, useLocation } from "react-router-dom";
 import Navbar_User from "./components/navbar/Navbar_User";
 import Navbar_No_User from "./components/navbar/Navbar_No_User";
+import NavBar from "./components/navBar/NavBar";
 import Routes from "./Routes";
 import "./App.css";
 import { useDispatch, useSelector } from "react-redux";
@@ -24,6 +25,7 @@ const App = () => {
 
   return (
     <Router>
+      {/* {isLoggedIn ? <NavBar user={user} /> : <Navbar_No_User />} */}
       {isLoggedIn ? <Navbar_User user={user} /> : <Navbar_No_User />}
 
       {/* {hash === "#/signup" || hash === "#/login" ? (

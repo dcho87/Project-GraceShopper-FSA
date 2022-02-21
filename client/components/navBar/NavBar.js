@@ -1,16 +1,33 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { logout } from "../../store";
 import "./Navbar.css";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchOrderDetails } from "../../store/index.js";
 
-const Navbar = ({ handleClick, isLoggedIn }) => {
+export default function Navbar({ handleClick, isLoggedIn }) {
   const user = useSelector((state) => state.auth);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchOrderDetails(user));
+  }, []);
+
+  const orderDetails = useSelector((state) => state.orders).find(
+    (order) => order.userId === user.id
+  );
+
   return (
     <div className="header">
-      <Link className="nav-link" to="/">
+      {/* <Link className="nav-link" to="/">
         <h1 id="logo">NFT </h1>
+      </Link> */}
+      <Link to="/home">
+        <h1 id="logo">
+          <img className="nft-logo" src="/NFT-Logo.jpg" />
+        </h1>
       </Link>
 
       {/* {isLoggedIn &&  */}
@@ -89,6 +106,21 @@ const Navbar = ({ handleClick, isLoggedIn }) => {
                     // src="https://i.ibb.co/LRNwbDz/outline-shopping-cart-checkout-black-24dp.png"
                     alt="shopping-cart-checkout"
                   />
+                  <span
+                    className={
+                      !orderDetails ||
+                      (orderDetails.totalItems > 0 && !orderDetails.products) ||
+                      orderDetails.totalItems === 0
+                        ? "cart-contents-count-0"
+                        : "cart-contents-count"
+                    }
+                  >
+                    {!orderDetails ||
+                    (orderDetails.totalItems > 0 && !orderDetails.products) ||
+                    orderDetails.totalItems === 0
+                      ? 0
+                      : orderDetails.totalItems}
+                  </span>
                 </Link>
               </li>
 
@@ -129,23 +161,23 @@ const Navbar = ({ handleClick, isLoggedIn }) => {
       </nav>
     </div>
   );
-};
+}
 
 /**
  * CONTAINER
  */
-const mapState = (state) => {
-  return {
-    isLoggedIn: !!state.auth.id,
-  };
-};
+// const mapState = (state) => {
+//   return {
+//     isLoggedIn: !!state.auth.id,
+//   };
+// };
 
-const mapDispatch = (dispatch) => {
-  return {
-    handleClick() {
-      dispatch(logout());
-    },
-  };
-};
+// const mapDispatch = (dispatch) => {
+//   return {
+//     handleClick() {
+//       dispatch(logout());
+//     },
+//   };
+// };
 
-export default connect(mapState, mapDispatch)(Navbar);
+// export default connect(mapState, mapDispatch)(Navbar);

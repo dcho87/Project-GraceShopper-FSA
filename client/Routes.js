@@ -8,7 +8,7 @@ import Products from "./components/products/Products";
 import Cart from "./components/cart/Cart";
 import Bio from "./components/bio/Bio";
 // import Password from "./components/bio/Password";
-import Single_Product_Page from "./components/products/Single_Product_Page";
+
 import Login_Popup from "./components/LoginSignup/Login_Popup";
 import Product_Edit from "./components/products/Product_Edit";
 import Checkout_Page from "./components/checkout/Checkout_Page";
@@ -30,62 +30,62 @@ const Routes = () => {
 
   return (
     <div>
-      {isLoggedIn ? (
-        <Switch>
-          <Route
-            exact
-            path="/home"
-            render={() => (
-              <div>
-                {/* <Home /> */}
-                <Products />
-              </div>
-            )}
-          />
-          <Route exact path="/" component={Products} />
-          <Route
-            exact
-            path="/products/crypto_punks"
-            component={Single_Category_Page}
-          />
-          <Route
-            exact
-            path="/products/Tasty_Bones"
-            component={Single_Category_Page}
-          />
-          <Route
-            exact
-            path="/products/RTFKTCLONEXTM"
-            component={Single_Category_Page}
-          />
-          <Route
-            exact
-            path="/products/azuki"
-            component={Single_Category_Page}
-          />
-          <Route
-            exact
-            path="/products/The_Metascapes"
-            component={Single_Category_Page}
-          />
-          <Route
-            exact
-            path="/products/The_Ladies"
-            component={Single_Category_Page}
-          />
-          <Route exact path="/cart" component={Cart} />
-          <Route exact path="/bio" component={Bio} />
-          <Route exact path="/products/:id" component={Product} />
-          <Route exact path="/products/edit/:id" component={Product_Edit} />
-          <Route exact path="/product/create" component={Product_Create} />
-          <Route exact path="/orders/checkout" component={Checkout_Page} />
-          <Route
-            exact
-            path="/orders/previous_orders"
-            component={Previous_Orders_Page}
-          />
-        </Switch>
-      ) : (
+      {/* {isLoggedIn ? ( */}
+      <Switch>
+        <Route
+          exact
+          path="/home"
+          render={() => (
+            <div>
+              {/* <Home /> */}
+              {/* {!isLoggedIn ? <Login_Popup /> : ""} */}
+              <Login_Popup />
+              <Products />
+            </div>
+          )}
+        />
+        <Route exact path="/" component={Products} />
+        <Route
+          exact
+          path="/products/crypto_punks"
+          component={Single_Category_Page}
+        />
+        <Route
+          exact
+          path="/products/Tasty_Bones"
+          component={Single_Category_Page}
+        />
+        <Route
+          exact
+          path="/products/RTFKTCLONEXTM"
+          component={Single_Category_Page}
+        />
+        <Route exact path="/products/azuki" component={Single_Category_Page} />
+        <Route
+          exact
+          path="/products/The_Metascapes"
+          component={Single_Category_Page}
+        />
+        <Route
+          exact
+          path="/products/The_Ladies"
+          component={Single_Category_Page}
+        />
+        <Route exact path="/cart" component={Cart} />
+        <Route exact path="/bio" component={Bio} />
+        <Route exact path="/products/:id" component={Product} />
+        <Route exact path="/products/edit/:id" component={Product_Edit} />
+        <Route exact path="/product/create" component={Product_Create} />
+        <Route exact path="/orders/checkout" component={Checkout_Page} />
+        <Route
+          exact
+          path="/orders/previous_orders"
+          component={Previous_Orders_Page}
+        />
+        <Route path="/login" exact component={Login_Page} />
+        <Route path="/signup" exact component={SignUp_Page} />
+      </Switch>
+      {/* ) : (
         <Switch>
           <Route
             path="/"
@@ -104,7 +104,7 @@ const Routes = () => {
           <Route path="/home" component={Products} />
           <Route exact path="/products/:id" component={Product} />
         </Switch>
-      )}
+      )} */}
     </div>
   );
 };
