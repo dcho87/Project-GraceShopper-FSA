@@ -74,16 +74,24 @@ const Routes = () => {
         <Route exact path="/cart" component={Cart} />
         <Route exact path="/bio" component={Bio} />
         <Route exact path="/products/:id" component={Product} />
-        <Route exact path="/products/edit/:id" component={Product_Edit} />
-        <Route exact path="/product/create" component={Product_Create} />
+
         <Route exact path="/orders/checkout" component={Checkout_Page} />
         <Route
           exact
           path="/orders/previous_orders"
           component={Previous_Orders_Page}
         />
-        <Route path="/login" exact component={Login_Page} />
-        <Route path="/signup" exact component={SignUp_Page} />
+        <Route exact path="/login" exact component={Login_Page} />
+        <Route exact path="/signup" exact component={SignUp_Page} />
+        {/* 
+        {isAdmin ? (
+          <> */}
+        <Route exact path="/products/edit/:id" component={Product_Edit} />
+        <Route exact path="/product/create" component={Product_Create} />
+        {/* </>
+        ) : (
+          ""
+        )} */}
       </Switch>
       {/* ) : (
         <Switch>

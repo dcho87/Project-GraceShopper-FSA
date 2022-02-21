@@ -80,20 +80,28 @@ export const products = (state = [], action) => {
         }
         return product;
       });
-    // case UPDATE_ORDER:
-    // return [...state].map((product) => {
-    //   // console.log("action order", action.order);
-    //   if (product.id === action.order.productId) {
-    //     console.log("nugget");
-    //     const difference =
-    //       product.inventory - action.order.orderUpdateTotalItems;
-    //     //quantity increase === positive num
-    //     //quantity decrease === negative num
+    case UPDATE_ORDER:
+      return [...state].map((product) => {
+        if (product.id === action.order.productId) {
+          // console.log("nugget action order", action.order);
 
-    //     return product;
-    //   }
-    //   return product;
-    // });
+          const OGCount = action.order.products.find(
+            (product) => product.id === action.order.productId
+          ).orderproduct.itemCount;
+          // console.log("OGCount", OGCount);
+
+          const difference = action.order.orderUpdateTotalItems - OGCount;
+          // //quantity increase === positive num
+          // //quantity decrease === negative num
+
+          product.inventory = product.inventory -= difference;
+          // console.log("difference", difference);
+          // console.log("OG Product", product);
+
+          return product;
+        }
+        return product;
+      });
 
     default:
       return state;

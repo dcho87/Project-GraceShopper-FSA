@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-// import { addUser } from "../auth";
+import { addUser } from "../../store";
+
 import "./Signup_Page.css";
 
 const SignUp_Page = () => {
@@ -99,7 +100,7 @@ const SignUp_Page = () => {
           </p>
         </div>
 
-        <button className="signup-form-item" id="submit-info">
+        <button className="signup-form-item" id="submit-info" on>
           Create Account
         </button>
       </form>
