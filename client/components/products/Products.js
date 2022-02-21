@@ -15,8 +15,8 @@ const Products = () => {
   const dispatch = useDispatch();
   const state = useSelector((state) => state);
   const user = state.auth;
-  const [currentPage, setCurrentPage] = useState(4);
-  const [productsPerPage] = useState(5);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [productsPerPage] = useState(10);
 
   useEffect(() => {
     dispatch(fetchOrderDetails(user));
