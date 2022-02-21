@@ -42,7 +42,6 @@ export const createProduct = (product) => {
 export const destroyProduct = (productId) => {
   return async (dispatch) => {
     const product_ = await axios.delete(`/api/products/${productId}`);
-    console.log(product_);
     dispatch(_destroyProduct(product_));
     dispatch(fetchProducts());
   };
