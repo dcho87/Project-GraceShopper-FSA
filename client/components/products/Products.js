@@ -4,8 +4,7 @@ import {
   addToOrder,
   destroyProduct,
   editProduct,
-  fetchProducts,
-  // products,
+  fetchOrderDetails,
 } from "../../store/index.js";
 import { Link } from "react-router-dom";
 import "./Products.css";
@@ -13,11 +12,16 @@ import Product_Edit from "./Product_Edit.js";
 
 const Products = (props) => {
   const dispatch = useDispatch();
-
-  // console.log(props.products);
-
   const state = useSelector((state) => state);
   const user = state.auth;
+
+  useEffect(() => {
+    dispatch(fetchOrderDetails(user));
+  }, []);
+
+  const orderDetails = useSelector((state) => state.orders).find(
+    (order) => order.userId === user.id
+  );
 
   const [totalItems, setTotalItems] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
@@ -81,7 +85,7 @@ const Products = (props) => {
             <button
               disabled={product.id !== productId || totalItems === 0}
               onClick={(ev) => {
-                dispatch(addToOrder(orderToAdd));
+                dispatch(addToOrder(orderToAdd, user, product));
                 dispatch(editProduct(orderToAdd, product));
                 setProductId("");
               }}

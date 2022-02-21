@@ -122,15 +122,15 @@ router.put("/:id", async (req, res, next) => {
           (product) => product.id === productId
         );
         console.log("productDetails", productDetails);
+        //obj that lists the stock/count before update was made
 
         productAmount = productDetails.price;
-        console.log("productAmount", productAmount);
 
         productQuantity = productDetails.orderproduct.itemCount;
-        console.log("productQuantity", productQuantity);
+        //num that notes the order count before update was made
 
         currentInventory = productDetails.inventory;
-        console.log("currentInventory", currentInventory);
+        //num that notes the stock count before update was made
 
         //find the Products for Active Order
         lineProduct = await OrderProduct.findOne({
@@ -139,47 +139,37 @@ router.put("/:id", async (req, res, next) => {
             productId,
           },
         });
-        console.log("lineProduct before update", lineProduct);
-
         await lineProduct.update({
           itemCount: orderInfo.orderUpdateTotalItems,
         });
 
-        console.log("lineProduct after update", lineProduct);
+        const difference = orderInfo.orderUpdateTotalItems - productQuantity;
+        //increase === positive num
+        //decrease === neg num
 
-        // const itemIncrease =
-        //   productQuantity < orderInfo.orderUpdateTotalItems ? true : false;
-
-        // console.log("item increase", itemIncrease);
-
-        // console.log();
-
-        // const difference = orderInfo.orderUpdateTotalItems - productQuantity;
-
-        // console.log("difference", difference);
+        console.log("difference", difference);
 
         // //find the Active Order
-        // orderDB = await Order.findByPk(orderInfo.id);
-        // console.log("orderDB", orderDB);
-        // productDB = await Product.findByPk(productDetails.id);
-        // console.log("productDB", productDB);
+        orderDB = await Order.findByPk(orderInfo.id);
+        productDB = await Product.findByPk(productId);
 
-        // console.log("item increase", itemIncrease);
+        await productDB.update({
+          inventory: productDB.inventory - difference,
+        });
 
-        // await productDB.update({
-        //   inventory: productDB.inventory - difference,
-        // });
+        console.log("productDB after update", productDB);
 
-        // await orderDB.update({
-        //   totalItems: orderDB.totalItems + difference,
-        //   totalPrice: orderDB.totalPrice - productAmount * productQuantity,
-        // });
-        // console.log("productDB after update", productDB);
-        // console.log("orderDB after update", orderDB);
+        await orderDB.update({
+          totalItems: orderDB.totalItems + difference,
+          totalPrice: orderDB.totalPrice + productAmount * difference,
+        });
 
-        // orderInfo.totalItems + difference;
-        // orderInfo.totalPrice = productAmount * productQuantity;
+        console.log("orderDB after update", orderDB);
 
+        orderInfo.totalItems += difference;
+        orderInfo.totalPrice += productAmount * difference;
+
+        console.log("orderInfo - final", orderInfo);
         break;
       case "delete":
         productId = orderInfo.productId;
@@ -214,6 +204,9 @@ router.put("/:id", async (req, res, next) => {
 
         orderInfo.totalItems -= productQuantity;
         orderInfo.totalPrice -= productAmount * productQuantity;
+        orderInfo["inventoryCountOG"] = currentInventory;
+
+        console.log("orderInfo - final", orderInfo);
 
         break;
       default:
@@ -302,5 +295,41 @@ router.put("/:id", async (req, res, next) => {
 //     res.send(order);
 //   } catch (ex) {
 //     next(ex);
+//   }
+// });
+
+// Stripe
+
+// app.post("/create-checkout-session", async (req, res) => {
+//   const session = await stripe.checkout.sessions.create({
+//     success_url: 'http://localhost:8000/success'
+//     cancel_url
+//     payment_method_types
+//     mode
+//   });
+//   res.json({})
+// });
+// app.post("/payment", cors(), async (req, res) => {
+// let { amount, id } = req.body;
+
+//   try {
+//     const payment = await stripe.paymentIntents.create({
+//       amount,
+//       currency: "USD",
+//       description: "NFT",
+//       payment_method: id,
+//       confirm: true,
+//     });
+//     console.log(payment);
+//     res.json({
+//       message: "Payment successful",
+//       success: true,
+//     });
+//   } catch (error) {
+//     console.log(error),
+//       res.json({
+//         message: "failed",
+//         success: false,
+//       });
 //   }
 // });

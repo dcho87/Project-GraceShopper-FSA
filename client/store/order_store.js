@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Provider } from "react-redux";
+import { fetchProducts } from "./index.js";
 
 const LOAD_ORDERS = "LOAD_ORDERS";
 const ADD_TO_ORDER = "ADD_TO_ORDER";
@@ -34,41 +34,142 @@ export const fetchOrders = () => {
   };
 };
 
-export const addToOrder = (order) => {
+export const addToOrder = (order, user, product) => {
   return async (dispatch) => {
-    order.type = "add";
-    order = (await axios.put(`/api/orders/${order.id}`, order)).data;
-    dispatch(_addToOrder(order));
+    if (order.id) {
+      order.type = "add";
+      order = (await axios.put(`/api/orders/${order.id}`, order)).data;
+      dispatch(_addToOrder(order));
+      dispatch(fetchOrderDetails(user));
+    } else {
+      //for guest users
+      let cart = JSON.parse(localStorage.getItem("cart"));
+      if (cart) {
+        //check if the product already exists
+        const productIdx = cart.products.findIndex(
+          (p) => p.productId === order.productId
+        );
+        const productToAdd = cart.products[productIdx];
+        //create association if new, otherwise add to quantity
+        if (productIdx === -1) {
+          order.orderproduct = { itemCount: order.totalItems };
+          order.id = product.id;
+          order.price = product.price;
+          order.inventory = product.inventory;
+          order.description = product.description;
+          order.imageURL = product.imageURL;
+          cart.products.push(order);
+        } else {
+          productToAdd.orderproduct.itemCount += order.totalItems;
+        }
+        cart.totalPrice += order.totalPrice;
+        cart.totalItems += order.totalItems;
+      } else {
+        cart = { products: [], totalPrice: 0, totalItems: 0 };
+        order.orderproduct = { itemCount: order.totalItems };
+        order.id = product.id;
+        order.price = product.price;
+        order.inventory = product.inventory;
+        order.description = product.description;
+        order.imageURL = product.imageURL;
+        cart.products.push(order);
+        cart.totalPrice = order.totalPrice;
+        cart.totalItems = order.totalItems;
+      }
+      localStorage.setItem("cart", JSON.stringify(cart));
+      dispatch(_addToOrder(cart));
+    }
   };
 };
 
 export const updateOrder = (order, orderUpdates, product) => {
   return async (dispatch) => {
-    order.type = "update";
-    order.productId = product.id;
-    order.orderToUpdateId = orderUpdates.id;
-    order.orderUpdateTotalItems = orderUpdates.totalItems;
-    order.orderUpdateTotalPrice = orderUpdates.totalPrice;
-    console.log("thunk, order before axios call", order);
-    order = (await axios.put(`/api/orders/${order.id}`, order)).data;
-    console.log("thunk, order after axios call", order);
-    dispatch(_updateOrder(order));
+    if (order.id) {
+      // order.type = "update";
+      // order.productId = product.id;
+      // order.orderToUpdateId = orderUpdates.id;
+      // order.orderUpdateTotalItems = orderUpdates.totalItems;
+      // order.orderUpdateTotalPrice = orderUpdates.totalPrice;
+      // console.log("thunk, order before axios call", order);
+      // order = (await axios.put(`/api/orders/${order.id}`, order)).data;
+      // console.log("thunk, order after axios call", order);
+      // dispatch(_updateOrder(order));
+      order.type = "update";
+      order.productId = product.id;
+      order.orderToUpdateId = orderUpdates.id;
+      order.orderUpdateTotalItems = orderUpdates.totalItems;
+      order = (await axios.put(`/api/orders/${order.id}`, order)).data;
+      const orderDetails = (await axios.get(`/api/users/order/${order.userId}`))
+        .data;
+      dispatch(_updateOrder(order));
+      dispatch(fetchOrderDetails(orderDetails));
+      dispatch(fetchProducts());
+    } else {
+      //for guest user's cart update
+      let cart = JSON.parse(localStorage.getItem("cart"));
+      //find the product to update
+      const productIdx = cart.products.findIndex(
+        (p) => p.productId === product.id
+      );
+      const productToUpdate = cart.products[productIdx];
+
+      //find the difference between previous itemCount and the new itemCount
+      const prevCount = Number(productToUpdate.orderproduct.itemCount);
+
+      const diff = orderUpdates.totalItems - prevCount;
+
+      productToUpdate.orderproduct.itemCount = orderUpdates.totalItems;
+      productToUpdate.totalPrice += diff * product.price;
+      productToUpdate.totalItems += diff;
+      cart.totalPrice += diff * product.price;
+      cart.totalItems += diff;
+
+      localStorage.setItem("cart", JSON.stringify(cart));
+      dispatch(_updateOrder(cart));
+    }
   };
 };
 
 export const deleteOrder = (order, product) => {
   return async (dispatch) => {
-    order.type = "delete";
-    order.productId = product.id;
-    order = (await axios.put(`/api/orders/${order.id}`, order)).data;
-    dispatch(_deleteOrder(order));
+    if (order.id) {
+      order.type = "delete";
+      order.productId = product.id;
+      order = (await axios.put(`/api/orders/${order.id}`, order)).data;
+      dispatch(_deleteOrder(order));
+      dispatch(fetchProducts());
+    } else {
+      //for guest user's cart update
+      let cart = JSON.parse(localStorage.getItem("cart"));
+      //find the product to update
+      const productIdx = cart.products.findIndex(
+        (p) => p.productId === product.id
+      );
+      const productToUpdate = cart.products[productIdx];
+      //find the difference between previous itemCount and the new itemCount
+      const prevCount = Number(productToUpdate.orderproduct.itemCount);
+      if (order.totalItems === prevCount) {
+        cart.products.splice(productIdx, 1);
+      }
+      cart.totalPrice -= prevCount * product.price;
+      cart.totalItems -= prevCount;
+      localStorage.setItem("cart", JSON.stringify(cart));
+      dispatch(fetchProducts());
+    }
   };
 };
 
 export const fetchOrderDetails = (user) => {
   return async (dispatch) => {
-    const orderDetails = (await axios.get(`/api/users/order/${user.id}`)).data;
-    dispatch(_loadOrderDetails(orderDetails));
+    if (user.id) {
+      const orderDetails = (await axios.get(`/api/users/order/${user.id}`))
+        .data;
+      dispatch(_loadOrderDetails(orderDetails));
+    } else {
+      //for guest user
+      const cart = JSON.parse(localStorage.getItem("cart"));
+      dispatch(_loadOrderDetails(cart));
+    }
   };
 };
 

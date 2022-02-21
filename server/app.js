@@ -2,6 +2,12 @@ const path = require("path");
 const express = require("express");
 const morgan = require("morgan");
 const app = express();
+require("dotenv").config();
+const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
+const bodyParser = require("body-parser");
+const cors = require("cors");
+
+app.use(cors());
 
 module.exports = app;
 
@@ -23,6 +29,7 @@ app.get("/", (req, res) =>
 );
 
 // static file-serving middleware
+app.use("/public", express.static(path.join(__dirname, "public")));
 app.use(express.static(path.join(__dirname, "..", "public")));
 
 // any remaining requests with an extension (.js, .css, etc.) send 404

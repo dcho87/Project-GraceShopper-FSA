@@ -53,7 +53,7 @@ router.get("/api/me", async (req, res, next) => {
 
 router.get("/me", async (req, res, next) => {
   try {
-    res.send(req.body);
+    res.send(req);
   } catch (err) {
     next(err);
   }

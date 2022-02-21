@@ -1,5 +1,6 @@
 "use strict";
 
+const { default: axios } = require("axios");
 const {
   db,
   models: { User, Product, Order, OrderProduct },
@@ -54,6 +55,34 @@ async function seed() {
     }),
   ]);
 
+  const testOrders = [
+    {
+      purchased: true,
+      totalItems: 2,
+      totalPrice: 450,
+    },
+    {
+      purchased: true,
+      totalItems: 2,
+      totalPrice: 450,
+    },
+    {
+      purchased: true,
+      totalItems: 1,
+      totalPrice: 199,
+    },
+    {
+      purchased: true,
+      totalItems: 4,
+      totalPrice: 1000,
+    },
+    {
+      purchased: true,
+      totalItems: 5,
+      totalPrice: 600,
+    },
+  ];
+
   const products = await Promise.all([
     Product.create({
       name: "Seascape",
@@ -62,7 +91,7 @@ async function seed() {
         "https://images.unsplash.com/photo-1518837695005-2083093ee35b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
       category: "Landscapes",
       price: 39,
-      inventory: 12,
+      inventory: 1,
     }),
 
     Product.create({
@@ -72,7 +101,7 @@ async function seed() {
         "https://media.istockphoto.com/photos/sand-dunes-in-the-sahara-desert-morocco-picture-id983422208?k=20&m=983422208&s=612x612&w=0&h=gjtn_hlkqzKfGQJQg62QTUbpFlQ0O5E5LnxQ5arh4ao=",
       category: "Landscapes",
       price: 22,
-      inventory: 18,
+      inventory: 1,
     }),
 
     Product.create({
@@ -82,7 +111,7 @@ async function seed() {
         "https://media.istockphoto.com/videos/the-perfect-mountain-aerial-shot-video-id181013019?s=640x640",
       category: "Landscapes",
       price: 25,
-      inventory: 19,
+      inventory: 1,
     }),
 
     Product.create({
@@ -113,7 +142,7 @@ async function seed() {
         "https://lh3.googleusercontent.com/36pq45ZwWmyX1haBqD29ysVcw8F9Cmx1ZgAFC6ptJfnDAJneA9Vqk6pRSScZDU0c8Hh1MPF6uvEcNEI-cT_DEbyWNBGhvinwA5DE=w1400-k",
       category: "Doodles",
       price: 170,
-      inventory: 7,
+      inventory: 1,
     }),
 
     Product.create({
@@ -369,10 +398,18 @@ async function seed() {
 
   await Promise.all(
     users.map(async (user) => {
+      await user.addOrder(
+        await Order.create(testOrders[Math.floor(Math.random() * 5)])
+      );
+      await user.addOrder(
+        await Order.create(testOrders[Math.floor(Math.random() * 5)])
+      );
+      await user.addOrder(
+        await Order.create(testOrders[Math.floor(Math.random() * 5)])
+      );
       await user.addOrder(await Order.create());
     })
   );
-
   console.log(`seeded ${users.length} users`);
 
   console.log(`seeded ${products.length} products`);

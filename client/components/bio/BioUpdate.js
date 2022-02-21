@@ -61,7 +61,7 @@ class BioUpdate extends Component {
     try {
       this.state.password = this.state.newPassword;
       await this.props.updateUser({ ...this.state });
-      // window.location.reload();
+      window.location.reload();
       console.log("working");
     } catch (er) {
       console.log(er);
@@ -76,7 +76,7 @@ class BioUpdate extends Component {
     // console.log(this);
     return (
       <div>
-        <form onSubmit={onSave}>
+        <form onSubmit={onSave} className="form-bio">
           {/* <pre>{!!error && JSON.stringify(error, null, 2)}</pre> */}
           <input
             name="first_name"
@@ -106,33 +106,30 @@ class BioUpdate extends Component {
             placeholder="Address"
           />{" "}
           <br />
-          <input
-            name="password"
-            value={password}
-            onChange={onChange}
-            placeholder="Password"
-          />{" "}
-          <button disabled={!first_name || !last_name || !email}>
+          <button
+            className="button1"
+            disabled={!first_name || !last_name || !email}
+          >
             Update Details!{" "}
           </button>
         </form>
-        <form onSubmit={onSaveA}>
+        <form onSubmit={onSaveA} className="form-bio">
           <h4> Change Password Here</h4>
           <input
             name="newPassword"
             onChange={onChange}
             placeholder="Password"
-            // type="password"
+            type="password"
           />{" "}
           <br />
           <input
             name="confirmNewPassword"
             onChange={onChange}
             placeholder="Confirm Password"
-            // type="password"
+            type="password"
           />{" "}
           <br />
-          <button>Update Password! </button>
+          <button className="button1">Update Password! </button>
         </form>
       </div>
     );
