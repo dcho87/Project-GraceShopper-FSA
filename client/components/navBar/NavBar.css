@@ -10,12 +10,14 @@ nav {
   position: sticky;
   top: 0px;
   background-color: #0b1426;
-
-  /* background-color: #ffffff; */
 }
 
 #logo {
   margin-left: 10px;
+}
+
+.nft-logo {
+  height: 3rem;
 }
 
 .nav-link:link,

@@ -14,7 +14,7 @@ import Product_Edit from "./components/products/Product_Edit";
 import Checkout_Page from "./components/checkout/Checkout_Page";
 import Previous_Orders_Page from "./components/previous_orders/Previous_Orders_Page";
 import Product_Create from "./components/products/Product_Create";
-// import Product from "./components/products/Product";
+import Product from "./components/products/Product";
 import Single_Category_Page from "./components/categories/Single_Category_Page";
 // import Home from "./components/Home/Home";
 
@@ -25,56 +25,11 @@ const Routes = () => {
     dispatch(me());
   }, []);
 
-  // const isAdmin = useSelector((state) => state.auth.isAdmin);
-  // const isLoggedIn = useSelector((state) => !!state.auth.id);
+  const isAdmin = useSelector((state) => state.auth.isAdmin);
+  const isLoggedIn = useSelector((state) => !!state.auth.id);
 
   return (
     <div>
-      {/* <Switch>
-        <Route exact path="/home" component={Products} />
-        <Route
-          exact
-          path="/products/Kangaroos"
-          component={Single_Category_Page}
-        />
-        <Route exact path="/products/Apes" component={Single_Category_Page} />
-        <Route exact path="/products/Cars" component={Single_Category_Page} />
-        <Route
-          exact
-          path="/products/Doodles"
-          component={Single_Category_Page}
-        />
-        <Route
-          exact
-          path="/products/Landscapes"
-          component={Single_Category_Page}
-        />
-        <Route exact path="/products/Punks" component={Single_Category_Page} />
-        <Route exact path="/products/People" component={Single_Category_Page} />
-        <Route exact path="/cart" component={Cart} />
-        <Route exact path="/bio" component={Bio} />
-   
-        <Route exact path="/products/:id" component={Single_Product_Page} />
-        <Route exact path="/products/edit/:id" component={Product_Edit} />
-        <Route exact path="/products/create" component={Product_Create} />
-        <Route path="/login" exact component={Login_Page} />
-        <Route path="/signup" exact component={SignUp_Page} /> */}
-
-      {/* {isAdmin === true ? (
-            <div>
-         
-            </div>
-          ) : (
-            ""
-          )} */}
-      {/* <Route exact path="/orders/checkout" component={Checkout_Page} />
-        <Route
-          exact
-          path="/orders/previous_orders"
-          component={Previous_Orders_Page}
-        />
-      </Switch> */}
-
       {isLoggedIn ? (
         <Switch>
           <Route
@@ -129,14 +84,6 @@ const Routes = () => {
             path="/orders/previous_orders"
             component={Previous_Orders_Page}
           />
-          {/* 
-          {isAdmin === true ? (
-            <div>
-         
-            </div>
-          ) : (
-            ""
-          )} */}
         </Switch>
       ) : (
         <Switch>
