@@ -10,6 +10,8 @@ import {
 import "./Cart.css";
 import Alert from "@mui/material/Alert";
 
+const totalInv = {};
+
 const Cart = () => {
   const state = useSelector((state) => state);
   const user = state.auth;
@@ -19,7 +21,7 @@ const Cart = () => {
   const [productId, setProductId] = useState("joe");
   const [error, setError] = useState("");
   const [currentVal, setCurrentVal] = useState(0);
-  const [invLimit, setInvLimit] = useState(0);
+  // const [invLimit, setInvLimit] = useState(0);
 
   const userOrderId = state.orders
     .filter((order) => order.userId === user.id)
@@ -42,7 +44,9 @@ const Cart = () => {
   let orderDetails = useSelector((state) => state.orders).find(
     (order) => order.userId === user.id
   );
+
   let cart = JSON.parse(localStorage.getItem("cart"));
+
   if (cart) {
     orderDetails = cart;
   }
@@ -62,6 +66,14 @@ const Cart = () => {
       </div>
 
       {orderDetails.products.map((product, idx) => {
+        if (!totalInv.hasOwnProperty(product.id)) {
+          totalInv[product.id] =
+            product.orderproduct.itemCount + product.inventory;
+        }
+
+        // idx === orderDetails.products.length - 1 &&
+        // console.log("totalInv", totalInv);
+
         return (
           <div key={product.id} className="single-product-cont-cart">
             <Link to={`/products/${product.id}`}>
@@ -89,7 +101,7 @@ const Cart = () => {
                   step={1}
                   defaultValue={product.orderproduct.itemCount}
                   min={0}
-                  max={product.orderproduct.itemCount + product.inventory}
+                  max={totalInv[product.id]}
                   onChange={(ev) => {
                     setTotalItems(ev.target.value * 1);
                     setTotalPrice(ev.target.value * product.price);
@@ -99,14 +111,23 @@ const Cart = () => {
                   onClick={(ev) => {
                     productId !== product.id && setError("");
                     setProductId(product.id);
-                    setInvLimit(
-                      product.orderproduct.itemCount + product.inventory
-                    );
-                    ev.target.value * 1 === invLimit &&
+                    // setInvLimit(
+                    //   product.orderproduct.itemCount + product.inventory
+                    // );
+                    ev.target.value * 1 === totalInv[product.id] &&
                     ev.target.value * 1 === currentVal
                       ? setError("Inventory Limit Has Been Reached")
                       : setError("");
                     setCurrentVal(ev.target.value * 1);
+
+                    // console.log("totalItems - on inc/dec click", totalItems);
+
+                    // console.log("totalPrice - on inc/dec click", totalPrice);
+
+                    // console.log(
+                    //   "orderDetails - on inc/dec click",
+                    //   orderDetails
+                    // );
                   }}
                 ></input>
                 <button
@@ -115,9 +136,23 @@ const Cart = () => {
                     product.id !== productId ||
                     totalItems === 0
                   }
-                  onClick={() =>
-                    dispatch(updateOrder(orderDetails, orderToAdd, product))
-                  }
+                  onClick={() => {
+                    // console.log(
+                    //   "orderDetails - on update click, before thunk",
+                    //   orderDetails
+                    // );
+                    dispatch(updateOrder(orderDetails, orderToAdd, product));
+                    setProductId("Joe");
+                    // console.log(
+                    //   "orderDetails - on update click, after thunk",
+                    //   orderDetails
+                    // );
+                    // console.log("orderToAdd - on update click", orderToAdd);
+
+                    // console.log("totalItems - on update click", totalItems);
+
+                    // console.log("totalPrice - on update click", totalPrice);
+                  }}
                 >
                   Update Order Quantity
                 </button>
