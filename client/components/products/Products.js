@@ -65,7 +65,7 @@ const Products = () => {
             <button
               disabled={product.id !== productId || totalItems === 0}
               onClick={(ev) => {
-                dispatch(addToOrder(orderToAdd, user, product));
+                dispatch(addToOrder(orderToAdd, user));
                 dispatch(editProduct(orderToAdd, product));
                 setProductId("");
               }}

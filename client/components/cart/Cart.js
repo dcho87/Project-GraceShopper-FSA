@@ -5,6 +5,7 @@ import {
   fetchOrderDetails,
   deleteOrder,
   updateOrder,
+  fetchHistory,
 } from "../../store/index.js";
 import "./Cart.css";
 import Alert from "@mui/material/Alert";
@@ -30,11 +31,12 @@ const Cart = () => {
     totalPrice,
     productId,
   };
-
+  console.log(state);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchOrderDetails(user));
+    dispatch(fetchHistory(user));
   }, []);
 
   let orderDetails = useSelector((state) => state.orders).find(

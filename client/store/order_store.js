@@ -203,7 +203,8 @@ export const orders = (state = [], action) => {
           order.totalPrice += action.order.totalPrice;
           return order;
         }
-        return order;
+        console.log(action.order);
+        return action.order;
       });
     case UPDATE_ORDER:
       return [...state].map((order) => {
