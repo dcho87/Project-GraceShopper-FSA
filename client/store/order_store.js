@@ -94,13 +94,24 @@ export const updateOrder = (order, orderUpdates, product) => {
       // order = (await axios.put(`/api/orders/${order.id}`, order)).data;
       // console.log("thunk, order after axios call", order);
       // dispatch(_updateOrder(order));
+      // console.log("update thunk - orderDetails var - before any calls", order);
       order.type = "update";
       order.productId = product.id;
       order.orderToUpdateId = orderUpdates.id;
       order.orderUpdateTotalItems = orderUpdates.totalItems;
+      // console.log(
+      //   "update thunk - orderDetails var - after all calls, before axios call",
+      //   order
+      // );
       order = (await axios.put(`/api/orders/${order.id}`, order)).data;
+      // console.log("update thunk - orderDetails var - after axios call", order);
       const orderDetails = (await axios.get(`/api/users/order/${order.userId}`))
         .data;
+      // console.log(
+      //   "update thunk - OGOG orderDetails var - after axios call",
+      //   order
+      // );
+      // console.log("----------end of call--------");
       dispatch(_updateOrder(order));
       dispatch(fetchOrderDetails(orderDetails));
       dispatch(fetchProducts());
@@ -208,6 +219,17 @@ export const orders = (state = [], action) => {
     case UPDATE_ORDER:
       return [...state].map((order) => {
         if (order.userId === action.order.userId) {
+          // console.log("action - update order", action.order);
+          // console.log("OG order - update order", order);
+
+          const productOrder = order.products.find(
+            (product) => product.id === action.order.productId
+          );
+
+          productOrder.orderproduct.itemCount =
+            action.order.orderUpdateTotalItems;
+
+          // console.log("productOrder", productOrder);
           order.totalItems = action.order.totalItems;
           order.totalPrice = action.order.totalPrice;
           return order;
