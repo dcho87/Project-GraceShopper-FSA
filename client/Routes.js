@@ -38,8 +38,8 @@ const Routes = () => {
           render={() => (
             <div>
               {/* <Home /> */}
-              {/* {!isLoggedIn ? <Login_Popup /> : ""} */}
-              <Login_Popup />
+              {isLoggedIn === false ? <Login_Popup /> : ""}
+              {/* <Login_Popup /> */}
               <Products />
             </div>
           )}
