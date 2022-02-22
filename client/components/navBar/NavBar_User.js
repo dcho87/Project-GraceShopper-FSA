@@ -21,7 +21,11 @@ const Navbar_User = ({ handleClick, user }) => {
     <div className="header">
       <Link to="/home">
         <h1 id="logo">
-          <img className="nft-logo" src="/NFT-Logo.jpg" />
+          <img
+            className="nft-logo"
+            src="/NFT-Logo.jpg"
+            onClick={() => window.location.reload()}
+          />
         </h1>
       </Link>
 
@@ -31,7 +35,11 @@ const Navbar_User = ({ handleClick, user }) => {
           <ul className="nav-list">
             {user.isAdmin === true ? (
               <li className="nav-item">
-                <Link to="/products/create" className="nav-btn">
+                <Link
+                  to="/products/create"
+                  className="nav-btn"
+                  onClick={() => window.location()}
+                >
                   Add Product
                 </Link>
               </li>
@@ -41,7 +49,9 @@ const Navbar_User = ({ handleClick, user }) => {
             <li className="nav-item">
               {" "}
               <Link to="/home">
-                <p id="nav-btn">Home</p>
+                <p id="nav-btn" onClick={() => window.location.reload()}>
+                  Home
+                </p>
               </Link>
             </li>
             <li className="nav-item">

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { logout } from "../../store";
@@ -9,28 +9,41 @@ import { fetchOrderDetails } from "../../store/index.js";
 const Navbar_No_User = () => {
   // const dispatch = useDispatch();
 
-  let orderDetails = JSON.parse(localStorage.getItem("cart"));
+  const [orderDetails, setOrderDetails] = useState(
+    JSON.parse(localStorage.getItem("cart"))
+  );
+  const onStorage = () => {
+    setOrderDetails(JSON.parse(window.localStorage.getItem("cart")));
+  };
 
   useEffect(() => {
-    window.onstorage = () => {
-      orderDetails = JSON.parse(window.localStorage.getItem("cart"));
-    };
+    window.addEventListener("click", onStorage);
   }, []);
 
   return (
     <div className="header">
       <Link to="/home">
         <h1 id="logo">
-          <img className="nft-logo" src="/NFT-Logo.jpg" />
+          <img
+            className="nft-logo"
+            src="/NFT-Logo.jpg"
+            onClick={() => window.location.reload()}
+          />
         </h1>
       </Link>
+
       <nav>
         <div className="nav-links">
           <ul className="nav-list">
             <li className="nav-item">
               {" "}
               <Link to="/home">
-                <p id="nav-btn nav-link">Home</p>
+                <p
+                  id="nav-btn nav-link"
+                  onClick={() => window.location.reload()}
+                >
+                  Home
+                </p>
               </Link>
             </li>
             <li className="nav-item">
