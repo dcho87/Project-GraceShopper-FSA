@@ -6,10 +6,10 @@ import "./Navbar.css";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchOrderDetails } from "../../store/index.js";
 
-const Navbar_No_User = ({ orderDetails }) => {
+const Navbar_No_User = () => {
   // const dispatch = useDispatch();
 
-  orderDetails = JSON.parse(localStorage.getItem("cart"));
+  let orderDetails = JSON.parse(localStorage.getItem("cart"));
 
   useEffect(() => {
     window.onstorage = () => {

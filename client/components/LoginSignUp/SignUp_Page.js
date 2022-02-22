@@ -1,31 +1,58 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-// import { addUser } from "../auth";
+import { addUser } from "../../store/index.js";
 import "./Signup_Page.css";
+import Alert from "@mui/material/Alert";
 
 const SignUp_Page = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [password1, setPassword1] = useState("");
   const [first_name, setFirstName] = useState("");
   const [last_name, setLastName] = useState("");
+  const [showPW, setShowPW] = useState(false);
+  const [error, setError] = useState("");
 
   const onChange = (ev) => {
     switch (ev.target.name) {
       case "email":
+        setError("");
         setEmail(ev.target.value);
         break;
       case "password":
+        setError("");
         setPassword(ev.target.value);
         break;
+      case "password1":
+        setError("");
+        setPassword1(ev.target.value);
+        break;
       case "first_name":
+        setError("");
         setFirstName(ev.target.value);
         break;
       case "last_name":
+        setError("");
         setLastName(ev.target.value);
         break;
       default:
         throw "error";
+    }
+  };
+
+  const showPwClick = () => {
+    setShowPW(!showPW);
+  };
+
+  const relayError = (err) => {
+    switch (err) {
+      case "pw does not match":
+        return "Passwords do not match";
+        break;
+      default:
+        return "Unknown Error, contact NFT Store Customer Service";
+        break;
     }
   };
 
@@ -34,15 +61,23 @@ const SignUp_Page = () => {
   const onSubmit = (ev) => {
     ev.preventDefault();
 
-    const user = {
-      email,
-      password,
-      first_name,
-      last_name,
-    };
+    try {
+      const user = {
+        email,
+        password,
+        first_name,
+        last_name,
+      };
 
-    dispatch(addUser(user));
-    location.hash = "#/login"; //where the user is sent after they succesfully login
+      if (password !== password1) {
+        setError("pw does not match");
+      } else {
+        dispatch(addUser(user));
+        location.hash = "#/login"; //where the user is sent after they succesfully login
+      }
+    } catch (err) {
+      console.log(err.response);
+    }
   };
 
   return (
@@ -52,6 +87,12 @@ const SignUp_Page = () => {
           &#60; Marketplace
         </Link>
         <h1 className="sign-up-header">Sign Up</h1>
+        {error && (
+          <Alert severity="error" className="error-text">
+            {relayError(error)}
+          </Alert>
+        )}
+
         <p>
           Already have an account?{" "}
           <Link to="/login" id="signup-form-link">
@@ -88,8 +129,21 @@ const SignUp_Page = () => {
           value={password}
           onChange={onChange}
           name="password"
-          type="password"
+          type={showPW ? "text" : "password"}
         />
+
+        <input
+          className="signup-form-item"
+          placeholder="Confirm Password"
+          value={password1}
+          onChange={onChange}
+          name="password1"
+          type={showPW ? "text" : "password"}
+        />
+
+        <div className="view-pw" onClick={() => showPwClick()}>
+          View Passwords
+        </div>
 
         <div className="signup-form-item terms_cond">
           <input type="checkbox" />

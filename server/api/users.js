@@ -119,3 +119,7 @@ router.put("/order/checkout/:id", async (req, res, next) => {
     next(ex);
   }
 });
+
+router.use((err, req, res, next) => {
+  res.status(500).send(err);
+});

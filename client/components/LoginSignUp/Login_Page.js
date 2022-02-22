@@ -7,6 +7,7 @@ import "./Login_Page.css";
 const Login_Page = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPW, setShowPW] = useState(false);
 
   const onChange = (ev) => {
     ev.target.name === "email"
@@ -14,12 +15,20 @@ const Login_Page = () => {
       : setPassword(ev.target.value);
   };
 
+  const showPwClick = () => {
+    setShowPW(!showPW);
+  };
+
   const dispatch = useDispatch();
 
   const onSubmit = (ev) => {
     ev.preventDefault();
-    dispatch(authenticate(email, password));
-    location.hash = "#/home"; //where the user is sent after they succesfully login
+    try {
+      dispatch(authenticate(email, password));
+      location.hash = "#/home"; //where the user is sent after they succesfully login
+    } catch (err) {
+      console.log(err.response);
+    }
   };
 
   return (
@@ -56,8 +65,11 @@ const Login_Page = () => {
             value={password}
             onChange={onChange}
             name="password"
-            type="password"
+            type={showPW ? "text" : "password"}
           />
+          <div className="view-pw" onClick={() => showPwClick()}>
+            View Password
+          </div>
           <button id="submit-info" className="login-form-item">
             Login
           </button>

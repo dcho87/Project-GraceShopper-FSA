@@ -96,3 +96,8 @@
 #signup-form-link:hover {
   color: #0283c4;
 }
+
+.view-pw {
+  margin: 0.5rem 0.5rem 0.5rem 1rem;
+  cursor: pointer;
+}

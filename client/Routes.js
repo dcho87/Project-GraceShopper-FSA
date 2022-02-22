@@ -29,6 +29,7 @@ const Routes = () => {
   return (
     <div>
       <Switch>
+        <Route exact path="/" component={Products} />
         <Route exact path="/home" component={Products} />
         <Route
           exact

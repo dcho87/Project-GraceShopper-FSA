@@ -11,8 +11,6 @@ const App = () => {
   const dispatch = useDispatch();
   const hash = useLocation().hash;
 
-  let orderDetails;
-
   useEffect(() => {
     dispatch(fetchProducts());
     dispatch(fetchOrders());
