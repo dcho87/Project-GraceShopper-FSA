@@ -153,7 +153,7 @@ const SignUp_Page = () => {
           </p>
         </div>
 
-        <button className="signup-form-item" id="submit-info">
+        <button className="signup-form-item" id="submit-info" on>
           Create Account
         </button>
       </form>

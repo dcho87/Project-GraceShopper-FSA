@@ -1,17 +1,23 @@
-import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { editProduct } from "../../store";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { createProduct } from "../../store";
 
 export default function Product_Create() {
   const [state, setstate] = useState({});
 
   const dispatch = useDispatch();
+  console.log(state);
   return (
     <div>
       <form>
-        <div>
+        <div style={{ backgroundColor: "#ffffff" }}>
           {" "}
           <div>
+            <label>Image URL</label>
+            <input
+              onChange={(e) => setstate({ ...state, imageURL: e.target.value })}
+              type="text"
+            />
             <label>Top Bid: </label>
             <input
               onChange={(e) => setstate({ ...state, price: e.target.value })}
@@ -53,7 +59,7 @@ export default function Product_Create() {
           <div>
             <button
               onClick={() => {
-                dispatch(editProduct({}, state));
+                dispatch(createProduct(state));
               }}
             >
               Submit Changes

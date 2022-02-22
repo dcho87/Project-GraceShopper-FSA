@@ -42,8 +42,8 @@ export const createProduct = (product) => {
 export const destroyProduct = (productId) => {
   return async (dispatch) => {
     const product_ = await axios.delete(`/api/products/${productId}`);
-    console.log(product_);
     dispatch(_destroyProduct(product_));
+    dispatch(fetchProducts());
   };
 };
 
@@ -53,7 +53,9 @@ export const editProduct = (order, product) => {
       product.inventory -= order.totalItems;
     }
     product = (await axios.put(`/api/products/${product.id}`, product)).data;
+
     dispatch(_editProduct(order, product));
+    dispatch(fetchProducts());
   };
 };
 

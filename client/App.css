@@ -2,6 +2,8 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  /* background-color: #0b1426;
+  color: aliceblue; */
 }
 
 .routes {
@@ -9,4 +11,5 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background-color: #0b1426;
 }

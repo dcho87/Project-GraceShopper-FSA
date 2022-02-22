@@ -24,10 +24,7 @@ const Navbar_User = ({ handleClick, user }) => {
           <img className="nft-logo" src="/NFT-Logo.jpg" />
         </h1>
       </Link>
-      <Link to="/bio">
-        {" "}
-        <div> {user.first_name} logged in </div>
-      </Link>
+
       <nav>
         <div className="nav-links">
           {/* The navbar will show these links after you log in */}
@@ -51,25 +48,35 @@ const Navbar_User = ({ handleClick, user }) => {
               <a className="nav-btn">Explore</a>
               <ul className="dropdown">
                 <li className="dropdown-item">
-                  <Link to="/products/Cars">Cars</Link>
+                  <Link className="dropdown-link" to="/products/azuki">
+                    Azuki
+                  </Link>
                 </li>
                 <li className="dropdown-item">
-                  <Link to="/products/Kangaroos">Kangaroos</Link>
+                  <Link className="dropdown-link" to="/products/crypto_punks">
+                    Crypto Punks
+                  </Link>
                 </li>
                 <li className="dropdown-item">
-                  <Link to="/products/Doodles">Doodles</Link>
+                  <Link className="dropdown-link" to="/products/RTFKTCLONEXTM">
+                    RTFKTCLONEXTM
+                  </Link>
                 </li>
                 <li className="dropdown-item">
-                  <Link to="/products/Landscapes">Landscapes</Link>
+                  <Link className="dropdown-link" to="/products/Tasty_Bones">
+                    Tasty Bones
+                  </Link>
                 </li>
                 <li className="dropdown-item">
-                  <Link to="/products/People">People</Link>
+                  <Link className="dropdown-link" to="/products/The_Metascapes">
+                    The Metascapes
+                  </Link>
                 </li>
+
                 <li className="dropdown-item">
-                  <Link to="/products/Apes">Apes</Link>
-                </li>
-                <li id="last-item" className="dropdown-item">
-                  <Link to="/products/Punks">Punks</Link>
+                  <Link className="dropdown-link" to="/products/The_Ladies">
+                    The Ladies
+                  </Link>
                 </li>
               </ul>
             </li>
@@ -120,6 +127,7 @@ const Navbar_User = ({ handleClick, user }) => {
       </nav>
     </div>
   );
+
   // return (
   //   <div className="header">
   //     <Link to="/home">
@@ -127,130 +135,113 @@ const Navbar_User = ({ handleClick, user }) => {
   //         <img className="nft-logo" src="/NFT-Logo.jpg" />
   //       </h1>
   //     </Link>
-
-  //     {isLoggedIn && (
-  //       <Link to="/bio">
-  //         {" "}
-  //         <div> {user.first_name} logged in </div>
-  //       </Link>
-  //     )}
+  //     {/* <Link to="/bio">
+  //       {" "}
+  //       <div> {user.first_name} logged in </div>
+  //     </Link> */}
   //     <nav>
-  //       {isLoggedIn ? (
-  //         <div className="nav-links">
-  //           {/* The navbar will show these links after you log in */}
-  //           <ul className="nav-list">
-  //             {user.isAdmin === true ? (
-  //               <li className="nav-item">
-  //                 <Link to="/products/create" className="nav-btn">
-  //                   Add Product
+  //       <div className="nav-links">
+  //         {/* The navbar will show these links after you log in */}
+  //         <ul className="nav-list">
+  //           {user.isAdmin === true ? (
+  //             <li className="nav-item">
+  //               <Link to="/products/create" className="nav-btn nav-link">
+  //                 Add Product
+  //               </Link>
+  //             </li>
+  //           ) : (
+  //             ""
+  //           )}
+  //           <li className="nav-item">
+  //             {" "}
+  //             <Link to="/home">
+  //               <p id="nav-btn nav-link">Home</p>
+  //             </Link>
+  //           </li>
+  //           <li className="nav-item">
+  //             <a className="nav-btn nav-link">Explore</a>
+  //             <ul className="dropdown">
+  //               <li className="dropdown-item">
+  //                 <Link className="dropdown-link" to="/products/azuki">
+  //                   Azuki
   //                 </Link>
   //               </li>
-  //             ) : (
-  //               ""
-  //             )}
-  //             <li className="nav-item">
-  //               {" "}
-  //               <Link to="/home">
-  //                 <p id="nav-btn">Home</p>
-  //               </Link>
-  //             </li>
-  //             <li className="nav-item">
-  //               <a className="nav-btn">Explore</a>
-  //               <ul className="dropdown">
-  //                 <li className="dropdown-item">
-  //                   <Link to="/products/Cars">Cars</Link>
-  //                 </li>
-  //                 <li className="dropdown-item">
-  //                   <Link to="/products/Kangaroos">Kangaroos</Link>
-  //                 </li>
-  //                 <li className="dropdown-item">
-  //                   <Link to="/products/Doodles">Doodles</Link>
-  //                 </li>
-  //                 <li className="dropdown-item">
-  //                   <Link to="/products/Landscapes">Landscapes</Link>
-  //                 </li>
-  //                 <li className="dropdown-item">
-  //                   <Link to="/products/People">People</Link>
-  //                 </li>
-  //                 <li className="dropdown-item">
-  //                   <Link to="/products/Apes">Apes</Link>
-  //                 </li>
-  //                 <li id="last-item" className="dropdown-item">
-  //                   <Link to="/products/Punks">Punks</Link>
-  //                 </li>
-  //               </ul>
-  //             </li>
-  //             <li className="nav-item">
-  //               <Link to="/cart">
-  //                 <img
-  //                   src="https://i.ibb.co/LRNwbDz/outline-shopping-cart-checkout-black-24dp.png"
-  //                   alt="shopping-cart-checkout"
-  //                   className="menu-item cart-contents"
-  //                 />
-  //                 <span
-  //                   className={
-  //                     !orderDetails ||
-  //                     (orderDetails.totalItems > 0 && !orderDetails.products) ||
-  //                     orderDetails.totalItems === 0
-  //                       ? "cart-contents-count-0"
-  //                       : "cart-contents-count"
-  //                   }
-  //                 >
-  //                   {!orderDetails ||
+  //               <li className="dropdown-item">
+  //                 <Link className="dropdown-link" to="/products/crypto_punks">
+  //                   Crypto Punks
+  //                 </Link>
+  //               </li>
+  //               <li className="dropdown-item">
+  //                 <Link className="dropdown-link" to="/products/RTFKTCLONEXTM">
+  //                   RTFKTCLONEXTM
+  //                 </Link>
+  //               </li>
+  //               <li className="dropdown-item">
+  //                 <Link className="dropdown-link" to="/products/Tasty_Bones">
+  //                   Tasty Bones
+  //                 </Link>
+  //               </li>
+  //               <li className="dropdown-item">
+  //                 <Link className="dropdown-link" to="/products/The_Metascapes">
+  //                   The Metascapes
+  //                 </Link>
+  //               </li>
+
+  //               <li className="dropdown-item">
+  //                 <Link className="dropdown-link" to="/products/The_Ladies">
+  //                   The Ladies
+  //                 </Link>
+  //               </li>
+  //             </ul>
+  //           </li>
+  //           <li className="nav-item">
+  //             <Link to="/cart">
+  //               <img
+  //                 src="https://i.ibb.co/tQgMFFz/outline-add-shopping-cart-white-24dp.png"
+  //                 alt="shopping-cart-checkout"
+  //                 className="menu-item cart-contents"
+  //               />
+  //               <span
+  //                 className={
+  //                   !orderDetails ||
   //                   (orderDetails.totalItems > 0 && !orderDetails.products) ||
   //                   orderDetails.totalItems === 0
-  //                     ? 0
-  //                     : orderDetails.products.length}
-  //                 </span>
-  //               </Link>
-  //             </li>
-  //             <li className="nav-item">
-  //               <Link to="/bio">
-  //                 <img
-  //                   src="https://i.ibb.co/4Zcr662/account-Logo.png"
-  //                   alt="account-Logo"
-  //                   id="account-logo"
-  //                 />
-  //               </Link>
-  //             </li>
-  //             <li className="nav-item">
-  //               <Link to="/login" onClick={handleClick}>
-  //                 <img
-  //                   src="https://i.ibb.co/2gfMsdL/logout.png"
-  //                   alt="logout"
-  //                   id="logout-icon"
-  //                 />
-  //               </Link>
-  //             </li>
-  //           </ul>
-  //         </div>
-  //       ) : (
-  //         <div>
-  //           {/* The navbar will show these links before you log in */}
-  //           <Link to="/cart">
-  //             <img
-  //               src="https://i.ibb.co/LRNwbDz/outline-shopping-cart-checkout-black-24dp.png"
-  //               alt="shopping-cart-checkout"
-  //               className="menu-item cart-contents"
-  //             />
-  //           </Link>
-  //           <Link to="/login">Login</Link>
-  //           <Link to="/signup">Sign Up</Link>
-  //         </div>
-  //       )}
+  //                     ? "cart-contents-count-0"
+  //                     : "cart-contents-count"
+  //                 }
+  //               >
+  //                 {!orderDetails ||
+  //                 (orderDetails.totalItems > 0 && !orderDetails.products) ||
+  //                 orderDetails.totalItems === 0
+  //                   ? 0
+  //                   : orderDetails.totalItems}
+  //               </span>
+  //             </Link>
+  //           </li>
+  //           <li className="nav-item">
+  //             <Link to="/bio">
+  //               <img
+  //                 src="https://i.ibb.co/YD9P9Zw/outline-account-circle-white-24dp.png"
+  //                 alt="account-Logo"
+  //                 id="account-logo"
+  //               />
+  //             </Link>
+  //           </li>
+  //           <li className="nav-item">
+  //             <Link to="/" onClick={handleClick}>
+  //               <img
+  //                 src="https://i.ibb.co/XbkS6LJ/outline-logout-white-24dp.png"
+  //                 alt="logout"
+  //                 id="logout-icon"
+  //               />
+  //             </Link>
+  //           </li>
+  //         </ul>
+  //       </div>
   //     </nav>
   //   </div>
   // );
 };
-
-/**
- * CONTAINER
- */
-// const mapState = (state) => {
-//   return {
-//     isLoggedIn: !!state.auth.id,
-//   };
-// };
 
 const mapDispatch = (dispatch) => {
   return {

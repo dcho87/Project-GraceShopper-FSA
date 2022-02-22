@@ -2,10 +2,11 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import { editProduct } from "../../store";
+import "./ProductEdit.css";
 
-export default function Product_Edit({ id }) {
-  const productId = useParams().id;
-  // let productId = id;
+export default function Product_Edit({ id, disableEditForm }) {
+  // const productId = useParams().id;
+  let productId = id;
 
   const products = useSelector((state) => state.products);
   const product = products.filter((product) => product.id === productId)[0];
@@ -18,11 +19,11 @@ export default function Product_Edit({ id }) {
 
   const dispatch = useDispatch();
   return (
-    <div>
-      <form>
-        <div>
+    <div className="edit-container">
+      <form className="edit-form">
+        <div className="edit-form-item">
           {" "}
-          <div>
+          <div className="edit-form-item">
             <label>Top Bid: </label>
             <input
               defaultValue={product.price}
@@ -30,7 +31,7 @@ export default function Product_Edit({ id }) {
               type="number"
             />
           </div>
-          <div>
+          <div className="edit-form-item">
             <label>Inventory: </label>
             <input
               defaultValue={product.inventory}
@@ -40,7 +41,7 @@ export default function Product_Edit({ id }) {
               type="number"
             />
           </div>
-          <div>
+          <div className="edit-form-item">
             <label>Name: </label>
             <input
               defaultValue={product.name}
@@ -48,7 +49,7 @@ export default function Product_Edit({ id }) {
               type="text"
             />
           </div>
-          <div>
+          <div className="edit-form-item">
             <label>Description: </label>
             <input
               defaultValue={product.description}
@@ -58,7 +59,7 @@ export default function Product_Edit({ id }) {
               type="text"
             />
           </div>
-          <div>
+          <div className="edit-form-item">
             <label>Category: </label>
             <input
               defaultValue={product.category}
@@ -66,10 +67,12 @@ export default function Product_Edit({ id }) {
               type="text"
             />
           </div>
-          <div>
+          <div className="edit-form-item">
             <button
               onClick={() => {
+                disableEditForm("");
                 dispatch(editProduct({}, state));
+                document.body.style.overflow = "visible";
               }}
             >
               Submit Changes

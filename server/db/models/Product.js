@@ -30,7 +30,7 @@ const Product = db.define("product", {
     allowNull: true,
   },
   description: {
-    type: STRING,
+    type: TEXT,
   },
   category: {
     type: STRING,
