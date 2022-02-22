@@ -22,9 +22,13 @@ const Navbar_No_User = () => {
 
   return (
     <div className="header">
-      <Link to="/home" onClick={() => window.location.reload()}>
+      <Link to="/home">
         <h1 id="logo">
-          <img className="nft-logo" src="/NFT-Logo.jpg" />
+          <img
+            className="nft-logo"
+            src="/NFT-Logo.jpg"
+            onClick={() => window.location.reload()}
+          />
         </h1>
       </Link>
 

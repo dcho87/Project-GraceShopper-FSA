@@ -38,7 +38,7 @@ const Navbar_User = ({ handleClick, user }) => {
                 <Link
                   to="/products/create"
                   className="nav-btn"
-                  onClick={() => window.location.reload()}
+                  onClick={() => window.location()}
                 >
                   Add Product
                 </Link>
@@ -48,8 +48,10 @@ const Navbar_User = ({ handleClick, user }) => {
             )}
             <li className="nav-item">
               {" "}
-              <Link to="/home" onClick={() => window.location.reload()}>
-                <p id="nav-btn">Home</p>
+              <Link to="/home">
+                <p id="nav-btn" onClick={() => window.location.reload()}>
+                  Home
+                </p>
               </Link>
             </li>
             <li className="nav-item">
