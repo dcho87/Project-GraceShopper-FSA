@@ -159,9 +159,9 @@ export const deleteOrder = (order, product) => {
       const productToUpdate = cart.products[productIdx];
       //find the difference between previous itemCount and the new itemCount
       const prevCount = Number(productToUpdate.orderproduct.itemCount);
-      if (order.totalItems === prevCount) {
-        cart.products.splice(productIdx, 1);
-      }
+      order.products.forEach((p) => {
+        if (p.id === product.id) cart.products.splice(productIdx, 1);
+      });
       cart.totalPrice -= prevCount * product.price;
       cart.totalItems -= prevCount;
       localStorage.setItem("cart", JSON.stringify(cart));
@@ -214,8 +214,9 @@ export const orders = (state = [], action) => {
           order.totalPrice += action.order.totalPrice;
           return order;
         }
-        console.log(action.order);
-        return action.order;
+        // console.log("order", order);
+        // console.log("action.order", action.order);
+        return order;
       });
     case UPDATE_ORDER:
       return [...state].map((order) => {

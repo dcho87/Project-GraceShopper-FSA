@@ -74,7 +74,6 @@ export const updateUserThunk = (user, history) => {
 
 export const fetchHistory = (user) => {
   return async (dispatch) => {
-    console.log(user);
     const userHistory = (await axios.get(`/api/users/order/history/${user.id}`))
       .data;
     dispatch({ type: "USER_HISTORY", userHistory });

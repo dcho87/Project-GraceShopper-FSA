@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { logout } from "../../store";
@@ -6,15 +6,18 @@ import "./Navbar.css";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchOrderDetails } from "../../store/index.js";
 
-const Navbar_No_User = ({ orderDetails }) => {
+const Navbar_No_User = () => {
   // const dispatch = useDispatch();
 
-  orderDetails = JSON.parse(localStorage.getItem("cart"));
+  const [orderDetails, setOrderDetails] = useState(
+    JSON.parse(localStorage.getItem("cart"))
+  );
+  const onStorage = () => {
+    setOrderDetails(JSON.parse(window.localStorage.getItem("cart")));
+  };
 
   useEffect(() => {
-    window.onstorage = () => {
-      orderDetails = JSON.parse(window.localStorage.getItem("cart"));
-    };
+    window.addEventListener("click", onStorage);
   }, []);
 
   return (
