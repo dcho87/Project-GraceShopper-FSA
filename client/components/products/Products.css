@@ -61,4 +61,7 @@
 }
 .pagination {
   display: flex;
+  list-style-type: none;
+  background-color: white;
+  border-radius: 5px;
 }
