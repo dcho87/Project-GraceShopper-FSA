@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { addToOrder, destroyProduct, editProduct } from "../../store/index.js";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import "./Products.css";
 import Product_Edit from "./Product_Edit.js";
 import Pagination from "./Pagination.js";
+import { popoverClasses } from "@mui/material";
 
-const Products = (props) => {
+const Products = () => {
+  const path = useLocation().pathname.split("/").pop();
+
   const dispatch = useDispatch();
   const state = useSelector((state) => state);
   const user = state.auth;
@@ -33,18 +36,61 @@ const Products = (props) => {
     return <Product_Edit id={id} disableEditForm={(res) => setShow(res)} />;
   };
 
+  const SortArrayDate = (a, b) => {
+    return new Date(b.updatedAt) - new Date(a.updatedAt);
+  };
+
+  const SortArrayName = (x, y) => {
+    if (x.name < y.name) {
+      return -1;
+    }
+    if (x.name > y.name) {
+      return 1;
+    }
+    return 0;
+  };
+
+  const SortArrayPrice = (x, y) => {
+    if (x.price < y.price) {
+      return -1;
+    }
+    if (x.price > y.price) {
+      return 1;
+    }
+    return 0;
+  };
+  console.log(path);
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexofFirstProduct = indexOfLastProduct - productsPerPage;
-  const currentProducts = state.products.slice(
-    indexofFirstProduct,
-    indexOfLastProduct
-  );
+  const currentProducts =
+    path === "a-z"
+      ? state.products
+          .sort(SortArrayName)
+          .slice(indexofFirstProduct, indexOfLastProduct)
+      : path === "price"
+      ? state.products
+          .sort(SortArrayPrice)
+          .slice(indexofFirstProduct, indexOfLastProduct)
+      : state.products
+          .sort(SortArrayDate)
+          .slice(indexofFirstProduct, indexOfLastProduct);
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
     <div className="products-container">
       <div>{show === "show" && <EditForm id={productId} />}</div>
+
+      <div className="sorting-container">
+        <ul>
+          <li>
+            <Link to="/products/sorted/a-z">Sort by A-Z</Link>
+          </li>
+          <li>
+            <Link to="/products/sorted/price">Sort by Price</Link>
+          </li>
+        </ul>
+      </div>
       {currentProducts.map((product) => (
         <div className="product" key={product.name}>
           <Link to={`/products/${product.id}`}>
