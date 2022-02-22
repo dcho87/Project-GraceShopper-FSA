@@ -65,3 +65,21 @@
   background-color: white;
   border-radius: 5px;
 }
+
+.pagination-item > li {
+  /* padding: 0.5rem; */
+  color: #0b1426;
+  padding: 0.5rem;
+  text-decoration: bold;
+}
+.pagination > li.selected {
+  background-color: white;
+  color: white;
+  border-radius: 3px;
+  padding: 0.5rem;
+  font-size: 18px;
+  background-color: #11abda;
+
+  /* color: cyan; */
+  /* border-radius: 10px; */
+}

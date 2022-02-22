@@ -147,6 +147,7 @@ const Products = (props) => {
         productsPerPage={productsPerPage}
         totalProducts={state.products.length}
         paginate={paginate}
+        currentPage={currentPage}
       />
     </div>
   );
