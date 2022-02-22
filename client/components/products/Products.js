@@ -10,6 +10,8 @@ import { popoverClasses } from "@mui/material";
 const Products = () => {
   const path = useLocation().pathname.split("/").pop();
 
+  console.log(useLocation());
+
   const dispatch = useDispatch();
   const state = useSelector((state) => state);
   const user = state.auth;
@@ -19,7 +21,7 @@ const Products = () => {
   const [show, setShow] = useState("");
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [productsPerPage] = useState(6);
+  const [productsPerPage] = useState(10);
 
   const userOrderId = state.orders
     .filter((order) => order.userId === user.id)
@@ -59,6 +61,7 @@ const Products = () => {
     }
     return 0;
   };
+
   console.log(path);
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexofFirstProduct = indexOfLastProduct - productsPerPage;
