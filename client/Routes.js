@@ -34,9 +34,13 @@ const Routes = () => {
       <Switch>
         <Route
           exact
-          path={
-            (["/", "/home"], "/products/sorted/a-z", "/products/sorted/price")
-          }
+          path={[
+            "/",
+            "/home",
+            "/products/sorted/a-z",
+            "/products/sorted/price/low-high",
+            "/products/sorted/price/high-low",
+          ]}
           component={Products}
         />
 

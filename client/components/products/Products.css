@@ -2,6 +2,11 @@
   display: flex;
   min-width: 1000px;
   max-width: 1338px;
+  flex-direction: column;
+}
+
+.products {
+  display: flex;
   flex-wrap: wrap;
   justify-content: center;
 }
@@ -61,4 +66,18 @@
 }
 .pagination {
   display: flex;
+}
+
+.sorting-ul {
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.303);
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  animation: fade 0.5s;
+  background-color: #ffffff;
+}
+
+.sorting-ul > li {
+  margin: 20px;
+  border-bottom: #ebebeb 1px solid;
+  padding: 10px;
 }
