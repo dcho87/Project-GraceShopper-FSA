@@ -32,6 +32,7 @@ const Products = (props) => {
   const EditForm = ({ id }) => {
     return <Product_Edit id={id} disableEditForm={(res) => setShow(res)} />;
   };
+
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexofFirstProduct = indexOfLastProduct - productsPerPage;
   const currentProducts = state.products.slice(
@@ -44,7 +45,7 @@ const Products = (props) => {
   return (
     <div className="products-container">
       <div>{show === "show" && <EditForm id={productId} />}</div>
-      {state.products.map((product) => (
+      {currentProducts.map((product) => (
         <div className="product" key={product.name}>
           <Link to={`/products/${product.id}`}>
             <div
