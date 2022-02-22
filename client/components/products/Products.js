@@ -19,7 +19,7 @@ const Products = () => {
   const [show, setShow] = useState("");
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [productsPerPage] = useState(10);
+  const [productsPerPage] = useState(6);
 
   const userOrderId = state.orders
     .filter((order) => order.userId === user.id)
