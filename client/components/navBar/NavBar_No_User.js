@@ -20,6 +20,10 @@ const Navbar_No_User = () => {
     window.addEventListener("click", onStorage);
   }, []);
 
+  // <a onClick={() => paginate(number)} href="#/home">
+  //             {number}
+  //           </a>
+
   return (
     <div className="header">
       <Link to="/home">

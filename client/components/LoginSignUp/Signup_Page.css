@@ -96,3 +96,22 @@
 #signup-form-link:hover {
   color: #0283c4;
 }
+
+.view-pw {
+  margin: 0.5rem 0.5rem 0.5rem 1rem;
+  cursor: pointer;
+}
+
+.MuiPaper-root {
+  height: 3rem;
+  margin: 0.5;
+}
+
+.MuiAlert-icon {
+  margin: 0;
+}
+
+.MuiAlert-message {
+  margin: 0;
+  text-align: center;
+}

@@ -11,8 +11,6 @@ export default function Product() {
     (product) => product.id === thisProductId
   );
 
-  console.log(product);
-
   const dispatch = useDispatch();
   const user = state.auth;
 
@@ -30,10 +28,11 @@ export default function Product() {
     totalPrice,
     productId,
   };
+
   return (
     <div className="product">
       {product.map((product) => (
-        <div>
+        <div key={product.id}>
           <h1>{product.name}</h1>
           <img className="product-img" src={product.imageURL} />
           <div className="product-details">
@@ -54,7 +53,7 @@ export default function Product() {
             <button
               disabled={product.id !== productId || totalItems === 0}
               onClick={(ev) => {
-                dispatch(addToOrder(orderToAdd));
+                dispatch(addToOrder(orderToAdd, user));
                 dispatch(editProduct(orderToAdd, product));
                 setProductId("");
               }}
