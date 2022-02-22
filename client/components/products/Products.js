@@ -4,6 +4,7 @@ import { addToOrder, destroyProduct, editProduct } from "../../store/index.js";
 import { Link } from "react-router-dom";
 import "./Products.css";
 import Product_Edit from "./Product_Edit.js";
+import Pagination from "./Pagination.js";
 
 const Products = (props) => {
   const dispatch = useDispatch();
@@ -13,6 +14,9 @@ const Products = (props) => {
   const [totalPrice, setTotalPrice] = useState(0);
   const [productId, setProductId] = useState("");
   const [show, setShow] = useState("");
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [productsPerPage] = useState(10);
 
   const userOrderId = state.orders
     .filter((order) => order.userId === user.id)
@@ -28,6 +32,14 @@ const Products = (props) => {
   const EditForm = ({ id }) => {
     return <Product_Edit id={id} disableEditForm={(res) => setShow(res)} />;
   };
+  const indexOfLastProduct = currentPage * productsPerPage;
+  const indexofFirstProduct = indexOfLastProduct - productsPerPage;
+  const currentProducts = state.products.slice(
+    indexofFirstProduct,
+    indexOfLastProduct
+  );
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
     <div className="products-container">
@@ -70,7 +82,7 @@ const Products = (props) => {
               <button
                 disabled={product.id !== productId || totalItems === 0}
                 onClick={(ev) => {
-                  dispatch(addToOrder(orderToAdd));
+                  dispatch(addToOrder(orderToAdd, user, product));
                   dispatch(editProduct(orderToAdd, product));
                   setProductId("");
                 }}
@@ -130,6 +142,11 @@ const Products = (props) => {
           </div>
         </div>
       ))}
+      <Pagination
+        productsPerPage={productsPerPage}
+        totalProducts={state.products.length}
+        paginate={paginate}
+      />
     </div>
   );
 };

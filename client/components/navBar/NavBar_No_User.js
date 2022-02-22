@@ -105,6 +105,6 @@ const Navbar_No_User = ({ orderDetails }) => {
       </nav>
     </div>
   );
-
+};
 
 export default connect(null)(Navbar_No_User);

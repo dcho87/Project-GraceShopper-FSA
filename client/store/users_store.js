@@ -15,7 +15,9 @@ export const users = (state = [], action) => {
     console.log(state);
     return state.filter((user) => user.id !== action.user.id);
   }
-
+  if (action.type === "USER_HISTORY") {
+    return action.userHistory;
+  }
   if (action.type === UPDATE) {
     state = state.map((user) =>
       user.id !== action.orderDetails.userId ? user : action.user
@@ -67,5 +69,14 @@ export const updateUserThunk = (user, history) => {
     const updatedUser = (await axios.put(`/api/users/${user.id}`, user)).data;
     dispatch(_updateUser(updatedUser));
     // history.push(`/`);
+  };
+};
+
+export const fetchHistory = (user) => {
+  return async (dispatch) => {
+    console.log(user);
+    const userHistory = (await axios.get(`/api/users/order/history/${user.id}`))
+      .data;
+    dispatch({ type: "USER_HISTORY", userHistory });
   };
 };
