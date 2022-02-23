@@ -10,19 +10,21 @@ const Previous_Orders_Page = () => {
     const id = state.auth.id;
     console.log("id", id);
 
-    console.log("order", state.orders);
+    // console.log("order", state.orders);
     // const orders = state.orders.filter((order) => order.UserId === thisId);
     // console.log(orders);
 
-    //   const finder = (st, otherId) => {
-    //     const arry = [];
-    //     for (let i = 0; i < st.orders.length; i++) {
-    //       if (st.orders[i].userId === otherId) {
-    //         console.log([i], st.orders[i]);
-    //       }
-    //     }
-    //   };
-    //   console.log(finder(state, id));
+    const finder = (st, otherId) => {
+      const arry = [];
+      for (let i = 0; i < st.orders.length; i++) {
+        if (st.orders[i].userId === otherId) {
+          // console.log([i], st.orders[i]);
+          arry.push(st.orders[i]);
+        }
+      }
+      return arry;
+    };
+    console.log(finder(state, id));
   }
 
   return <h1>Previous Orders Page </h1>;

@@ -27,7 +27,7 @@ const Navbar_No_User = () => {
           <img
             className="nft-logo"
             src="/NFT-Logo.jpg"
-            onClick={() => window.location.reload()}
+            // onClick={() => window.location.reload()}
           />
         </h1>
       </Link>
@@ -40,7 +40,7 @@ const Navbar_No_User = () => {
               <Link to="/home">
                 <p
                   id="nav-btn nav-link"
-                  onClick={() => window.location.reload()}
+                  // onClick={() => window.location.reload()}
                 >
                   Home
                 </p>

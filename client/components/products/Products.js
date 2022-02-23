@@ -18,7 +18,7 @@ const Products = () => {
   const [show, setShow] = useState("");
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [productsPerPage] = useState(6);
+  const [productsPerPage] = useState(25);
 
   const userOrderId = state.orders
     .filter((order) => order.userId === user.id)
@@ -67,6 +67,7 @@ const Products = () => {
 
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexofFirstProduct = indexOfLastProduct - productsPerPage;
+
   const currentProducts =
     path === "a-z"
       ? state.products
@@ -93,15 +94,23 @@ const Products = () => {
       <ul className="sorting-ul sorting-container">
         <p>Sort</p>
         <li className="sorting-item">
-          <Link to="/products/sorted/a-z">Sort by A-Z</Link>
+          <Link to="/products/sorted/a-z" onClick={() => setCurrentPage(1)}>
+            Sort by A-Z
+          </Link>
         </li>
         <li className="sorting-item">
-          <Link to="/products/sorted/price/low-high">
+          <Link
+            to="/products/sorted/price/low-high"
+            onClick={() => setCurrentPage(1)}
+          >
             Sort by Price (Low - High)
           </Link>
         </li>
         <li className="sorting-item">
-          <Link to="/products/sorted/price/high-low">
+          <Link
+            to="/products/sorted/price/high-low"
+            onClick={() => setCurrentPage(1)}
+          >
             Sort by Price (High - Low)
           </Link>
         </li>

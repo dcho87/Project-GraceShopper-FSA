@@ -24,7 +24,7 @@ const Navbar_User = ({ handleClick, user }) => {
           <img
             className="nft-logo"
             src="/NFT-Logo.jpg"
-            onClick={() => window.location.reload()}
+            // onClick={() => window.location.reload()}
           />
         </h1>
       </Link>
@@ -38,7 +38,7 @@ const Navbar_User = ({ handleClick, user }) => {
                 <Link
                   to="/products/create"
                   className="nav-btn"
-                  onClick={() => window.location()}
+                  // onClick={() => window.location()}
                 >
                   Add Product
                 </Link>
@@ -49,7 +49,10 @@ const Navbar_User = ({ handleClick, user }) => {
             <li className="nav-item">
               {" "}
               <Link to="/home">
-                <p id="nav-btn" onClick={() => window.location.reload()}>
+                <p
+                  id="nav-btn"
+                  // onClick={() => window.location.reload()}
+                >
                   Home
                 </p>
               </Link>
