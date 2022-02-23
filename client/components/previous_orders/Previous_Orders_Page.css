@@ -1,0 +1,8 @@
+.singleProduct {
+  background-color: white;
+  list-style-type: lower-alpha;
+}
+
+.singleProducts > li {
+  list-style-type: upper-roman;
+}
