@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchProducts } from "../../store/product_store";
 import { connect } from "react-redux";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./Previous_Orders_Page.css";
 
 const Previous_Orders_Page = () => {
@@ -26,7 +26,7 @@ const Previous_Orders_Page = () => {
       }
     }
   }
-
+  // console.log("check", state.orders[0].products);
   //   if(this.items.indexOf(item) === -1) {
   //     this.items.push(item);
   //     console.log(this.items);
@@ -34,7 +34,7 @@ const Previous_Orders_Page = () => {
 
   // const userOrders = finder(state, id);
   // console.log(userOrders);
-  console.log(userOrders);
+  console.log("userOrders", userOrders);
   return (
     <div className="singleProduct">
       <h1>Previous Orders Page </h1>
@@ -43,14 +43,28 @@ const Previous_Orders_Page = () => {
           return (
             <ul key={order.id}>
               <ol>
-                {order.totalItems} items for ${order.totalPrice}{" "}
-                {/* {userOrders.products.map((product) => {
-          return (
-            <ul key={product.id}>
-              <ol>{product.name} </ol>
-            </ul>
-          ); */}
+                {order.totalItems} items for ${order.totalPrice} on {""}
+                {order.createdAt.slice(0, -14)} at{" "}
+                {order.createdAt.slice(11, -8)}{" "}
               </ol>
+              <div>{console.log("products", order.products)}</div>
+              {order.products.map((product) => {
+                return (
+                  <ul key={product.id}>
+                    <ol>
+                      ${product.price}:
+                      <Link to={`/products/${product.id}`}>
+                        {" "}
+                        {product.name}{" "}
+                      </Link>
+                      in{" "}
+                      <Link to={`/products/${product.category}`}>
+                        {product.category}
+                      </Link>
+                    </ol>
+                  </ul>
+                );
+              })}
             </ul>
           );
         })}
