@@ -33,7 +33,7 @@ const Cart = () => {
     totalPrice,
     productId,
   };
-  console.log(state);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
