@@ -32,8 +32,18 @@ const Routes = () => {
     <div>
       {/* {isLoggedIn ? ( */}
       <Switch>
-        <Route exact path="/" component={Products} />
-        <Route exact path="/home" component={Products} />
+        <Route
+          exact
+          path={[
+            "/",
+            "/home",
+            "/products/sorted/a-z",
+            "/products/sorted/price/low-high",
+            "/products/sorted/price/high-low",
+          ]}
+          component={Products}
+        />
+
         <Route
           exact
           path="/home"
