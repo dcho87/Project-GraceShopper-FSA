@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { addUser } from "../../store/index.js";
+import { addUser, fetchUsers } from "../../store/index.js";
 import "./Signup_Page.css";
 import Alert from "@mui/material/Alert";
 
@@ -13,6 +13,22 @@ const SignUp_Page = () => {
   const [last_name, setLastName] = useState("");
   const [showPW, setShowPW] = useState(false);
   const [error, setError] = useState("");
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchUsers());
+  }, []);
+
+  const users = useSelector((state) => state.users);
+
+  if (!users) {
+    return null;
+  }
+
+  const userEmails = users.map((user) => {
+    return user.email;
+  });
 
   const onChange = (ev) => {
     switch (ev.target.name) {
@@ -50,15 +66,22 @@ const SignUp_Page = () => {
       case "pw does not match":
         return "Passwords do not match";
         break;
+      case "email already exists":
+        return "Email already exists, please sign in";
+        break;
+      case "null":
+        return "One or more of the required fields below is blank";
+        break;
+      case "Validation error: Validation isEmail on email failed":
+        return "Email is not in valid format";
+        break;
       default:
         return "Unknown Error, contact NFT Store Customer Service";
         break;
     }
   };
 
-  const dispatch = useDispatch();
-
-  const onSubmit = (ev) => {
+  const onSubmit = async (ev) => {
     ev.preventDefault();
 
     try {
@@ -71,12 +94,17 @@ const SignUp_Page = () => {
 
       if (password !== password1) {
         setError("pw does not match");
+      } else if (userEmails.includes(email)) {
+        setError("email already exists");
+      } else if (first_name === "" || last_name === "" || email === "") {
+        setError("null");
       } else {
-        dispatch(addUser(user));
+        await dispatch(addUser(user));
         location.hash = "#/login"; //where the user is sent after they succesfully login
       }
     } catch (err) {
       console.log(err.response);
+      setError(err.response.data.error);
     }
   };
 
@@ -153,7 +181,7 @@ const SignUp_Page = () => {
           </p>
         </div>
 
-        <button className="signup-form-item" id="submit-info" on>
+        <button className="signup-form-item" id="submit-info">
           Create Account
         </button>
       </form>
