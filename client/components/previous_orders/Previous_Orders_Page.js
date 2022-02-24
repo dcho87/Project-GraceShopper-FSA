@@ -6,26 +6,26 @@ import { Link } from "react-router-dom";
 import "./Previous_Orders_Page.css";
 
 const Previous_Orders_Page = () => {
-  const state = useSelector((state) => state);
+  const userOrders = useSelector((state) => state.users);
 
-  const userOrders = [];
-  if (state.orders && state.orders.length > 0) {
-    const id = state.auth.id;
-    console.log("id", id);
+  // const userOrders = [];
+  // if (state.orders && state.orders.length > 0) {
+  //   const id = state.auth.id;
+  //   console.log("id", id);
 
-    // console.log("order", state.orders);
-    // const orders = state.orders.filter((order) => order.UserId === thisId);
-    // console.log(orders);
+  //   // console.log("order", state.orders);
+  //   // const orders = state.orders.filter((order) => order.UserId === thisId);
+  //   // console.log(orders);
 
-    for (let i = 0; i < state.orders.length; i++) {
-      if (state.orders[i].userId === id) {
-        // if (state.orders.indexOf(i) === -1) {
-        // console.log([i], st.orders[i]);
+  //   for (let i = 0; i < state.orders.length; i++) {
+  //     if (state.orders[i].userId === id) {
+  //       // if (state.orders.indexOf(i) === -1) {
+  //       // console.log([i], st.orders[i]);
 
-        userOrders.push(state.orders[i]);
-      }
-    }
-  }
+  //       userOrders.push(state.orders[i]);
+  //     }
+  //   }
+  // }
   // console.log("check", state.orders[0].products);
   //   if(this.items.indexOf(item) === -1) {
   //     this.items.push(item);
@@ -34,7 +34,7 @@ const Previous_Orders_Page = () => {
 
   // const userOrders = finder(state, id);
   // console.log(userOrders);
-  console.log("userOrders", userOrders);
+
   return (
     <div className="singleProduct">
       <h1>Previous Orders Page </h1>

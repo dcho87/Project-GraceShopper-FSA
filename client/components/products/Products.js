@@ -63,8 +63,6 @@ const Products = () => {
     return y.price - x.price;
   };
 
-  console.log(path);
-
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexofFirstProduct = indexOfLastProduct - productsPerPage;
 
