@@ -202,11 +202,11 @@ class CheckoutForm extends React.Component {
           Payment successful
         </div>
         <div className="ResultMessage">
-          <Link to="/home">
+          <Link to="/home" onClick={this.reset}>
             Thank you for your support! This is a Fullstack Academy Project so
             you unfortunately cannot spend any money here. Anyway here is a
             random number {paymentMethod.id}
-            <h1>Click Anywhere to Keep Shopping</h1>
+            <h1>Click Here to Keep Shopping</h1>
           </Link>
         </div>
         <ResetButton onClick={this.reset} />
