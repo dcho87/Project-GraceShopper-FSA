@@ -10,6 +10,9 @@ import {
   ElementsConsumer,
 } from "@stripe/react-stripe-js";
 import "./Stripe.css";
+import { useSelector } from "react-redux";
+import axios from "axios";
+import history from "history";
 
 // import "../styles/2-Card-Detailed.css";
 
@@ -124,7 +127,7 @@ class CheckoutForm extends React.Component {
   handleSubmit = async (event) => {
     event.preventDefault();
 
-    const { stripe, elements } = this.props;
+    const { stripe, elements, user } = this.props;
     const { email, name, error, cardComplete } = this.state;
 
     if (!stripe || !elements) {
@@ -165,6 +168,16 @@ class CheckoutForm extends React.Component {
     } else {
       this.setState({ paymentMethod: payload.paymentMethod });
     }
+
+    //DC added
+
+    if (user) {
+      await axios.put(`/api/users/order/checkout/${user.id}`);
+    } else {
+      localStorage.removeItem("cart");
+    }
+
+    history.push("/");
   };
 
   reset = () => {
@@ -181,8 +194,8 @@ class CheckoutForm extends React.Component {
       email,
       address,
     } = this.state;
-    console.log(this.state);
-    const { stripe } = this.props;
+    const { stripe, user } = this.props;
+    console.log(this);
     // console.log(name);
     return paymentMethod ? (
       <div className="Result">
@@ -282,13 +295,15 @@ class CheckoutForm extends React.Component {
   }
 }
 
-const InjectedCheckoutForm = () => (
-  <ElementsConsumer>
-    {({ stripe, elements }) => (
-      <CheckoutForm stripe={stripe} elements={elements} />
-    )}
-  </ElementsConsumer>
-);
+const InjectedCheckoutForm = ({ user }) => {
+  return (
+    <ElementsConsumer>
+      {({ stripe, elements }) => (
+        <CheckoutForm stripe={stripe} elements={elements} user={user} />
+      )}
+    </ElementsConsumer>
+  );
+};
 
 const ELEMENTS_OPTIONS = {
   fonts: [
@@ -303,10 +318,11 @@ const ELEMENTS_OPTIONS = {
 const stripePromise = loadStripe("pk_test_6pRNASCoBOKtIshFeQd4XMUh");
 
 const Stripe = () => {
+  const user = useSelector((state) => state.auth);
   return (
     <div className="AppWrapper">
-      <Elements stripe={stripePromise}>
-        <InjectedCheckoutForm />
+      <Elements stripe={stripePromise} user={user}>
+        <InjectedCheckoutForm user={user} />
       </Elements>
     </div>
   );
