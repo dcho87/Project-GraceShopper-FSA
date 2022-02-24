@@ -114,7 +114,7 @@ const ResetButton = ({ onClick }) => (
 class CheckoutForm extends React.Component {
   constructor(props) {
     super(props);
-    // console.log(props);
+    console.log("butt", props);
     this.state = {
       error: null,
       cardComplete: false,
@@ -194,7 +194,7 @@ class CheckoutForm extends React.Component {
       address,
     } = this.state;
     const { stripe, user } = this.props;
-    // console.log(this);
+
     // console.log(name);
     return paymentMethod ? (
       <div className="Result">
@@ -212,76 +212,84 @@ class CheckoutForm extends React.Component {
         <ResetButton onClick={this.reset} />
       </div>
     ) : (
-      <form className="Form" onSubmit={this.handleSubmit}>
-        <fieldset className="FormGroup">
-          <Field
-            label="First"
-            id="first_name"
-            type="first_name"
-            placeholder={first_name}
-            required
-            autoComplete="first_name"
-            value={first_name}
-            onChange={(event) => {
-              this.setState({ first_name: event.target.value });
-            }}
-          />
-          <Field
-            label="Last"
-            id="last_name"
-            type="last_name"
-            placeholder="FakeLast"
-            required
-            autoComplete="last_name"
-            value={last_name}
-            onChange={(event) => {
-              this.setState({ last_name: event.target.value });
-            }}
-          />
-          <Field
-            label="Email"
-            id="email"
-            type="email"
-            placeholder="janedoe@gmail.com"
-            required
-            autoComplete="email"
-            value={email}
-            onChange={(event) => {
-              this.setState({ email: event.target.value });
-            }}
-          />
-          <Field
-            label="Address"
-            id="Address"
-            type="Address"
-            placeholder="Address"
-            required
-            autoComplete="Address"
-            value={address}
-            onChange={(event) => {
-              this.setState({ address: event.target.value });
-            }}
-          />
-        </fieldset>
-        <fieldset className="FormGroup">
-          <CardField
-            onChange={(event) => {
-              this.setState({
-                error: event.error,
-                cardComplete: event.complete,
-              });
-            }}
-          />
-        </fieldset>
-        {error && <ErrorMessage>{error.message}</ErrorMessage>}
-        <SubmitButton
-          processing={processing}
-          error={error}
-          disabled={!stripe || !first_name}
-        >
-          Pay
-        </SubmitButton>
-      </form>
+      <div>
+        <form className="Form" onSubmit={this.handleSubmit}>
+          <fieldset className="FormGroup">
+            <Field
+              label="First:"
+              id="first_name"
+              type="first_name"
+              placeholder={this.props.user.first_name}
+              required
+              autoComplete={this.props.user.first_name}
+              value={this.props.user.first_name}
+              onChange={(event) => {
+                this.setState({ first_name: event.target.value });
+              }}
+            />
+            <Field
+              label="Last:"
+              id="last_name"
+              type="last_name"
+              placeholder={this.props.user.last_name}
+              required
+              autoComplete={this.props.user.last_name}
+              value={this.props.user.last_name}
+              onChange={(event) => {
+                this.setState({ last_name: event.target.value });
+              }}
+            />
+            <Field
+              label="Email:"
+              id="email"
+              type="email"
+              placeholder={this.props.user.email}
+              required
+              autoComplete={this.props.user.email}
+              value={this.props.user.email}
+              onChange={(event) => {
+                this.setState({ email: event.target.value });
+              }}
+            />
+            <Field
+              label="Address:"
+              id="Address"
+              type="Address"
+              placeholder={this.props.user.address}
+              required
+              autoComplete={this.props.user.address}
+              value={this.props.user.address}
+              onChange={(event) => {
+                this.setState({ address: event.target.value });
+              }}
+            />
+          </fieldset>
+          <fieldset className="FormGroup">
+            <CardField
+              onChange={(event) => {
+                this.setState({
+                  error: event.error,
+                  cardComplete: event.complete,
+                });
+              }}
+            />
+          </fieldset>
+          {error && <ErrorMessage>{error.message}</ErrorMessage>}
+          <SubmitButton
+            processing={processing}
+            error={error}
+            disabled={
+              !stripe ||
+              !this.props.user.first_name ||
+              !this.props.user.last_name ||
+              !this.props.user.email ||
+              !this.props.user.address
+            }
+          >
+            Pay
+          </SubmitButton>
+        </form>
+      </div>
     );
   }
 }
