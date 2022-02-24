@@ -58,7 +58,6 @@ class Checkout extends Component {
       <div>
         <div className="checkout-header">
           <h1>Checkout</h1>
-          <Link to="/orders/previous_orders">View Previous Orders</Link>
         </div>
         <div className="firstTwo">
           <Checkout_Products />
