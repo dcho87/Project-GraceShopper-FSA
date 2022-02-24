@@ -67,9 +67,7 @@ const Products = (props) => {
           <div className="product-details">
             <div className="other-details right">
               <p>
-                <Link to={`/products/${product.category}`}>
-                  {product.category}
-                </Link>
+                <Link to={`/products/${product.URL}`}>{product.category}</Link>
               </p>
               <p style={{ fontSize: "1.4rem", fontWeight: "900" }}>
                 {product.name}
@@ -137,7 +135,7 @@ const Products = (props) => {
                 }}
               >
                 <span style={{ fontSize: "1rem", marginRight: "2px" }}>$</span>
-                {product.price}
+                {product.price.toLocaleString("en-US")}
               </p>
             </div>
           </div>

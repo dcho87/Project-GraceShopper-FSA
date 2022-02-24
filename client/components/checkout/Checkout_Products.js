@@ -50,9 +50,15 @@ const CheckoutProducts = () => {
                   <Link to={`/products/${product.id}`}>
                     <h3>{product.name}</h3>
                     <h4>
-                      {product.orderproduct.itemCount} x {product.price}{" "}
+                      {product.orderproduct.itemCount} x{" "}
+                      {product.price.toLocaleString("en-US")}
                     </h4>
-                    <h3>${product.price * product.orderproduct.itemCount}</h3>
+                    <h3>
+                      $
+                      {(
+                        product.price * product.orderproduct.itemCount
+                      ).toLocaleString("en-US")}
+                    </h3>
                   </Link>
                 </div>
               </div>
@@ -61,14 +67,16 @@ const CheckoutProducts = () => {
             <div className="checkout-cont">
               <div className="total-cont">
                 Subtotal ({orderDetails.totalItems} items): $
-                {orderDetails.totalPrice} <br />
+                {orderDetails.totalPrice.toLocaleString("en-US")} <br />
                 Shipping : Free <br />
                 Estimated Tax: $
                 {Math.round(orderDetails.totalPrice * 0.07).toFixed(2)}
               </div>
               <h3 className="total-cont">
                 Order Total: $
-                {Math.round(orderDetails.totalPrice * 1.07).toFixed(2)}
+                {Math.round(orderDetails.totalPrice * 1.07).toLocaleString(
+                  "en-US"
+                )}
               </h3>
             </div>
           </div>
