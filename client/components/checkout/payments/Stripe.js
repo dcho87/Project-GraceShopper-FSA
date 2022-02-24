@@ -13,6 +13,7 @@ import "./Stripe.css";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import history from "history";
+import { Link } from "react-router-dom";
 
 // import "../styles/2-Card-Detailed.css";
 
@@ -179,7 +180,7 @@ class CheckoutForm extends React.Component {
   };
 
   reset = () => {
-    this.setState(DEFAULT_STATE);
+    window.location.href = "/home"; // similar behavior as clicking on a link
   };
 
   render() {
@@ -201,9 +202,12 @@ class CheckoutForm extends React.Component {
           Payment successful
         </div>
         <div className="ResultMessage">
-          Thank you for your support! This is a Fullstack Academy Project so you
-          unfortunately cannot spend any money here. Anyway here is a random
-          number {paymentMethod.id}
+          <Link to="/home">
+            Thank you for your support! This is a Fullstack Academy Project so
+            you unfortunately cannot spend any money here. Anyway here is a
+            random number {paymentMethod.id}
+            <h1>Click Anywhere to Keep Shopping</h1>
+          </Link>
         </div>
         <ResetButton onClick={this.reset} />
       </div>
