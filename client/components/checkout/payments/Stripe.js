@@ -193,7 +193,7 @@ class CheckoutForm extends React.Component {
       address,
     } = this.state;
     const { stripe, user } = this.props;
-    console.log(this);
+    // console.log(this);
     // console.log(name);
     return paymentMethod ? (
       <div className="Result">
@@ -201,8 +201,9 @@ class CheckoutForm extends React.Component {
           Payment successful
         </div>
         <div className="ResultMessage">
-          Thanks for trying Stripe Elements. No money was charged, but we
-          generated a PaymentMethod: {paymentMethod.id}
+          Thank you for your support! This is a Fullstack Academy Project so you
+          unfortunately cannot spend any money here. Anyway here is a random
+          number {paymentMethod.id}
         </div>
         <ResetButton onClick={this.reset} />
       </div>
@@ -213,7 +214,7 @@ class CheckoutForm extends React.Component {
             label="First"
             id="first_name"
             type="first_name"
-            placeholder="FakeFirst"
+            placeholder={first_name}
             required
             autoComplete="first_name"
             value={first_name}
@@ -257,18 +258,6 @@ class CheckoutForm extends React.Component {
               this.setState({ address: event.target.value });
             }}
           />
-          {/* <Field
-            label="Phone"
-            id="phone"
-            type="tel"
-            placeholder="(941) 555-0123"
-            required
-            autoComplete="tel"
-            value={phone}
-            onChange={(event) => {
-              this.setState({ phone: event.target.value });
-            }}
-          /> */}
         </fieldset>
         <fieldset className="FormGroup">
           <CardField
