@@ -83,6 +83,16 @@ const Routes = () => {
           path="/products/The_Ladies"
           component={Single_Category_Page}
         />
+        <Route
+          exact
+          path="/products/Grumpets"
+          component={Single_Category_Page}
+        />
+        <Route
+          exact
+          path="/products/Little_Lemon_Friends"
+          component={Single_Category_Page}
+        />
         <Route exact path="/cart" component={Cart} />
         <Route exact path="/bio" component={Bio} />
         <Route exact path="/products/:id" component={Product} />

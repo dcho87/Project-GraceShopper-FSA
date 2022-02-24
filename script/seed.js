@@ -141,6 +141,29 @@ async function seed() {
         inventory: product.inventory,
       })
     ),
+    data.grumpets.map((product) =>
+      Product.create({
+        name: product.name,
+        description: null,
+        imageURL: product.image_url,
+        category: "Grumpets",
+        URL: "Grumpets",
+        price: product.price,
+        inventory: product.inventory,
+      })
+    ),
+    data.littleLemonFriends.map((product) =>
+      Product.create({
+        name: product.name,
+        description: null,
+        imageURL: product.image_url,
+        category: "Little Lemon Friends",
+        URL: "Little_Lemon_Friends",
+        price: product.price,
+        inventory: product.inventory,
+      })
+    ),
+
     data.theLadies.map((product) =>
       Product.create({
         name: product.name,

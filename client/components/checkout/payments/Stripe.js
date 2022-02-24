@@ -180,7 +180,7 @@ class CheckoutForm extends React.Component {
   };
 
   reset = () => {
-    window.location.href = "/home"; // similar behavior as clicking on a link
+    window.location.href = "/"; // similar behavior as clicking on a link
   };
 
   render() {
@@ -202,7 +202,7 @@ class CheckoutForm extends React.Component {
           Payment successful
         </div>
         <div className="ResultMessage">
-          <Link to="/home" onClick={this.reset}>
+          <Link onClick={this.reset}>
             Thank you for your support! This is a Fullstack Academy Project so
             you unfortunately cannot spend any money here. Anyway here is a
             random number {paymentMethod.id}

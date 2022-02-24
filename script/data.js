@@ -448,6 +448,87 @@ const data = {
       inventory: 12,
     },
   ],
+  littleLemonFriends: [
+    {
+      image_url:
+        "https://lh3.googleusercontent.com/1yg0tAU65Z9dpdibWODlB7LGR4F4bke6p2KHjiC0nuuESthnK-CR8CTuiRWRQT6eigSa4uBSali7AbZjlGPAVLiNR5GpGVR1Dovh=w600",
+      name: "Little Lemon #7205",
+      price: 999,
+      inventory: 32,
+    },
+    {
+      image_url:
+        "https://lh3.googleusercontent.com/61lKtHSPVCbZOTXrb0bTx12eF_tEIm5gznbAPpNwHWppgwHsaCyXwaDdevvV0Aa9ve5pOh4KvIv75DNk3PbRa0gL213WzY4fnvFx-w=w600",
+      name: "Little Lemon #2203",
+      price: 799,
+      inventory: 37,
+    },
+    {
+      image_url:
+        "https://lh3.googleusercontent.com/c5NLj7_GKaTu89p8DCXI-EOLwrbrv2BwuLbEGYDVPjgsaTtkQdgfwRGOaFaw2fTxujIqG9tf_wNZ8KkUvDPpHiVX0ME56V77d66HTQ=s0",
+      name: "Little Lemon #1196",
+      price: 599,
+      inventory: 19,
+    },
+    {
+      image_url:
+        "https://lh3.googleusercontent.com/u3RHjs2is1wGXxuS5LpyUhxho06MMPlLY6QCbYUqxmcHmfl2daeNLUpDMiqdZkolqutFISbBueXWdWK2tMkFYrTPfxgdgNDP6RHB=w600",
+      name: "Little Lemon #6929",
+      price: 899,
+      inventory: 18,
+    },
+    {
+      image_url:
+        "https://lh3.googleusercontent.com/FxtQNSSX8_DwNFyrwgKTXGhPDaRqlgPSzExNNa6U3YvoZRHd8BhklVFlXaiKQqCi23zq4JgEBmSJfUAAZBduffOyYQWrWYcdZnnl3w=s0",
+      name: "Little Lemon #382",
+      price: 859,
+      inventory: 16,
+    },
+  ],
+  grumpets: [
+    {
+      image_url:
+        "https://lh3.googleusercontent.com/-0njRpxnQgKLV_epQrP1MJYlearhsjpTioWnwer75BGnb58EKoq9giY9ul9MFfNojFXl9S5tU1j5gmC2HwkW5xU0Sx2f26HMocij=s0",
+      name: "Grumpet #1",
+      price: 799,
+      inventory: 54,
+    },
+    {
+      image_url:
+        "https://lh3.googleusercontent.com/uYaQMmJ080G1bINBxF2cxzY88fLnbTjfc3QQrGAxyiPwVvm9R_wfqqaY7F1bDVltOYmJn4l55jCpNNVjkMgwyVh7aQTvVvri7lSy9Q=s0",
+      name: "Grumpet #2031",
+      price: 1199,
+      inventory: 32,
+    },
+    {
+      image_url:
+        "https://lh3.googleusercontent.com/T852DHtm_9h9lb35xsxZnms1EvUZcbDTE9c6NCCUfr-HTDwMbG7xfS4fG5iMmbuWjMpw40s073nPu6E0CuOzx6pdhMMp2MFOFOhz458=w600",
+      name: "Grumpet #344",
+      price: 999,
+      inventory: 16,
+    },
+    {
+      image_url:
+        "https://lh3.googleusercontent.com/TiN3QXBci8NoFz4iCZfXTICFBhombMcn0ilY4u9uNaK1787k5YhRaEDZ7JW6Taqhx-IOlfKs1rDXwXv1ZcL_iezY_9drolVWES8uyA=s0",
+      name: "Grumpet #3029",
+      price: 1799,
+      inventory: 14,
+    },
+    {
+      image_url:
+        "https://lh3.googleusercontent.com/WuaUf0mv6yaDvLc3BDm3rEWwteiao-DZYIT4PXmyVIt9Y4ttZM8y-5PNjD6DXvVE11rwk0uUSDVq-GZQYK1mhpG71BuhtkVOi8zKIyw=s0",
+      name: "Grumpet #822",
+      price: 1299,
+      inventory: 27,
+    },
+    {
+      image_url:
+        "https://lh3.googleusercontent.com/5zvYpZ0YwahHCSRb4yTE3_AWQ-9kb7121H-KH7XzeLj-rrXMn6z-EjBtL5MxUWaUZ_bvN3pAV3VBIdf-io5TUNUIACBpyHGnR_7knQ=s0",
+      name: "Grumpet #1812",
+      price: 1999,
+      inventory: 21,
+    },
+  ],
 };
 
 module.exports = data;
