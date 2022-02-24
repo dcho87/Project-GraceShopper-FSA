@@ -169,15 +169,13 @@ class CheckoutForm extends React.Component {
       this.setState({ paymentMethod: payload.paymentMethod });
     }
 
-    //DC added
+    //DC add
 
-    if (user) {
+    if (user.id) {
       await axios.put(`/api/users/order/checkout/${user.id}`);
     } else {
       localStorage.removeItem("cart");
     }
-
-    history.push("/");
   };
 
   reset = () => {

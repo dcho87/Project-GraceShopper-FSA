@@ -156,15 +156,15 @@ async function seed() {
 
   await Promise.all(
     users.map(async (user) => {
-      await user.addOrder(
-        await Order.create(testOrders[Math.floor(Math.random() * 5)])
-      );
-      await user.addOrder(
-        await Order.create(testOrders[Math.floor(Math.random() * 5)])
-      );
-      await user.addOrder(
-        await Order.create(testOrders[Math.floor(Math.random() * 5)])
-      );
+      // await user.addOrder(
+      //   await Order.create(testOrders[Math.floor(Math.random() * 5)])
+      // );
+      // await user.addOrder(
+      //   await Order.create(testOrders[Math.floor(Math.random() * 5)])
+      // );
+      // await user.addOrder(
+      //   await Order.create(testOrders[Math.floor(Math.random() * 5)])
+      // );
       await user.addOrder(await Order.create());
     })
   );
