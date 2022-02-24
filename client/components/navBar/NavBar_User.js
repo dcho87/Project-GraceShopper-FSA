@@ -36,7 +36,7 @@ const Navbar_User = ({ handleClick, user }) => {
             {user.isAdmin === true ? (
               <li className="nav-item">
                 <Link
-                  to="/products/create"
+                  to="/create-product"
                   className="nav-btn"
                   // onClick={() => window.location()}
                 >

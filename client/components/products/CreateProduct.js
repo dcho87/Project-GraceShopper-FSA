@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { createProduct } from "../../store";
 
-export default function Product_Create() {
+export default function CreateProduct() {
   const [state, setstate] = useState({});
 
   const dispatch = useDispatch();
