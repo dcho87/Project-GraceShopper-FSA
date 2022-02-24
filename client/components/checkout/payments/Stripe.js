@@ -14,6 +14,8 @@ import { useSelector } from "react-redux";
 import axios from "axios";
 import history from "history";
 import { Link } from "react-router-dom";
+import { updateUserThunk } from "../../../store";
+import { connect } from "react-redux";
 
 // import "../styles/2-Card-Detailed.css";
 
@@ -123,13 +125,33 @@ class CheckoutForm extends React.Component {
       email: "",
       name: "",
     };
+    this.onChange = this.onChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
+
+  onChange(ev) {
+    const change = {};
+    change[ev.target.name] = ev.target.value;
+    this.setState(change);
+  }
+
+  // async onSave(ev) {
+  //   ev.preventDefault();
+  //   try {
+  //     await this.props.updateUser({ ...this.state });
+  //     // window.location.reload();
+  //   } catch (er) {
+  //     console.log(er);
+  //     // this.setState({ error: er.response.data.error.errors[0].message });
+  //   }
+  // }
 
   handleSubmit = async (event) => {
     event.preventDefault();
 
     const { stripe, elements, user } = this.props;
     const { email, name, error, cardComplete } = this.state;
+    // await updateUser({ ...this.state });
 
     if (!stripe || !elements) {
       // Stripe.js has not loaded yet. Make sure to disable
@@ -194,6 +216,7 @@ class CheckoutForm extends React.Component {
       address,
     } = this.state;
     const { stripe, user } = this.props;
+    const { onChange, onSave } = this;
 
     // console.log(name);
     return paymentMethod ? (
@@ -219,6 +242,7 @@ class CheckoutForm extends React.Component {
               label="First:"
               id="first_name"
               type="first_name"
+              onChange={this.onChange}
               placeholder={this.props.user.first_name}
               required
               autoComplete={this.props.user.first_name}
@@ -231,6 +255,7 @@ class CheckoutForm extends React.Component {
               label="Last:"
               id="last_name"
               type="last_name"
+              onChange={this.onChange}
               placeholder={this.props.user.last_name}
               required
               autoComplete={this.props.user.last_name}
@@ -243,6 +268,7 @@ class CheckoutForm extends React.Component {
               label="Email:"
               id="email"
               type="email"
+              onChange={this.onChange}
               placeholder={this.props.user.email}
               required
               autoComplete={this.props.user.email}
@@ -255,6 +281,7 @@ class CheckoutForm extends React.Component {
               label="Address:"
               id="Address"
               type="Address"
+              onChange={this.onChange}
               placeholder={this.props.user.address}
               required
               autoComplete={this.props.user.address}
@@ -327,4 +354,14 @@ const Stripe = () => {
   );
 };
 
-export default Stripe;
+const mapDispatchToProps = (dispatch, { history }) => {
+  return {
+    updateUser: (user) => {
+      dispatch(updateUserThunk(user, history));
+    },
+  };
+};
+
+export default connect((state) => state, mapDispatchToProps)(Stripe);
+
+// export default Stripe;
