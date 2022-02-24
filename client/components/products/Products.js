@@ -91,7 +91,7 @@ const Products = () => {
     <div className="products-container">
       <div>{show === "show" && <EditForm id={productId} />}</div>
 
-      <ul className="sorting-ul sorting-container">
+      {/* <ul className="sorting-ul sorting-container">
         <p>Sort</p>
         <li className="sorting-item">
           <Link to="/products/sorted/a-z" onClick={() => setCurrentPage(1)}>
@@ -114,7 +114,7 @@ const Products = () => {
             Sort by Price (High - Low)
           </Link>
         </li>
-      </ul>
+      </ul> */}
       <div className="products">
         {currentProducts.map((product) => (
           <div className="product" key={product.name}>

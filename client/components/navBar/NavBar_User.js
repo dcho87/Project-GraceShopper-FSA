@@ -48,13 +48,8 @@ const Navbar_User = ({ handleClick, user }) => {
             )}
             <li className="nav-item">
               {" "}
-              <Link to="/home">
-                <p
-                  id="nav-btn"
-                  // onClick={() => window.location.reload()}
-                >
-                  Home
-                </p>
+              <Link to="/home" className="nav-btn nav-link">
+                Home
               </Link>
             </li>
             <li className="nav-item">
@@ -96,7 +91,7 @@ const Navbar_User = ({ handleClick, user }) => {
             <li className="nav-item">
               <Link to="/cart">
                 <img
-                  src="https://i.ibb.co/LRNwbDz/outline-shopping-cart-checkout-black-24dp.png"
+                  src="https://i.ibb.co/tQgMFFz/outline-add-shopping-cart-white-24dp.png"
                   alt="shopping-cart-checkout"
                   className="menu-item cart-contents"
                 />
@@ -120,16 +115,16 @@ const Navbar_User = ({ handleClick, user }) => {
             <li className="nav-item">
               <Link to="/bio">
                 <img
-                  src="https://i.ibb.co/4Zcr662/account-Logo.png"
+                  src="https://i.ibb.co/YD9P9Zw/outline-account-circle-white-24dp.png"
                   alt="account-Logo"
                   id="account-logo"
                 />
               </Link>
             </li>
             <li className="nav-item">
-              <Link to="/login" onClick={handleClick}>
+              <Link to="/" onClick={handleClick}>
                 <img
-                  src="https://i.ibb.co/2gfMsdL/logout.png"
+                  src="https://i.ibb.co/XbkS6LJ/outline-logout-white-24dp.png"
                   alt="logout"
                   id="logout-icon"
                 />
