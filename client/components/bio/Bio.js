@@ -14,6 +14,7 @@ const Bio = () => {
   return (
     <div>
       <div className="header-bio">
+        <Link to="/orders/previous_orders">View Previous Orders</Link>
         <h2>Welcome {user.first_name}</h2>
         <h4>Update User Details Below</h4>
       </div>

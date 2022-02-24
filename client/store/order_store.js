@@ -184,6 +184,21 @@ export const fetchOrderDetails = (user) => {
   };
 };
 
+export const completeOrder = (user) => {
+  return async (dispatch) => {
+    if (user.id) {
+      await axios.get(`/api/users/order/checkout/${user.id}`);
+      const newOrder = await axios.get(`/api/users/order/${user.id}`);
+      dispatch(_loadOrderDetails(newOrder));
+    } else {
+      //for guest user
+      localStorage.removeItem("cart");
+      localStorage.setItem("cart", {});
+      dispatch(_loadOrderDetails(cart));
+    }
+  };
+};
+
 export const orders = (state = [], action) => {
   switch (action.type) {
     case LOAD_ORDERS:

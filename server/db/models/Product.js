@@ -36,6 +36,10 @@ const Product = db.define("product", {
     type: STRING,
     allowNull: false,
   },
+  URL: {
+    type: STRING,
+    allowNull: false,
+  },
 });
 
 module.exports = Product;

@@ -38,7 +38,7 @@ export default function Product() {
           <div className="product-details">
             <small>{product.description}</small>&nbsp;
             <p>
-              <b> Top Bid:</b> ${product.price}
+              <b> Top Bid:</b> ${product.price.toLocaleString("en-US")}
             </p>
             <p>
               {" "}
@@ -46,9 +46,7 @@ export default function Product() {
             </p>
             <p>
               <b>Category: </b>
-              <Link to={`/products/${product.category}`}>
-                {product.category}
-              </Link>
+              <Link to={`/products/${product.URL}`}>{product.URL}</Link>
             </p>
             <button
               disabled={product.id !== productId || totalItems === 0}
