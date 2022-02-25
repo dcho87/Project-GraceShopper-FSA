@@ -21,7 +21,11 @@ const Navbar_User = ({ handleClick, user }) => {
     <div className="header">
       <Link to="/home">
         <h1 id="logo">
-          <img className="nft-logo" src="/NFT-Logo.jpg" />
+          <img
+            className="nft-logo"
+            src="/NFT-Logo.jpg"
+            // onClick={() => window.location.reload()}
+          />
         </h1>
       </Link>
 
@@ -31,7 +35,11 @@ const Navbar_User = ({ handleClick, user }) => {
           <ul className="nav-list">
             {user.isAdmin === true ? (
               <li className="nav-item">
-                <Link to="/products/create" className="nav-btn">
+                <Link
+                  to="/create-product"
+                  className="nav-btn"
+                  // onClick={() => window.location()}
+                >
                   Add Product
                 </Link>
               </li>
@@ -40,8 +48,8 @@ const Navbar_User = ({ handleClick, user }) => {
             )}
             <li className="nav-item">
               {" "}
-              <Link to="/home">
-                <p id="nav-btn">Home</p>
+              <Link to="/home" className="nav-btn nav-link">
+                Home
               </Link>
             </li>
             <li className="nav-item">
@@ -83,7 +91,7 @@ const Navbar_User = ({ handleClick, user }) => {
             <li className="nav-item">
               <Link to="/cart">
                 <img
-                  src="https://i.ibb.co/LRNwbDz/outline-shopping-cart-checkout-black-24dp.png"
+                  src="https://i.ibb.co/tQgMFFz/outline-add-shopping-cart-white-24dp.png"
                   alt="shopping-cart-checkout"
                   className="menu-item cart-contents"
                 />
@@ -107,7 +115,7 @@ const Navbar_User = ({ handleClick, user }) => {
             <li className="nav-item">
               <Link to="/bio">
                 <img
-                  src="https://i.ibb.co/4Zcr662/account-Logo.png"
+                  src="https://i.ibb.co/YD9P9Zw/outline-account-circle-white-24dp.png"
                   alt="account-Logo"
                   id="account-logo"
                 />
@@ -116,7 +124,7 @@ const Navbar_User = ({ handleClick, user }) => {
             <li className="nav-item">
               <Link to="/" onClick={handleClick}>
                 <img
-                  src="https://i.ibb.co/2gfMsdL/logout.png"
+                  src="https://i.ibb.co/XbkS6LJ/outline-logout-white-24dp.png"
                   alt="logout"
                   id="logout-icon"
                 />

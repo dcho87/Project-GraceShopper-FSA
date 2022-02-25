@@ -40,7 +40,7 @@ const SingleCategory_Page = () => {
       category = "Clone X";
       break;
     case "/products/Tasty_Bones":
-      category = "Tasty Bones";
+      category = "Tasty Bones XYZ";
       break;
     case "/products/The_Metascapes":
       category = "The Metascapes";

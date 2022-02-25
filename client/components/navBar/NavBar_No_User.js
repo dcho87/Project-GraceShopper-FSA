@@ -20,24 +20,30 @@ const Navbar_No_User = () => {
     window.addEventListener("click", onStorage);
   }, []);
 
-  // <a onClick={() => paginate(number)} href="#/home">
-  //             {number}
-  //           </a>
-
   return (
     <div className="header">
       <Link to="/home">
         <h1 id="logo">
-          <img className="nft-logo" src="/NFT-Logo.jpg" />
+          <img
+            className="nft-logo"
+            src="/NFT-Logo.jpg"
+            // onClick={() => window.location.reload()}
+          />
         </h1>
       </Link>
+
       <nav>
         <div className="nav-links">
           <ul className="nav-list">
             <li className="nav-item">
               {" "}
               <Link to="/home">
-                <p id="nav-btn nav-link">Home</p>
+                <p
+                  id="nav-btn nav-link"
+                  // onClick={() => window.location.reload()}
+                >
+                  Home
+                </p>
               </Link>
             </li>
             <li className="nav-item">

@@ -5,7 +5,6 @@ import { Link, useLocation } from "react-router-dom";
 import "./Products.css";
 import Product_Edit from "./Product_Edit.js";
 import Pagination from "./Pagination.js";
-import { popoverClasses } from "@mui/material";
 
 const Products = () => {
   const path = useLocation().pathname.split("/").pop();
@@ -21,7 +20,7 @@ const Products = () => {
   const [show, setShow] = useState("");
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [productsPerPage] = useState(10);
+  const [productsPerPage] = useState(25);
 
   const userOrderId = state.orders
     .filter((order) => order.userId === user.id)
@@ -38,8 +37,14 @@ const Products = () => {
     return <Product_Edit id={id} disableEditForm={(res) => setShow(res)} />;
   };
 
-  const SortArrayDate = (a, b) => {
-    return new Date(b.updatedAt) - new Date(a.updatedAt);
+  const SortArrayDate = (x, y) => {
+    if (x.category < y.category) {
+      return -1;
+    }
+    if (x.category > y.category) {
+      return 1;
+    }
+    return 0;
   };
 
   const SortArrayName = (x, y) => {
@@ -52,27 +57,31 @@ const Products = () => {
     return 0;
   };
 
-  const SortArrayPrice = (x, y) => {
-    if (x.price < y.price) {
-      return -1;
-    }
-    if (x.price > y.price) {
-      return 1;
-    }
-    return 0;
+  const SortArrayPriceLowHigh = (x, y) => {
+    return x.price - y.price;
+  };
+
+  const SortArrayPriceHighLow = (x, y) => {
+    return y.price - x.price;
   };
 
   console.log(path);
+
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexofFirstProduct = indexOfLastProduct - productsPerPage;
+
   const currentProducts =
     path === "a-z"
       ? state.products
           .sort(SortArrayName)
           .slice(indexofFirstProduct, indexOfLastProduct)
-      : path === "price"
+      : path === "low-high"
       ? state.products
-          .sort(SortArrayPrice)
+          .sort(SortArrayPriceLowHigh)
+          .slice(indexofFirstProduct, indexOfLastProduct)
+      : path === "high-low"
+      ? state.products
+          .sort(SortArrayPriceHighLow)
           .slice(indexofFirstProduct, indexOfLastProduct)
       : state.products
           .sort(SortArrayDate)
@@ -84,118 +93,139 @@ const Products = () => {
     <div className="products-container">
       <div>{show === "show" && <EditForm id={productId} />}</div>
 
-      <div className="sorting-container">
-        <ul>
-          <li>
-            <Link to="/products/sorted/a-z">Sort by A-Z</Link>
-          </li>
-          <li>
-            <Link to="/products/sorted/price">Sort by Price</Link>
-          </li>
-        </ul>
-      </div>
-      {currentProducts.map((product) => (
-        <div className="product" key={product.name}>
-          <Link to={`/products/${product.id}`}>
-            <div
-              className=""
-              style={{
-                backgroundImage: `url(${product.imageURL}) `,
-                width: "360px",
-                height: "360px",
-                backgroundRepeat: "no-repeat",
-                backgroundSize: "cover",
-                borderTopLeftRadius: "20px",
-                borderTopRightRadius: "20px",
-              }}
-            >
-              {/* <img className="product-img" src={product.imageURL} /> */}
-            </div>
+      {/* <ul className="sorting-ul sorting-container">
+        <p>Sort</p>
+        <li className="sorting-item">
+          <Link to="/products/sorted/a-z" onClick={() => setCurrentPage(1)}>
+            Sort by A-Z
           </Link>
+        </li>
+        <li className="sorting-item">
+          <Link
+            to="/products/sorted/price/low-high"
+            onClick={() => setCurrentPage(1)}
+          >
+            Sort by Price (Low - High)
+          </Link>
+        </li>
+        <li className="sorting-item">
+          <Link
+            to="/products/sorted/price/high-low"
+            onClick={() => setCurrentPage(1)}
+          >
+            Sort by Price (High - Low)
+          </Link>
+        </li>
+      </ul> */}
+      <div className="products">
+        {currentProducts.map((product) => (
+          <div className="product" key={product.name}>
+            <Link to={`/products/${product.id}`}>
+              <div
+                className=""
+                style={{
+                  backgroundImage: `url(${product.imageURL}) `,
+                  width: "360px",
+                  height: "360px",
+                  backgroundRepeat: "no-repeat",
+                  backgroundSize: "cover",
+                  borderTopLeftRadius: "20px",
+                  borderTopRightRadius: "20px",
+                }}
+              >
+                {/* <img className="product-img" src={product.imageURL} /> */}
+              </div>
+            </Link>
 
-          <div className="product-details">
-            <div className="other-details right">
-              <p>
-                <Link to={`/products/${product.category}`}>
-                  {product.category}
-                </Link>
-              </p>
-              <p style={{ fontSize: "1.4rem", fontWeight: "900" }}>
-                {product.name}
-              </p>
+            <div className="product-details">
+              <div className="other-details right">
+                <p>
+                  <Link to={`/products/${product.category}`}>
+                    {product.category}
+                  </Link>
+                </p>
+                <p style={{ fontSize: "1.4rem", fontWeight: "900" }}>
+                  {product.name}
+                </p>
 
-              {/* <p>
+                {/* <p>
                 <b>Sold so far</b>
                 <p>{product.inventory}</p>
               </p> */}
 
-              <button
-                disabled={product.id !== productId || totalItems === 0}
-                onClick={(ev) => {
-                  dispatch(addToOrder(orderToAdd, user, product));
-                  dispatch(editProduct(orderToAdd, product));
-                  setProductId("");
-                }}
-              >
-                Add to cart
-              </button>
-              <input
-                type="number"
-                step={1}
-                placeholder={0}
-                min={0}
-                max={product.inventory}
-                onChange={(ev) => {
-                  setTotalItems(ev.target.value * 1);
-                  setTotalPrice(ev.target.value * product.price);
-                  setProductId(product.id);
-                }}
-              ></input>
+                <button
+                  disabled={product.id !== productId || totalItems === 0}
+                  onClick={(ev) => {
+                    dispatch(addToOrder(orderToAdd, user, product));
+                    dispatch(editProduct(orderToAdd, product));
+                    setProductId("");
+                  }}
+                >
+                  Add to cart
+                </button>
+                <input
+                  type="number"
+                  step={1}
+                  placeholder={0}
+                  min={0}
+                  max={product.inventory}
+                  onChange={(ev) => {
+                    setTotalItems(ev.target.value * 1);
+                    setTotalPrice(ev.target.value * product.price);
+                    setProductId(product.id);
+                  }}
+                ></input>
 
-              {user.isAdmin === true ? (
-                <div className="edit-delte-btns">
-                  {" "}
-                  {/* <Link to={`/products/edit/${product.id}`}> */}
-                  <button
-                    onClick={() => {
-                      setProductId(product.id);
-                      setShow("show");
-                      document.body.style.overflow = "hidden";
-                    }}
-                  >
-                    Edit
-                  </button>
-                  {/* </Link> */}
-                  <button onClick={() => dispatch(destroyProduct(product.id))}>
-                    Delete
-                  </button>
-                </div>
-              ) : (
-                ""
-              )}
-            </div>
+                {user.isAdmin === true ? (
+                  <div className="edit-delte-btns">
+                    {" "}
+                    {/* <Link to={`/products/edit/${product.id}`}> */}
+                    <button
+                      onClick={() => {
+                        setProductId(product.id);
+                        setShow("show");
+                        document.body.style.overflow = "hidden";
+                      }}
+                    >
+                      Edit
+                    </button>
+                    {/* </Link> */}
+                    <button
+                      onClick={() => dispatch(destroyProduct(product.id))}
+                    >
+                      Delete
+                    </button>
+                  </div>
+                ) : (
+                  ""
+                )}
+              </div>
 
-            <div className="price-div right">
-              <p style={{ fontSize: "0.8rem", margin: "0" }}>Buy Now</p>
-              <p
-                style={{
-                  fontSize: "1.3rem",
-                  fontWeight: "900",
-                  display: "flex",
-                  alignItems: "center",
-                }}
-              >
-                <span style={{ fontSize: "1rem", marginRight: "2px" }}>$</span>
-                {product.price}
-              </p>
+              <div className="price-div right">
+                <p style={{ fontSize: "0.8rem", margin: "0" }}>Buy Now</p>
+                <p
+                  style={{
+                    fontSize: "1.3rem",
+                    fontWeight: "900",
+                    display: "flex",
+                    alignItems: "center",
+                  }}
+                >
+                  <span style={{ fontSize: "1rem", marginRight: "2px" }}>
+                    $
+                  </span>
+                  {product.price}
+                </p>
+              </div>
             </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
       <Pagination
         productsPerPage={productsPerPage}
         totalProducts={state.products.length}
         paginate={paginate}
+        currentPage={currentPage}
       />
     </div>
   );
