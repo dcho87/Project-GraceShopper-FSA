@@ -26,16 +26,16 @@ router.get("/:id", async (req, res, next) => {
 //route to ADD a Product
 router.post("/", async (req, res, next) => {
   try {
-    const newProduct = {
-      name: req.body.name,
-      price: req.body.price,
-      inventory: req.body.inventory,
-      description: req.body.description,
-      imageURL: req.body.imageURL,
-      category: req.body.category,
-    };
-    console.log(newProduct);
-    res.send(await Product.create(newProduct));
+    // const newProduct = {
+    //   name: req.body.name,
+    //   price: req.body.price,
+    //   inventory: req.body.inventory,
+    //   description: req.body.description,
+    //   imageURL: req.body.imageURL,
+    //   category: req.body.category,
+    // };
+
+    res.send(await Product.create(req.body));
   } catch (ex) {
     next(ex);
   }

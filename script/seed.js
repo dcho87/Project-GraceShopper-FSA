@@ -89,56 +89,48 @@ async function seed() {
     data.azuki.map((product) =>
       Product.create({
         name: product.name,
-        description: null,
         imageURL: product.image_url,
         category: "Azuki",
         URL: "Azuki",
-        price: Math.floor(Math.random() * (10000 - 500) + 500),
-        inventory: Math.floor(Math.random() * (100 - 20) + 20),
+        price: product.price,
       })
     ),
     data.RTFKTCLONEXTM.map((product) =>
       Product.create({
         name: product.name,
-        description: null,
         imageURL: product.image_url,
         category: "Clone X",
         URL: "Clone_X",
-        price: Math.floor(Math.random() * (10000 - 500) + 500),
-        inventory: Math.floor(Math.random() * (100 - 20) + 20),
+        price: product.price,
       })
     ),
     data.tastyBones.map((product) =>
       Product.create({
         name: product.name,
-        description: null,
         imageURL: product.image_url,
         category: "Tasty Bones",
         URL: "Tasty_Bones",
-        price: Math.floor(Math.random() * (10000 - 500) + 500),
-        inventory: Math.floor(Math.random() * (100 - 20) + 20),
+        price: product.price,
       })
     ),
     data.metascapes.map((product) =>
       Product.create({
         name: product.name,
-        description: null,
+
         imageURL: product.image_url,
         category: "The Metascapes",
         URL: "The_Metascapes",
-        price: Math.floor(Math.random() * (10000 - 500) + 500),
-        inventory: Math.floor(Math.random() * (100 - 20) + 20),
+        price: product.price,
       })
     ),
     data.cryptoPunks.map((product) =>
       Product.create({
         name: product.name,
-        description: null,
+
         imageURL: product.image_url,
         category: "Crypto Punks",
         URL: "Crypto_Punks",
-        price: Math.floor(Math.random() * (10000 - 500) + 500),
-        inventory: Math.floor(Math.random() * (100 - 20) + 20),
+        price: product.price,
       })
     ),
     data.grumpets.map((product) =>
@@ -155,24 +147,20 @@ async function seed() {
     data.littleLemonFriends.map((product) =>
       Product.create({
         name: product.name,
-        description: null,
         imageURL: product.image_url,
         category: "Little Lemon Friends",
         URL: "Little_Lemon_Friends",
         price: product.price,
-        inventory: product.inventory,
       })
     ),
 
     data.theLadies.map((product) =>
       Product.create({
         name: product.name,
-        description: null,
         imageURL: product.image_url,
         category: "The Ladies",
         URL: "The_Ladies",
-        price: Math.floor(Math.random() * (10000 - 500) + 500),
-        inventory: Math.floor(Math.random() * (100 - 20) + 20),
+        price: product.price,
       })
     ),
   ]);
