@@ -32,8 +32,18 @@ const Routes = () => {
     <div>
       {/* {isLoggedIn ? ( */}
       <Switch>
-        <Route exact path="/" component={Products} />
-        <Route exact path="/home" component={Products} />
+        <Route
+          exact
+          path={[
+            "/",
+            "/home",
+            "/products/sorted/a-z",
+            "/products/sorted/price/low-high",
+            "/products/sorted/price/high-low",
+          ]}
+          component={Products}
+        />
+
         <Route
           exact
           path="/home"
@@ -71,6 +81,16 @@ const Routes = () => {
         <Route
           exact
           path="/products/The_Ladies"
+          component={Single_Category_Page}
+        />
+        <Route
+          exact
+          path="/products/Grumpets"
+          component={Single_Category_Page}
+        />
+        <Route
+          exact
+          path="/products/Little_Lemon_Friends"
           component={Single_Category_Page}
         />
         <Route exact path="/cart" component={Cart} />

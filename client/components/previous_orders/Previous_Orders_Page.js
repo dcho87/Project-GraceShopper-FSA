@@ -2,47 +2,193 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchProducts } from "../../store/product_store";
 import { connect } from "react-redux";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
+import "./Previous_Orders_Page.css";
+
+const monthConv = (str) => {
+  switch (str) {
+    case 1:
+      return "January";
+    case 2:
+      return "February";
+    case 3:
+      return "March";
+    case 4:
+      return "April";
+    case 5:
+      return "May";
+    case 6:
+      return "June";
+    case 7:
+      return "July";
+    case 8:
+      return "August";
+    case 9:
+      return "September";
+    case 10:
+      return "October";
+    case 11:
+      return "November";
+    default:
+      return "December";
+  }
+};
 
 const Previous_Orders_Page = () => {
-  const state = useSelector((state) => state);
-  const thisId = state.auth.id;
-  // console.log(thisId);
-  console.log(state.orders[0].userId);
+  const userOrders = useSelector((state) => state.users);
+  const user = useSelector((state) => state.auth);
+  const products = useSelector((state) => state.products);
+  // const userOrders = [];
+  // if (state.orders && state.orders.length > 0) {
+  //   const id = state.auth.id;
+  //   console.log("id", id);
 
-  // if (!thisId) {
-  //   return "Sorry the Campus you are looking for is unreachable";
+  //   // console.log("order", state.orders);
+  //   // const orders = state.orders.filter((order) => order.UserId === thisId);
+  //   // console.log(orders);
+
+  //   for (let i = 0; i < state.orders.length; i++) {
+  //     if (state.orders[i].userId === id) {
+  //       // if (state.orders.indexOf(i) === -1) {
+  //       // console.log([i], st.orders[i]);
+
+  //       userOrders.push(state.orders[i]);
+  //     }
+  //   }
+  // }
+  // console.log("check", state.orders[0].products);
+  //   if(this.items.indexOf(item) === -1) {
+  //     this.items.push(item);
+  //     console.log(this.items);
   // }
 
-  const orders = state.orders.filter((order) => order.UserId === thisId);
-  // console.log(orders);
-  // console.log(state.orders[0].userId);
-  // let arry = [];
-  // const finder = (st, otherId) => {
-  //   for (let i = 0; i < st.orders.length; i++) {
-  //     if (st.orders[i].userId === otherId) {
-  //       arry += st.orders;
-  //     }
-  //     return arry;
-  //   }
-  // };
-  // console.log(finder(state, thisId));
+  // const userOrders = finder(state, id);
+  // console.log(userOrders);
 
-  // const userOrders = state.orders.forEach(
-  //   (element) => (element.userId === thisId)
+  return (
+    <div className="singleProduct">
+      <h1>Previous Orders</h1>
+      <div>
+        {userOrders ? (
+          userOrders.map((order) => {
+            console.log("nugget", order);
+            const orderNum = order.id.split("-");
+            const date = order.createdAt.slice(0, -14);
+            const year = Number(date.split("-")[0]);
+            const month = Number(date.split("-")[1]);
+            const day = Number(date.split("-")[2]);
 
-  //   }(arry += element.userId)
-  // );
-  // console.log(arry);
+            return (
+              <ul key={order.id} className="single-order-cont">
+                <div className="order-header">
+                  <div className="placed-cont">
+                    <div>ORDER PLACED</div>
+                    <div className="date">
+                      {monthConv(month)} {day}, {year}
+                    </div>
+                  </div>
+                  <div className="total-cont">
+                    <div>TOTAL</div>
+                    <div className="total">
+                      ${(order.totalPrice * 1.07).toLocaleString("en-US")}
+                    </div>
+                  </div>
 
-  // const found = array1.find((element) => element > 10);
+                  <div className="ship-cont">
+                    <div>SHIP TO</div>
+                    <div className="total">
+                      {user.first_name} {user.last_name}
+                    </div>
+                  </div>
 
-  // const thisProductId = match.params.id;
-  // const product = state.products.find(
-  //   (product) => product.id === thisProductId
-  // );
+                  <div className="order-num-cont">
+                    <div>Order # {orderNum[0]}</div>
+                  </div>
+                </div>
 
-  return <h1>Previous Orders Page </h1>;
+                {order.products.map((product) => {
+                  const productInfo = products.find(
+                    (prod) => prod.id === product.id
+                  );
+                  return (
+                    <div key={product.id} className="single-prod-cont">
+                      <Link to={`/products/${product.id}`} className="image">
+                        <div
+                          style={{
+                            backgroundImage: `url(${product.imageURL}) `,
+                            width: "70px",
+                            height: "70px",
+                            backgroundRepeat: "no-repeat",
+                            backgroundSize: "cover",
+                            borderTopLeftRadius: "20px",
+                            borderTopRightRadius: "20px",
+                          }}
+                        ></div>
+                      </Link>
+                      <div className="order-data">
+                        <Link to={`/products/${product.id}`}>
+                          <div>
+                            <h3>{product.name}</h3>
+                          </div>
+                        </Link>
+                        <div>
+                          Price per Item: $
+                          {productInfo.price.toLocaleString("en-US")}
+                        </div>
+                        <div>Quantity: {product.orderproduct.itemCount}</div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </ul>
+            );
+          })
+        ) : (
+          <div>no previous orders exist</div>
+        )}
+      </div>
+      <div>&nbsp;</div>
+      <div>&nbsp;</div>
+      <div>&nbsp;</div>
+      <div>&nbsp;</div>
+      <div>&nbsp;</div>
+      <div>&nbsp;</div>
+      <div>&nbsp;</div>
+      <div>&nbsp;</div>
+      <div>&nbsp;</div>
+      <div>&nbsp;</div>
+      <div>&nbsp;</div>
+      <div>&nbsp;</div>
+      <div>&nbsp;</div>
+      <div>&nbsp;</div>
+      <div>&nbsp;</div>
+      <div>&nbsp;</div>
+      <div>&nbsp;</div>
+      <div>&nbsp;</div>
+      <div>&nbsp;</div>
+      <div>&nbsp;</div>
+      <div>&nbsp;</div>
+      <div>&nbsp;</div>
+      <div>&nbsp;</div>
+      <div>&nbsp;</div>
+      <div>&nbsp;</div>
+      <div>&nbsp;</div>
+      <div>&nbsp;</div>
+      <div>&nbsp;</div>
+      <div>&nbsp;</div>
+      <div>&nbsp;</div>
+      <div>&nbsp;</div>
+      <div>&nbsp;</div>
+      <div>&nbsp;</div>
+      <div>&nbsp;</div>
+      <div>&nbsp;</div>
+      <div>&nbsp;</div>
+      <div>&nbsp;</div>
+      <div>&nbsp;</div>
+      <div>&nbsp;</div>
+      <div>&nbsp;</div>
+    </div>
+  );
 };
 
 export default Previous_Orders_Page;

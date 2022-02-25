@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { logout } from "../../store";
@@ -9,12 +9,15 @@ import { fetchOrderDetails } from "../../store/index.js";
 const Navbar_No_User = () => {
   // const dispatch = useDispatch();
 
-  let orderDetails = JSON.parse(localStorage.getItem("cart"));
+  const [orderDetails, setOrderDetails] = useState(
+    JSON.parse(localStorage.getItem("cart"))
+  );
+  const onStorage = () => {
+    setOrderDetails(JSON.parse(window.localStorage.getItem("cart")));
+  };
 
   useEffect(() => {
-    window.onstorage = () => {
-      orderDetails = JSON.parse(window.localStorage.getItem("cart"));
-    };
+    window.addEventListener("click", onStorage);
   }, []);
 
   return (
@@ -24,13 +27,16 @@ const Navbar_No_User = () => {
           <img className="nft-logo" src="/NFT-Logo.jpg" />
         </h1>
       </Link>
+
       <nav>
         <div className="nav-links">
           <ul className="nav-list">
             <li className="nav-item">
               {" "}
               <Link to="/home">
-                <p id="nav-btn nav-link">Home</p>
+                <p id="nav-btn nav-link" className="white-text">
+                  Home
+                </p>
               </Link>
             </li>
             <li className="nav-item">
@@ -61,10 +67,22 @@ const Navbar_No_User = () => {
                     The Metascapes
                   </Link>
                 </li>
-
                 <li className="dropdown-item">
                   <Link className="dropdown-link" to="/products/The_Ladies">
                     The Ladies
+                  </Link>
+                </li>
+                <li className="dropdown-item">
+                  <Link className="dropdown-link" to="/products/Grumpets">
+                    Grumpets
+                  </Link>
+                </li>
+                <li className="dropdown-item">
+                  <Link
+                    className="dropdown-link"
+                    to="/products/Little_Lemon_Friends"
+                  >
+                    Little Lemon Friends
                   </Link>
                 </li>
               </ul>
@@ -94,11 +112,15 @@ const Navbar_No_User = () => {
               </Link>
             </li>
             <li className="nav-item nav-link">
-              <Link to="/login">Sign in</Link>
+              <Link to="/login" className="white-text">
+                Sign in
+              </Link>
             </li>
 
             <li className="nav-item nav-link">
-              <Link to="/signup">Sign Up</Link>
+              <Link to="/signup" className="white-text">
+                Sign Up
+              </Link>
             </li>
           </ul>
         </div>

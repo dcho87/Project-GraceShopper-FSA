@@ -32,6 +32,18 @@ class Checkout extends Component {
     }
   }
 
+  async componentDidUpdate(prevProps, prevState) {
+    if (prevProps.auth.id !== prevState.id) {
+      this.setState({
+        id: this.props.auth.id,
+        first_name: this.props.auth.first_name,
+        last_name: this.props.auth.last_name,
+        email: this.props.auth.email,
+        address: this.props.auth.address || "",
+      });
+    }
+  }
+
   onChange(ev) {
     const change = {};
     change[ev.target.name] = ev.target.value;
@@ -51,7 +63,7 @@ class Checkout extends Component {
 
   render() {
     const user = this.state;
-    // console.log(user);
+    // console.log("butt", this);
     const { first_name, last_name, email, address } = this.state;
     const { onChange, onSave } = this;
     return (

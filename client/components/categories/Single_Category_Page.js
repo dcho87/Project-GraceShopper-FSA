@@ -40,13 +40,19 @@ const SingleCategory_Page = () => {
       category = "Clone X";
       break;
     case "/products/Tasty_Bones":
-      category = "Tasty Bones";
+      category = "Tasty Bones XYZ";
       break;
     case "/products/The_Metascapes":
       category = "The Metascapes";
       break;
     case "/products/The_Ladies":
       category = "The Ladies";
+      break;
+    case "/products/Grumpets":
+      category = "Grumpets";
+      break;
+    case "/products/Little_Lemon_Friends":
+      category = "Little Lemon Friends";
       break;
     default:
       break;

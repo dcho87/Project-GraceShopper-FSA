@@ -10,6 +10,10 @@ import {
   ElementsConsumer,
 } from "@stripe/react-stripe-js";
 import "./Stripe.css";
+import { useSelector } from "react-redux";
+import axios from "axios";
+import history from "history";
+import { Link } from "react-router-dom";
 
 // import "../styles/2-Card-Detailed.css";
 
@@ -124,7 +128,7 @@ class CheckoutForm extends React.Component {
   handleSubmit = async (event) => {
     event.preventDefault();
 
-    const { stripe, elements } = this.props;
+    const { stripe, elements, user } = this.props;
     const { email, name, error, cardComplete } = this.state;
 
     if (!stripe || !elements) {
@@ -165,10 +169,18 @@ class CheckoutForm extends React.Component {
     } else {
       this.setState({ paymentMethod: payload.paymentMethod });
     }
+
+    //DC add
+
+    if (user.id) {
+      await axios.put(`/api/users/order/checkout/${user.id}`);
+    } else {
+      localStorage.removeItem("cart");
+    }
   };
 
   reset = () => {
-    this.setState(DEFAULT_STATE);
+    window.location.href = "/"; // similar behavior as clicking on a link
   };
 
   render() {
@@ -181,8 +193,8 @@ class CheckoutForm extends React.Component {
       email,
       address,
     } = this.state;
-    console.log(this.state);
-    const { stripe } = this.props;
+    const { stripe, user } = this.props;
+    // console.log(this);
     // console.log(name);
     return paymentMethod ? (
       <div className="Result">
@@ -190,8 +202,12 @@ class CheckoutForm extends React.Component {
           Payment successful
         </div>
         <div className="ResultMessage">
-          Thanks for trying Stripe Elements. No money was charged, but we
-          generated a PaymentMethod: {paymentMethod.id}
+          <Link onClick={this.reset}>
+            Thank you for your support! This is a Fullstack Academy Project so
+            you unfortunately cannot spend any money here. Anyway here is a
+            random number {paymentMethod.id}
+            <h1>Click Here to Keep Shopping</h1>
+          </Link>
         </div>
         <ResetButton onClick={this.reset} />
       </div>
@@ -202,7 +218,7 @@ class CheckoutForm extends React.Component {
             label="First"
             id="first_name"
             type="first_name"
-            placeholder="FakeFirst"
+            placeholder={first_name}
             required
             autoComplete="first_name"
             value={first_name}
@@ -246,18 +262,6 @@ class CheckoutForm extends React.Component {
               this.setState({ address: event.target.value });
             }}
           />
-          {/* <Field
-            label="Phone"
-            id="phone"
-            type="tel"
-            placeholder="(941) 555-0123"
-            required
-            autoComplete="tel"
-            value={phone}
-            onChange={(event) => {
-              this.setState({ phone: event.target.value });
-            }}
-          /> */}
         </fieldset>
         <fieldset className="FormGroup">
           <CardField
@@ -282,13 +286,15 @@ class CheckoutForm extends React.Component {
   }
 }
 
-const InjectedCheckoutForm = () => (
-  <ElementsConsumer>
-    {({ stripe, elements }) => (
-      <CheckoutForm stripe={stripe} elements={elements} />
-    )}
-  </ElementsConsumer>
-);
+const InjectedCheckoutForm = ({ user }) => {
+  return (
+    <ElementsConsumer>
+      {({ stripe, elements }) => (
+        <CheckoutForm stripe={stripe} elements={elements} user={user} />
+      )}
+    </ElementsConsumer>
+  );
+};
 
 const ELEMENTS_OPTIONS = {
   fonts: [
@@ -303,10 +309,11 @@ const ELEMENTS_OPTIONS = {
 const stripePromise = loadStripe("pk_test_6pRNASCoBOKtIshFeQd4XMUh");
 
 const Stripe = () => {
+  const user = useSelector((state) => state.auth);
   return (
     <div className="AppWrapper">
-      <Elements stripe={stripePromise}>
-        <InjectedCheckoutForm />
+      <Elements stripe={stripePromise} user={user}>
+        <InjectedCheckoutForm user={user} />
       </Elements>
     </div>
   );

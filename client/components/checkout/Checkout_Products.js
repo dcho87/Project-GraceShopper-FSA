@@ -74,9 +74,7 @@ const CheckoutProducts = () => {
               </div>
               <h3 className="total-cont">
                 Order Total: $
-                {Math.round(orderDetails.totalPrice * 1.07).toLocaleString(
-                  "en-US"
-                )}
+                {(orderDetails.totalPrice * 1.07).toLocaleString("en-US")}
               </h3>
             </div>
           </div>

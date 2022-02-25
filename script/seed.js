@@ -141,6 +141,29 @@ async function seed() {
         inventory: Math.floor(Math.random() * (100 - 20) + 20),
       })
     ),
+    data.grumpets.map((product) =>
+      Product.create({
+        name: product.name,
+        description: null,
+        imageURL: product.image_url,
+        category: "Grumpets",
+        URL: "Grumpets",
+        price: product.price,
+        inventory: product.inventory,
+      })
+    ),
+    data.littleLemonFriends.map((product) =>
+      Product.create({
+        name: product.name,
+        description: null,
+        imageURL: product.image_url,
+        category: "Little Lemon Friends",
+        URL: "Little_Lemon_Friends",
+        price: product.price,
+        inventory: product.inventory,
+      })
+    ),
+
     data.theLadies.map((product) =>
       Product.create({
         name: product.name,
@@ -156,15 +179,15 @@ async function seed() {
 
   await Promise.all(
     users.map(async (user) => {
-      await user.addOrder(
-        await Order.create(testOrders[Math.floor(Math.random() * 5)])
-      );
-      await user.addOrder(
-        await Order.create(testOrders[Math.floor(Math.random() * 5)])
-      );
-      await user.addOrder(
-        await Order.create(testOrders[Math.floor(Math.random() * 5)])
-      );
+      // await user.addOrder(
+      //   await Order.create(testOrders[Math.floor(Math.random() * 5)])
+      // );
+      // await user.addOrder(
+      //   await Order.create(testOrders[Math.floor(Math.random() * 5)])
+      // );
+      // await user.addOrder(
+      //   await Order.create(testOrders[Math.floor(Math.random() * 5)])
+      // );
       await user.addOrder(await Order.create());
     })
   );

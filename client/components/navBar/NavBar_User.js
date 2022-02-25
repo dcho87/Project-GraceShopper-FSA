@@ -27,7 +27,6 @@ const Navbar_User = ({ handleClick, user }) => {
 
       <nav>
         <div className="nav-links">
-          {/* The navbar will show these links after you log in */}
           <ul className="nav-list">
             {user.isAdmin === true ? (
               <li className="nav-item">
@@ -41,7 +40,9 @@ const Navbar_User = ({ handleClick, user }) => {
             <li className="nav-item">
               {" "}
               <Link to="/home">
-                <p id="nav-btn">Home</p>
+                <p id="nav-btn" className="white-text">
+                  Home
+                </p>
               </Link>
             </li>
             <li className="nav-item">
@@ -78,12 +79,25 @@ const Navbar_User = ({ handleClick, user }) => {
                     The Ladies
                   </Link>
                 </li>
+                <li className="dropdown-item">
+                  <Link className="dropdown-link" to="/products/Grumpets">
+                    Grumpets
+                  </Link>
+                </li>
+                <li className="dropdown-item">
+                  <Link
+                    className="dropdown-link"
+                    to="/products/Little_Lemon_Friends"
+                  >
+                    Little Lemon Friends
+                  </Link>
+                </li>
               </ul>
             </li>
             <li className="nav-item">
               <Link to="/cart">
                 <img
-                  src="https://i.ibb.co/LRNwbDz/outline-shopping-cart-checkout-black-24dp.png"
+                  src="https://i.ibb.co/tQgMFFz/outline-add-shopping-cart-white-24dp.png"
                   alt="shopping-cart-checkout"
                   className="menu-item cart-contents"
                 />
@@ -107,7 +121,7 @@ const Navbar_User = ({ handleClick, user }) => {
             <li className="nav-item">
               <Link to="/bio">
                 <img
-                  src="https://i.ibb.co/4Zcr662/account-Logo.png"
+                  src="https://i.ibb.co/4Zcr662/account-Logo-white.png"
                   alt="account-Logo"
                   id="account-logo"
                 />
