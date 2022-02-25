@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchHistory, updateUserThunk } from "../../store";
 import Alert from "@mui/material/Alert";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
 
 class BioUpdate extends Component {
   constructor(props) {
@@ -57,7 +59,7 @@ class BioUpdate extends Component {
   }
 
   async onSave(ev) {
-    ev.preventDefault();
+    // ev.preventDefault();
     try {
       await this.props.updateUser({ ...this.state });
       window.location.reload();
@@ -68,7 +70,7 @@ class BioUpdate extends Component {
   }
 
   async onSaveA(ev) {
-    ev.preventDefault();
+    // ev.preventDefault();
     if (this.state.newPassword !== this.state.confirmNewPassword) {
       this.setState({ error: "your passwords do not match" });
       return;
@@ -129,13 +131,16 @@ class BioUpdate extends Component {
             onChange={onChange}
             placeholder="Address"
           />{" "}
-          <br />
-          <button
-            className="button1"
-            disabled={!first_name || !last_name || !email}
-          >
-            Update{" "}
-          </button>
+          <Box>
+            <Button
+              onClick={() => this.onSave()}
+              variant="contained"
+              size="medium"
+              disabled={!first_name || !last_name || !email}
+            >
+              Update{" "}
+            </Button>
+          </Box>
         </form>
         {error && (
           <Alert severity="error" className="error-text">
@@ -158,13 +163,16 @@ class BioUpdate extends Component {
             placeholder="Confirm Password"
             type="password"
           />{" "}
-          <br />
-          <button
-            disabled={!newPassword || !confirmNewPassword}
-            className="button1"
-          >
-            Update{" "}
-          </button>
+          <Box>
+            <Button
+              onClick={() => this.onSaveA()}
+              variant="contained"
+              size="medium"
+              disabled={!newPassword || !confirmNewPassword}
+            >
+              Update{" "}
+            </Button>
+          </Box>
         </form>
       </div>
     );
