@@ -6,7 +6,7 @@ export default function CreateProduct() {
   const [state, setstate] = useState({});
 
   const dispatch = useDispatch();
-  console.log(state);
+  // console.log(state);
   return (
     <div>
       <form>

@@ -59,7 +59,7 @@ router.get("/:id", async (req, res, next) => {
 router.put("/:id", async (req, res, next) => {
   try {
     const orderInfo = req.body;
-    console.log("orderInfo", orderInfo);
+    // console.log("orderInfo", orderInfo);
     // const order = (await Order.findByPk(req.params.id)) || {};
     // console.log("order", order);
     // const orderInfo = req.body;
@@ -116,12 +116,12 @@ router.put("/:id", async (req, res, next) => {
         break;
       case "update":
         productId = orderInfo.productId;
-        console.log("productId", productId);
+        // console.log("productId", productId);
 
         productDetails = orderInfo.products.find(
           (product) => product.id === productId
         );
-        console.log("productDetails", productDetails);
+        // console.log("productDetails", productDetails);
         //obj that lists the stock/count before update was made
 
         productAmount = productDetails.price;
@@ -147,7 +147,7 @@ router.put("/:id", async (req, res, next) => {
         //increase === positive num
         //decrease === neg num
 
-        console.log("difference", difference);
+        // console.log("difference", difference);
 
         // //find the Active Order
         orderDB = await Order.findByPk(orderInfo.id);
@@ -157,19 +157,19 @@ router.put("/:id", async (req, res, next) => {
           inventory: productDB.inventory - difference,
         });
 
-        console.log("productDB after update", productDB);
+        // console.log("productDB after update", productDB);
 
         await orderDB.update({
           totalItems: orderDB.totalItems + difference,
           totalPrice: orderDB.totalPrice + productAmount * difference,
         });
 
-        console.log("orderDB after update", orderDB);
+        // console.log("orderDB after update", orderDB);
 
         orderInfo.totalItems += difference;
         orderInfo.totalPrice += productAmount * difference;
 
-        console.log("orderInfo - final", orderInfo);
+        // console.log("orderInfo - final", orderInfo);
         break;
       case "delete":
         productId = orderInfo.productId;
@@ -206,7 +206,7 @@ router.put("/:id", async (req, res, next) => {
         orderInfo.totalPrice -= productAmount * productQuantity;
         orderInfo["inventoryCountOG"] = currentInventory;
 
-        console.log("orderInfo - final", orderInfo);
+        // console.log("orderInfo - final", orderInfo);
 
         break;
       default:

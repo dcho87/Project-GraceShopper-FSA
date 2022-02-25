@@ -8,9 +8,9 @@ if (process.env.NODE_ENV === !"production") {
 }
 
 const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
-console.log(stripeSecretKey);
+// console.log(stripeSecretKey);
 const stripePublicKey = process.env.STRIPE_PUBLIC_KEY;
-console.log(stripePublicKey);
+// console.log(stripePublicKey);
 
 const init = async () => {
   try {

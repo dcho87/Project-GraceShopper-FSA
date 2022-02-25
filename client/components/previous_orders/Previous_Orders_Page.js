@@ -72,7 +72,7 @@ const Previous_Orders_Page = () => {
       <div>
         {userOrders ? (
           userOrders.map((order) => {
-            console.log("nugget", order);
+            // console.log("nugget", order);
             const orderNum = order.id.split("-");
             const date = order.createdAt.slice(0, -14);
             const year = Number(date.split("-")[0]);
