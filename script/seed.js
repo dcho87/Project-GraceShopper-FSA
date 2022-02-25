@@ -89,56 +89,48 @@ async function seed() {
     data.azuki.map((product) =>
       Product.create({
         name: product.name,
-        description: null,
         imageURL: product.image_url,
         category: "Azuki",
         URL: "Azuki",
         price: product.price,
-        inventory: product.inventory,
       })
     ),
     data.RTFKTCLONEXTM.map((product) =>
       Product.create({
         name: product.name,
-        description: null,
         imageURL: product.image_url,
         category: "Clone X",
         URL: "Clone_X",
         price: product.price,
-        inventory: product.inventory,
       })
     ),
     data.tastyBones.map((product) =>
       Product.create({
         name: product.name,
-        description: null,
         imageURL: product.image_url,
         category: "Tasty Bones",
         URL: "Tasty_Bones",
         price: product.price,
-        inventory: product.inventory,
       })
     ),
     data.metascapes.map((product) =>
       Product.create({
         name: product.name,
-        description: null,
+
         imageURL: product.image_url,
         category: "The Metascapes",
         URL: "The_Metascapes",
         price: product.price,
-        inventory: product.inventory,
       })
     ),
     data.cryptoPunks.map((product) =>
       Product.create({
         name: product.name,
-        description: null,
+
         imageURL: product.image_url,
         category: "Crypto Punks",
         URL: "Crypto_Punks",
         price: product.price,
-        inventory: product.inventory,
       })
     ),
     data.grumpets.map((product) =>
@@ -155,24 +147,20 @@ async function seed() {
     data.littleLemonFriends.map((product) =>
       Product.create({
         name: product.name,
-        description: null,
         imageURL: product.image_url,
         category: "Little Lemon Friends",
         URL: "Little_Lemon_Friends",
         price: product.price,
-        inventory: product.inventory,
       })
     ),
 
     data.theLadies.map((product) =>
       Product.create({
         name: product.name,
-        description: null,
         imageURL: product.image_url,
         category: "The Ladies",
         URL: "The_Ladies",
         price: product.price,
-        inventory: product.inventory,
       })
     ),
   ]);
