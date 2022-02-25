@@ -9,7 +9,7 @@ import Pagination from "./Pagination.js";
 const Products = () => {
   const path = useLocation().pathname.split("/").pop();
 
-  console.log(useLocation());
+  // console.log(useLocation());
 
   const dispatch = useDispatch();
   const state = useSelector((state) => state);
@@ -20,7 +20,7 @@ const Products = () => {
   const [show, setShow] = useState("");
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [productsPerPage] = useState(25);
+  const [productsPerPage] = useState(10);
 
   const userOrderId = state.orders
     .filter((order) => order.userId === user.id)
@@ -56,16 +56,6 @@ const Products = () => {
     }
     return 0;
   };
-
-  const SortArrayPriceLowHigh = (x, y) => {
-    return x.price - y.price;
-  };
-
-  const SortArrayPriceHighLow = (x, y) => {
-    return y.price - x.price;
-  };
-
-  console.log(path);
 
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexofFirstProduct = indexOfLastProduct - productsPerPage;

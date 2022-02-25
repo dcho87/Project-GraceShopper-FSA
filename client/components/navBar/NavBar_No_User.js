@@ -50,18 +50,18 @@ const Navbar_No_User = () => {
               <a className="nav-btn nav-link">Explore</a>
               <ul className="dropdown">
                 <li className="dropdown-item">
-                  <Link className="dropdown-link" to="/products/azuki">
+                  <Link className="dropdown-link" to="/products/Azuki">
                     Azuki
                   </Link>
                 </li>
                 <li className="dropdown-item">
-                  <Link className="dropdown-link" to="/products/crypto_punks">
+                  <Link className="dropdown-link" to="/products/Crypto_Punks">
                     Crypto Punks
                   </Link>
                 </li>
                 <li className="dropdown-item">
-                  <Link className="dropdown-link" to="/products/RTFKTCLONEXTM">
-                    RTFKTCLONEXTM
+                  <Link className="dropdown-link" to="/products/Clone_X">
+                    Clone X
                   </Link>
                 </li>
                 <li className="dropdown-item">
@@ -74,10 +74,22 @@ const Navbar_No_User = () => {
                     The Metascapes
                   </Link>
                 </li>
-
                 <li className="dropdown-item">
                   <Link className="dropdown-link" to="/products/The_Ladies">
                     The Ladies
+                  </Link>
+                </li>
+                <li className="dropdown-item">
+                  <Link className="dropdown-link" to="/products/Grumpets">
+                    Grumpets
+                  </Link>
+                </li>
+                <li className="dropdown-item">
+                  <Link
+                    className="dropdown-link"
+                    to="/products/Little_Lemon_Friends"
+                  >
+                    Little Lemon Friends
                   </Link>
                 </li>
               </ul>

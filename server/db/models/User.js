@@ -89,12 +89,12 @@ User.authenticate = async ({ email, password }) => {
     }
     const error = Error("bad credentials - in authenticate - try");
     error.status = 401;
-    throw error;
+    return error;
   } catch (err) {
     console.log("REEED", err);
     const error = Error("bad credentials - in authenticate - catch");
     error.status = 401;
-    throw error;
+    return error;
   }
 };
 

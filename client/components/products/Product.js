@@ -9,23 +9,6 @@ import "./Product.css";
 export default function Product() {
   const state = useSelector((state) => state);
   const thisProductId = useParams().id;
-  // const [products, setProducts] = useState([]);
-
-  // const isFirstRender = useRef(1);
-  // useEffect(() => {
-  //   if (isFirstRender.current === 1) {
-  //     isFirstRender.current++;
-  //   } else {
-  //     setProducts(
-  //       state.products.filter(
-  //         (product_) => product_.category === product.category
-  //       )
-  //     );
-  //     return;
-  //   }
-  // }, []);
-
-  // console.log(products);
 
   const product = state.products.filter(
     (product) => product.id === thisProductId

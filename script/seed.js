@@ -92,8 +92,9 @@ async function seed() {
         description: null,
         imageURL: product.image_url,
         category: "Azuki",
-        price: Math.floor(Math.random() * (10000 - 500) + 500),
-        inventory: Math.floor(Math.random() * (100 - 20) + 20),
+        URL: "Azuki",
+        price: product.price,
+        inventory: product.inventory,
       })
     ),
     data.RTFKTCLONEXTM.map((product) =>
@@ -102,8 +103,9 @@ async function seed() {
         description: null,
         imageURL: product.image_url,
         category: "Clone X",
-        price: Math.floor(Math.random() * (10000 - 500) + 500),
-        inventory: Math.floor(Math.random() * (100 - 20) + 20),
+        URL: "Clone_X",
+        price: product.price,
+        inventory: product.inventory,
       })
     ),
     data.tastyBones.map((product) =>
@@ -111,9 +113,10 @@ async function seed() {
         name: product.name,
         description: null,
         imageURL: product.image_url,
-        category: "Tasty Bones XYZ",
-        price: Math.floor(Math.random() * (10000 - 500) + 500),
-        inventory: Math.floor(Math.random() * (100 - 20) + 20),
+        category: "Tasty Bones",
+        URL: "Tasty_Bones",
+        price: product.price,
+        inventory: product.inventory,
       })
     ),
     data.metascapes.map((product) =>
@@ -122,8 +125,9 @@ async function seed() {
         description: null,
         imageURL: product.image_url,
         category: "The Metascapes",
-        price: Math.floor(Math.random() * (10000 - 500) + 500),
-        inventory: Math.floor(Math.random() * (100 - 20) + 20),
+        URL: "The_Metascapes",
+        price: product.price,
+        inventory: product.inventory,
       })
     ),
     data.cryptoPunks.map((product) =>
@@ -132,33 +136,58 @@ async function seed() {
         description: null,
         imageURL: product.image_url,
         category: "Crypto Punks",
-        price: Math.floor(Math.random() * (10000 - 500) + 500),
-        inventory: Math.floor(Math.random() * (100 - 20) + 20),
+        URL: "Crypto_Punks",
+        price: product.price,
+        inventory: product.inventory,
       })
     ),
+    data.grumpets.map((product) =>
+      Product.create({
+        name: product.name,
+        description: null,
+        imageURL: product.image_url,
+        category: "Grumpets",
+        URL: "Grumpets",
+        price: product.price,
+        inventory: product.inventory,
+      })
+    ),
+    data.littleLemonFriends.map((product) =>
+      Product.create({
+        name: product.name,
+        description: null,
+        imageURL: product.image_url,
+        category: "Little Lemon Friends",
+        URL: "Little_Lemon_Friends",
+        price: product.price,
+        inventory: product.inventory,
+      })
+    ),
+
     data.theLadies.map((product) =>
       Product.create({
         name: product.name,
         description: null,
         imageURL: product.image_url,
         category: "The Ladies",
-        price: Math.floor(Math.random() * (10000 - 500) + 500),
-        inventory: Math.floor(Math.random() * (100 - 20) + 20),
+        URL: "The_Ladies",
+        price: product.price,
+        inventory: product.inventory,
       })
     ),
   ]);
 
   await Promise.all(
     users.map(async (user) => {
-      await user.addOrder(
-        await Order.create(testOrders[Math.floor(Math.random() * 5)])
-      );
-      await user.addOrder(
-        await Order.create(testOrders[Math.floor(Math.random() * 5)])
-      );
-      await user.addOrder(
-        await Order.create(testOrders[Math.floor(Math.random() * 5)])
-      );
+      // await user.addOrder(
+      //   await Order.create(testOrders[Math.floor(Math.random() * 5)])
+      // );
+      // await user.addOrder(
+      //   await Order.create(testOrders[Math.floor(Math.random() * 5)])
+      // );
+      // await user.addOrder(
+      //   await Order.create(testOrders[Math.floor(Math.random() * 5)])
+      // );
       await user.addOrder(await Order.create());
     })
   );

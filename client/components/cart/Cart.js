@@ -33,7 +33,7 @@ const Cart = () => {
     totalPrice,
     productId,
   };
-  console.log(state);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -84,7 +84,7 @@ const Cart = () => {
               <Link to={`/products/${product.id}`}>
                 NFT Description: {product.description}
               </Link>
-              <div> ${product.price} per NFT</div>
+              <div> ${product.price.toLocaleString("en-US")} per NFT</div>
               <div className="error-cont">
                 {!!error && productId === product.id ? (
                   <Alert severity="error" className="error-text">
@@ -172,7 +172,7 @@ const Cart = () => {
             <div className="total-cont-cart">
               Subtotal ({orderDetails.totalItems}{" "}
               {orderDetails.totalItems === 1 ? "item" : "items"}): $
-              {orderDetails.totalPrice}
+              {orderDetails.totalPrice.toLocaleString("en-US")}
             </div>
             <Link to="/orders/checkout" className="link-to-checkout-cont-cart">
               Proceed to Checkout

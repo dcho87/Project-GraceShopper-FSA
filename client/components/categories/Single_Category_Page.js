@@ -30,13 +30,13 @@ const SingleCategory_Page = () => {
   let category;
 
   switch (pathname) {
-    case "/products/crypto_punks":
+    case "/products/Crypto_Punks":
       category = "Crypto Punks";
       break;
-    case "/products/azuki":
+    case "/products/Azuki":
       category = "Azuki";
       break;
-    case "/products/RTFKTCLONEXTM":
+    case "/products/Clone_X":
       category = "Clone X";
       break;
     case "/products/Tasty_Bones":
@@ -47,6 +47,12 @@ const SingleCategory_Page = () => {
       break;
     case "/products/The_Ladies":
       category = "The Ladies";
+      break;
+    case "/products/Grumpets":
+      category = "Grumpets";
+      break;
+    case "/products/Little_Lemon_Friends":
+      category = "Little Lemon Friends";
       break;
     default:
       break;
@@ -67,7 +73,7 @@ const SingleCategory_Page = () => {
 
           <div className="product-details">
             <p>
-              <b> Top Bid:</b> ${product.price}
+              <b> Top Bid:</b> ${product.price.toLocaleString("en-US")}
             </p>
             <p>
               {" "}
@@ -75,9 +81,7 @@ const SingleCategory_Page = () => {
             </p>
             <p>
               <b>Category: </b>
-              <Link to={`/products/${product.category}`}>
-                {product.category}
-              </Link>
+              <Link to={`/products/${product.URL}`}>{product.category}</Link>
             </p>
             <button
               disabled={product.id !== productId || totalItems === 0}

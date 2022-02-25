@@ -56,18 +56,18 @@ const Navbar_User = ({ handleClick, user }) => {
               <a className="nav-btn">Explore</a>
               <ul className="dropdown">
                 <li className="dropdown-item">
-                  <Link className="dropdown-link" to="/products/azuki">
+                  <Link className="dropdown-link" to="/products/Azuki">
                     Azuki
                   </Link>
                 </li>
                 <li className="dropdown-item">
-                  <Link className="dropdown-link" to="/products/crypto_punks">
+                  <Link className="dropdown-link" to="/products/Crypto_Punks">
                     Crypto Punks
                   </Link>
                 </li>
                 <li className="dropdown-item">
-                  <Link className="dropdown-link" to="/products/RTFKTCLONEXTM">
-                    RTFKTCLONEXTM
+                  <Link className="dropdown-link" to="/products/Clone_X">
+                    Clone X
                   </Link>
                 </li>
                 <li className="dropdown-item">
@@ -84,6 +84,19 @@ const Navbar_User = ({ handleClick, user }) => {
                 <li className="dropdown-item">
                   <Link className="dropdown-link" to="/products/The_Ladies">
                     The Ladies
+                  </Link>
+                </li>
+                <li className="dropdown-item">
+                  <Link className="dropdown-link" to="/products/Grumpets">
+                    Grumpets
+                  </Link>
+                </li>
+                <li className="dropdown-item">
+                  <Link
+                    className="dropdown-link"
+                    to="/products/Little_Lemon_Friends"
+                  >
+                    Little Lemon Friends
                   </Link>
                 </li>
               </ul>

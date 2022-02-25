@@ -59,7 +59,7 @@ const Routes = () => {
         <Route exact path="/" component={Products} />
         <Route
           exact
-          path="/products/crypto_punks"
+          path="/products/Crypto_Punks"
           component={Single_Category_Page}
         />
         <Route
@@ -69,10 +69,10 @@ const Routes = () => {
         />
         <Route
           exact
-          path="/products/RTFKTCLONEXTM"
+          path="/products/Clone_X"
           component={Single_Category_Page}
         />
-        <Route exact path="/products/azuki" component={Single_Category_Page} />
+        <Route exact path="/products/Azuki" component={Single_Category_Page} />
         <Route
           exact
           path="/products/The_Metascapes"
@@ -81,6 +81,16 @@ const Routes = () => {
         <Route
           exact
           path="/products/The_Ladies"
+          component={Single_Category_Page}
+        />
+        <Route
+          exact
+          path="/products/Grumpets"
+          component={Single_Category_Page}
+        />
+        <Route
+          exact
+          path="/products/Little_Lemon_Friends"
           component={Single_Category_Page}
         />
         <Route exact path="/cart" component={Cart} />
