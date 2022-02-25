@@ -12,9 +12,9 @@ const Bio = () => {
   const dispatch = useDispatch();
   // console.log(user);
 
-  useEffect(() => {
-    dispatch(fetchHistory(user));
-  }, []);
+  // useEffect(() => {
+  //   dispatch(fetchHistory(user));
+  // }, []);
 
   return (
     <div>

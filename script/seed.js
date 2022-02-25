@@ -92,6 +92,7 @@ async function seed() {
         imageURL: product.image_url,
         category: "Azuki",
         URL: "Azuki",
+        inventory: product.inventory,
         price: product.price,
       })
     ),
@@ -101,6 +102,7 @@ async function seed() {
         imageURL: product.image_url,
         category: "Clone X",
         URL: "Clone_X",
+        inventory: product.inventory,
         price: product.price,
       })
     ),
@@ -110,13 +112,14 @@ async function seed() {
         imageURL: product.image_url,
         category: "Tasty Bones",
         URL: "Tasty_Bones",
+        inventory: product.inventory,
         price: product.price,
       })
     ),
     data.metascapes.map((product) =>
       Product.create({
         name: product.name,
-
+        inventory: product.inventory,
         imageURL: product.image_url,
         category: "The Metascapes",
         URL: "The_Metascapes",
@@ -126,7 +129,7 @@ async function seed() {
     data.cryptoPunks.map((product) =>
       Product.create({
         name: product.name,
-
+        inventory: product.inventory,
         imageURL: product.image_url,
         category: "Crypto Punks",
         URL: "Crypto_Punks",
@@ -147,6 +150,7 @@ async function seed() {
     data.littleLemonFriends.map((product) =>
       Product.create({
         name: product.name,
+        inventory: product.inventory,
         imageURL: product.image_url,
         category: "Little Lemon Friends",
         URL: "Little_Lemon_Friends",
@@ -161,6 +165,7 @@ async function seed() {
         category: "The Ladies",
         URL: "The_Ladies",
         price: product.price,
+        inventory: product.inventory,
       })
     ),
   ]);

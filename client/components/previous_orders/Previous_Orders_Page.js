@@ -38,6 +38,7 @@ const Previous_Orders_Page = () => {
   const userOrders = useSelector((state) => state.users);
   const user = useSelector((state) => state.auth);
   const products = useSelector((state) => state.products);
+
   // const userOrders = [];
   // if (state.orders && state.orders.length > 0) {
   //   const id = state.auth.id;

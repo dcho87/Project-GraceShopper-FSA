@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { updateUserThunk } from "../../store";
+import { fetchHistory, updateUserThunk } from "../../store";
 import Alert from "@mui/material/Alert";
 
 class BioUpdate extends Component {
@@ -46,6 +46,7 @@ class BioUpdate extends Component {
         email: this.props.auth.email,
         address: this.props.auth.address || "",
       });
+      this.props.fetchHistory(this.props.auth);
     }
   }
 
@@ -174,6 +175,9 @@ const mapDispatchToProps = (dispatch, { history }) => {
   return {
     updateUser: (user) => {
       dispatch(updateUserThunk(user, history));
+    },
+    fetchHistory: (user) => {
+      dispatch(fetchHistory(user));
     },
   };
 };
