@@ -11,6 +11,10 @@
   width: 50rem;
   padding: 1rem;
 }
+.header {
+  display: flex;
+  border-radius: 3px;
+}
 
 .cart-image {
   max-height: 7rem;

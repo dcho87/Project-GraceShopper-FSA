@@ -24,11 +24,7 @@ const Navbar_No_User = () => {
     <div className="header">
       <Link to="/home">
         <h1 id="logo">
-          <img
-            className="nft-logo"
-            src="/NFT-Logo.jpg"
-            // onClick={() => window.location.reload()}
-          />
+          <img className="nft-logo" src="/NFT-Logo.jpg" />
         </h1>
       </Link>
 
@@ -38,10 +34,7 @@ const Navbar_No_User = () => {
             <li className="nav-item">
               {" "}
               <Link to="/home">
-                <p
-                  id="nav-btn nav-link"
-                  // onClick={() => window.location.reload()}
-                >
+                <p id="nav-btn nav-link" className="white-text">
                   Home
                 </p>
               </Link>
@@ -119,11 +112,15 @@ const Navbar_No_User = () => {
               </Link>
             </li>
             <li className="nav-item nav-link">
-              <Link to="/login">Sign in</Link>
+              <Link to="/login" className="white-text">
+                Sign in
+              </Link>
             </li>
 
             <li className="nav-item nav-link">
-              <Link to="/signup">Sign Up</Link>
+              <Link to="/signup" className="white-text">
+                Sign Up
+              </Link>
             </li>
           </ul>
         </div>

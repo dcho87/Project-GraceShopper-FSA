@@ -21,17 +21,12 @@ const Navbar_User = ({ handleClick, user }) => {
     <div className="header">
       <Link to="/home">
         <h1 id="logo">
-          <img
-            className="nft-logo"
-            src="/NFT-Logo.jpg"
-            // onClick={() => window.location.reload()}
-          />
+          <img className="nft-logo" src="/NFT-Logo.jpg" />
         </h1>
       </Link>
 
       <nav>
         <div className="nav-links">
-          {/* The navbar will show these links after you log in */}
           <ul className="nav-list">
             {user.isAdmin === true ? (
               <li className="nav-item">

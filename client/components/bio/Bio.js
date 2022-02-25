@@ -4,6 +4,7 @@ import { fetchHistory, logout } from "../../store";
 import { Link } from "react-router-dom";
 import BioUpdate from "./BioUpdate";
 import "./Bio.css";
+import Previous_Orders_Page from "../previous_orders/Previous_Orders_Page";
 
 const Bio = () => {
   const user = useSelector((state) => state.auth);
@@ -18,11 +19,10 @@ const Bio = () => {
   return (
     <div>
       <div className="header-bio">
-        <Link to="/orders/previous_orders"> Order History </Link>
-        <h2>Welcome {user.first_name}</h2>
-        <h4>Manage Your Profiles</h4>
+        <h1>Manage Your Profiles</h1>
       </div>
       <BioUpdate history={history} user={user} />
+      <Previous_Orders_Page />
     </div>
   );
 };
