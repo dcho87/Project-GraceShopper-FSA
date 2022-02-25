@@ -13,7 +13,7 @@ import Login_Popup from "./components/LoginSignup/Login_Popup";
 import Product_Edit from "./components/products/Product_Edit";
 import Checkout_Page from "./components/checkout/Checkout_Page";
 import Previous_Orders_Page from "./components/previous_orders/Previous_Orders_Page";
-import Product_Create from "./components/products/Product_Create";
+import CreateProduct from "./components/products/CreateProduct";
 import Product from "./components/products/Product";
 import Single_Category_Page from "./components/categories/Single_Category_Page";
 // import Home from "./components/Home/Home";
@@ -83,6 +83,16 @@ const Routes = () => {
           path="/products/The_Ladies"
           component={Single_Category_Page}
         />
+        <Route
+          exact
+          path="/products/Grumpets"
+          component={Single_Category_Page}
+        />
+        <Route
+          exact
+          path="/products/Little_Lemon_Friends"
+          component={Single_Category_Page}
+        />
         <Route exact path="/cart" component={Cart} />
         <Route exact path="/bio" component={Bio} />
         <Route exact path="/products/:id" component={Product} />
@@ -99,7 +109,7 @@ const Routes = () => {
         {isAdmin ? (
           <> */}
         <Route exact path="/products/edit/:id" component={Product_Edit} />
-        <Route exact path="/product/create" component={Product_Create} />
+        <Route exact path="/create-product" component={CreateProduct} />
         {/* </>
         ) : (
           ""

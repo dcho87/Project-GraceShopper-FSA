@@ -74,10 +74,22 @@ const Navbar_No_User = () => {
                     The Metascapes
                   </Link>
                 </li>
-
                 <li className="dropdown-item">
                   <Link className="dropdown-link" to="/products/The_Ladies">
                     The Ladies
+                  </Link>
+                </li>
+                <li className="dropdown-item">
+                  <Link className="dropdown-link" to="/products/Grumpets">
+                    Grumpets
+                  </Link>
+                </li>
+                <li className="dropdown-item">
+                  <Link
+                    className="dropdown-link"
+                    to="/products/Little_Lemon_Friends"
+                  >
+                    Little Lemon Friends
                   </Link>
                 </li>
               </ul>

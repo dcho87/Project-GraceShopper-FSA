@@ -48,6 +48,12 @@ const SingleCategory_Page = () => {
     case "/products/The_Ladies":
       category = "The Ladies";
       break;
+    case "/products/Grumpets":
+      category = "Grumpets";
+      break;
+    case "/products/Little_Lemon_Friends":
+      category = "Little Lemon Friends";
+      break;
     default:
       break;
   }
