@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { createProduct } from "../../store";
+import { createProduct, fetchProducts } from "../../store";
 
 export default function CreateProduct() {
   const [state, setstate] = useState({});
@@ -60,6 +60,7 @@ export default function CreateProduct() {
             <button
               onClick={() => {
                 dispatch(createProduct(state));
+                dispatch(fetchProducts());
               }}
             >
               Submit Changes
