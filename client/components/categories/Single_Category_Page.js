@@ -80,7 +80,7 @@ const SingleCategory_Page = () => {
             <button
               disabled={product.id !== productId || totalItems === 0}
               onClick={(ev) => {
-                dispatch(addToOrder(orderToAdd, user));
+                dispatch(addToOrder(orderToAdd, user, product));
                 dispatch(editProduct(orderToAdd, product));
                 setProductId("");
               }}
