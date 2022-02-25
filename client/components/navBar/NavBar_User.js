@@ -125,20 +125,12 @@ const Navbar_User = ({ handleClick, user }) => {
             </li>
             <li className="nav-item">
               <Link to="/bio">
-                <img
-                  src="https://i.ibb.co/4Zcr662/account-Logo.png"
-                  alt="account-Logo"
-                  id="account-logo"
-                />
+                <img src="/bio.jpg" alt="account-Logo" id="account-logo" />
               </Link>
             </li>
             <li className="nav-item">
               <Link to="/login" onClick={handleClick}>
-                <img
-                  src="https://i.ibb.co/2gfMsdL/logout.png"
-                  alt="logout"
-                  id="logout-icon"
-                />
+                <img src="/logout.jpg" alt="logout" id="logout-icon" />
               </Link>
             </li>
           </ul>
