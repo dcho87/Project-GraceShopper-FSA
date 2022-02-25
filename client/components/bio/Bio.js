@@ -18,30 +18,11 @@ const Bio = () => {
   return (
     <div>
       <div className="header-bio">
-        <Link to="/orders/previous_orders">View Previous Orders</Link>
+        <Link to="/orders/previous_orders"> Order History </Link>
         <h2>Welcome {user.first_name}</h2>
-        <h4>Update User Details Below</h4>
+        <h4>Manage Your Profiles</h4>
       </div>
       <BioUpdate history={history} user={user} />
-
-      <ul>
-        <pre> </pre>
-        <li>Number of past orders</li>
-        <li>Previous shipping address</li>
-        <pre> </pre>
-        <li>
-          Your last order, click a link to see it in seperate page?
-          <pre></pre>I think it will have a time/date
-        </li>
-        <pre> </pre>
-        <small>Much later, have last payment method</small>
-      </ul>
-
-      <button className="button2">
-        <Link to="/login" onClick={() => dispatch(logout())}>
-          Logout
-        </Link>
-      </button>
     </div>
   );
 };
