@@ -62,11 +62,11 @@ const Routes = () => {
           path="/products/Crypto_Punks"
           component={Single_Category_Page}
         />
-        <Route
+        {/* <Route
           exact
           path="/products/Tasty_Bones"
           component={Single_Category_Page}
-        />
+        /> */}
         <Route
           exact
           path="/products/Clone_X"

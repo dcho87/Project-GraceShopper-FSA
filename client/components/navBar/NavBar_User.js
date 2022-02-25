@@ -70,11 +70,11 @@ const Navbar_User = ({ handleClick, user }) => {
                     Clone X
                   </Link>
                 </li>
-                <li className="dropdown-item">
+                {/* <li className="dropdown-item">
                   <Link className="dropdown-link" to="/products/Tasty_Bones">
                     Tasty Bones
                   </Link>
-                </li>
+                </li> */}
                 <li className="dropdown-item">
                   <Link className="dropdown-link" to="/products/The_Metascapes">
                     The Metascapes

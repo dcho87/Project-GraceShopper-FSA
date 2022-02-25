@@ -180,78 +180,78 @@ const data = {
       inventory: 8,
     },
   ],
-  tastyBones: [
-    {
-      image_url:
-        "https://lh3.googleusercontent.com/eYosrQkx9IqsnZJsKv190JQDzVcVGsCYY6DbHLX6xdjub5BReI3DV5fdY-WHkSyCUOLKaOf_VNy-Hm-obH4IxDJ_kXX3m40lCGFBYg=w600",
-      name: "Funny Bone #3198",
-      price: 1999,
-      inventory: 2,
-    },
-    {
-      image_url:
-        "https://lh3.googleusercontent.com/sU5zuqvLMHrYNavtrxvtu-hDQhGTtOqmAnnEt0EkrktlqvzPdz6Psktsi9Hn0WLtpccOPgcHmEyeYOqSVowXkcaws6CbbLbHUVfr6Q=w600",
-      name: "Meaty Bone #657",
-      price: 2199,
-      inventory: 4,
-    },
-    {
-      image_url:
-        "https://lh3.googleusercontent.com/1JNYgAwvIsVhTr6h6RBOXJtXT4eMmrse-fXHMv-SLOqV2UkPeNSfuul0YgcxSa1Rky54DHm9J1YyaV3F4JuKqFuVGehvc9dprF5C2AQ=w600",
-      name: "Funny Bone #1166",
-      price: 2399,
-      inventory: 6,
-    },
-    {
-      image_url:
-        "https://lh3.googleusercontent.com/_Xj4wCk3fCzKmqEJ4IMXGzmYpJFxeXtbgBix11XileYIEfxTt2s1KhMTtW6z1rT_FHGKa6HOEKDiPQErOfjOJGTH4oV7zvsRVoNT=w600",
-      name: "Funny Bone #2187",
-      price: 2499,
-      inventory: 7,
-    },
-    {
-      image_url:
-        "https://lh3.googleusercontent.com/eP6to-QAk6H5joxylV75aIK25wIQeemwWDhoygQbvbcknfjROcO2zjR5wHO9_9HgFqlPl24mKaJD_7p-hhUQJzcQkboe4zUd4WQ=w600",
-      name: "Meaty Bone #1953",
-      price: 1899,
-      inventory: 3,
-    },
-    {
-      image_url:
-        "https://lh3.googleusercontent.com/t-1anrnd-OZ5eXBQPbFZT4vO6JftfwT1cV71mul7qIq58BNtwdoA62fyuJRNluXdRre9jLM0lSkrUTLSgxUvp2QHCmdWjXWOodUFUA=w600",
-      name: "Funny Bone #629",
-      price: 2749,
-      inventory: 9,
-    },
-    {
-      image_url:
-        "https://lh3.googleusercontent.com/ucRxE4h9mvSMUhbKmNcN_QnP5iHwY3crc87-vqQS9rcFwDYbuyNDDI5JRZJFIyMq757DqMU2Y7h13S_bOYn21NZAIJKOV44abm7Hf2Y=w600",
-      name: "Meaty Bone #2971",
-      price: 2799,
-      inventory: 9,
-    },
-    {
-      image_url:
-        "https://lh3.googleusercontent.com/CGF-cJ3jTPG43WSw7tsFLBXuKGEB9GG7efQr6zwDbhGGHYAtlxoC6LbPLxY9kH70W1UgacpQH_13sJrAknGngZi6h-12MQOW1q8TySo=w600",
-      name: "Meaty Bone #804",
-      price: 2149,
-      inventory: 8,
-    },
-    {
-      image_url:
-        "https://lh3.googleusercontent.com/LA0XJJsv3LNKjvJg02wTu_26TEQ60W1_5DXDACWhIFJI8JY8kg2Z7HcDgBL0q8zOyMmUIVwZL0W2G9plCZI31wxQw_vUyehitAXKfw=w600",
-      name: "Meaty Bone #503",
-      price: 2299,
-      inventory: 2,
-    },
-    {
-      image_url:
-        "https://lh3.googleusercontent.com/VHoQfUVo7QInTCaN7Tg9vGIx2DRS8UTvOCxcJ3Gc83WvpH4wIvRNpCKWTeXwonkh4Yrz4nYWJk6N_MhO_ihamowcGnQepUts_ECn=w600",
-      name: "Funny Bone #2691",
-      price: 2799,
-      inventory: 5,
-    },
-  ],
+  // tastyBones: [
+  //   {
+  //     image_url:
+  //       "https://lh3.googleusercontent.com/eYosrQkx9IqsnZJsKv190JQDzVcVGsCYY6DbHLX6xdjub5BReI3DV5fdY-WHkSyCUOLKaOf_VNy-Hm-obH4IxDJ_kXX3m40lCGFBYg=w600",
+  //     name: "Funny Bone #3198",
+  //     price: 1999,
+  //     inventory: 2,
+  //   },
+  //   {
+  //     image_url:
+  //       "https://lh3.googleusercontent.com/sU5zuqvLMHrYNavtrxvtu-hDQhGTtOqmAnnEt0EkrktlqvzPdz6Psktsi9Hn0WLtpccOPgcHmEyeYOqSVowXkcaws6CbbLbHUVfr6Q=w600",
+  //     name: "Meaty Bone #657",
+  //     price: 2199,
+  //     inventory: 4,
+  //   },
+  //   {
+  //     image_url:
+  //       "https://lh3.googleusercontent.com/1JNYgAwvIsVhTr6h6RBOXJtXT4eMmrse-fXHMv-SLOqV2UkPeNSfuul0YgcxSa1Rky54DHm9J1YyaV3F4JuKqFuVGehvc9dprF5C2AQ=w600",
+  //     name: "Funny Bone #1166",
+  //     price: 2399,
+  //     inventory: 6,
+  //   },
+  //   {
+  //     image_url:
+  //       "https://lh3.googleusercontent.com/_Xj4wCk3fCzKmqEJ4IMXGzmYpJFxeXtbgBix11XileYIEfxTt2s1KhMTtW6z1rT_FHGKa6HOEKDiPQErOfjOJGTH4oV7zvsRVoNT=w600",
+  //     name: "Funny Bone #2187",
+  //     price: 2499,
+  //     inventory: 7,
+  //   },
+  //   {
+  //     image_url:
+  //       "https://lh3.googleusercontent.com/eP6to-QAk6H5joxylV75aIK25wIQeemwWDhoygQbvbcknfjROcO2zjR5wHO9_9HgFqlPl24mKaJD_7p-hhUQJzcQkboe4zUd4WQ=w600",
+  //     name: "Meaty Bone #1953",
+  //     price: 1899,
+  //     inventory: 3,
+  //   },
+  //   {
+  //     image_url:
+  //       "https://lh3.googleusercontent.com/t-1anrnd-OZ5eXBQPbFZT4vO6JftfwT1cV71mul7qIq58BNtwdoA62fyuJRNluXdRre9jLM0lSkrUTLSgxUvp2QHCmdWjXWOodUFUA=w600",
+  //     name: "Funny Bone #629",
+  //     price: 2749,
+  //     inventory: 9,
+  //   },
+  //   {
+  //     image_url:
+  //       "https://lh3.googleusercontent.com/ucRxE4h9mvSMUhbKmNcN_QnP5iHwY3crc87-vqQS9rcFwDYbuyNDDI5JRZJFIyMq757DqMU2Y7h13S_bOYn21NZAIJKOV44abm7Hf2Y=w600",
+  //     name: "Meaty Bone #2971",
+  //     price: 2799,
+  //     inventory: 9,
+  //   },
+  //   {
+  //     image_url:
+  //       "https://lh3.googleusercontent.com/CGF-cJ3jTPG43WSw7tsFLBXuKGEB9GG7efQr6zwDbhGGHYAtlxoC6LbPLxY9kH70W1UgacpQH_13sJrAknGngZi6h-12MQOW1q8TySo=w600",
+  //     name: "Meaty Bone #804",
+  //     price: 2149,
+  //     inventory: 8,
+  //   },
+  //   {
+  //     image_url:
+  //       "https://lh3.googleusercontent.com/LA0XJJsv3LNKjvJg02wTu_26TEQ60W1_5DXDACWhIFJI8JY8kg2Z7HcDgBL0q8zOyMmUIVwZL0W2G9plCZI31wxQw_vUyehitAXKfw=w600",
+  //     name: "Meaty Bone #503",
+  //     price: 2299,
+  //     inventory: 2,
+  //   },
+  //   {
+  //     image_url:
+  //       "https://lh3.googleusercontent.com/VHoQfUVo7QInTCaN7Tg9vGIx2DRS8UTvOCxcJ3Gc83WvpH4wIvRNpCKWTeXwonkh4Yrz4nYWJk6N_MhO_ihamowcGnQepUts_ECn=w600",
+  //     name: "Funny Bone #2691",
+  //     price: 2799,
+  //     inventory: 5,
+  //   },
+  // ],
   metascapes: [
     {
       image_url:

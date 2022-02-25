@@ -106,16 +106,16 @@ async function seed() {
         price: product.price,
       })
     ),
-    data.tastyBones.map((product) =>
-      Product.create({
-        name: product.name,
-        imageURL: product.image_url,
-        category: "Tasty Bones",
-        URL: "Tasty_Bones",
-        inventory: product.inventory,
-        price: product.price,
-      })
-    ),
+    // data.tastyBones.map((product) =>
+    //   Product.create({
+    //     name: product.name,
+    //     imageURL: product.image_url,
+    //     category: "Tasty Bones",
+    //     URL: "Tasty_Bones",
+    //     inventory: product.inventory,
+    //     price: product.price,
+    //   })
+    // ),
     data.metascapes.map((product) =>
       Product.create({
         name: product.name,
