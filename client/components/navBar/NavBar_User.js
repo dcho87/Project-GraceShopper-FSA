@@ -44,14 +44,12 @@ const Navbar_User = ({ handleClick, user }) => {
             <li className="nav-item">
               {" "}
               <Link to="/home">
-                <p
-                  id="nav-btn"
-                  // onClick={() => window.location.reload()}
-                >
+                <p id="nav-btn nav-link" className="white-text">
                   Home
                 </p>
               </Link>
             </li>
+
             <li className="nav-item">
               <a className="nav-btn">Explore</a>
               <ul className="dropdown">
@@ -104,7 +102,7 @@ const Navbar_User = ({ handleClick, user }) => {
             <li className="nav-item">
               <Link to="/cart">
                 <img
-                  src="https://i.ibb.co/LRNwbDz/outline-shopping-cart-checkout-black-24dp.png"
+                  src="https://i.ibb.co/tQgMFFz/outline-add-shopping-cart-white-24dp.png"
                   alt="shopping-cart-checkout"
                   className="menu-item cart-contents"
                 />
