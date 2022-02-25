@@ -67,13 +67,13 @@ class Checkout extends Component {
     const { first_name, last_name, email, address } = this.state;
     const { onChange, onSave } = this;
     return (
-      <div>
-        <div className="checkout-header">
-          <h1>Checkout</h1>
-        </div>
-        <div className="firstTwo">
-          <Checkout_Products />
-          <h1>Confirm Details</h1>
+      <div className="checkout-page">
+        <div className="stuff-on-this-page">
+          <div className="firstTwo">
+            <Checkout_Products />
+          </div>
+
+          <h1 className="confirm-header">Confirm Details</h1>
         </div>
         {console.log(this.state)}
         <Stripe suser={user} />
