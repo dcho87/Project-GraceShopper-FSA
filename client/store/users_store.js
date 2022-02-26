@@ -68,6 +68,7 @@ export const updateUserThunk = (user, history) => {
   return async (dispatch) => {
     const updatedUser = (await axios.put(`/api/users/${user.id}`, user)).data;
     dispatch(_updateUser(updatedUser));
+    // window.location.reload();
     // history.push(`/`);
   };
 };

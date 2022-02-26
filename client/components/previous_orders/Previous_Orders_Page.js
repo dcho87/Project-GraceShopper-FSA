@@ -68,7 +68,7 @@ const Previous_Orders_Page = () => {
                   </div>
 
                   <div className="ship-cont">
-                    <div>SHIP TO</div>
+                    <div>SOLD TO</div>
                     <div className="total">
                       {user.first_name} {user.last_name}
                     </div>

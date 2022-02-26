@@ -58,6 +58,7 @@ const Field = ({
   autoComplete,
   value,
   onChange,
+  name,
 }) => (
   <div className="FormRow">
     <label htmlFor={id} className="FormRowLabel">
@@ -72,6 +73,7 @@ const Field = ({
       autoComplete={autoComplete}
       value={value}
       onChange={onChange}
+      name={name}
     />
   </div>
 );
@@ -116,23 +118,38 @@ const ResetButton = ({ onClick }) => (
 class CheckoutForm extends React.Component {
   constructor(props) {
     super(props);
-    console.log("butt", props);
     this.state = {
       error: null,
       cardComplete: false,
       processing: false,
       paymentMethod: null,
-      email: "",
-      name: "",
+      first_name: props.user.first_name,
+      last_name: props.user.last_name,
+      email: props.user.email,
+      address: props.user.address,
+      id: props.user.id,
     };
     this.onChange = this.onChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  // async componentDidUpdate(prevProps, prevState) {
+  //   if (prevProps.auth.id !== prevState.id) {
+  //     this.setState({
+  //       id: props.user.id,
+  //       first_name: props.user.first_name,
+  //       last_name: props.user.last_name,
+  //       email: props.user.email,
+  //       address: props.user.address || "",
+  //     });
+  //   }
+  // }
+
   onChange(ev) {
     const change = {};
     change[ev.target.name] = ev.target.value;
     this.setState(change);
+    // console.log(ev.target.name, ev.target.value);
   }
 
   // async onSave(ev) {
@@ -148,7 +165,9 @@ class CheckoutForm extends React.Component {
 
   handleSubmit = async (event) => {
     event.preventDefault();
+    // console.log("update1", this.props.updateUser);
 
+    await this.props.updateUser({ ...this.state });
     const { stripe, elements, user } = this.props;
     const { email, name, error, cardComplete } = this.state;
     // await updateUser({ ...this.state });
@@ -217,7 +236,7 @@ class CheckoutForm extends React.Component {
     } = this.state;
     const { stripe, user } = this.props;
     const { onChange, onSave } = this;
-
+    // console.log(this.props);
     // console.log(name);
     return paymentMethod ? (
       <div className="Result">
@@ -242,53 +261,48 @@ class CheckoutForm extends React.Component {
               label="First:"
               id="first_name"
               type="first_name"
+              name="first_name"
               onChange={this.onChange}
-              placeholder={this.props.user.first_name}
+              // placeholder='First Name'
               required
               autoComplete={this.props.user.first_name}
-              value={this.props.user.first_name}
-              onChange={(event) => {
-                this.setState({ first_name: event.target.value });
-              }}
+              value={this.state.first_name}
             />
             <Field
               label="Last:"
               id="last_name"
               type="last_name"
+              name="last_name"
               onChange={this.onChange}
-              placeholder={this.props.user.last_name}
+              // placeholder={this.props.user.last_name}
               required
               autoComplete={this.props.user.last_name}
-              value={this.props.user.last_name}
-              onChange={(event) => {
-                this.setState({ last_name: event.target.value });
-              }}
+              value={this.state.last_name}
+              // onChange={(event) => {
+              //   this.setState({ last_name: event.target.value });
+              // }}
             />
             <Field
               label="Email:"
               id="email"
               type="email"
+              name="email"
               onChange={this.onChange}
-              placeholder={this.props.user.email}
+              // placeholder={this.props.user.email}
               required
               autoComplete={this.props.user.email}
-              value={this.props.user.email}
-              onChange={(event) => {
-                this.setState({ email: event.target.value });
-              }}
+              value={this.state.email}
             />
             <Field
               label="Address:"
               id="Address"
               type="Address"
+              name="address"
               onChange={this.onChange}
-              placeholder={this.props.user.address}
+              // placeholder={this.props.user.address}
               required
               autoComplete={this.props.user.address}
-              value={this.props.user.address}
-              onChange={(event) => {
-                this.setState({ address: event.target.value });
-              }}
+              value={this.state.address}
             />
           </fieldset>
           <fieldset className="FormGroup">
@@ -321,11 +335,16 @@ class CheckoutForm extends React.Component {
   }
 }
 
-const InjectedCheckoutForm = ({ user }) => {
+const InjectedCheckoutForm = ({ user, updateUser }) => {
   return (
     <ElementsConsumer>
       {({ stripe, elements }) => (
-        <CheckoutForm stripe={stripe} elements={elements} user={user} />
+        <CheckoutForm
+          stripe={stripe}
+          elements={elements}
+          user={user}
+          updateUser={updateUser}
+        />
       )}
     </ElementsConsumer>
   );
@@ -343,12 +362,12 @@ const ELEMENTS_OPTIONS = {
 // recreating the `Stripe` object on every render.
 const stripePromise = loadStripe("pk_test_6pRNASCoBOKtIshFeQd4XMUh");
 
-const Stripe = () => {
+const Stripe = (props) => {
   const user = useSelector((state) => state.auth);
   return (
     <div className="AppWrapper">
       <Elements stripe={stripePromise} user={user}>
-        <InjectedCheckoutForm user={user} />
+        <InjectedCheckoutForm user={user} updateUser={props.updateUser} />
       </Elements>
     </div>
   );

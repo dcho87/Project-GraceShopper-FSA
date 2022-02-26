@@ -30,11 +30,7 @@ const Navbar_User = ({ handleClick, user }) => {
           <ul className="nav-list">
             {user.isAdmin === true ? (
               <li className="nav-item">
-                <Link
-                  to="/create-product"
-                  className="nav-btn"
-                  // onClick={() => window.location()}
-                >
+                <Link to="/products/create" className="nav-btn">
                   Add Product
                 </Link>
               </li>
@@ -43,8 +39,10 @@ const Navbar_User = ({ handleClick, user }) => {
             )}
             <li className="nav-item">
               {" "}
-              <Link to="/home" className="nav-btn nav-link">
-                Home
+              <Link to="/home">
+                <p id="nav-btn" className="white-text">
+                  Home
+                </p>
               </Link>
             </li>
             <li className="nav-item">
@@ -130,7 +128,7 @@ const Navbar_User = ({ handleClick, user }) => {
               </Link>
             </li>
             <li className="nav-item">
-              <Link to="/" onClick={handleClick}>
+              <Link to="/login" onClick={handleClick}>
                 <img
                   src="https://i.ibb.co/XbkS6LJ/outline-logout-white-24dp.png"
                   alt="logout"

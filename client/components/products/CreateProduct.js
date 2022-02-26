@@ -9,7 +9,6 @@ export default function CreateProduct() {
   const history = useHistory();
 
   const dispatch = useDispatch();
-
   return (
     <div className="add-product-page">
       <h1>Add Product</h1>

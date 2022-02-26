@@ -39,9 +39,9 @@ const SingleCategory_Page = () => {
     case "/products/Clone_X":
       category = "Clone X";
       break;
-    case "/products/Tasty_Bones":
-      category = "Tasty Bones XYZ";
-      break;
+    // case "/products/_Bones":
+    //   category = "Tasty Bones XYZ";
+    //   break;
     case "/products/The_Metascapes":
       category = "The Metascapes";
       break;
@@ -86,7 +86,7 @@ const SingleCategory_Page = () => {
             <button
               disabled={product.id !== productId || totalItems === 0}
               onClick={(ev) => {
-                dispatch(addToOrder(orderToAdd, user));
+                dispatch(addToOrder(orderToAdd, user, product));
                 dispatch(editProduct(orderToAdd, product));
                 setProductId("");
               }}

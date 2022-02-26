@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { updateUserThunk } from "../../store";
+import { fetchHistory, updateUserThunk } from "../../store";
+import Alert from "@mui/material/Alert";
 
 class BioUpdate extends Component {
   constructor(props) {
@@ -14,6 +15,7 @@ class BioUpdate extends Component {
       address: "",
       newPassword: "",
       confirmNewPassword: "",
+      error: "",
     };
     this.onChange = this.onChange.bind(this);
     this.onSave = this.onSave.bind(this);
@@ -32,6 +34,19 @@ class BioUpdate extends Component {
         confirmPassword: "",
         address: user.address || "",
       });
+    }
+  }
+
+  async componentDidUpdate(prevProps, prevState) {
+    if (prevProps.auth.id !== prevState.id) {
+      this.setState({
+        id: this.props.auth.id,
+        first_name: this.props.auth.first_name,
+        last_name: this.props.auth.last_name,
+        email: this.props.auth.email,
+        address: this.props.auth.address || "",
+      });
+      this.props.fetchHistory(this.props.auth);
     }
   }
 
@@ -55,14 +70,14 @@ class BioUpdate extends Component {
   async onSaveA(ev) {
     ev.preventDefault();
     if (this.state.newPassword !== this.state.confirmNewPassword) {
-      alert("your passwords do not match");
+      this.setState({ error: "your passwords do not match" });
       return;
     }
     try {
       this.state.password = this.state.newPassword;
       await this.props.updateUser({ ...this.state });
       window.location.reload();
-      console.log("working");
+      // console.log("working");
     } catch (er) {
       console.log(er);
       // this.setState({ error: er.response.data.error.errors[0].message });
@@ -70,7 +85,15 @@ class BioUpdate extends Component {
   }
 
   render() {
-    const { first_name, last_name, email, address, password } = this.state;
+    const {
+      first_name,
+      last_name,
+      email,
+      address,
+      error,
+      newPassword,
+      confirmNewPassword,
+    } = this.state;
     // console.log(this.props);
     const { onChange, onSave, onSaveA } = this;
     // console.log(this);
@@ -78,6 +101,7 @@ class BioUpdate extends Component {
       <div>
         <form onSubmit={onSave} className="form-bio">
           {/* <pre>{!!error && JSON.stringify(error, null, 2)}</pre> */}
+          <br />
           <input
             name="first_name"
             value={first_name}
@@ -110,11 +134,17 @@ class BioUpdate extends Component {
             className="button1"
             disabled={!first_name || !last_name || !email}
           >
-            Update Details!{" "}
+            Update{" "}
           </button>
         </form>
+        {error && (
+          <Alert severity="error" className="error-text">
+            {error}
+          </Alert>
+        )}
         <form onSubmit={onSaveA} className="form-bio">
           <h4> Change Password Here</h4>
+          <br />
           <input
             name="newPassword"
             onChange={onChange}
@@ -129,7 +159,12 @@ class BioUpdate extends Component {
             type="password"
           />{" "}
           <br />
-          <button className="button1">Update Password! </button>
+          <button
+            disabled={!newPassword || !confirmNewPassword}
+            className="button1"
+          >
+            Update{" "}
+          </button>
         </form>
       </div>
     );
@@ -140,6 +175,9 @@ const mapDispatchToProps = (dispatch, { history }) => {
   return {
     updateUser: (user) => {
       dispatch(updateUserThunk(user, history));
+    },
+    fetchHistory: (user) => {
+      dispatch(fetchHistory(user));
     },
   };
 };
