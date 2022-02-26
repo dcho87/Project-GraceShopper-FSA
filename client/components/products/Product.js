@@ -74,8 +74,10 @@ export default function Product() {
           <div className="product-single">
             <img className="product-img" src={product.imageURL} />
             <div className="single-product-details">
-              <p>
-                <b>Collection </b>
+              <p style={{ fontSize: "6rem", marginTop: "10px" }}>
+                <b clas>
+                  Collection: <br />
+                </b>
                 <Link to={`/products/${product.category}`}>
                   {product.category}
                 </Link>
@@ -104,7 +106,7 @@ export default function Product() {
                     <span style={{ fontSize: "1rem", marginRight: "2px" }}>
                       $
                     </span>
-                    {product.price}
+                    {product.price.toLocaleString("en-US")}
                   </p>
                 </div>
               </div>
@@ -194,51 +196,6 @@ export default function Product() {
                         <p style={{ fontSize: "1.4rem", fontWeight: "900" }}>
                           {product.name}
                         </p>
-                        {/* <form
-                          className="add-btn"
-                          style={{
-                            backgroundColor: "#ffffff",
-                            borderBottomLeftRadius: "20px",
-                            borderBottomRightRadius: "20px",
-                          }}
-                        >
-                          <select
-                            name="quantity"
-                            onChange={(ev) => {
-                              setTotalItems(ev.target.value * 1);
-                              setTotalPrice(ev.target.value * product.price);
-                              setProductId(product.id);
-                            }}
-                            style={{
-                              width: "120px",
-                              margin: "20px 10px",
-                              textAlign: "center",
-                            }}
-                          >
-                            <option>Choose Quantity</option>
-                            {new Array(product.inventory)
-                              .fill("")
-                              .map((_, idx) => (
-                                <option>{idx + 1}</option>
-                              ))}
-                          </select>
-                          <button
-                            className="addToCart"
-                            disabled={
-                              product.id !== productId || totalItems === 0
-                            }
-                            onClick={(ev) => {
-                              dispatch(addToOrder(orderToAdd, user, product));
-                              dispatch(editProduct(orderToAdd, product));
-                              setProductId("");
-                              console.log(JSON.stringify(orderToAdd));
-                            }}
-                          >
-                            {product.inventory === 0
-                              ? "Out of Stock"
-                              : "Add to cart"}
-                          </button>
-                        </form> */}
                       </div>
 
                       <div className="price-div right">
@@ -258,7 +215,7 @@ export default function Product() {
                           >
                             $
                           </span>
-                          {product.price}
+                          {product.price.toLocaleString("en-US")}
                         </p>
                       </div>
                     </div>

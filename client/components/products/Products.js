@@ -293,7 +293,7 @@ const Products = () => {
                     <span style={{ fontSize: "1rem", marginRight: "2px" }}>
                       $
                     </span>
-                    {product.price}
+                    {product.price.toLocaleString("en-US")}
                   </p>
                 </div>
               </div>
