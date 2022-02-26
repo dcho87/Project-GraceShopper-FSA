@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addToOrder, editProduct } from "../../store/index.js";
 import "./Products.css";
@@ -15,9 +15,6 @@ export default function Product() {
   );
 
   const products = state.products;
-
-  const category = product.map((pro) => [pro.category])[0];
-  console.log(category);
 
   const dispatch = useDispatch();
   const user = state.auth;
@@ -36,6 +33,39 @@ export default function Product() {
     totalPrice,
     productId,
   };
+
+  const [category, setCategory] = useState();
+
+  switch (category) {
+    case "/products/Crypto_Punks":
+      category = "Crypto Punks";
+      break;
+    case "/products/Azuki":
+      category = "Azuki";
+      break;
+    case "/products/Clone_X":
+      category = "Clone X";
+      break;
+    case "/products/Tasty_Bones":
+      category = "Tasty Bones XYZ";
+      break;
+    case "/products/The_Metascapes":
+      category = "The Metascapes";
+      break;
+    case "/products/The_Ladies":
+      category = "The Ladies";
+      break;
+    case "/products/Grumpets":
+      category = "Grumpets";
+      break;
+    case "/products/Little_Lemon_Friends":
+      category = "Little Lemon Friends";
+      break;
+    default:
+      break;
+  }
+
+  console.log(category);
 
   return (
     <div className="single-product-container">
@@ -77,135 +107,142 @@ export default function Product() {
                     {product.price}
                   </p>
                 </div>
-                <p>
+                {/* <p>
                   <b>Left in stock:</b> {product.inventory}
-                </p>
-                <button
-                  disabled={product.id !== productId || totalItems === 0}
-                  onClick={(ev) => {
-                    dispatch(addToOrder(orderToAdd, user, product));
-                    dispatch(editProduct(orderToAdd, product));
-                    setProductId("");
-                  }}
-                >
-                  Add to cart
-                </button>
-                <input
-                  type="number"
-                  step={1}
-                  placeholder={0}
-                  min={0}
-                  max={product.inventory}
-                  onChange={(ev) => {
-                    setTotalItems(ev.target.value * 1);
-                    setTotalPrice(ev.target.value * product.price);
-                    setProductId(product.id);
-                  }}
-                ></input>
+                </p> */}
+                <form className="add-btn">
+                  {/* <label for="lang">Qty:</label> */}
+                  <select
+                    name="quantity"
+                    onChange={(ev) => {
+                      setTotalItems(ev.target.value * 1);
+                      setTotalPrice(ev.target.value * product.price);
+                      setProductId(product.id);
+                    }}
+                    style={{ width: "50px" }}
+                  >
+                    {new Array(product.inventory).fill("").map((_, idx) => (
+                      <option>{idx + 1}</option>
+                    ))}
+                  </select>
+                  <button
+                    className="addToCart"
+                    disabled={product.id !== productId || totalItems === 0}
+                    onClick={(ev) => {
+                      dispatch(addToOrder(orderToAdd, user, product));
+                      dispatch(editProduct(orderToAdd, product));
+                      setProductId("");
+                    }}
+                  >
+                    {}
+                  </button>
+                </form>
               </div>
             </div>
           </div>
           <div className="product-suggestions-container">
-            {products
-              .filter(
-                (p) => p.category === product.category && p.id !== product.id
-              )
-              .slice(0, 4)
-              .map((product) => (
-                <div key={product.name} className="single-suggested-product">
-                  <Link to={`/products/${product.id}`}>
+            <h3
+              style={{
+                textAlign: "center",
+                marginBottom: "10px",
+              }}
+            >
+              More From This Collection
+            </h3>
+            <div className="single-suggested-products">
+              {products
+                .filter(
+                  (p) => p.category === product.category && p.id !== product.id
+                )
+                .slice(0, 4)
+                .map((product) => (
+                  <div key={product.name} className="single-suggested-product">
+                    <Link to={`/products/${product.id}`}>
+                      <div>
+                        <img
+                          style={{
+                            width: "300px",
+                            backgroundRepeat: "no-repeat",
+                            backgroundSize: "cover",
+                            borderTopLeftRadius: "20px",
+                            borderTopRightRadius: "20px",
+                          }}
+                          src={product.imageURL}
+                        />
+                      </div>
+                    </Link>
+
                     <div
-                      className=""
-                      style={{
-                        backgroundImage: `url(${product.imageURL}) `,
-                        width: "350px",
-                        height: "350px",
-                        backgroundRepeat: "no-repeat",
-                        backgroundSize: "cover",
-                        borderTopLeftRadius: "20px",
-                        borderTopRightRadius: "20px",
-                      }}
-                    ></div>
-                  </Link>
+                      className="product-details"
+                      style={{ height: "150px" }}
+                    >
+                      <div className="other-details right">
+                        <p>
+                          <Link to={`/products/${product.category}`}>
+                            {product.category}
+                          </Link>
+                        </p>
+                        <p style={{ fontSize: "1.4rem", fontWeight: "900" }}>
+                          {product.name}
+                        </p>
 
-                  <div className="product-details">
-                    <div className="other-details right">
-                      <p>
-                        <Link to={`/products/${product.category}`}>
-                          {product.category}
-                        </Link>
-                      </p>
-                      <p style={{ fontSize: "1.4rem", fontWeight: "900" }}>
-                        {product.name}
-                      </p>
-
-                      <button
-                        disabled={product.id !== productId || totalItems === 0}
-                        onClick={(ev) => {
-                          dispatch(addToOrder(orderToAdd, user, product));
-                          dispatch(editProduct(orderToAdd, product));
-                          setProductId("");
-                        }}
-                      >
-                        Add to cart
-                      </button>
-                      <input
-                        type="number"
-                        step={1}
-                        placeholder={0}
-                        min={0}
-                        max={product.inventory}
-                        onChange={(ev) => {
-                          setTotalItems(ev.target.value * 1);
-                          setTotalPrice(ev.target.value * product.price);
-                          setProductId(product.id);
-                        }}
-                      ></input>
-
-                      {user.isAdmin === true ? (
-                        <div className="edit-delte-btns">
-                          {" "}
+                        <div className="add-div">
                           <button
-                            onClick={() => {
-                              setProductId(product.id);
-                              setShow("show");
-                              document.body.style.overflow = "hidden";
+                            className="addToCart"
+                            disabled={
+                              product.id !== productId || totalItems === 0
+                            }
+                            onClick={(ev) => {
+                              dispatch(addToOrder(orderToAdd, user, product));
+                              dispatch(editProduct(orderToAdd, product));
+                              setProductId("");
                             }}
                           >
-                            Edit
+                            Add to cart
                           </button>
-                          <button
-                            onClick={() => dispatch(destroyProduct(product.id))}
-                          >
-                            Delete
-                          </button>
+                          <input
+                            type="number"
+                            step={1}
+                            placeholder={0}
+                            min={0}
+                            max={product.inventory}
+                            onChange={(ev) => {
+                              setTotalItems(ev.target.value * 1);
+                              setTotalPrice(ev.target.value * product.price);
+                              setProductId(product.id);
+                            }}
+                          ></input>
                         </div>
-                      ) : (
-                        ""
-                      )}
-                    </div>
+                      </div>
 
-                    <div className="price-div right">
-                      <p style={{ fontSize: "0.8rem", margin: "0" }}>Buy Now</p>
-                      <p
-                        style={{
-                          fontSize: "1.3rem",
-                          fontWeight: "900",
-                          display: "flex",
-                          alignItems: "center",
-                        }}
-                      >
-                        <span style={{ fontSize: "1rem", marginRight: "2px" }}>
-                          $
-                        </span>
-                        {product.price}
-                      </p>
+                      <div className="price-div right">
+                        <p style={{ fontSize: "0.8rem", margin: "0" }}>
+                          Buy Now
+                        </p>
+                        <p
+                          style={{
+                            fontSize: "1.3rem",
+                            fontWeight: "900",
+                            display: "flex",
+                            alignItems: "center",
+                          }}
+                        >
+                          <span
+                            style={{ fontSize: "1rem", marginRight: "2px" }}
+                          >
+                            $
+                          </span>
+                          {product.price}
+                        </p>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                ))}
+            </div>
+            <Link to={`/products/${product.category}`}>
+              <h4 className="collection-btn">View Collection</h4>
+            </Link>
           </div>
-          <button>View Collection</button>
         </div>
       ))}
     </div>

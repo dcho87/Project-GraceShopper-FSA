@@ -407,6 +407,13 @@ const data = {
   theLadies: [
     {
       image_url:
+        "https://lh3.googleusercontent.com/DB0JFmP2iJqgFAmtN5EwAre6uiGTclmBx3-M88Ikd_7ut4DzBcGOcTJL9P249K6zIzL6e79wOlezZOhArjjoVzHKEtHtEQXSvhxaW9A=s0",
+      name: "Midnight Swim",
+      price: 12999,
+      inventory: 20,
+    },
+    {
+      image_url:
         "https://lh3.googleusercontent.com/O6P5pb5EYvIh1tjlnwWRB3Oo3UYBycGE0JKSwGILnQSDSJUD55K0lBS03NTDGtH7FnfvGWUbna0RMnWiTdLaLtvw2kDBcu_J_si8Qw=w600",
       name: "Kimono II",
       price: 10999,

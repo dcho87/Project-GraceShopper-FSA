@@ -15,17 +15,17 @@
   margin: 20px;
   border-radius: 20px;
 }
+
 .img-div {
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
 }
 
 .product-details {
-  height: 235px;
+  height: 180px;
   background-color: #ffffff;
   color: #333333;
-  border-bottom-left-radius: 20px;
-  border-bottom-right-radius: 20px;
+
   display: flex;
   justify-content: space-between;
 }
@@ -100,4 +100,17 @@
   margin: 20px;
   border-bottom: #ebebeb 1px solid;
   padding: 10px;
+}
+
+.aa {
+  box-sizing: border-box;
+  margin: 0px;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  justify-content: center;
+  inset: 0px;
+  /* position: absolute; */
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
 }

@@ -83,6 +83,10 @@ const Products = () => {
     <div className="products-container">
       <div>{show === "show" && <EditForm id={productId} />}</div>
 
+      {/* <div className="aa">
+        <img src="https://lh3.googleusercontent.com/26JEJ3m352pqfyJLRNeFJ1KlIbJBFcxSDN0ff437naUG8mHKIPZVQOjCzlDBbfhNz4yaSVbNmAW7Bk6LA4QqaEAShR5mnFxUU1XwFhY=w600" />
+      </div> */}
+
       {/* <ul className="sorting-ul sorting-container">
         <p>Sort</p>
         <li className="sorting-item">
@@ -109,42 +113,95 @@ const Products = () => {
       </ul> */}
       <div className="products">
         {currentProducts.map((product) => (
-          <div className="product" key={product.name}>
-            <Link to={`/products/${product.id}`}>
-              <div
-                className=""
-                style={{
-                  backgroundImage: `url(${product.imageURL}) `,
-                  width: "360px",
-                  height: "360px",
-                  backgroundRepeat: "no-repeat",
-                  backgroundSize: "cover",
-                  borderTopLeftRadius: "20px",
-                  borderTopRightRadius: "20px",
-                }}
-              >
-                {/* <img className="product-img" src={product.imageURL} /> */}
+          <div>
+            <div className="product" key={product.name}>
+              <Link to={`/products/${product.id}`}>
+                <div
+                  className=""
+                  style={{
+                    backgroundImage: `url(${product.imageURL}) `,
+                    width: "360px",
+                    height: "360px",
+                    backgroundRepeat: "no-repeat",
+                    backgroundSize: "cover",
+                    borderTopLeftRadius: "20px",
+                    borderTopRightRadius: "20px",
+                  }}
+                >
+                  {/* <img className="product-img" src={product.imageURL} /> */}
+                </div>
+              </Link>
+
+              <div className="product-details">
+                <div className="other-details right">
+                  <p>
+                    <Link to={`/products/${product.category}`}>
+                      {product.category}
+                    </Link>
+                  </p>
+                  <p style={{ fontSize: "1.4rem", fontWeight: "900" }}>
+                    {product.name}
+                  </p>
+
+                  {user.isAdmin === true ? (
+                    <div className="edit-delte-btns">
+                      {" "}
+                      <button
+                        onClick={() => {
+                          setProductId(product.id);
+                          setShow("show");
+                          document.body.style.overflow = "hidden";
+                        }}
+                      >
+                        Edit
+                      </button>
+                      <button
+                        onClick={() => dispatch(destroyProduct(product.id))}
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  ) : (
+                    ""
+                  )}
+                </div>
+
+                <div className="price-div right">
+                  <p style={{ fontSize: "0.8rem", margin: "0" }}>Buy Now</p>
+                  <p
+                    style={{
+                      fontSize: "1.3rem",
+                      fontWeight: "900",
+                      display: "flex",
+                      alignItems: "center",
+                    }}
+                  >
+                    <span style={{ fontSize: "1rem", marginRight: "2px" }}>
+                      $
+                    </span>
+                    {product.price}
+                  </p>
+                </div>
               </div>
-            </Link>
-
-            <div className="product-details">
-              <div className="other-details right">
-                <p>
-                  <Link to={`/products/${product.category}`}>
-                    {product.category}
-                  </Link>
-                </p>
-                <p style={{ fontSize: "1.4rem", fontWeight: "900" }}>
-                  {product.name}
-                </p>
-
-                {/* <p>
-                <b>Sold so far</b>
-                <p>{product.inventory}</p>
-              </p> */}
-
+              {/* <div > */}
+              <form className="add-btn">
+                {/* <label for="lang">Qty:</label> */}
+                <select
+                  name="quantity"
+                  onChange={(ev) => {
+                    setTotalItems(ev.target.value * 1);
+                    setTotalPrice(ev.target.value * product.price);
+                    setProductId(product.id);
+                  }}
+                  style={{ width: "50px" }}
+                >
+                  {new Array(product.inventory).fill("").map((_, idx) => (
+                    <option>{idx + 1}</option>
+                  ))}
+                </select>
                 <button
-                  disabled={product.id !== productId || totalItems === 0}
+                  className="addToCart"
+                  // disabled={product.id !== productId || totalItems === 0}
                   onClick={(ev) => {
                     dispatch(addToOrder(orderToAdd, user, product));
                     dispatch(editProduct(orderToAdd, product));
@@ -153,60 +210,19 @@ const Products = () => {
                 >
                   Add to cart
                 </button>
-                <input
-                  type="number"
-                  step={1}
-                  placeholder={0}
-                  min={0}
-                  max={product.inventory}
+              </form>
+              {/* <input
+            
+              
+                  
                   onChange={(ev) => {
                     setTotalItems(ev.target.value * 1);
                     setTotalPrice(ev.target.value * product.price);
                     setProductId(product.id);
                   }}
-                ></input>
+                ></input> */}
 
-                {user.isAdmin === true ? (
-                  <div className="edit-delte-btns">
-                    {" "}
-                    {/* <Link to={`/products/edit/${product.id}`}> */}
-                    <button
-                      onClick={() => {
-                        setProductId(product.id);
-                        setShow("show");
-                        document.body.style.overflow = "hidden";
-                      }}
-                    >
-                      Edit
-                    </button>
-                    {/* </Link> */}
-                    <button
-                      onClick={() => dispatch(destroyProduct(product.id))}
-                    >
-                      Delete
-                    </button>
-                  </div>
-                ) : (
-                  ""
-                )}
-              </div>
-
-              <div className="price-div right">
-                <p style={{ fontSize: "0.8rem", margin: "0" }}>Buy Now</p>
-                <p
-                  style={{
-                    fontSize: "1.3rem",
-                    fontWeight: "900",
-                    display: "flex",
-                    alignItems: "center",
-                  }}
-                >
-                  <span style={{ fontSize: "1rem", marginRight: "2px" }}>
-                    $
-                  </span>
-                  {product.price}
-                </p>
-              </div>
+              {/* </div> */}
             </div>
           </div>
         ))}

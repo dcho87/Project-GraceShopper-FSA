@@ -7,8 +7,6 @@ import SignUp_Page from "./components/LoginSignup/SignUp_Page";
 import Products from "./components/products/Products";
 import Cart from "./components/cart/Cart";
 import Bio from "./components/bio/Bio";
-// import Password from "./components/bio/Password";
-
 import Login_Popup from "./components/LoginSignup/Login_Popup";
 import Product_Edit from "./components/products/Product_Edit";
 import Checkout_Page from "./components/checkout/Checkout_Page";
@@ -16,7 +14,6 @@ import Previous_Orders_Page from "./components/previous_orders/Previous_Orders_P
 import CreateProduct from "./components/products/CreateProduct";
 import Product from "./components/products/Product";
 import Single_Category_Page from "./components/categories/Single_Category_Page";
-// import Home from "./components/Home/Home";
 
 const Routes = () => {
   const dispatch = useDispatch();
@@ -30,7 +27,6 @@ const Routes = () => {
 
   return (
     <div>
-      {/* {isLoggedIn ? ( */}
       <Switch>
         <Route
           exact
@@ -49,9 +45,8 @@ const Routes = () => {
           path="/home"
           render={() => (
             <div>
-              {/* <Home /> */}
               {isLoggedIn === false ? <Login_Popup /> : ""}
-              {/* <Login_Popup /> */}
+              <Login_Popup />
               <Products />
             </div>
           )}
@@ -105,36 +100,10 @@ const Routes = () => {
         />
         <Route exact path="/login" exact component={Login_Page} />
         <Route exact path="/signup" exact component={SignUp_Page} />
-        {/* 
-        {isAdmin ? (
-          <> */}
+
         <Route exact path="/products/edit/:id" component={Product_Edit} />
         <Route exact path="/create-product" component={CreateProduct} />
-        {/* </>
-        ) : (
-          ""
-        )} */}
       </Switch>
-      {/* ) : (
-        <Switch>
-          <Route
-            path="/"
-            exact
-            render={() => (
-              <div>
-                <Login_Popup />
-                <Products />
-              </div>
-            )}
-          />
-          <Route exact path="/cart" component={Cart} />
-          <Route exact path="/products/:id" component={Single_Product_Page} />
-          <Route path="/login" exact component={Login_Page} />
-          <Route path="/signup" exact component={SignUp_Page} />
-          <Route path="/home" component={Products} />
-          <Route exact path="/products/:id" component={Product} />
-        </Switch>
-      )} */}
     </div>
   );
 };

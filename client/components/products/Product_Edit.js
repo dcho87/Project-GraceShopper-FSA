@@ -21,6 +21,21 @@ export default function Product_Edit({ id, disableEditForm }) {
   return (
     <div className="edit-container">
       <form className="edit-form">
+        <p
+          style={{
+            margin: "10px",
+            background: "#000000",
+            width: "20px",
+            color: "#ffffff",
+            textAlign: "center",
+          }}
+          onClick={() => {
+            disableEditForm("");
+            document.body.style.overflow = "visible";
+          }}
+        >
+          X
+        </p>
         <div className="edit-form-item">
           {" "}
           <div className="edit-form-item">
