@@ -17,7 +17,7 @@ export default function Product() {
   const products = state.products;
 
   const category = product.map((pro) => [pro.category])[0];
-  console.log(category);
+  // console.log(category);
 
   const dispatch = useDispatch();
   const user = state.auth;

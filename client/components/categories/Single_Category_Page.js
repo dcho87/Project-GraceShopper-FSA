@@ -39,9 +39,9 @@ const SingleCategory_Page = () => {
     case "/products/Clone_X":
       category = "Clone X";
       break;
-    case "/products/Tasty_Bones":
-      category = "Tasty Bones XYZ";
-      break;
+    // case "/products/_Bones":
+    //   category = "Tasty Bones XYZ";
+    //   break;
     case "/products/The_Metascapes":
       category = "The Metascapes";
       break;

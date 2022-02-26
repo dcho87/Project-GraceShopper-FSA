@@ -15,7 +15,7 @@ export default function Product_Edit({ id, disableEditForm }) {
     id: productId,
     ...product,
   });
-  console.log(productId);
+  // console.log(productId);
 
   const dispatch = useDispatch();
   return (

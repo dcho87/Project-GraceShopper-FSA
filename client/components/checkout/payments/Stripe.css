@@ -58,7 +58,8 @@ body {
   margin: 0 15px 20px;
   padding: 0;
   border-style: none;
-  background-color: #61c5fa;
+  /* background-color: #61c5fa; */
+  background: linear-gradient(to bottom, white 0%, #3158a7 100%);
   will-change: opacity, transform;
   box-shadow: 0 6px 9px rgba(50, 50, 93, 0.06), 0 2px 5px rgba(0, 0, 0, 0.08),
     inset 0 1px 0 #0b1426;
@@ -83,7 +84,7 @@ body {
   width: 15%;
   min-width: 70px;
   padding: 11px 0;
-  color: #0b1426;
+  color: black;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
