@@ -70,9 +70,8 @@ const Previous_Orders_Page = () => {
     <div className="singleProduct">
       <h1>Previous Orders</h1>
       <div>
-        {userOrders ? (
+        {userOrders.length > 0 ? (
           userOrders.map((order) => {
-            console.log("nugget", order);
             const orderNum = order.id.split("-");
             const date = order.createdAt.slice(0, -14);
             const year = Number(date.split("-")[0]);
@@ -145,31 +144,16 @@ const Previous_Orders_Page = () => {
             );
           })
         ) : (
-          <div>no previous orders exist</div>
+          <h1
+            style={{
+              color: "white",
+            }}
+          >
+            No previous orders exist
+          </h1>
         )}
       </div>
-      <div>&nbsp;</div>
-      <div>&nbsp;</div>
-      <div>&nbsp;</div>
-      <div>&nbsp;</div>
-      <div>&nbsp;</div>
-      <div>&nbsp;</div>
-      <div>&nbsp;</div>
-      <div>&nbsp;</div>
-      <div>&nbsp;</div>
-      <div>&nbsp;</div>
-      <div>&nbsp;</div>
-      <div>&nbsp;</div>
-      <div>&nbsp;</div>
-      <div>&nbsp;</div>
-      <div>&nbsp;</div>
-      <div>&nbsp;</div>
-      <div>&nbsp;</div>
-      <div>&nbsp;</div>
-      <div>&nbsp;</div>
-      <div>&nbsp;</div>
-      <div>&nbsp;</div>
-      <div>&nbsp;</div>
+
       <div>&nbsp;</div>
       <div>&nbsp;</div>
       <div>&nbsp;</div>

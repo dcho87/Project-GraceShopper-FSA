@@ -10,14 +10,9 @@ const Bio = () => {
   const user = useSelector((state) => state.auth);
   const userOrders = useSelector((state) => state.users);
   const dispatch = useDispatch();
-  console.log("userOrders", userOrders);
-
-  // useEffect(() => {
-  //   dispatch(fetchHistory(user));
-  // }, []);
 
   return (
-    <div>
+    <div className="bio-main">
       <div className="header-bio">
         <h1>Manage Your Profiles</h1>
       </div>
