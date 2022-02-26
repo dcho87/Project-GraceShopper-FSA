@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchHistory, updateUserThunk } from "../../store";
 import Alert from "@mui/material/Alert";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
 
 class BioUpdate extends Component {
   constructor(props) {
@@ -54,10 +57,12 @@ class BioUpdate extends Component {
     const change = {};
     change[ev.target.name] = ev.target.value;
     this.setState(change);
+    console.log(ev.target);
+    // this.setState((state) => (state[ev.target.name] = ev.target.value));
   }
 
   async onSave(ev) {
-    ev.preventDefault();
+    // ev.preventDefault();
     try {
       await this.props.updateUser({ ...this.state });
       window.location.reload();
@@ -68,9 +73,9 @@ class BioUpdate extends Component {
   }
 
   async onSaveA(ev) {
-    ev.preventDefault();
+    // ev.preventDefault();
     if (this.state.newPassword !== this.state.confirmNewPassword) {
-      this.setState({ error: "your passwords do not match" });
+      this.setState({ error: "Your passwords do not match" });
       return;
     }
     try {
@@ -102,40 +107,74 @@ class BioUpdate extends Component {
         <form onSubmit={onSave} className="form-bio">
           {/* <pre>{!!error && JSON.stringify(error, null, 2)}</pre> */}
           <br />
-          <input
-            name="first_name"
-            value={first_name}
-            onChange={onChange}
-            placeholder="First Name"
-          />{" "}
-          <br />
-          <input
-            name="last_name"
-            value={last_name}
-            onChange={onChange}
-            placeholder="Last Name"
-          />{" "}
-          <br />
-          <input
-            name="email"
-            value={email}
-            onChange={onChange}
-            placeholder="Email"
-          />{" "}
-          <br />
-          <input
-            name="address"
-            value={address}
-            onChange={onChange}
-            placeholder="Address"
-          />{" "}
-          <br />
-          <button
-            className="button1"
-            disabled={!first_name || !last_name || !email}
+          <Box
+            component="form"
+            sx={{
+              "& > :not(style)": { m: 1, width: "25ch" },
+            }}
+            noValidate
+            autoComplete="off"
           >
-            Update{" "}
-          </button>
+            <TextField
+              id="filled-basic"
+              label="First Name"
+              variant="filled"
+              value={first_name}
+              onChange={(event) => {
+                const { value } = event.target;
+                this.setState({ first_name: value });
+              }}
+            />
+            <TextField
+              id="filled-basic"
+              label="Last Name"
+              variant="filled"
+              value={last_name}
+              onChange={(event) => {
+                const { value } = event.target;
+                this.setState({ last_name: value });
+              }}
+            />
+          </Box>
+          <Box
+            component="form"
+            sx={{
+              "& > :not(style)": { m: 1, width: "25ch" },
+            }}
+            noValidate
+            autoComplete="off"
+          >
+            <TextField
+              id="filled-basic"
+              label="Email"
+              variant="filled"
+              value={email}
+              onChange={(event) => {
+                const { value } = event.target;
+                this.setState({ email: value });
+              }}
+            />
+            <TextField
+              id="filled-basic"
+              label="address"
+              variant="filled"
+              value={address}
+              onChange={(event) => {
+                const { value } = event.target;
+                this.setState({ address: value });
+              }}
+            />
+          </Box>
+          <Box>
+            <Button
+              onClick={() => this.onSave()}
+              variant="contained"
+              size="medium"
+              disabled={!first_name || !last_name || !email}
+            >
+              Update{" "}
+            </Button>
+          </Box>
         </form>
         {error && (
           <Alert severity="error" className="error-text">
@@ -158,13 +197,16 @@ class BioUpdate extends Component {
             placeholder="Confirm Password"
             type="password"
           />{" "}
-          <br />
-          <button
-            disabled={!newPassword || !confirmNewPassword}
-            className="button1"
-          >
-            Update{" "}
-          </button>
+          <Box>
+            <Button
+              onClick={() => this.onSaveA()}
+              variant="contained"
+              size="medium"
+              disabled={!newPassword || !confirmNewPassword}
+            >
+              Update{" "}
+            </Button>
+          </Box>
         </form>
       </div>
     );

@@ -10,7 +10,7 @@
 .form-bio {
   border: 1px solid black;
   border-radius: 4px;
-  background-color: #61c5fa;
+  background-color: rgb(238, 234, 234);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -19,7 +19,7 @@
 .form-bio > input {
   border: 1px solid black;
   border-radius: 4px;
-  background-color: #61c5fa;
+  background-color: white;
   display: flex;
   flex-direction: column;
   align-items: center;

@@ -5,7 +5,7 @@ import configureMockStore from "redux-mock-store";
 import thunkMiddleware from "redux-thunk";
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import { fetchProducts } from "./product_store";
-import { fetchOrderDetails } from ".";
+import { fetchHistory } from ".";
 const middlewares = [thunkMiddleware];
 const mockStore = configureMockStore(middlewares);
 
@@ -36,6 +36,7 @@ export const me = () => async (dispatch) => {
         authorization: token,
       },
     });
+    dispatch(fetchHistory(response.data));
     const cart = JSON.parse(localStorage.getItem("cart"));
     if (cart) {
       const currOrder = (
