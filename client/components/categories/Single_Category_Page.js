@@ -113,168 +113,188 @@ const SingleCategory_Page = () => {
       break;
   }
 
+  let banner;
+  switch (category) {
+    case "Crypto Punks":
+      banner = logos.cryptoPunks.banner;
+      break;
+    case "Azuki":
+      banner = logos.azuki.banner;
+      break;
+    case "Clone X":
+      banner = logos.cloneX.banner;
+      break;
+    case "Tasty Bones XYZ":
+      banner = logos.tastyBones.banner;
+      break;
+    case "The Metascapes":
+      banner = logos.The_Metascapes.banner;
+      break;
+    case "The Ladies":
+      banner = logos.theLadies.banner;
+      break;
+    case "Grumpets":
+      banner = logos.Grumpets.banner;
+      break;
+    case "Little Lemon Friends":
+      banner = logos.littleLemonFriends.banner;
+      break;
+    default:
+      break;
+  }
+
   const products = useSelector((state) => state.products).filter(
     (product) => product.category === category
   );
 
   return (
-    <div className="single-category-container">
-      {products.map((product) => (
-        // <div className="product" key={product.name}>
-        //   <h1>{product.name}</h1>
-        //   <Link to={`/products/${product.id}`}>
-        //     <img className="product-img" src={product.imageURL} />
-        //   </Link>
-
-        //   <div className="product-details">
-        //     <p>
-        //       <b> Top Bid:</b> ${product.price.toLocaleString("en-US")}
-        //     </p>
-        //     <p>
-        //       {" "}
-        //       <b>Left in stock:</b> {product.inventory}
-        //     </p>
-        //     <p>
-        //       <b>Category: </b>
-        //       <Link to={`/products/${product.URL}`}>{product.category}</Link>
-        //     </p>
-        //     <button
-        //       disabled={product.id !== productId || totalItems === 0}
-        //       onClick={(ev) => {
-        //         dispatch(addToOrder(orderToAdd, user, product));
-        //         dispatch(editProduct(orderToAdd, product));
-        //         setProductId("");
-        //       }}
-        //     >
-        //       Add to cart
-        //     </button>
-        //     <input
-        //       type="number"
-        //       step={1}
-        //       placeholder={0}
-        //       min={0}
-        //       max={product.inventory}
-        //       onChange={(ev) => {
-        //         setTotalItems(ev.target.value * 1);
-        //         setTotalPrice(ev.target.value * product.price);
-        //         setProductId(product.id);
-        //       }}
-        //     ></input>
-        //   </div>
-        // </div>
-        <div>
-          <div className="product" key={product.name}>
-            <Link to={`/products/${product.id}`}>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        backgroundColor: "#ffffff",
+        justifyContent: "center",
+      }}
+    >
+      <div className="Image--content">
+        <div
+          className="banner"
+          style={{
+            display: "flex",
+            backgroundImage: `url(${banner})  `,
+            width: "100vw",
+            height: "220px",
+            backgroundSize: "cover",
+            minWidth: "1150px",
+            marginBottom: "50px",
+            // backgroundRepeat: "no-repeat ",
+          }}
+        ></div>
+      </div>
+      <h1 style={{ color: "#000000", textAlign: "center", fontSize: "3rem" }}>
+        {category}
+      </h1>
+      <div className="single-category-container">
+        <div className="single-category-products">
+          {products.map((product) => (
+            <div>
               <div
-                className=""
-                style={{
-                  backgroundImage: `url(${product.imageURL}) `,
-                  width: "360px",
-                  height: "360px",
-                  backgroundRepeat: "no-repeat",
-                  backgroundSize: "cover",
-                  borderTopLeftRadius: "20px",
-                  borderTopRightRadius: "20px",
-                }}
+                className="product"
+                key={product.name}
+                style={{ border: " 1px solid #333333" }}
               >
-                {/* <img className="product-img" src={product.imageURL} /> */}
-              </div>
-            </Link>
+                <Link to={`/products/${product.id}`}>
+                  <div
+                    className=""
+                    style={{
+                      backgroundImage: `url(${product.imageURL}) `,
+                      width: "360px",
+                      height: "360px",
+                      backgroundRepeat: "no-repeat",
+                      backgroundSize: "cover",
+                      borderTopLeftRadius: "20px",
+                      borderTopRightRadius: "20px",
+                    }}
+                  >
+                    {/* <img className="product-img" src={product.imageURL} /> */}
+                  </div>
+                </Link>
 
-            <div className="product-details">
-              <div className="other-details right">
-                <p>
-                  <Link to={`/products/${product.category}`}>
-                    {product.category}
-                  </Link>
-                </p>
-                <p style={{ fontSize: "1.4rem", fontWeight: "900" }}>
-                  {product.name}
-                </p>
+                <div className="product-details">
+                  <div className="other-details right">
+                    <p>
+                      <Link to={`/products/${product.category}`}>
+                        {product.category}
+                      </Link>
+                    </p>
+                    <p style={{ fontSize: "1.4rem", fontWeight: "900" }}>
+                      {product.name}
+                    </p>
 
-                {user.isAdmin === true ? (
-                  <div className="edit-delte-btns">
-                    {" "}
-                    <button
-                      onClick={() => {
-                        setProductId(product.id);
-                        setShow("show");
-                        document.body.style.overflow = "hidden";
+                    {user.isAdmin === true ? (
+                      <div className="edit-delte-btns">
+                        {" "}
+                        <button
+                          onClick={() => {
+                            setProductId(product.id);
+                            setShow("show");
+                            document.body.style.overflow = "hidden";
+                          }}
+                        >
+                          Edit
+                        </button>
+                        <button
+                          onClick={() => dispatch(destroyProduct(product.id))}
+                        >
+                          Delete
+                        </button>
+                      </div>
+                    ) : (
+                      ""
+                    )}
+                  </div>
+
+                  <div className="price-div right">
+                    <p style={{ fontSize: "0.8rem", margin: "0" }}>Buy Now</p>
+                    <p
+                      style={{
+                        fontSize: "1.3rem",
+                        fontWeight: "900",
+                        display: "flex",
+                        alignItems: "center",
                       }}
                     >
-                      Edit
-                    </button>
-                    <button
-                      onClick={() => dispatch(destroyProduct(product.id))}
-                    >
-                      Delete
-                    </button>
+                      <span style={{ fontSize: "1rem", marginRight: "2px" }}>
+                        $
+                      </span>
+                      {product.price}
+                    </p>
                   </div>
-                ) : (
-                  ""
-                )}
-              </div>
-
-              <div className="price-div right">
-                <p style={{ fontSize: "0.8rem", margin: "0" }}>Buy Now</p>
-                <p
+                </div>
+                <form
+                  className="add-btn"
                   style={{
-                    fontSize: "1.3rem",
-                    fontWeight: "900",
-                    display: "flex",
-                    alignItems: "center",
+                    backgroundColor: "#ffffff",
+                    borderBottomLeftRadius: "20px",
+                    borderBottomRightRadius: "20px",
                   }}
                 >
-                  <span style={{ fontSize: "1rem", marginRight: "2px" }}>
-                    $
-                  </span>
-                  {product.price}
-                </p>
+                  <select
+                    name="quantity"
+                    onChange={(ev) => {
+                      setTotalItems(ev.target.value * 1);
+                      setTotalPrice(ev.target.value * product.price);
+                      setProductId(product.id);
+                    }}
+                    style={{
+                      width: "120px",
+                      margin: "20px 10px",
+                      textAlign: "center",
+                    }}
+                  >
+                    <option>Choose Quantity</option>
+                    {new Array(product.inventory).fill("").map((_, idx) => (
+                      <option>{idx + 1}</option>
+                    ))}
+                  </select>
+                  <button
+                    className="addToCart1"
+                    disabled={product.id !== productId || totalItems === 0}
+                    onClick={(ev) => {
+                      dispatch(addToOrder(orderToAdd, user, product));
+                      dispatch(editProduct(orderToAdd, product));
+                      setProductId("");
+                      console.log(JSON.stringify(orderToAdd));
+                    }}
+                  >
+                    {product.inventory === 0 ? "Out of Stock" : "Add to cart"}
+                  </button>
+                </form>
               </div>
             </div>
-            {/* <div > */}
-            <form className="add-btn">
-              {/* <label for="lang">Qty:</label> */}
-              <select
-                name="quantity"
-                onChange={(ev) => {
-                  setTotalItems(ev.target.value * 1);
-                  setTotalPrice(ev.target.value * product.price);
-                  setProductId(product.id);
-                }}
-                style={{ width: "50px" }}
-              >
-                {new Array(product.inventory).fill("").map((_, idx) => (
-                  <option>{idx + 1}</option>
-                ))}
-              </select>
-              <button
-                className="addToCart"
-                // disabled={product.id !== productId || totalItems === 0}
-                onClick={(ev) => {
-                  dispatch(addToOrder(orderToAdd, user, product));
-                  dispatch(editProduct(orderToAdd, product));
-                  setProductId("");
-                }}
-              >
-                Add to cart
-              </button>
-            </form>
-            {/* <input
-        
-          
-              
-              onChange={(ev) => {
-                setTotalItems(ev.target.value * 1);
-                setTotalPrice(ev.target.value * product.price);
-                setProductId(product.id);
-              }}
-            ></input> */}
-
-            {/* </div> */}
-          </div>
+          ))}
         </div>
-      ))}
+      </div>
     </div>
   );
 };

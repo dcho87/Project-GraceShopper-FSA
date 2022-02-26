@@ -236,7 +236,7 @@ class CheckoutForm extends React.Component {
     } = this.state;
     const { stripe, user } = this.props;
     const { onChange, onSave } = this;
-    console.log(this.props);
+    // console.log(this.props);
     // console.log(name);
     return paymentMethod ? (
       <div className="Result">

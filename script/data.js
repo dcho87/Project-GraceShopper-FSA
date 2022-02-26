@@ -509,7 +509,7 @@ const data = {
     },
     {
       image_url:
-        "https://lh3.googleusercontent.com/T852DHtm_9h9lb35xsxZnms1EvUZcbDTE9c6NCCUfr-HTDwMbG7xfS4fG5iMmbuWjMpw40s073nPu6E0CuOzx6pdhMMp2MFOFOhz458=w600",
+        "https://lh3.googleusercontent.com/_4RRRvT-9m_JXH82bBO5Ovg0y3wGnEcMABYcE7u7EqSqg3bnqMtw1HcF4bfKDU077UisIpTN7yizseeCrKsDqD5-3sfYxsVDMAy1=s0",
       name: "Grumpet #344",
       price: 999,
       inventory: 16,

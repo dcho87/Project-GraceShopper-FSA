@@ -77,7 +77,7 @@ class BioUpdate extends Component {
       this.state.password = this.state.newPassword;
       await this.props.updateUser({ ...this.state });
       window.location.reload();
-      console.log("working");
+      // console.log("working");
     } catch (er) {
       console.log(er);
       // this.setState({ error: er.response.data.error.errors[0].message });

@@ -42,18 +42,6 @@ const Routes = () => {
 
         <Route
           exact
-          path="/home"
-          render={() => (
-            <div>
-              {isLoggedIn === false ? <Login_Popup /> : ""}
-              <Login_Popup />
-              <Products />
-            </div>
-          )}
-        />
-        <Route exact path="/" component={Products} />
-        <Route
-          exact
           path="/products/Crypto_Punks"
           component={Single_Category_Page}
         />

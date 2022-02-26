@@ -87,7 +87,7 @@ export default function Product() {
                   style={{
                     display: "flex",
                     flexDirection: "column",
-                    margin: "0",
+                    margin: "30px 0",
                   }}
                 >
                   <p style={{ fontSize: "1rem", marginBottom: "5px" }}>
@@ -107,37 +107,46 @@ export default function Product() {
                     {product.price}
                   </p>
                 </div>
-                {/* <p>
-                  <b>Left in stock:</b> {product.inventory}
-                </p> */}
-                <form className="add-btn">
-                  {/* <label for="lang">Qty:</label> */}
-                  <select
-                    name="quantity"
-                    onChange={(ev) => {
-                      setTotalItems(ev.target.value * 1);
-                      setTotalPrice(ev.target.value * product.price);
-                      setProductId(product.id);
-                    }}
-                    style={{ width: "50px" }}
-                  >
-                    {new Array(product.inventory).fill("").map((_, idx) => (
-                      <option>{idx + 1}</option>
-                    ))}
-                  </select>
-                  <button
-                    className="addToCart"
-                    disabled={product.id !== productId || totalItems === 0}
-                    onClick={(ev) => {
-                      dispatch(addToOrder(orderToAdd, user, product));
-                      dispatch(editProduct(orderToAdd, product));
-                      setProductId("");
-                    }}
-                  >
-                    {}
-                  </button>
-                </form>
               </div>
+              <form
+                className="add-btn"
+                style={{
+                  backgroundColor: "#ffffff",
+                  borderBottomLeftRadius: "20px",
+                  borderBottomRightRadius: "20px",
+                }}
+              >
+                <select
+                  name="quantity"
+                  onChange={(ev) => {
+                    setTotalItems(ev.target.value * 1);
+                    setTotalPrice(ev.target.value * product.price);
+                    setProductId(product.id);
+                  }}
+                  style={{
+                    width: "120px",
+                    margin: "20px 10px",
+                    textAlign: "center",
+                  }}
+                >
+                  <option>Choose Quantity</option>
+                  {new Array(product.inventory).fill("").map((_, idx) => (
+                    <option>{idx + 1}</option>
+                  ))}
+                </select>
+                <button
+                  className="addToCart"
+                  disabled={product.id !== productId || totalItems === 0}
+                  onClick={(ev) => {
+                    dispatch(addToOrder(orderToAdd, user, product));
+                    dispatch(editProduct(orderToAdd, product));
+                    setProductId("");
+                    console.log(JSON.stringify(orderToAdd));
+                  }}
+                >
+                  {product.inventory === 0 ? "Out of Stock" : "Add to cart"}
+                </button>
+              </form>
             </div>
           </div>
           <div className="product-suggestions-container">
@@ -185,8 +194,34 @@ export default function Product() {
                         <p style={{ fontSize: "1.4rem", fontWeight: "900" }}>
                           {product.name}
                         </p>
-
-                        <div className="add-div">
+                        {/* <form
+                          className="add-btn"
+                          style={{
+                            backgroundColor: "#ffffff",
+                            borderBottomLeftRadius: "20px",
+                            borderBottomRightRadius: "20px",
+                          }}
+                        >
+                          <select
+                            name="quantity"
+                            onChange={(ev) => {
+                              setTotalItems(ev.target.value * 1);
+                              setTotalPrice(ev.target.value * product.price);
+                              setProductId(product.id);
+                            }}
+                            style={{
+                              width: "120px",
+                              margin: "20px 10px",
+                              textAlign: "center",
+                            }}
+                          >
+                            <option>Choose Quantity</option>
+                            {new Array(product.inventory)
+                              .fill("")
+                              .map((_, idx) => (
+                                <option>{idx + 1}</option>
+                              ))}
+                          </select>
                           <button
                             className="addToCart"
                             disabled={
@@ -196,23 +231,14 @@ export default function Product() {
                               dispatch(addToOrder(orderToAdd, user, product));
                               dispatch(editProduct(orderToAdd, product));
                               setProductId("");
+                              console.log(JSON.stringify(orderToAdd));
                             }}
                           >
-                            Add to cart
+                            {product.inventory === 0
+                              ? "Out of Stock"
+                              : "Add to cart"}
                           </button>
-                          <input
-                            type="number"
-                            step={1}
-                            placeholder={0}
-                            min={0}
-                            max={product.inventory}
-                            onChange={(ev) => {
-                              setTotalItems(ev.target.value * 1);
-                              setTotalPrice(ev.target.value * product.price);
-                              setProductId(product.id);
-                            }}
-                          ></input>
-                        </div>
+                        </form> */}
                       </div>
 
                       <div className="price-div right">

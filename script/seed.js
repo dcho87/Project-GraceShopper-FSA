@@ -110,7 +110,7 @@ async function seed() {
       Product.create({
         name: product.name,
         imageURL: product.image_url,
-        category: "Tasty Bones",
+        category: "Tasty Bones XYZ",
         URL: "Tasty_Bones",
         inventory: product.inventory,
         price: product.price,

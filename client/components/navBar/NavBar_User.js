@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { logout } from "../../store";
 import "./Navbar.css";
 import { useSelector, useDispatch } from "react-redux";
@@ -19,80 +19,121 @@ const Navbar_User = ({ handleClick, user }) => {
 
   return (
     <div className="header">
-      <Link to="/home">
+      <NavLink
+        activeClassName="selected"
+        exact
+        activeClassName="selected"
+        to="/home"
+      >
         <h1 id="logo">
           <img className="nft-logo" src="/NFT-Logo.jpg" />
         </h1>
-      </Link>
+      </NavLink>
 
       <nav>
         <div className="nav-links">
           <ul className="nav-list">
             {user.isAdmin === true ? (
               <li className="nav-item">
-                <Link
+                <NavLink
+                  activeClassName="selected"
+                  exact
                   to="/create-product"
                   className="nav-btn nav-link"
                   // onClick={() => window.location()}
                 >
                   Add Product
-                </Link>
+                </NavLink>
               </li>
             ) : (
               ""
             )}
             <li className="nav-item">
               {" "}
-              <Link to="/home" className="nav-btn nav-link">
+              <NavLink
+                activeClassName="selected"
+                exact
+                to="/home"
+                className="nav-btn nav-link"
+              >
                 Home
-              </Link>
+              </NavLink>
             </li>
             <li className="nav-item">
               <a className="nav-btn">Explore</a>
               <ul className="dropdown">
                 <li className="dropdown-item">
-                  <Link className="dropdown-link" to="/products/Azuki">
+                  <NavLink
+                    activeClassName="selected"
+                    className="dropdown-link"
+                    to="/products/Azuki"
+                  >
                     Azuki
-                  </Link>
+                  </NavLink>
                 </li>
                 <li className="dropdown-item">
-                  <Link className="dropdown-link" to="/products/Crypto_Punks">
+                  <NavLink
+                    activeClassName="selected"
+                    className="dropdown-link"
+                    to="/products/Crypto_Punks"
+                  >
                     Crypto Punks
-                  </Link>
+                  </NavLink>
                 </li>
                 <li className="dropdown-item">
-                  <Link className="dropdown-link" to="/products/Clone_X">
+                  <NavLink
+                    activeClassName="selected"
+                    className="dropdown-link"
+                    to="/products/Clone_X"
+                  >
                     Clone X
-                  </Link>
+                  </NavLink>
                 </li>
                 <li className="dropdown-item">
-                  <Link className="dropdown-link" to="/products/Tasty_Bones">
+                  <NavLink
+                    activeClassName="selected"
+                    className="dropdown-link"
+                    to="/products/Tasty_Bones"
+                  >
                     Tasty Bones
-                  </Link>
+                  </NavLink>
                 </li>
                 <li className="dropdown-item">
-                  <Link className="dropdown-link" to="/products/The_Metascapes">
+                  <NavLink
+                    activeClassName="selected"
+                    className="dropdown-link"
+                    to="/products/The_Metascapes"
+                  >
                     The Metascapes
-                  </Link>
+                  </NavLink>
                 </li>
 
                 <li className="dropdown-item">
-                  <Link className="dropdown-link" to="/products/The_Ladies">
+                  <NavLink
+                    activeClassName="selected"
+                    className="dropdown-link"
+                    to="/products/The_Ladies"
+                  >
                     The Ladies
-                  </Link>
+                  </NavLink>
                 </li>
                 <li className="dropdown-item">
-                  <Link className="dropdown-link" to="/products/Grumpets">
+                  <NavLink
+                    activeClassName="selected"
+                    className="dropdown-link"
+                    to="/products/Grumpets"
+                  >
                     Grumpets
-                  </Link>
+                  </NavLink>
                 </li>
                 <li className="dropdown-item">
-                  <Link
+                  <NavLink
+                    activeClassName="selected"
                     className="dropdown-link"
                     to="/products/Little_Lemon_Friends"
                   >
                     Little Lemon Friends
-                  </Link>
+                  </NavLink>
                 </li>
               </ul>
             </li>

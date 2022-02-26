@@ -29,6 +29,7 @@ const CheckoutProducts = () => {
   return (
     <>
       <div>
+        <h1 className="checkout-header">Product Details</h1>
         {/* <nav>
         {isLoggedIn ? (
         <div className="nav-links">
@@ -39,6 +40,7 @@ const CheckoutProducts = () => {
          The navbar will show these links before you log in 
         )} 
         </nav>  */}
+        <div className="checkout-prod"></div>
         {!!orderDetails.totalItems ? (
           <div className="check-cont">
             {orderDetails.products.map((product) => (
@@ -46,7 +48,7 @@ const CheckoutProducts = () => {
                 <Link to={`/products/${product.id}`}>
                   <img className="cart-image" src={product.imageURL}></img>
                 </Link>
-                <div className="order-info-cont">
+                <div className="order-info-cont-text">
                   <Link to={`/products/${product.id}`}>
                     <h3>{product.name}</h3>
                     <h4>
@@ -72,7 +74,7 @@ const CheckoutProducts = () => {
                 Estimated Tax: $
                 {Math.round(orderDetails.totalPrice * 0.07).toFixed(2)}
               </div>
-              <h3 className="total-cont">
+              <h3 className="total-cont-order">
                 Order Total: $
                 {(orderDetails.totalPrice * 1.07).toLocaleString("en-US")}
               </h3>
@@ -86,7 +88,6 @@ const CheckoutProducts = () => {
                 <Link to="/orders/previous_orders">View Previous Orders</Link>
               </div>
             </div>
-
             <h2>
               {user.first_name}, you have nothing in your cart. Click
               <Link to="/home"> here to</Link> add products

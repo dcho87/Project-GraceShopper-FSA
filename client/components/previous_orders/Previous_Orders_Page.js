@@ -39,40 +39,12 @@ const Previous_Orders_Page = () => {
   const user = useSelector((state) => state.auth);
   const products = useSelector((state) => state.products);
 
-  // const userOrders = [];
-  // if (state.orders && state.orders.length > 0) {
-  //   const id = state.auth.id;
-  //   console.log("id", id);
-
-  //   // console.log("order", state.orders);
-  //   // const orders = state.orders.filter((order) => order.UserId === thisId);
-  //   // console.log(orders);
-
-  //   for (let i = 0; i < state.orders.length; i++) {
-  //     if (state.orders[i].userId === id) {
-  //       // if (state.orders.indexOf(i) === -1) {
-  //       // console.log([i], st.orders[i]);
-
-  //       userOrders.push(state.orders[i]);
-  //     }
-  //   }
-  // }
-  // console.log("check", state.orders[0].products);
-  //   if(this.items.indexOf(item) === -1) {
-  //     this.items.push(item);
-  //     console.log(this.items);
-  // }
-
-  // const userOrders = finder(state, id);
-  // console.log(userOrders);
-
   return (
     <div className="singleProduct">
       <h1>Previous Orders</h1>
       <div>
         {userOrders ? (
           userOrders.map((order) => {
-            console.log("nugget", order);
             const orderNum = order.id.split("-");
             const date = order.createdAt.slice(0, -14);
             const year = Number(date.split("-")[0]);
@@ -96,7 +68,7 @@ const Previous_Orders_Page = () => {
                   </div>
 
                   <div className="ship-cont">
-                    <div>SHIP TO</div>
+                    <div>SOLD TO</div>
                     <div className="total">
                       {user.first_name} {user.last_name}
                     </div>
