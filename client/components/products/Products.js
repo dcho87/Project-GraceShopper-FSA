@@ -164,6 +164,7 @@ const Products = () => {
                     setTotalPrice(ev.target.value * product.price);
                     setProductId(product.id);
                   }}
+                  onClick={() => console.log("product", product)}
                 ></input>
 
                 {user.isAdmin === true ? (

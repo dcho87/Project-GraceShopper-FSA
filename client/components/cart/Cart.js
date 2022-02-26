@@ -59,133 +59,156 @@ const Cart = () => {
     return null;
   }
 
+  console.log("orderDetails", orderDetails);
+
   return (
-    <div className="cart-cont-cart">
-      <div className="header-cart">
-        <h1>Shopping Cart</h1>
-      </div>
+    <div className="cart">
+      <h1>Shopping Cart</h1>
+      {orderDetails.totalItems ? (
+        <div>
+          <ul className="cart-cont-cart">
+            {orderDetails.products.map((product, idx) => {
+              if (!totalInv.hasOwnProperty(product.id)) {
+                totalInv[product.id] =
+                  product.orderproduct.itemCount + product.inventory;
+              }
 
-      {orderDetails.products.map((product, idx) => {
-        if (!totalInv.hasOwnProperty(product.id)) {
-          totalInv[product.id] =
-            product.orderproduct.itemCount + product.inventory;
-        }
+              return (
+                <div key={product.id} className="single-prod-cont-cart">
+                  <Link to={`/products/${product.id}`} className="image">
+                    <div
+                      style={{
+                        backgroundImage: `url(${product.imageURL}) `,
+                        width: "70px",
+                        height: "70px",
+                        backgroundRepeat: "no-repeat",
+                        backgroundSize: "cover",
+                        borderTopLeftRadius: "20px",
+                        borderTopRightRadius: "20px",
+                      }}
+                    ></div>
+                  </Link>
+                  <div className="order-data">
+                    <Link to={`/products/${product.id}`}>
+                      <div>
+                        <h3>{product.name}</h3>
+                      </div>
+                    </Link>
+                    <div>
+                      Price per Item: ${product.price.toLocaleString("en-US")}
+                    </div>
+                    <div className="update-order-cont">
+                      <div className="quantity-cont">Quantity:</div>
+                      <input
+                        className="input-cont"
+                        type="number"
+                        opacity={1}
+                        step={1}
+                        defaultValue={product.orderproduct.itemCount}
+                        min={0}
+                        max={totalInv[product.id]}
+                        onChange={(ev) => {
+                          setTotalItems(ev.target.value * 1);
+                          setTotalPrice(ev.target.value * product.price);
+                          setProductId(product.id);
+                          productId !== product.id && setError("");
+                        }}
+                        onClick={(ev) => {
+                          productId !== product.id && setError("");
+                          setProductId(product.id);
+                          ev.target.value * 1 === totalInv[product.id] &&
+                          ev.target.value * 1 === currentVal
+                            ? setError("Inventory Limit Has Been Reached")
+                            : setError("");
+                          setCurrentVal(ev.target.value * 1);
+                        }}
+                      ></input>
 
-        // idx === orderDetails.products.length - 1 &&
-        // console.log("totalInv", totalInv);
-
-        return (
-          <div key={product.id} className="single-product-cont-cart">
-            <Link to={`/products/${product.id}`}>
-              <img className="cart-image-cart" src={product.imageURL}></img>
-            </Link>
-
-            <div className="order-info-cont-cart">
-              <Link to={`/products/${product.id}`}>
-                NFT Description: {product.description}
-              </Link>
-              <div> ${product.price.toLocaleString("en-US")} per NFT</div>
-              <div className="error-cont">
-                {!!error && productId === product.id ? (
-                  <Alert severity="error" className="error-text">
-                    {error}
-                  </Alert>
-                ) : (
-                  ""
-                )}
+                      <button
+                        className="update-button"
+                        disabled={
+                          productId === "joe" ||
+                          product.id !== productId ||
+                          totalItems === 0
+                        }
+                        onClick={() => {
+                          dispatch(
+                            updateOrder(orderDetails, orderToAdd, product)
+                          );
+                          setProductId("Joe");
+                        }}
+                      >
+                        Update Order Quantity
+                      </button>
+                      <button
+                        className="delete-button"
+                        onClick={() =>
+                          dispatch(deleteOrder(orderDetails, product))
+                        }
+                      >
+                        Delete NFT from Order
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+            <div className="order-footer">
+              <div className="continue-shopping-cont">
+                <Link to="/home">Continue Shopping</Link>
               </div>
-              <div className="quantity-cont-cart">
-                <div>Order Quantity:</div>
-                <input
-                  type="number"
-                  step={1}
-                  defaultValue={product.orderproduct.itemCount}
-                  min={0}
-                  max={totalInv[product.id]}
-                  onChange={(ev) => {
-                    setTotalItems(ev.target.value * 1);
-                    setTotalPrice(ev.target.value * product.price);
-                    setProductId(product.id);
-                    productId !== product.id && setError("");
-                  }}
-                  onClick={(ev) => {
-                    productId !== product.id && setError("");
-                    setProductId(product.id);
-                    // setInvLimit(
-                    //   product.orderproduct.itemCount + product.inventory
-                    // );
-                    ev.target.value * 1 === totalInv[product.id] &&
-                    ev.target.value * 1 === currentVal
-                      ? setError("Inventory Limit Has Been Reached")
-                      : setError("");
-                    setCurrentVal(ev.target.value * 1);
-
-                    // console.log("totalItems - on inc/dec click", totalItems);
-
-                    // console.log("totalPrice - on inc/dec click", totalPrice);
-
-                    // console.log(
-                    //   "orderDetails - on inc/dec click",
-                    //   orderDetails
-                    // );
-                  }}
-                ></input>
-                <button
-                  disabled={
-                    productId === "joe" ||
-                    product.id !== productId ||
-                    totalItems === 0
-                  }
-                  onClick={() => {
-                    // console.log(
-                    //   "orderDetails - on update click, before thunk",
-                    //   orderDetails
-                    // );
-                    dispatch(updateOrder(orderDetails, orderToAdd, product));
-                    setProductId("Joe");
-                    // console.log(
-                    //   "orderDetails - on update click, after thunk",
-                    //   orderDetails
-                    // );
-                    // console.log("orderToAdd - on update click", orderToAdd);
-
-                    // console.log("totalItems - on update click", totalItems);
-
-                    // console.log("totalPrice - on update click", totalPrice);
-                  }}
-                >
-                  Update Order Quantity
-                </button>
-                <button
-                  onClick={() => dispatch(deleteOrder(orderDetails, product))}
-                >
-                  Delete NFT from Order
-                </button>
+              <div className="total-cont">
+                <div className="subtotal-cont">
+                  {" "}
+                  Subtotal ({orderDetails.totalItems}{" "}
+                  {orderDetails.totalItems === 1 ? "item" : "items"}): $
+                  {orderDetails.totalPrice.toLocaleString("en-US")}
+                </div>
+                <div className="checkout-cont-cart">
+                  <Link
+                    to="/orders/checkout"
+                    className="link-to-checkout-cont-cart"
+                  >
+                    Proceed to Checkout
+                  </Link>
+                </div>
               </div>
             </div>
+          </ul>
+        </div>
+      ) : (
+        <div className="order-footer-no-items">
+          <div className="continue-shopping-cont-no-items">
+            <div>You have no items in your cart shopping right now.</div>
+            <Link to="/home">Shop Now!</Link>
           </div>
-        );
-      })}
-      <div className="checkout-cont-cart">
-        {orderDetails.totalItems ? (
-          <div>
-            <div className="total-cont-cart">
-              Subtotal ({orderDetails.totalItems}{" "}
-              {orderDetails.totalItems === 1 ? "item" : "items"}): $
-              {orderDetails.totalPrice.toLocaleString("en-US")}
-            </div>
-            <Link to="/orders/checkout" className="link-to-checkout-cont-cart">
-              Proceed to Checkout
-            </Link>
-            <Link to="/home">Continue Shopping</Link>
-          </div>
-        ) : (
-          <div>
-            <h2>{user.first_name}, you have nothing in your cart.</h2>
-            <Link to="/home">Shop now!</Link>
-          </div>
-        )}
-      </div>
+        </div>
+      )}
+      <div>&nbsp;</div>
+      <div>&nbsp;</div>
+      <div>&nbsp;</div>
+      <div>&nbsp;</div>
+      <div>&nbsp;</div>
+      <div>&nbsp;</div>
+      <div>&nbsp;</div>
+      <div>&nbsp;</div>
+      <div>&nbsp;</div>
+      <div>&nbsp;</div>
+      <div>&nbsp;</div>
+      <div>&nbsp;</div>
+      <div>&nbsp;</div>
+      <div>&nbsp;</div>
+      <div>&nbsp;</div>
+      <div>&nbsp;</div>
+      <div>&nbsp;</div>
+      <div>&nbsp;</div>
+      <div>&nbsp;</div>
+      <div>&nbsp;</div>
+      <div>&nbsp;</div>
+      <div>&nbsp;</div>
+      <div>&nbsp;</div>
+      <div>&nbsp;</div>
+      <div>&nbsp;</div>
     </div>
   );
 };
