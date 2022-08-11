@@ -58,29 +58,19 @@ router.get("/:id", async (req, res, next) => {
 
 router.put("/:id", async (req, res, next) => {
   try {
-    const orderInfo = req.body;
-    // console.log("orderInfo", orderInfo);
-    // const order = (await Order.findByPk(req.params.id)) || {};
-    // console.log("order", order);
-    // const orderInfo = req.body;
-    // console.log("orderInfo", orderInfo);
-    // const productId = orderInfo.productId;
-    // console.log("productId", productId);
-    // const productDetails =
-    //   order.products &&
-    //   order.products.find((product) => product.id === productId);
-    // console.log("productDetails", productDetails);
-    // // const productDB = await Product.findByPk(productDetails.id);
-    // //find an order and product
-    // console.log("orderInfo", orderInfo);
+    //find an order and product
+    const order = (await Order.findByPk(req.params.id)) || {};
+    const product = (await Product.findByPk(req.body.id)) || {};
+    let count = req.body.itemCount;
 
-    // //find or create an associate between order and product
-    // const [orderProduct] = await OrderProduct.findOrCreate({
-    //   where: {
-    //     orderId: req.params.id,
-    //     productId: orderInfo.productId,
-    //   },
-    // });
+    //find or create an associate between order and product
+    const [orderProduct] = await OrderProduct.findOrCreate({
+      where: {
+        orderId: req.params.id,
+        productId: req.body.id,
+      },
+    });
+    const orderInfo = req.body;
 
     let order,
       productId,
@@ -253,32 +243,42 @@ router.put("/:id", async (req, res, next) => {
 // });
 
 //route to Update Order
-// router.put("/deleteOrder/:id", async (req, res, next) => {
-//   try {
-//     const order = req.body;
-//     console.log("order from delete", order);
-//     const productId = req.body.productId;
-//     const productDetails = order.products.find(
-//       (product) => product.id === productId
-//     );
-//     const productAmount = productDetails.price;
-//     const productQuantity = productDetails.orderproduct.itemCount;
-//     const currentInventory = productDetails.inventory;
 
-//     //find the Products for Active Order
-//     const lineProduct = await OrderProduct.findOne({
-//       where: {
-//         orderId: order.id,
-//         productId,
-//       },
-//     });
-//     await lineProduct.destroy();
+router.put("/update", async (req, res, next) => {
+  try {
+    const { order, product, itemCount } = req.body;
 
-//     //find the Active Order
-//     const orderDB = await Order.findByPk(order.id);
-//     console.log("orderDB", orderDB);
-//     const productDB = await Product.findByPk(productDetails.id);
-//     console.log("productDB", productDB);
+    //find the Products for Active Order
+    const lineProduct = await OrderProduct.findOne({
+      where: {
+        orderId: order.id,
+        productId: product.id,
+      },
+    });
+
+    //delete Product if itemCount is 0
+    if (itemCount === 0) {
+      await lineProduct.delete();
+    } else {
+      await lineProduct.update({
+        itemCount: itemCount,
+      });
+    }
+
+    //find the Active Order
+    const orderDB = await Order.findOne({
+      where: {
+        orderId: order.id,
+      },
+    });
+
+    const newTotalPrice = orderDB.totalPrice + product.price * itemCount;
+    const newTotalItems = orderDB.totalItems + (itemCount - orderDB.totalItems);
+
+    await orderDB.update({
+      totalPrice: newTotalPrice,
+      totalItems: newTotalItems,
+    });
 
 //     await productDB.update({
 //       inventory: productDB.inventory + productQuantity,

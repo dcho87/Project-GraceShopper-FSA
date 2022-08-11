@@ -57,6 +57,156 @@ async function seed() {
     }),
   ]);
 
+
+  await Promise.all(
+    users.map(async (user) => {
+      await user.addOrder(await Order.create());
+    })
+  );
+
+  const products = await Promise.all([
+    Product.create({
+      name: "Seascape",
+      description: "A beautiful seascape",
+      imageURL:
+        "https://images.unsplash.com/photo-1518837695005-2083093ee35b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
+      category: "Landscapes",
+      price: 39,
+      inventory: 12,
+    }),
+
+    Product.create({
+      name: "Desert",
+      description: "A spanning desert",
+      imageURL:
+        "https://media.istockphoto.com/photos/sand-dunes-in-the-sahara-desert-morocco-picture-id983422208?k=20&m=983422208&s=612x612&w=0&h=gjtn_hlkqzKfGQJQg62QTUbpFlQ0O5E5LnxQ5arh4ao=",
+      category: "Landscapes",
+      price: 22,
+      inventory: 18,
+    }),
+
+    Product.create({
+      name: "Mountain",
+      description: "A stunning snowy mountain",
+      imageURL:
+        "https://media.istockphoto.com/videos/the-perfect-mountain-aerial-shot-video-id181013019?s=640x640",
+      category: "Landscapes",
+      price: 25,
+      inventory: 19,
+    }),
+
+    Product.create({
+      name: "Forest",
+      description: "A captivating silent forest",
+      imageURL:
+        "https://www.treehugger.com/thmb/QolJfOYFmxwIH6Sxv5SBqY8Kq-M=/1885x1414/smart/filters:no_upscale()/GettyImages-1273584292-cbcd5f85f4c646d58f7a7fa158dcaaeb.jpg",
+      category: "Landscapes",
+      price: 39,
+      inventory: 15,
+    }),
+
+    Product.create({
+      name: "City",
+      description: "A grandious city",
+      imageURL:
+        "https://static01.nyt.com/images/2021/04/09/realestate/09SUBURBTOCITY-slide-ROM2/09SUBURBTOCITY-slide-ROM2-mobileMasterAt3x.jpg",
+      category: "Landscapes",
+      price: 50,
+      inventory: 9,
+    }),
+
+    //doodle
+    Product.create({
+      name: "Squiggly",
+      description: "Unique Squiggle with two peaks",
+      imageURL:
+        "https://lh3.googleusercontent.com/36pq45ZwWmyX1haBqD29ysVcw8F9Cmx1ZgAFC6ptJfnDAJneA9Vqk6pRSScZDU0c8Hh1MPF6uvEcNEI-cT_DEbyWNBGhvinwA5DE=w1400-k",
+      category: "Doodles",
+      price: 170,
+      inventory: 7,
+    }),
+
+    Product.create({
+      name: "Big Squiggle",
+      description: "Chromatic and intense action",
+      imageURL:
+        "https://lh3.googleusercontent.com/_gy7-sZJ5u5H0dBkANZTtGaBtbBgU_Ui424RHvx9k1AhffIajWs-ttf7Dn4sUcW2fdmhEN0Hcjn6KamobkrAs5hVtBMf29xzNSSDOw=w1400-k",
+      category: "Doodles",
+      price: 120,
+      inventory: 5,
+    }),
+
+    Product.create({
+      name: "Blue Squiggle",
+      description: "Scintillating vertical lines",
+      imageURL:
+        "https://lh3.googleusercontent.com/V8vm4TZJuQDB-frpp2RROJJBcQg2A8KC-nTf7ZMM04RDlhlCPDDs0cR0gtyWV2llJ0yR9L9W6zD0Ra7jnepWExECoNs5ZIfL7bfsAA=w1400-k",
+      category: "Doodles",
+      price: 290,
+      inventory: 8,
+    }),
+
+    Product.create({
+      name: "Squiggle Rainbow",
+      description: "Vibrate experience",
+      imageURL:
+        "https://static.nftgo.io/asset/metadata/c9fba9f0b9225caa73710b35b8ad0eb8.png",
+      category: "Doodles",
+      price: 350,
+      inventory: 123,
+    }),
+
+    Product.create({
+      name: "Light Squiggle",
+      description: "Lighter hue for a more mellow affair",
+      imageURL:
+        "https://external-preview.redd.it/cZn2m1ikRJMIvOWLjl6p-hT6vmOMEjVIc-uPUQxgO2A.jpg?auto=webp&s=0821e1f4ae5004e14320138c67d50306f7c5d961",
+      category: "Doodles",
+      price: 99,
+      inventory: 4,
+    }),
+
+    //cars
+
+    Product.create({
+      name: "Golf",
+      description: "It goes fast enough",
+      imageURL:
+        "https://oceanatlanticrentals.com/wp-content/uploads/2016-Club-Car-Precedent-4-Seater-Macon-GA-1295_2.aiimg-w700ar1cr0.jpg",
+      category: "Cars",
+      price: 100,
+      inventory: 21,
+    }),
+
+    Product.create({
+      name: "SUV",
+      description: "Luxury and Utility",
+      imageURL:
+        "https://di-uploads-pod4.dealerinspire.com/sunrisechevyredesign/uploads/2019/02/tahoe-exterior.jpg",
+      category: "Cars",
+      price: 120,
+      inventory: 12,
+    }),
+
+    Product.create({
+      name: "Tank",
+      description: "Truck will fit your golf clubs",
+      imageURL:
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Challenger2-Bergen-Hohne-Training-Area-2.jpg/600px-Challenger2-Bergen-Hohne-Training-Area-2.jpg",
+      category: "Cars",
+      price: 450,
+      inventory: 9,
+    }),
+
+    Product.create({
+      name: "Sport",
+      description: "Suitable for a Bond villan",
+      imageURL:
+        "https://www.denverpost.com/wp-content/uploads/2021/07/7.14D-Lucid-scaled-1.jpg?w=1020",
+      category: "Cars",
+      price: 720,
+      inventory: 5,
+    }),
   const testOrders = [
     {
       purchased: true,
