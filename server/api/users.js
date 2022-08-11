@@ -89,3 +89,37 @@ router.delete("/:id", async (req, res, next) => {
     next(ex);
   }
 });
+
+//route to CHECKOUT and create new order
+router.put("/order/checkout/:id", async (req, res, next) => {
+  try {
+    //find the order
+    const order = await Order.findOne({
+      where: {
+        userId: req.params.id,
+        purchased: false,
+      },
+    });
+
+    //update the order to purchased
+    await order.update({ purchased: true });
+
+    //create new order for the user
+    const newOrder = await Order.create();
+    const user = await User.findOne({
+      where: {
+        id: req.params.id,
+      },
+    });
+
+    await user.addOrder(newOrder);
+
+    res.send(order);
+  } catch (ex) {
+    next(ex);
+  }
+});
+
+router.use((err, req, res, next) => {
+  res.status(500).send(err);
+});

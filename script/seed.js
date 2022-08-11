@@ -1,9 +1,12 @@
 "use strict";
 
+const { default: axios } = require("axios");
 const {
   db,
   models: { User, Product, Order, OrderProduct },
 } = require("../server/db");
+
+const data = require("./data");
 
 Order.belongsTo(User);
 User.hasMany(Order);
@@ -34,6 +37,7 @@ async function seed() {
       last_name: "Greenspan",
       email: "ben@gmail.com",
       password: "ben_pw",
+      address: "1600 Pennsylvania Avenue",
       isAdmin: false,
     }),
     User.create({
@@ -41,6 +45,7 @@ async function seed() {
       last_name: "Collins",
       email: "joe@gmail.com",
       password: "joe_pw",
+      address: "1060 W Addison St",
       isAdmin: false,
     }),
     User.create({
@@ -51,6 +56,7 @@ async function seed() {
       isAdmin: true,
     }),
   ]);
+
 
   await Promise.all(
     users.map(async (user) => {
@@ -201,176 +207,133 @@ async function seed() {
       price: 720,
       inventory: 5,
     }),
+  const testOrders = [
+    {
+      purchased: true,
+      totalItems: 2,
+      totalPrice: 450,
+    },
+    {
+      purchased: true,
+      totalItems: 2,
+      totalPrice: 450,
+    },
+    {
+      purchased: true,
+      totalItems: 1,
+      totalPrice: 199,
+    },
+    {
+      purchased: true,
+      totalItems: 4,
+      totalPrice: 1000,
+    },
+    {
+      purchased: true,
+      totalItems: 5,
+      totalPrice: 600,
+    },
+  ];
 
-    Product.create({
-      name: "Convertible",
-      description:
-        "Holding this token gives you fractional ownership of the product",
-      imageURL:
-        "https://www.autocar.co.uk/sites/autocar.co.uk/files/styles/gallery_slide/public/images/car-reviews/first-drives/legacy/mercedes-amg-c63-cabriolet.jpg?itok=mY23jB1D",
-      category: "Cars",
-      price: 399,
-      inventory: 3,
-    }),
+  const products = await Promise.all([
+    data.azuki.map((product) =>
+      Product.create({
+        name: product.name,
+        imageURL: product.image_url,
+        category: "Azuki",
+        URL: "Azuki",
+        inventory: product.inventory,
+        price: product.price,
+      })
+    ),
+    data.RTFKTCLONEXTM.map((product) =>
+      Product.create({
+        name: product.name,
+        imageURL: product.image_url,
+        category: "Clone X",
+        URL: "Clone_X",
+        inventory: product.inventory,
+        price: product.price,
+      })
+    ),
+    data.tastyBones.map((product) =>
+      Product.create({
+        name: product.name,
+        imageURL: product.image_url,
+        category: "Tasty Bones XYZ",
+        URL: "Tasty_Bones",
+        inventory: product.inventory,
+        price: product.price,
+      })
+    ),
+    data.metascapes.map((product) =>
+      Product.create({
+        name: product.name,
+        inventory: product.inventory,
+        imageURL: product.image_url,
+        category: "The Metascapes",
+        URL: "The_Metascapes",
+        price: product.price,
+      })
+    ),
+    data.cryptoPunks.map((product) =>
+      Product.create({
+        name: product.name,
+        inventory: product.inventory,
+        imageURL: product.image_url,
+        category: "Crypto Punks",
+        URL: "Crypto_Punks",
+        price: product.price,
+      })
+    ),
+    data.grumpets.map((product) =>
+      Product.create({
+        name: product.name,
+        description: null,
+        imageURL: product.image_url,
+        category: "Grumpets",
+        URL: "Grumpets",
+        price: product.price,
+        inventory: product.inventory,
+      })
+    ),
+    data.littleLemonFriends.map((product) =>
+      Product.create({
+        name: product.name,
+        inventory: product.inventory,
+        imageURL: product.image_url,
+        category: "Little Lemon Friends",
+        URL: "Little_Lemon_Friends",
+        price: product.price,
+      })
+    ),
 
-    // kangaroo
-    Product.create({
-      name: "Sleepy",
-      description: "Narcoleptic in nature",
-      imageURL:
-        "https://i.pinimg.com/474x/81/ab/90/81ab90af8c33e17078eae6b13a7cada1--kangaroo-jack-sleeping-animals.jpg",
-      category: "Kangaroos",
-      price: 150,
-      inventory: 9,
-    }),
-
-    Product.create({
-      name: "Hello",
-      description: "Seductive",
-      imageURL:
-        "https://i.pinimg.com/originals/93/57/52/935752e7d704377fadbdfa35b8e3e15c.jpg",
-      category: "Kangaroos",
-      price: 150,
-      inventory: 7,
-    }),
-
-    Product.create({
-      name: "Goofy",
-      description: "Ready to hop around",
-      imageURL:
-        "https://www.askideas.com/media/40/Funny-Kangaroo-Showing-Tomgue-Face-Picture.jpg",
-      category: "Kangaroos",
-      price: 150,
-      inventory: 8,
-    }),
-
-    Product.create({
-      name: "Goofier",
-      description:
-        "Historians believe this work was augmented by a Snapchat lens ",
-      imageURL:
-        "https://lensesforsnap.com/wp-content/uploads/2021/02/funny-kangaroo-2.png",
-      category: "Kangaroos",
-      price: 150,
-      inventory: 14,
-    }),
-
-    Product.create({
-      name: "Buff",
-      description: "How tough are you?",
-      imageURL: "https://i.redd.it/fgb64gg7w0271.jpg",
-      category: "Kangaroos",
-      price: 150,
-      inventory: 6,
-    }),
-
-    Product.create({
-      name: "Smile",
-      description: "Reminiscent of the halcyon days",
-      imageURL: "http://www.clipartbest.com/cliparts/dT8/oEk/dT8oEkXKc.jpg",
-      category: "People",
-      price: 200,
-      inventory: 19,
-    }),
-
-    Product.create({
-      name: "Point",
-      description:
-        "When you point one finger, there are three fingers pointing back at your... maybe",
-      imageURL:
-        "http://www.freepngclipart.com/download/stick_figure/20206-girl-stick-figure-images-hd-photo.jpeg",
-      category: "People",
-      price: 200,
-      inventory: 3,
-    }),
-
-    Product.create({
-      name: "Shrug",
-      description: "An apocryphal demeanor",
-      imageURL:
-        "https://clipartix.com/wp-content/uploads/2016/05/Girl-clipart-stick-figure-free-clipart-images.jpeg",
-      category: "People",
-      price: 200,
-      inventory: 17,
-    }),
-
-    Product.create({
-      name: "Girl",
-      description: "Youthful and Convival",
-      imageURL:
-        "https://clipartix.com/wp-content/uploads/2016/05/Stick-figures-on-clip-art-sticks-and-vector-graphics.jpg",
-      category: "People",
-      price: 200,
-      inventory: 9,
-    }),
-
-    Product.create({
-      name: "Wave",
-      description: "His best statue of liberty impression",
-      imageURL:
-        "https://i0.wp.com/clipartworks.com/wp-content/uploads/2021/06/Stick-Man-Wave.jpg?resize=300%2C300&ssl=1",
-      category: "People",
-      price: 200,
-      inventory: 8,
-    }),
-    /// Apes
-    Product.create({
-      name: "Pizza",
-      description: "I am not sure he is going to share",
-      imageURL:
-        "https://lh3.googleusercontent.com/I1-Fa_i7gG3cJ-kiwEHki-5P5RE47lyeY31qKsX04z3X56jzA4sE5VIDYoAVCgOmssS39tfQDEkGeiOv_Chj1RXOOUdc3Lfb__AA3Q=w600",
-      category: "Apes",
-      price: 500,
-      inventory: 3,
-    }),
-    Product.create({
-      name: "Colorful",
-      description: "Radical in nature",
-      imageURL:
-        "https://lh3.googleusercontent.com/oZ4wtxWRkKuDTlOnZV25ZSehUnmLgh8wF5SA_vaudILPQ23fY2SA8kEVoG3-JfTsMAY9sdycqWDvF24tFcwzTuqptILDGb9_nQLpuJ4",
-      category: "Apes",
-      price: 500,
-      inventory: 2,
-    }),
-    Product.create({
-      name: "Cowboy",
-      description: "All Hat, No Cattle",
-      imageURL:
-        "https://lh3.googleusercontent.com/natQzxcx7wCSsfYL5VgwFx1occeJOQdGm4hQGwWOoIh5vP0YaxcptD5dVZBOB1UmMr0CBAgkapdWNznwmwpO4O1KwL6EjLcTqo7_=w600",
-      category: "Apes",
-      price: 500,
-      inventory: 4,
-    }),
-
-    ///Punks
-    Product.create({
-      name: "Cigarette",
-      description: "Someone introduce this man to a Juul",
-      imageURL: "https://www.larvalabs.com/cryptopunks/cryptopunk8348.png",
-      category: "Punks",
-      price: 700,
-      inventory: 2,
-    }),
-    Product.create({
-      name: "Headband",
-      description: "Ready to help Michael and Buggs defeat the Monstars",
-      imageURL:
-        "https://lh3.googleusercontent.com/PWDq8erM2dMscd99OntjFRJFfvtvki7uxeYiBUT8e59Kdbn8s34dM59kCkVZ66b687B6i8KXMDspRfnU-JbLcB9Kc23EoSydJNkmgA=w600",
-      category: "Punks",
-      price: 700,
-      inventory: 1,
-    }),
-    Product.create({
-      name: "Bandit",
-      description: "Display your rebellious and slightly unshaven nature",
-      imageURL:
-        "https://lh3.googleusercontent.com/VZgeKWUmrLjkbbCfjMn3ytDvOK3nLJjImk1-CW0jxIwE1XYIDnUDbcwbEOkrLXaS9aLhQJLQNCsSVuMwSg3RGtB1eIqPDQ2FU4OF=s0",
-      category: "Punks",
-      price: 700,
-      inventory: 3,
-    }),
+    data.theLadies.map((product) =>
+      Product.create({
+        name: product.name,
+        imageURL: product.image_url,
+        category: "The Ladies",
+        URL: "The_Ladies",
+        price: product.price,
+        inventory: product.inventory,
+      })
+    ),
   ]);
 
+  await Promise.all(
+    users.map(async (user) => {
+      // await user.addOrder(
+      //   await Order.create(testOrders[Math.floor(Math.random() * 5)])
+      // );
+      // await user.addOrder(
+      //   await Order.create(testOrders[Math.floor(Math.random() * 5)])
+      // );
+      // await user.addOrder(
+      //   await Order.create(testOrders[Math.floor(Math.random() * 5)])
+      // );
+      await user.addOrder(await Order.create());
+    })
+  );
   console.log(`seeded ${users.length} users`);
 
   console.log(`seeded ${products.length} products`);

@@ -16,8 +16,7 @@ router.get("/api/users", async (req, res, next) => {
 
 router.put("/api/users/:id", async (req, res, next) => {
   try {
-    const users = await User.findByPk(req.params.id);
-
+    const user = await User.findByPk(req.params.id);
     res.send(await user.update(req.body));
   } catch (err) {
     next(err);
@@ -47,6 +46,14 @@ router.post("/api/auth", async (req, res, next) => {
 router.get("/api/me", async (req, res, next) => {
   try {
     res.send(await User.byToken(req.headers.authorization));
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.get("/me", async (req, res, next) => {
+  try {
+    res.send(req);
   } catch (err) {
     next(err);
   }

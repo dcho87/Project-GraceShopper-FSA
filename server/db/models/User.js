@@ -5,7 +5,7 @@ const bcrypt = require("bcrypt");
 
 const SALT_ROUNDS = 5;
 
-const { STRING, UUID, UUIDV4, BOOLEAN } = Sequelize;
+const { STRING, UUID, UUIDV4, BOOLEAN, TEXT } = Sequelize;
 const id = {
   type: UUID,
   defaultValue: UUIDV4,
@@ -34,11 +34,12 @@ const User = db.define("user", {
     type: STRING,
     allowNull: false,
   },
-  isAdmin: {
-    type: BOOLEAN,
-    defaultValue: false,
+
+  address: {
+    type: STRING,
+    allowNull: true,
   },
-  isEngineer: {
+  isAdmin: {
     type: BOOLEAN,
     defaultValue: false,
   },
@@ -88,12 +89,12 @@ User.authenticate = async ({ email, password }) => {
     }
     const error = Error("bad credentials - in authenticate - try");
     error.status = 401;
-    throw error;
+    return error;
   } catch (err) {
     console.log("REEED", err);
     const error = Error("bad credentials - in authenticate - catch");
     error.status = 401;
-    throw error;
+    return error;
   }
 };
 

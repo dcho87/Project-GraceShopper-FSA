@@ -30,12 +30,16 @@ const Product = db.define("product", {
     allowNull: true,
   },
   description: {
-    type: STRING,
+    type: TEXT,
   },
   category: {
     type: STRING,
     allowNull: false,
   },
+  // URL: {
+  //   type: STRING,
+  //   allowNull: false,
+  // },
 });
 
 module.exports = Product;

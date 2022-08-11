@@ -1,10 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { authenticate } from "../store/auth";
+import { authenticate } from "../../store/auth";
 
-const Login_Page = () => {
+import "./Login_Popup.css";
+
+const Login_Popup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [state, setstate] = useState("none");
+  useEffect(() => {
+    setTimeout(() => {
+      setstate("block");
+    }, 2000);
+  }, []);
 
   const onChange = (ev) => {
     ev.target.name === "email"
@@ -21,8 +29,10 @@ const Login_Page = () => {
   };
 
   return (
-    <main id="login_page">
+    <main id="login_popup_page" style={{ display: state }}>
+      <button onClick={() => setstate("none")}>X</button>
       <form onSubmit={onSubmit}>
+        <h1>Login to have the best experience</h1>
         <div id="form-cont-login">
           <div className="login-cont">
             <div id="email-cont">
@@ -54,4 +64,4 @@ const Login_Page = () => {
   );
 };
 
-export default Login_Page;
+export default Login_Popup;

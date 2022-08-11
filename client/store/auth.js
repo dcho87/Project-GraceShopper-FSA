@@ -5,6 +5,7 @@ import configureMockStore from "redux-mock-store";
 import thunkMiddleware from "redux-thunk";
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import { fetchProducts } from "./product_store";
+import { fetchHistory } from ".";
 const middlewares = [thunkMiddleware];
 const mockStore = configureMockStore(middlewares);
 
@@ -35,6 +36,19 @@ export const me = () => async (dispatch) => {
         authorization: token,
       },
     });
+    dispatch(fetchHistory(response.data));
+    const cart = JSON.parse(localStorage.getItem("cart"));
+    if (cart) {
+      const currOrder = (
+        await axios.get(`/api/users/order/${response.data.id}`)
+      ).data;
+      for (let i = 0; i < cart.products.length; i++) {
+        const product = cart.products[i];
+        product.type = "add";
+        await axios.put(`/api/orders/${currOrder.id}`, product);
+      }
+      localStorage.removeItem("cart");
+    }
     return dispatch(setAuth(response.data));
   }
 };
@@ -44,7 +58,7 @@ export const authenticate = (email, password) => async (dispatch) => {
     const response = await axios.post("api/auth", { email, password });
     const { token } = response.data;
     window.localStorage.setItem(TOKEN, token);
-    dispatch(me());
+    return dispatch(me());
   } catch (authError) {
     return dispatch(setAuth({ error: authError }));
   }
